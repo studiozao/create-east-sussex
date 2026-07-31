@@ -644,6 +644,21 @@ button:focus-visible {
    13 · Responsive
    --------------------------------------------------------------------------- */
 
+/* Large screens — confirmed live at 1920px: the container stops growing at
+   1200px, leaving ~360px of empty white margin on each side ("looks great
+   on mobile, not optimized for browser" feedback). Widen the shared
+   container progressively on big monitors so the photography-heavy
+   sections (hero collage, tile grids) fill the extra space. Text blocks
+   don't stretch to match — .hero-copy, .measure, .programme-body etc. all
+   carry their own max-width/ch caps regardless of how wide the outer
+   container gets, so reading width stays comfortable either way. */
+@media (min-width: 1500px) {
+  :root { --wrap-max: 1440px; }
+}
+@media (min-width: 1900px) {
+  :root { --wrap-max: 1600px; }
+}
+
 /* Nav switches to the hamburger menu on its OWN breakpoint, wider than the
    layout breakpoint below. Five links + the logo lockup start wrapping to
    two lines somewhere around 900-970px (confirmed by measurement) — well
