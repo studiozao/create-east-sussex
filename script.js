@@ -1,5 +1,5 @@
 /* ============================================================================
-   East Sussex Creative Collective — script.js
+   Create East Sussex — script.js
    ----------------------------------------------------------------------------
    Vanilla JS, no dependencies. Handles:
      1. Scroll-reveal on entry (IntersectionObserver)

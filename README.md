@@ -1,8 +1,10 @@
-# East Sussex Creative Collective — landing page
+# Create East Sussex — landing page
 
-A single-page static site for the East Sussex Creative Collective, a free
-programme for creative businesses across East Sussex, delivered by Studio Zao in
-partnership with East Sussex County Council.
+A single-page static site for Create East Sussex, a free programme for
+creative businesses across East Sussex, delivered by Studio Zao in
+partnership with East Sussex County Council. (Working title: the programme's
+internal community offering is still called "The Collective" throughout the
+copy — this is separate from the overall programme name.)
 
 No frameworks, no build step. Plain HTML, CSS and vanilla JS.
 
