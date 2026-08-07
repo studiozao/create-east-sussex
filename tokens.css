@@ -20,7 +20,7 @@
 
   /* Typography */
   --font-display: "Fraunces", ui-serif, Georgia, serif;
-  --font-body:    "Switzer", ui-sans-serif, system-ui, -apple-system, sans-serif;
+  --font-body:    "General Sans", ui-sans-serif, system-ui, -apple-system, sans-serif;
   --font-mono:    "JetBrains Mono", ui-monospace, "SF Mono", monospace;
 
   --text-hero:    clamp(2.5rem, 5.2vw, 4.75rem);

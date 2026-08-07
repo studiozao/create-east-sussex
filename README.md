@@ -124,7 +124,8 @@ Colours are the client's exact locked hex values (defined in `tokens.css`):
 ### Typography
 
 - **Display:** Fraunces (serif, variable, expressive italic) — Google Fonts
-- **Body:** Switzer (clean neutral sans) — Fontshare
+- **Body:** General Sans (warm, rounded humanist sans) — Fontshare, swapped
+  from Switzer in the August 2026 makeover for a friendlier feel
 - **Numerals/labels only:** JetBrains Mono — Google Fonts, used in exactly two
   places (section index numbers, hero scroll cue) per the "outlier face" rule
 
