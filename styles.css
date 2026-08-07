@@ -160,6 +160,7 @@ button:focus-visible {
   display: flex;
   align-items: center;
   gap: 1rem;
+  flex-wrap: wrap;
 }
 
 .logo-link {
@@ -174,7 +175,10 @@ button:focus-visible {
   width: auto;
   object-fit: contain;
 }
-.logo-img-escc { height: 30px; }
+
+/* ESCC crest sized up per client feedback ("bigger council logo") — it now
+   appears larger than the Studio Zao mark in both header and footer. */
+.logo-img-escc { height: 42px; }
 
 .logo-rule {
   width: 1px;
@@ -248,11 +252,14 @@ button:focus-visible {
 .section {
   position: relative;
 }
-.section-programme  { padding-block: var(--space-2xl) var(--space-xl); }
-.section-how        { padding-block: var(--space-xl) var(--space-2xl); }
-.section-eligibility{ padding-block: var(--space-xl); }
-.section-who        { padding-block: var(--space-2xl); background: #FAFAFA; }
-.section-form       { padding-block: var(--space-2xl) var(--space-3xl); }
+.section-is-you        { padding-block: var(--space-2xl) var(--space-xl); background: #FAFAFA; }
+.section-programme     { padding-block: var(--space-2xl) var(--space-xl); }
+.section-how           { padding-block: var(--space-xl) var(--space-2xl); }
+.section-connects-list { padding-block: var(--space-xl); }
+.section-become-mentor { padding-block: var(--space-xl); background: #FAFAFA; }
+.section-eligibility   { padding-block: var(--space-xl); }
+.section-who           { padding-block: var(--space-2xl); background: #FAFAFA; }
+.section-form          { padding-block: var(--space-2xl) var(--space-3xl); }
 
 .section-head { margin-bottom: var(--space-xl); max-width: 40rem; }
 
@@ -521,6 +528,51 @@ button:focus-visible {
 }
 
 /* ---------------------------------------------------------------------------
+   7b · Is this you? — reuses the checklist look from Eligibility; a lighter,
+   self-qualifying pass before the formal criteria further down the page.
+   --------------------------------------------------------------------------- */
+.is-you-inner { max-width: 46rem; }
+
+/* ---------------------------------------------------------------------------
+   7c · Upcoming Connects — placeholder list, same expression-of-interest
+   framing as the form section (no confirmed dates yet).
+   --------------------------------------------------------------------------- */
+.connects-inner { max-width: 44rem; }
+.connects-list {
+  list-style: none;
+  margin: var(--space-lg) 0 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-sm);
+}
+.connect-item {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: var(--space-md);
+  padding-block: var(--space-sm);
+  border-bottom: 1px solid var(--color-light-grey);
+  font-size: var(--text-lead);
+}
+.connect-place {
+  font-family: var(--font-display);
+  font-weight: 600;
+  color: var(--color-navy);
+}
+.connect-date {
+  font-size: var(--text-small);
+  color: var(--color-darker-grey);
+}
+
+/* ---------------------------------------------------------------------------
+   7d · Become a mentor — placeholder CTA, routes to the same form as the
+   rest of the page until a dedicated mentor sign-up flow exists.
+   --------------------------------------------------------------------------- */
+.become-mentor-inner { max-width: 42rem; }
+.become-mentor-inner .btn { margin-top: var(--space-lg); }
+
+/* ---------------------------------------------------------------------------
    8 · Eligibility
    --------------------------------------------------------------------------- */
 .eligibility-inner { max-width: 52rem; }
@@ -612,6 +664,24 @@ button:focus-visible {
   font-size: var(--text-small);
   color: var(--color-darker-grey); /* --color-grey fails 4.5:1 at this size */
 }
+
+/* Funder trio — UK Government, SBSA, ESCC, in that order (per council
+   request). These are wide banner-style logos, not square crests like
+   Studio Zao's mark, so they're capped by height rather than matched 1:1
+   to it. Own row so they have room to breathe without crowding the
+   Studio Zao/tagline row above. */
+.footer-funders {
+  display: flex;
+  align-items: center;
+  gap: 1.75rem;
+  flex-wrap: wrap;
+  margin-top: var(--space-lg);
+  padding-top: var(--space-lg);
+  border-top: 1px solid var(--color-light-grey);
+}
+.logo-img-ukgov { height: 26px; }
+.logo-img-sbsa { height: 30px; }
+
 .footer-bottom {
   margin-top: var(--space-xl); /* separate copyright from the tagline row */
 }
