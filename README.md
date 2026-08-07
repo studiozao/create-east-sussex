@@ -15,7 +15,7 @@ No frameworks, no build step. Plain HTML, CSS and vanilla JS.
 | `index.html` | Page structure and copy |
 | `styles.css` | Component styles — imports `tokens.css`, references tokens by name throughout |
 | `tokens.css` | Design tokens (colour, type, spacing, motion) — portable, reusable in other tooling |
-| `script.js` | Scroll reveals, hero parallax, mobile nav, analytics event |
+| `script.js` | GSAP hero timeline, scroll reveals, frame swapping, map pins, mobile nav, analytics event |
 | `.hallmark/log.json` | Design-system provenance record (see "Design rationale" below) |
 | `README.md` | This file |
 
@@ -40,12 +40,21 @@ fast (Cmd/Ctrl+F).
    *visual* height (not the same box) via `.logo-img` / `.logo-img-escc` in
    `styles.css` — adjust those two rules if either logo is replaced later.
 
-2. **Hero images — TEMPORARY, replace before launch.** All four collage
-   tiles use real photos — generic (but real, credited) stock, not actual
-   programme photography, dropped in so the page doesn't look unfinished.
-   Each tile represents one creative discipline. Files live in
-   `assets/hero/`; swap each directly (keep the filename) or update the
-   `url()` in `styles.css`. Suggested export: ~800×1000px, under 200KB each.
+2a. **Hero background photograph.** `assets/hero/hero-cliffs.jpg` is a
+   client-supplied Seven Sisters shot, resized to 2400px wide (~900KB) for
+   the web. The full-resolution original (`heroeastsussex.jpg`, 5.5MB) is
+   gitignored rather than committed. The hero applies a strong navy
+   gradient over it: the source is a bright daytime image, and the overlay
+   is what keeps the white headline at AA contrast, so don't lighten it
+   without re-checking the type.
+
+2. **Discipline images — TEMPORARY, replace before launch.** All four
+   photos are generic (but real, credited) stock, not actual programme
+   photography, dropped in so the page doesn't look unfinished. Three
+   cross-fade in the sticky frame beside "Is this you?"; the fourth sits
+   beside the eligibility checklist. Files live in `assets/hero/`; swap
+   each directly (keep the filename) or update the `url()` in `styles.css`.
+   Suggested export: ~800×1000px, under 200KB each.
 
    | Tile | Discipline | File | `styles.css` rule |
    | --- | --- | --- | --- |
@@ -123,14 +132,18 @@ Colours are the client's exact locked hex values (defined in `tokens.css`):
 
 ### Typography
 
-- **Display:** Fraunces (serif, variable, expressive italic) — Google Fonts
-- **Body:** Switzer (clean neutral sans) — Fontshare
-- **Numerals/labels only:** JetBrains Mono — Google Fonts, used in exactly two
-  places (section index numbers, hero scroll cue) per the "outlier face" rule
+- **Display:** Clash Display (bold geometric sans) — Fontshare
+- **Body:** Satoshi (clean geometric sans) — Fontshare
 
-Previously Space Grotesk + Inter — replaced in the July 2026 redesign (see
-below) because that pairing is the single most common LLM-default font
-combination and read as generic rather than considered.
+Font history, newest first:
+
+- **Aug 2026** — Fraunces + Switzer replaced with Clash Display + Satoshi
+  after direct feedback that the serif read too light ("looks a bit drunk",
+  "I was thinking more bold"). The JetBrains Mono outlier face was dropped
+  entirely; the page is now a two-face system.
+- **Jul 2026** — Space Grotesk + Inter replaced with Fraunces + Switzer,
+  because that pairing is the single most common LLM-default font
+  combination and read as generic rather than considered.
 
 ## Accessibility & motion
 

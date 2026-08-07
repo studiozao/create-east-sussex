@@ -1,10 +1,14 @@
-/* Hallmark · design tokens for East Sussex Creative Collective
+/* Hallmark · design tokens for Create East Sussex
    ----------------------------------------------------------------------------
    Colour values are the client's LOCKED brand hex (explicit brief: "use
    exactly these, no substitutions") — kept as literal hex rather than
    converted to OKLCH, which is a deliberate deviation from the usual
    Hallmark catalog-theme convention. Everything else follows the standard
    token shape so this file is portable to other tooling.
+
+   Aug 2026 redesign: type stack swapped from Fraunces/Switzer to Clash
+   Display + Satoshi after direct feedback that the serif read too thin
+   ("looks a bit drunk", "I was thinking more bold").
    ============================================================================ */
 
 :root {
@@ -18,18 +22,26 @@
   --color-red:          #E42544;
   --color-red-hover:    #C51D38;
 
-  /* Typography */
-  --font-display: "Fraunces", ui-serif, Georgia, serif;
-  --font-body:    "Switzer", ui-sans-serif, system-ui, -apple-system, sans-serif;
-  --font-mono:    "JetBrains Mono", ui-monospace, "SF Mono", monospace;
+  /* Derived surfaces — built from the locked palette, not new brand colours */
+  --color-paper:        #FFFFFF;
+  --color-paper-2:      #F5F6F8;   /* faint off-white band */
+  --color-ink-dim:      rgba(18, 45, 84, 0.62);
+  --color-hairline:     rgba(18, 45, 84, 0.14);
+  --color-on-dark:      #FFFFFF;
+  --color-on-dark-dim:  rgba(255, 255, 255, 0.74);
 
-  --text-hero:    clamp(2.5rem, 5.2vw, 4.75rem);
-  --text-h2:      clamp(1.875rem, 3.2vw, 3rem);
-  --text-h3:      clamp(1.25rem, 1.6vw, 1.5rem);
+  /* Typography */
+  --font-display: "Clash Display", ui-sans-serif, system-ui, sans-serif;
+  --font-body:    "Satoshi", ui-sans-serif, system-ui, -apple-system, sans-serif;
+
+  --text-hero:    clamp(3.25rem, 12.5vw, 11rem);
+  --text-h2:      clamp(2.25rem, 5.5vw, 4.5rem);
+  --text-h3:      clamp(1.375rem, 2vw, 1.875rem);
   --text-lead:    clamp(1.125rem, 1.5vw, 1.4rem);
   --text-body:    1.0625rem;
   --text-small:   0.9375rem;
-  --text-num:     clamp(2.5rem, 4vw, 3.5rem);
+  --text-label:   0.75rem;
+  --text-num:     clamp(2.5rem, 5vw, 4rem);
 
   /* Spacing — 4pt scale, used with deliberate variation, not uniformly */
   --space-3xs: 0.25rem;
@@ -40,12 +52,13 @@
   --space-lg:  2.5rem;
   --space-xl:  4rem;
   --space-2xl: 6rem;
-  --space-3xl: 8rem;
+  --space-3xl: 9rem;
 
   /* Layout */
-  --wrap-max:  1200px;
-  --wrap-pad:  clamp(1.25rem, 5vw, 4rem);
-  --measure:   62ch;
+  --wrap-max:  1280px;
+  --wrap-pad:  clamp(1.25rem, 5vw, 4.5rem);
+  --measure:   58ch;
+  --header-h:  4.75rem;
 
   /* Motion */
   --dur-fast:  200ms;
@@ -54,12 +67,16 @@
   --ease-out:  cubic-bezier(0.16, 1, 0.3, 1);
   --ease-in-out: cubic-bezier(0.65, 0, 0.35, 1);
 
-  /* Radii */
+  /* Radii — near-square, per the bold editorial voice */
   --radius-pill: 999px;
-  --radius-sm:   4px;
+  --radius-sm:   2px;
 
   /* Z-index — named scale, never freestyled */
   --z-base:    1;
   --z-raised:  10;
   --z-sticky:  200;
+}
+
+@media (min-width: 1600px) {
+  :root { --wrap-max: 1480px; }
 }

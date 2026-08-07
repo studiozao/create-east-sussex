@@ -1,24 +1,20 @@
-/* Hallmark · pre-emit critique: P4 H4 E4 S4 R4 V4
- * Hallmark · genre: editorial · macrostructure: Specimen-inspired, DE-NUMBERED
- * at client request (the 01–05 section index and per-list-item hairline
- * rules read as over-applied and were removed after review — see README's
- * "Design rationale" section for the two-pass history). Deviations: filled
- * CTA retained for conversion; hero photography retained over "none/SVG").
- * theme: client-locked hex palette (not OKLCH catalog) · nav: N9-inspired
- * (edge-aligned, quiet links, text+arrow secondary CTA) · footer: Ft1-inspired
- * (mast-headed) · enrichment: hero collage — 4 real, credited photographs
- * (makers/craft, illustration & fine art, fashion/textiles, drone/property
- * photography); see README for current credits and swap notes
+/* Hallmark · pre-emit critique: P4 H5 E4 S5 R4 V5
+ * Hallmark · genre: editorial (bold) · macrostructure: Marquee Hero
+ * nav: N2 split-bar · footer: Ft1 mast-headed
+ * theme: client-locked hex palette (not OKLCH catalog) — navy/red/grey on
+ * white, with a single dark photographic hero as the only inverted band
+ * enrichment: E3 full-bleed photograph (client-supplied Seven Sisters shot)
+ * + E5 hand-built SVG county map
  * ============================================================================
  * Create East Sussex — styles.css
  * ----------------------------------------------------------------------------
- * Redesigned from a generic 3-card-grid/AI-nav template into an editorial
- * layout for a creative-industry audience, then simplified further after
- * client review (numbered section labels and most hairline dividers cut —
- * only two rules remain on the whole page, each marking a real hierarchy
- * break). See README for the full rationale. Colour system uses the
- * client's EXACT locked hex values. Laptop-first; adapts down to mobile at
- * the bottom of the file. All motion respects prefers-reduced-motion.
+ * Aug 2026 rebuild (branch: redesign-v2). Replaces the quiet serif editorial
+ * layout with a bold, scroll-driven one: type-motion hero over photography,
+ * sticky framed imagery beside the qualifying copy, an editorial index for
+ * the offer (deliberately NOT a 3-card grid), and a stylised county map.
+ * Colour system uses the client's EXACT locked hex values. Background stays
+ * white throughout except the hero and one closing band.
+ * All motion respects prefers-reduced-motion.
  * ============================================================================ */
 
 @import url("tokens.css");
@@ -32,7 +28,7 @@
 
 html {
   scroll-behavior: smooth;
-  scroll-padding-top: 6rem;
+  scroll-padding-top: calc(var(--header-h) + 1rem);
   -webkit-text-size-adjust: 100%;
   overflow-x: clip;
 }
@@ -42,8 +38,8 @@ body {
   font-family: var(--font-body);
   font-size: var(--text-body);
   line-height: 1.6;
-  color: var(--color-black);
-  background: var(--color-white);
+  color: var(--color-navy);
+  background: var(--color-paper);
   -webkit-font-smoothing: antialiased;
   text-rendering: optimizeLegibility;
   overflow-x: clip;
@@ -52,25 +48,20 @@ body {
 h1, h2, h3 {
   font-family: var(--font-display);
   color: var(--color-navy);
-  line-height: 1.08;
-  letter-spacing: -0.01em;
+  line-height: 1.0;
+  letter-spacing: -0.02em;
   margin: 0;
+  font-weight: 600;
+  /* display faces at large sizes must be able to break inside a long word
+     rather than push the page sideways on a 320px screen */
   overflow-wrap: anywhere;
   min-width: 0;
-  font-weight: 600;
-}
-
-em {
-  font-style: italic;
-  font-weight: 500;
 }
 
 p { margin: 0; }
-
 a { color: inherit; }
-
-img,
-svg { max-width: 100%; display: block; }
+img, svg { max-width: 100%; display: block; }
+ul { list-style: none; margin: 0; padding: 0; }
 
 .wrap {
   width: 100%;
@@ -87,65 +78,80 @@ svg { max-width: 100%; display: block; }
   background: var(--color-navy);
   color: var(--color-white);
   padding: 0.75rem 1.25rem;
-  border-radius: 0 0 6px 0;
   text-decoration: none;
-  font-weight: 600;
+  font-weight: 700;
 }
 .skip-link:focus { left: 0; }
 
 a:focus-visible,
-button:focus-visible {
+button:focus-visible,
+[tabindex]:focus-visible {
   outline: 3px solid var(--color-red);
   outline-offset: 3px;
-  border-radius: 2px;
 }
 
 /* ---------------------------------------------------------------------------
-   2 · Buttons — solid, for the two real conversion moments only (hero + form)
+   2 · Buttons
    --------------------------------------------------------------------------- */
 .btn {
   display: inline-flex;
   align-items: center;
+  justify-content: center;
   gap: 0.5rem;
   font-family: var(--font-body);
-  font-weight: 600;
+  font-weight: 700;
   font-size: 1rem;
   line-height: 1;
   text-decoration: none;
-  padding: 1rem 1.75rem;
+  padding: 1.125rem 2rem;
+  border: 2px solid transparent;
   border-radius: var(--radius-pill);
-  border: 0;
   cursor: pointer;
+  /* never let a CTA wrap to two lines — it stops reading as one target */
   white-space: nowrap;
   transition: background-color var(--dur-fast) var(--ease-out),
+              border-color var(--dur-fast) var(--ease-out),
+              color var(--dur-fast) var(--ease-out),
               transform var(--dur-fast) var(--ease-out);
 }
 
 .btn-primary {
   background: var(--color-red);
+  border-color: var(--color-red);
   color: var(--color-white);
 }
 .btn-primary:hover {
   background: var(--color-red-hover);
+  border-color: var(--color-red-hover);
   transform: translateY(-2px);
 }
 .btn-primary:active { transform: translateY(0); }
 
-.btn-lg {
-  font-size: 1.0625rem;
-  padding: 1.15rem 2.25rem;
+/* Ghost — hero only, on the dark band */
+.btn-ghost {
+  background: transparent;
+  border-color: rgba(255, 255, 255, 0.55);
+  color: var(--color-white);
 }
+.btn-ghost:hover {
+  background: var(--color-white);
+  border-color: var(--color-white);
+  color: var(--color-navy);
+  transform: translateY(-2px);
+}
+.btn-ghost:active { transform: translateY(0); }
+
+.btn-lg { font-size: 1.0625rem; padding: 1.25rem 2.5rem; }
 
 /* ---------------------------------------------------------------------------
-   3 · Header — edge-aligned and quiet (N9-inspired). No blur, no glass;
-   a hairline rule is the only separation from the page.
+   3 · Header — solid white, sticky, slim
    --------------------------------------------------------------------------- */
 .site-header {
   position: sticky;
   top: 0;
   z-index: var(--z-sticky);
   background: var(--color-white);
-  border-bottom: 1px solid var(--color-light-grey);
+  border-bottom: 1px solid var(--color-hairline);
 }
 
 .header-inner {
@@ -153,16 +159,10 @@ button:focus-visible {
   align-items: center;
   justify-content: space-between;
   gap: var(--space-lg);
-  min-height: 4.75rem;
+  min-height: var(--header-h);
 }
 
-.logo-lockup {
-  display: flex;
-  align-items: center;
-  gap: 1rem;
-  flex-wrap: wrap;
-}
-
+.logo-lockup { display: flex; align-items: center; gap: 1rem; }
 .logo-link {
   display: inline-flex;
   align-items: center;
@@ -170,56 +170,38 @@ button:focus-visible {
 }
 .logo-link:hover { opacity: 0.7; }
 
-.logo-img {
-  height: 34px;
-  width: auto;
-  object-fit: contain;
-}
+.logo-img { height: 32px; width: auto; object-fit: contain; }
+/* ESCC crest sized up per client feedback ("bigger council logo") */
+.logo-img-escc { height: 44px; }
 
-/* ESCC crest sized up per client feedback ("bigger council logo") — it now
-   appears larger than the Studio Zao mark in both header and footer. */
-.logo-img-escc { height: 42px; }
-
-.logo-rule {
-  width: 1px;
-  height: 30px;
-  background: var(--color-light-grey);
-}
+.logo-rule { width: 1px; height: 30px; background: var(--color-light-grey); }
 
 .site-nav { display: flex; align-items: center; }
 
-.nav-links {
-  display: flex;
-  align-items: center;
-  gap: 2rem;
-  list-style: none;
-  margin: 0;
-  padding: 0;
-}
+.nav-links { display: flex; align-items: center; gap: 2rem; }
 .nav-links a {
   font-family: var(--font-body);
-  font-size: 0.8125rem;
-  font-weight: 600;
-  letter-spacing: 0.08em;
+  font-size: var(--text-label);
+  font-weight: 700;
+  letter-spacing: 0.1em;
   text-transform: uppercase;
   color: var(--color-darker-grey);
   text-decoration: none;
   padding: 0.35rem 0;
+  white-space: nowrap;
   transition: color var(--dur-fast) var(--ease-out);
 }
 .nav-links a:hover { color: var(--color-navy); }
 
-/* Nav CTA — quiet text+arrow, not a filled pill (the bold button is reserved
-   for the hero and final register moments so it isn't diluted here). */
 .nav-links .nav-cta {
-  color: var(--color-navy);
+  color: var(--color-red);
   display: inline-flex;
   align-items: center;
   gap: 0.3em;
 }
 .nav-links .nav-cta span {
-  transition: transform var(--dur-fast) var(--ease-out);
   display: inline-block;
+  transition: transform var(--dur-fast) var(--ease-out);
 }
 .nav-links .nav-cta:hover span { transform: translateX(3px); }
 
@@ -239,351 +221,351 @@ button:focus-visible {
   width: 24px;
   height: 2px;
   background: var(--color-navy);
-  transition: transform var(--dur-fast) var(--ease-out),
-              opacity var(--dur-fast) var(--ease-out);
 }
 
 /* ---------------------------------------------------------------------------
-   4 · Section rhythm — deliberately varied padding. Sections are separated
-   by whitespace alone; the two rules that remain on the page (below Hacks
-   in the programme section, above the footer copyright) each mark a real
-   hierarchy break rather than decorating every gap.
+   4 · Hero — the page's only dark band. Photograph sits behind a navy
+   gradient strong enough to hold white type at AA (the source image is a
+   bright daytime shot, so the overlay does real work here, not decoration).
    --------------------------------------------------------------------------- */
-.section {
+.hero {
   position: relative;
+  min-height: calc(100svh - var(--header-h));
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding-block: clamp(2.5rem, 6vh, 5rem) clamp(3rem, 8vh, 6rem);
+  background: var(--color-navy);
+  color: var(--color-on-dark);
+  overflow: hidden;
+  isolation: isolate;
 }
-.section-is-you        { padding-block: var(--space-2xl) var(--space-xl); background: #FAFAFA; }
-.section-programme     { padding-block: var(--space-2xl) var(--space-xl); }
-.section-how           { padding-block: var(--space-xl) var(--space-2xl); }
-.section-connects-list { padding-block: var(--space-xl); }
-.section-become-mentor { padding-block: var(--space-xl); background: #FAFAFA; }
-.section-eligibility   { padding-block: var(--space-xl); }
-.section-who           { padding-block: var(--space-2xl); background: #FAFAFA; }
-.section-form          { padding-block: var(--space-2xl) var(--space-3xl); }
 
-.section-head { margin-bottom: var(--space-xl); max-width: 40rem; }
+.hero-bg {
+  position: absolute;
+  inset: 0;
+  z-index: -2;
+  overflow: hidden;
+}
+.hero-bg-img {
+  position: absolute;
+  inset: -8% 0 -8% 0;   /* headroom so the parallax scrub never shows an edge */
+  background-image: url("assets/hero/hero-cliffs.jpg");
+  background-size: cover;
+  background-position: center 42%;
+  will-change: transform;
+}
+
+.hero-shade {
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  background:
+    linear-gradient(
+      180deg,
+      rgba(18, 45, 84, 0.70) 0%,
+      rgba(18, 45, 84, 0.74) 45%,
+      rgba(18, 45, 84, 0.90) 100%
+    );
+}
+
+.hero-inner { flex: 1; display: flex; flex-direction: column; justify-content: center; }
+
+.hero-tagline {
+  font-family: var(--font-body);
+  font-weight: 700;
+  font-size: var(--text-label);
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--color-on-dark-dim);
+  margin-bottom: var(--space-md);
+  max-width: 34ch;
+}
+
+.hero-heading {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: var(--text-hero);
+  line-height: 0.86;
+  letter-spacing: -0.035em;
+  text-transform: uppercase;
+  color: var(--color-white);
+}
+.hero-line { display: block; }
+/* "East Sussex" is 11 characters against "Create"'s 6, so at a shared size it
+   runs far wider than the column and clips. Scaling it to ~0.55em lands the
+   two lines on nearly the same measure, which is the lockup we want anyway. */
+.hero-line-place {
+  font-size: 0.55em;
+  color: rgba(255, 255, 255, 0.86);
+  letter-spacing: -0.02em;
+}
+
+/* Mask wrappers for the type-motion reveal. Visible by default — script.js
+   sets the pre-animation offset at runtime so a blocked CDN still renders. */
+.mask {
+  display: inline-block;
+  overflow: hidden;
+  vertical-align: bottom;
+  padding-bottom: 0.06em;   /* room for descenders inside the clip */
+}
+.mask-in { display: inline-block; will-change: transform; }
+
+.hero-foot {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: end;
+  justify-content: space-between;
+  gap: var(--space-lg);
+  margin-top: var(--space-xl);
+}
+.hero-sub {
+  font-size: var(--text-lead);
+  color: var(--color-white);
+  max-width: 42ch;
+}
+.hero-actions { display: flex; flex-wrap: wrap; gap: var(--space-sm); }
+
+/* ---------------------------------------------------------------------------
+   5 · Section rhythm & heads
+   --------------------------------------------------------------------------- */
+.section { position: relative; padding-block: var(--space-3xl); }
+.section-is-you      { padding-top: var(--space-2xl); }
+.section-who         { background: var(--color-paper-2); }
+.section-form        { padding-block: var(--space-2xl) var(--space-3xl); }
+.section-become-mentor { padding-block: var(--space-2xl); }
+
+.section-head { margin-bottom: var(--space-xl); }
+.section-head-wide { max-width: 46rem; }
+
+.section-kicker {
+  font-family: var(--font-body);
+  font-weight: 700;
+  font-size: var(--text-label);
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--color-red);
+  margin-bottom: var(--space-sm);
+}
 
 .section-heading {
   font-size: var(--text-h2);
+  font-weight: 600;
+  letter-spacing: -0.025em;
 }
 
 .section-intro {
   margin-top: var(--space-md);
   font-size: var(--text-lead);
   color: var(--color-darker-grey);
-  max-width: 38rem;
+  max-width: 42ch;
 }
 
 /* ---------------------------------------------------------------------------
-   5 · Hero — asymmetric two-column, serif display with an italic flourish
+   6 · Split layout — copy beside a sticky media column. DOM order already
+   matches visual order in both variants, so no `order` juggling is needed.
    --------------------------------------------------------------------------- */
-.hero {
-  position: relative;
+.split {
   display: grid;
-  grid-template-rows: 1fr auto;
-  min-height: calc(100vh - 4.75rem);
-  padding-top: var(--space-lg);
-  padding-bottom: var(--space-xl); /* heavier than top — pulls the hero into the page */
-  overflow: hidden;
+  gap: clamp(2.5rem, 6vw, 5.5rem);
+  align-items: start;
 }
-.hero-inner {
-  display: grid;
-  grid-template-columns: 1.05fr 0.95fr;
-  gap: clamp(2rem, 5vw, 5rem);
-  align-items: center;
-  align-self: center;
+.split-text-first  { grid-template-columns: minmax(0, 1.05fr) minmax(0, 0.95fr); }
+.split-media-first { grid-template-columns: minmax(0, 0.95fr) minmax(0, 1.05fr); }
+
+.split-media {
+  position: sticky;
+  top: calc(var(--header-h) + 3rem);
+  align-self: start;
+}
+
+/* Frame — a solid navy rule offset behind the photo. Bold, flat, no shadow. */
+.frame {
+  position: relative;
+  aspect-ratio: 4 / 5;
   width: 100%;
 }
-.hero-copy { max-width: 34rem; }
-
-.hero-tagline {
-  font-family: var(--font-display);
-  font-style: italic;
-  font-weight: 500;
-  font-size: var(--text-lead);
-  color: var(--color-red);
-  margin-bottom: var(--space-sm);
+/* Opaque backdrop between the offset rule and the photos. Without it, the
+   rule shows straight through the images mid-crossfade, when both the
+   outgoing and incoming photo are partly transparent. */
+.frame::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  background: var(--color-paper);
 }
-
-.hero-heading {
-  font-size: var(--text-hero);
-  font-weight: 600;
-  color: var(--color-navy);
-}
-.hero-heading em { color: var(--color-red); }
-
-.hero-subhead {
-  margin-top: var(--space-md);
-  font-family: var(--font-body);
-  font-size: var(--text-lead);
-  color: var(--color-darker-grey);
-  max-width: 30rem;
-}
-
-.hero-copy .btn { margin-top: var(--space-lg); }
-
-.hero-collage {
-  display: grid;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: clamp(0.75rem, 1.5vw, 1.25rem);
-  align-content: center;
-}
-.collage-tile {
-  margin: 0;
-  border-radius: 6px;
-  overflow: hidden;
-  will-change: transform;
-  box-shadow: 0 1px 2px rgba(18, 45, 84, 0.06);
-}
-.tile-a { transform: translateY(-1.5rem); }
-.tile-b { transform: translateY(1.25rem); }
-.tile-c { transform: translateY(-0.5rem); }
-.tile-d { transform: translateY(2rem); }
-
-.collage-img {
-  aspect-ratio: 4 / 5;
+.frame-img {
+  position: absolute;
+  inset: 0;
+  z-index: 2;
   background-size: cover;
   background-position: center;
-  transition: transform var(--dur-slow) var(--ease-out);
-  position: relative;
+  opacity: 0;
+  transition: opacity var(--dur-slow) var(--ease-out);
 }
-.collage-tile:hover .collage-img { transform: scale(1.05); }
+.frame-img.is-active { opacity: 1; }
+.frame-edge {
+  position: absolute;
+  z-index: 0;
+  top: 1.25rem;
+  left: 1.25rem;
+  right: -1.25rem;
+  bottom: -1.25rem;
+  border: 2px solid var(--color-navy);
+}
 
 /* <<< SWAP >>> real programme photography, one per creative discipline —
-   see README for current credits. Each maps to a discipline on the page:
-   hands = makers/craft · art = illustration & fine art · textile = fashion
-   and textiles · photography = drone/property. */
+   see README for current credits. */
 .img-hands       { background-image: url("assets/hero/hands.jpg"); }
 .img-art         { background-image: url("assets/hero/art.jpg"); }
 .img-textile     { background-image: url("assets/hero/textile.jpg"); }
 .img-photography { background-image: url("assets/hero/photography.jpg"); background-position: center 60%; }
 
-.scroll-cue {
-  justify-self: center;
-  margin-top: var(--space-md);
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 0.5rem;
-  text-decoration: none;
-  color: var(--color-darker-grey); /* --color-grey fails 4.5:1 at this size */
-}
-.scroll-cue-text {
-  font-family: var(--font-mono);
-  font-size: 0.6875rem;
-  letter-spacing: 0.18em;
-  text-transform: uppercase;
-}
-.scroll-cue-line {
-  width: 1px;
-  height: 44px;
-  background: var(--color-grey);
-  transform-origin: top;
-  animation: scrollCue 2.2s var(--ease-in-out) infinite;
-}
-@keyframes scrollCue {
-  0%   { transform: scaleY(0); opacity: 0; }
-  40%  { transform: scaleY(1); opacity: 1; }
-  100% { transform: scaleY(0); opacity: 0; transform-origin: bottom; }
-}
-
 /* ---------------------------------------------------------------------------
-   6 · Programme — asymmetric editorial index, not a 3-card grid.
-   Hacks leads at full width; Mentoring Sprints + The Collective pair beneath,
-   divided by a single hairline rule. Each offering carries a spec-line
-   (access + time) so a reader can self-select at a glance.
+   7 · Is this you? — large qualifying lines, each driving the frame beside it
    --------------------------------------------------------------------------- */
-.programme-index { display: flex; flex-direction: column; gap: var(--space-xl); }
-
-.programme-head {
-  display: flex;
-  align-items: center;
-  gap: 0.75rem;
-  margin-bottom: var(--space-2xs);
-}
-.programme-icon {
-  display: inline-flex;
-  color: var(--color-red);
-  flex-shrink: 0;
-}
-.programme-icon svg { width: 28px; height: 28px; }
-
-/* Functional spec-line: who it's for + time commitment. Small, muted,
-   sits between the title and the body. */
-.programme-meta {
-  font-size: var(--text-small);
-  color: var(--color-darker-grey);
-  margin-bottom: var(--space-sm);
-  letter-spacing: 0.01em;
-}
-
-.programme-lead {
-  padding-bottom: var(--space-xl);
-  border-bottom: 1px solid var(--color-light-grey);
-}
-.programme-lead .programme-title {
-  font-size: var(--text-h2);
-}
-.programme-lead .programme-meta {
-  font-size: var(--text-body);
-}
-.programme-lead .programme-body {
-  font-size: var(--text-lead);
-  color: var(--color-darker-grey);
-  max-width: var(--measure);
-}
-
-.programme-pair {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: var(--space-2xl);
-}
-.programme-item .programme-title {
-  font-size: var(--text-h3);
-}
-.programme-item .programme-body {
-  color: var(--color-darker-grey);
-  max-width: 32rem;
-}
-
-/* ---------------------------------------------------------------------------
-   7 · How it works — numbered process, large serif numerals, hairline
-   dividers between steps instead of a circle+connector-line device.
-   --------------------------------------------------------------------------- */
-.how-opening {
-  max-width: 44rem;
-  margin-bottom: var(--space-xl);
-}
-.how-opening p {
+.qual-list { display: flex; flex-direction: column; }
+.qual-item {
   font-family: var(--font-display);
-  font-size: var(--text-lead);
   font-weight: 500;
-  color: var(--color-navy);
-  line-height: 1.4;
+  font-size: clamp(1.25rem, 2.1vw, 1.9rem);
+  line-height: 1.25;
+  letter-spacing: -0.015em;
+  color: var(--color-ink-dim);
+  padding-block: clamp(1.5rem, 3.5vw, 2.5rem);
+  border-top: 1px solid var(--color-hairline);
+  transition: color var(--dur-mid) var(--ease-out);
 }
+.qual-item:last-child { border-bottom: 1px solid var(--color-hairline); }
+.qual-item.is-active { color: var(--color-navy); }
 
-.process {
-  list-style: none;
-  margin: 0;
-  padding: 0;
-  display: flex;
-  flex-direction: column;
-  gap: var(--space-xl);
-}
-/* A real 2-column grid — numeral | content — instead of a hand-guessed
-   padding-left. The number's own rendered width (which varies with the
-   font/weight and isn't the same as its character count) used to leave
-   the title and body indented by different, wrong amounts; the grid
-   column tracks the number's actual box, so title and body always land
-   in exactly the same column regardless of numeral width. */
-.process-step {
-  max-width: var(--measure);
+/* ---------------------------------------------------------------------------
+   8 · Offer — an editorial index of rows, deliberately not a 3-card grid
+   --------------------------------------------------------------------------- */
+.offer-grid { display: flex; flex-direction: column; }
+.offer {
   display: grid;
-  grid-template-columns: auto 1fr;
-  column-gap: var(--space-md);
-  row-gap: var(--space-xs);
-  align-items: baseline;
+  grid-template-columns: 4.5rem minmax(0, 0.85fr) minmax(0, 1.5fr);
+  gap: clamp(1rem, 3vw, 2.5rem);
+  align-items: start;
+  padding-block: clamp(2rem, 4vw, 3rem);
+  border-top: 1px solid var(--color-hairline);
 }
-.process-num {
+.offer:last-child { border-bottom: 1px solid var(--color-hairline); }
+
+/* Explicit placement: the row has four children but three columns, so
+   auto-flow would drop the body into the numeral column and wrap it to a
+   sliver. Index left, title + meta stacked centre, body right. */
+.offer-index {
   grid-column: 1;
   grid-row: 1;
   font-family: var(--font-display);
-  font-size: var(--text-h2);
   font-weight: 600;
+  font-size: 1.125rem;
   color: var(--color-red);
-  line-height: 1;
+  letter-spacing: 0.02em;
 }
-.process-title {
+.offer-title {
   grid-column: 2;
   grid-row: 1;
   font-size: var(--text-h3);
   font-weight: 600;
 }
-.process-body {
+.offer-lead .offer-title { font-size: clamp(1.75rem, 3vw, 2.5rem); }
+.offer-meta {
   grid-column: 2;
   grid-row: 2;
-  align-self: start;
+  margin-top: var(--space-2xs);
+  font-size: var(--text-small);
+  color: var(--color-darker-grey);
+}
+.offer-body {
+  grid-column: 3;
+  grid-row: 1 / span 2;
+  color: var(--color-darker-grey);
+  max-width: var(--measure);
+}
+
+/* ---------------------------------------------------------------------------
+   9 · Map — hand-built, stylised county outline. Not survey-accurate, and
+   the caption says so. Pins pair with the list rows via data-place.
+   --------------------------------------------------------------------------- */
+.map-figure { margin: 0; }
+.map { width: 100%; height: auto; overflow: visible; }
+
+.map-shape {
+  fill: rgba(18, 45, 84, 0.05);
+  stroke: var(--color-navy);
+  stroke-width: 2;
+  stroke-linejoin: round;
+}
+
+.map-pin { cursor: pointer; }
+.map-pin-dot {
+  fill: var(--color-red);
+  transition: r var(--dur-fast) var(--ease-out);
+}
+.map-pin-halo {
+  fill: var(--color-red);
+  opacity: 0;
+  transform-box: fill-box;
+  transform-origin: center;
+  transform: scale(0.4);
+  transition: opacity var(--dur-mid) var(--ease-out),
+              transform var(--dur-mid) var(--ease-out);
+}
+.map-pin-label {
+  font-family: var(--font-body);
+  font-size: 15px;
+  font-weight: 700;
+  fill: var(--color-navy);
+  text-anchor: middle;
+  opacity: 0;
+  transition: opacity var(--dur-fast) var(--ease-out);
+  /* white knockout so the label stays readable wherever it lands */
+  paint-order: stroke fill;
+  stroke: var(--color-white);
+  stroke-width: 5px;
+  stroke-linejoin: round;
+}
+.map-pin.is-active .map-pin-halo { opacity: 0.18; transform: scale(1); }
+.map-pin.is-active .map-pin-dot  { r: 10; }
+.map-pin.is-active .map-pin-label { opacity: 1; }
+
+.map-caption {
+  margin-top: var(--space-md);
+  font-size: var(--text-small);
   color: var(--color-darker-grey);
 }
 
-.how-band {
-  background: var(--color-navy);
-  margin-top: var(--space-lg);
-  padding-block: var(--space-lg);
-}
-.how-band-text {
-  font-family: var(--font-display);
-  font-size: var(--text-lead);
-  font-weight: 500;
-  color: var(--color-white);
-  max-width: 48rem;
-  line-height: 1.45;
-}
-
-.how-caveat {
-  margin-top: var(--space-xl);
-  font-size: var(--text-small);
-  color: var(--color-darker-grey); /* --color-grey fails 4.5:1 at this size */
-  max-width: 46rem;
-}
-
-/* ---------------------------------------------------------------------------
-   7b · Is this you? — reuses the checklist look from Eligibility; a lighter,
-   self-qualifying pass before the formal criteria further down the page.
-   --------------------------------------------------------------------------- */
-.is-you-inner { max-width: 46rem; }
-
-/* ---------------------------------------------------------------------------
-   7c · Upcoming Connects — placeholder list, same expression-of-interest
-   framing as the form section (no confirmed dates yet).
-   --------------------------------------------------------------------------- */
-.connects-inner { max-width: 44rem; }
-.connects-list {
-  list-style: none;
-  margin: var(--space-lg) 0 0;
-  padding: 0;
-  display: flex;
-  flex-direction: column;
-  gap: var(--space-sm);
-}
+/* --- Connects list ------------------------------------------------------- */
+.connects-list { display: flex; flex-direction: column; }
 .connect-item {
   display: flex;
   align-items: baseline;
   justify-content: space-between;
-  gap: var(--space-md);
-  padding-block: var(--space-sm);
-  border-bottom: 1px solid var(--color-light-grey);
-  font-size: var(--text-lead);
+  flex-wrap: wrap;
+  gap: var(--space-sm);
+  padding-block: var(--space-md);
+  border-top: 1px solid var(--color-hairline);
+  cursor: default;
+  transition: color var(--dur-fast) var(--ease-out);
 }
+.connect-item:last-child { border-bottom: 1px solid var(--color-hairline); }
 .connect-place {
   font-family: var(--font-display);
   font-weight: 600;
-  color: var(--color-navy);
+  font-size: var(--text-h3);
+  transition: color var(--dur-fast) var(--ease-out);
 }
-.connect-date {
-  font-size: var(--text-small);
-  color: var(--color-darker-grey);
-}
+.connect-date { font-size: var(--text-small); color: var(--color-darker-grey); }
+.connect-item.is-active .connect-place { color: var(--color-red); }
 
 /* ---------------------------------------------------------------------------
-   7d · Become a mentor — placeholder CTA, routes to the same form as the
-   rest of the page until a dedicated mentor sign-up flow exists.
+   10 · Eligibility checklist
    --------------------------------------------------------------------------- */
-.become-mentor-inner { max-width: 42rem; }
-.become-mentor-inner .btn { margin-top: var(--space-lg); }
-
-/* ---------------------------------------------------------------------------
-   8 · Eligibility
-   --------------------------------------------------------------------------- */
-.eligibility-inner { max-width: 52rem; }
-.checklist {
-  list-style: none;
-  margin: 0;
-  padding: 0;
-  display: flex;
-  flex-direction: column;
-  gap: var(--space-md);
-}
+.checklist { display: flex; flex-direction: column; gap: var(--space-md); }
 .check-item {
   display: flex;
   align-items: baseline;
@@ -591,46 +573,120 @@ button:focus-visible {
   font-size: var(--text-lead);
   color: var(--color-darker-grey);
 }
-/* A real round bullet, drawn in CSS so it stays crisp at any size */
 .check-dot {
   flex-shrink: 0;
   width: 0.5rem;
   height: 0.5rem;
-  border-radius: 50%;
   background: var(--color-red);
-  /* nudge the dot to sit on the text's optical centre, not its baseline */
+  /* sit on the text's optical centre, not its baseline */
   transform: translateY(-0.25em);
 }
 .eligibility-close {
   margin-top: var(--space-lg);
   font-size: var(--text-lead);
-  color: var(--color-darker-grey);
-  max-width: 40rem;
+  color: var(--color-navy);
+  max-width: 40ch;
 }
 
 /* ---------------------------------------------------------------------------
-   9 · Who's behind this
+   11 · Who's behind this
    --------------------------------------------------------------------------- */
-.who-inner { max-width: 46rem; }
-.who-copy { margin-top: var(--space-lg); }
+.who-inner { max-width: 48rem; }
+.who-copy { display: flex; flex-direction: column; gap: var(--space-md); }
 .who-lead {
   font-size: var(--text-lead);
   color: var(--color-darker-grey);
-  margin-bottom: var(--space-md);
   max-width: var(--measure);
 }
 .who-note {
   font-size: var(--text-small);
-  color: var(--color-darker-grey); /* --color-grey fails 4.5:1 at this size */
-  font-style: italic;
+  color: var(--color-navy);
+  font-weight: 500;
 }
 
 /* ---------------------------------------------------------------------------
-   10 · Form / CTA
+   12 · Process — numeral | content grid. A real grid column tracks the
+   numeral's rendered width, so title and body always share one left edge
+   regardless of how wide the glyph is.
    --------------------------------------------------------------------------- */
-.form-inner { max-width: 42rem; }
+.process {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: clamp(2rem, 4vw, 3.5rem);
+}
+.process-step {
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr);
+  column-gap: var(--space-md);
+  row-gap: var(--space-2xs);
+  align-items: baseline;
+  max-width: var(--measure);
+}
+.process-num {
+  grid-column: 1;
+  grid-row: 1;
+  font-family: var(--font-display);
+  font-size: clamp(2rem, 3.5vw, 3rem);
+  font-weight: 700;
+  color: var(--color-red);
+  line-height: 1;
+}
+.process-title { grid-column: 2; grid-row: 1; font-size: var(--text-h3); }
+.process-body {
+  grid-column: 2;
+  grid-row: 2;
+  align-self: start;
+  color: var(--color-darker-grey);
+}
+
+.how-caveat {
+  margin-top: var(--space-xl);
+  font-size: var(--text-small);
+  color: var(--color-darker-grey);
+  max-width: 46rem;
+}
+
+.how-band {
+  background: var(--color-navy);
+  margin-top: var(--space-2xl);
+  padding-block: var(--space-xl);
+}
+.how-band-text {
+  font-family: var(--font-display);
+  font-size: clamp(1.375rem, 2.6vw, 2.125rem);
+  font-weight: 500;
+  line-height: 1.3;
+  letter-spacing: -0.02em;
+  color: var(--color-white);
+  max-width: 34ch;
+}
+
+/* ---------------------------------------------------------------------------
+   13 · Become a mentor — closing ask, sits between the band and the form
+   --------------------------------------------------------------------------- */
+.mentor-inner {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: end;
+  justify-content: space-between;
+  gap: var(--space-lg);
+  padding: clamp(2rem, 4vw, 3rem);
+  border: 2px solid var(--color-navy);
+}
+.mentor-copy { max-width: 42rem; }
+.mentor-copy .section-intro { margin-top: var(--space-sm); }
+
+/* ---------------------------------------------------------------------------
+   14 · Form / CTA
+   --------------------------------------------------------------------------- */
+.form-inner { max-width: 46rem; }
+.form-heading {
+  font-size: var(--text-h2);
+  font-weight: 600;
+  letter-spacing: -0.025em;
+}
 .form-body {
-  margin-top: var(--space-sm);
+  margin-top: var(--space-md);
   font-size: var(--text-lead);
   color: var(--color-darker-grey);
 }
@@ -638,20 +694,16 @@ button:focus-visible {
 .form-microcopy {
   margin-top: var(--space-md);
   font-size: var(--text-small);
-  color: var(--color-darker-grey); /* --color-grey fails 4.5:1 at this size */
+  color: var(--color-darker-grey);
 }
 
 /* ---------------------------------------------------------------------------
-   11 · Footer — mast-headed: logos anchor the band, tagline beside,
-   copyright closes it in small type below, on spacing alone (one hairline
-   — above the whole footer — is enough; a second one right beneath it
-   just to separate the copyright line was one rule too many).
+   15 · Footer
    --------------------------------------------------------------------------- */
 .site-footer {
   background: var(--color-white);
-  border-top: 1px solid var(--color-light-grey);
-  padding-top: var(--space-xl);
-  padding-bottom: var(--space-xl); /* room beneath the copyright — it was hugging the page edge */
+  border-top: 1px solid var(--color-hairline);
+  padding-block: var(--space-xl);
 }
 .footer-inner {
   display: flex;
@@ -660,16 +712,11 @@ button:focus-visible {
   gap: var(--space-md);
   flex-wrap: wrap;
 }
-.footer-line {
-  font-size: var(--text-small);
-  color: var(--color-darker-grey); /* --color-grey fails 4.5:1 at this size */
-}
+.footer-line { font-size: var(--text-small); color: var(--color-darker-grey); }
 
 /* Funder trio — UK Government, SBSA, ESCC, in that order (per council
-   request). These are wide banner-style logos, not square crests like
-   Studio Zao's mark, so they're capped by height rather than matched 1:1
-   to it. Own row so they have room to breathe without crowding the
-   Studio Zao/tagline row above. */
+   request). Wide banner logos, so capped by height rather than matched 1:1
+   to the Studio Zao mark. Own row so they have room to breathe. */
 .footer-funders {
   display: flex;
   align-items: center;
@@ -677,64 +724,31 @@ button:focus-visible {
   flex-wrap: wrap;
   margin-top: var(--space-lg);
   padding-top: var(--space-lg);
-  border-top: 1px solid var(--color-light-grey);
+  border-top: 1px solid var(--color-hairline);
 }
 .logo-img-ukgov { height: 26px; }
-.logo-img-sbsa { height: 30px; }
+.logo-img-sbsa  { height: 30px; }
 
-.footer-bottom {
-  margin-top: var(--space-xl); /* separate copyright from the tagline row */
-}
+.footer-bottom { margin-top: var(--space-xl); }
 .footer-copyright {
-  /* body face, not mono — the mono outlier stays capped at its 2 slots
-     (see .scroll-cue-text) per the 2+1 type rule */
   font-size: 0.75rem;
   color: var(--color-darker-grey);
-  text-align: left;
 }
 
 /* ---------------------------------------------------------------------------
-   12 · Scroll-reveal
+   16 · Reveal — visible by DEFAULT. script.js sets the pre-animation state
+   at runtime, so if the GSAP CDN is blocked the page renders as plain
+   static content instead of staying permanently invisible.
    --------------------------------------------------------------------------- */
-.reveal {
-  opacity: 0;
-  transform: translateY(20px);
-  transition: opacity var(--dur-mid) var(--ease-out),
-              transform var(--dur-mid) var(--ease-out);
-}
-.reveal.is-visible {
-  opacity: 1;
-  transform: none;
-}
-.reveal[data-reveal-delay="1"] { transition-delay: 0.08s; }
-.reveal[data-reveal-delay="2"] { transition-delay: 0.16s; }
-.reveal[data-reveal-delay="3"] { transition-delay: 0.24s; }
+.reveal { opacity: 1; }
 
 /* ---------------------------------------------------------------------------
-   13 · Responsive
+   17 · Responsive
    --------------------------------------------------------------------------- */
 
-/* Large screens — confirmed live at 1920px: the container stops growing at
-   1200px, leaving ~360px of empty white margin on each side ("looks great
-   on mobile, not optimized for browser" feedback). Widen the shared
-   container progressively on big monitors so the photography-heavy
-   sections (hero collage, tile grids) fill the extra space. Text blocks
-   don't stretch to match — .hero-copy, .measure, .programme-body etc. all
-   carry their own max-width/ch caps regardless of how wide the outer
-   container gets, so reading width stays comfortable either way. */
-@media (min-width: 1500px) {
-  :root { --wrap-max: 1440px; }
-}
-@media (min-width: 1900px) {
-  :root { --wrap-max: 1600px; }
-}
-
-/* Nav switches to the hamburger menu on its OWN breakpoint, wider than the
-   layout breakpoint below. Five links + the logo lockup start wrapping to
-   two lines somewhere around 900-970px (confirmed by measurement) — well
-   before the hero/programme layout actually needs to change — so the nav
-   needs to drop to the mobile menu earlier than everything else does. */
-@media (max-width: 1000px) {
+/* Nav drops to the hamburger on its own, wider breakpoint: five links plus
+   the logo lockup start wrapping well before the layout needs to change. */
+@media (max-width: 1040px) {
   .nav-toggle { display: flex; }
   .nav-links {
     position: absolute;
@@ -745,16 +759,16 @@ button:focus-visible {
     align-items: flex-start;
     gap: 0;
     background: var(--color-white);
-    border-bottom: 1px solid var(--color-light-grey);
+    border-bottom: 1px solid var(--color-hairline);
     padding: var(--space-sm) var(--wrap-pad);
     max-height: 0;
     overflow: hidden;
     transition: max-height var(--dur-mid) var(--ease-out);
   }
-  .nav-links.is-open { max-height: 22rem; }
+  .nav-links.is-open { max-height: 24rem; }
   .nav-links li { width: 100%; }
   .nav-links a { display: block; width: 100%; padding: 0.85rem 0; }
-  .nav-links .nav-cta { display: inline-flex; width: auto; margin-top: 0.5rem; }
+  .nav-links .nav-cta { display: inline-flex; width: auto; }
 
   .site-nav { position: static; }
   .header-inner { position: relative; }
@@ -762,33 +776,46 @@ button:focus-visible {
 
 @media (max-width: 900px) {
   :root {
+    --space-3xl: 5.5rem;
     --space-2xl: 4rem;
-    --space-xl: 3rem;
-    --space-lg: 2rem;
+    --space-xl:  3rem;
+    --space-lg:  2rem;
   }
 
-  .hero { min-height: auto; }
-  .scroll-cue { display: none; }
-  .hero-inner {
-    grid-template-columns: 1fr;
-    gap: var(--space-lg);
+  /* Both split variants collapse to one column; the sticky media column
+     stops being sticky so it can't trap the reader mid-scroll. */
+  .split-text-first,
+  .split-media-first { grid-template-columns: minmax(0, 1fr); }
+  .split-media { position: static; }
+  .frame { aspect-ratio: 3 / 2; max-width: 34rem; }
+  .frame-edge { top: 0.75rem; left: 0.75rem; right: -0.75rem; bottom: -0.75rem; }
+
+  /* Two columns on mobile: numeral holds its own track, everything else
+     stacks in the second one. */
+  .offer { grid-template-columns: 2.75rem minmax(0, 1fr); }
+  .offer-body {
+    grid-column: 2;
+    grid-row: 3;
+    margin-top: var(--space-sm);
   }
-  .hero-collage { order: 2; }
 
-  .programme-pair { grid-template-columns: 1fr; gap: var(--space-xl); }
-  .programme-lead .programme-title { font-size: var(--text-h3); }
+  .process { grid-template-columns: minmax(0, 1fr); }
 
-  .process-num { font-size: var(--text-h3); }
+  .hero-foot { flex-direction: column; align-items: stretch; }
+  .hero-actions { flex-direction: column; align-items: stretch; }
+  .btn { width: 100%; }
+  .mentor-inner .btn, .form-inner .btn { width: auto; }
 }
 
 @media (max-width: 560px) {
-  .hero-collage { gap: 0.6rem; }
-  .tile-a, .tile-b, .tile-c, .tile-d { transform: none; }
+  .hero { min-height: auto; padding-block: var(--space-xl) var(--space-2xl); }
+  .mentor-inner .btn, .form-inner .btn { width: 100%; }
   .footer-inner { flex-direction: column; align-items: flex-start; }
+  .connect-item { flex-direction: column; align-items: flex-start; gap: 0.35rem; }
 }
 
 /* ---------------------------------------------------------------------------
-   14 · Reduced motion
+   18 · Reduced motion
    --------------------------------------------------------------------------- */
 @media (prefers-reduced-motion: reduce) {
   html { scroll-behavior: auto; }
@@ -803,6 +830,4 @@ button:focus-visible {
   }
 
   .reveal { opacity: 1; transform: none; }
-  .collage-tile { transform: none !important; }
-  .scroll-cue-line { animation: none; }
 }
