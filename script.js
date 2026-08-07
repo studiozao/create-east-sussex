@@ -1,101 +1,103 @@
 /* ============================================================================
    Create East Sussex — script.js
    ----------------------------------------------------------------------------
-   GSAP + ScrollTrigger. Handles:
-     1. Hero entrance timeline (tagline → heading → subhead → CTA)
-     2. Scroll-triggered reveals for every .reveal element (ScrollTrigger.batch,
-        replaces the old IntersectionObserver + manual class toggle)
-     3. Hero collage scrub-parallax (replaces the old scroll-listener version)
-     4. Mobile nav toggle
-     5. CTA click analytics event (separate from the page view)
-   All motion is gated behind prefers-reduced-motion via gsap.matchMedia().
+   Vanilla JS, no dependencies. Handles:
+     1. Scroll-reveal on entry (IntersectionObserver)
+     2. Hero collage parallax drift on scroll
+     3. Mobile nav toggle
+     4. CTA click analytics event (separate from page view)
+   All motion is disabled when the user prefers reduced motion.
    ============================================================================ */
 
 (function () {
   "use strict";
 
-  gsap.registerPlugin(ScrollTrigger);
-
-  var mm = gsap.matchMedia();
+  var prefersReducedMotion = window.matchMedia(
+    "(prefers-reduced-motion: reduce)"
+  ).matches;
 
   /* -------------------------------------------------------------------------
-     Motion — reduced-motion branch shows everything immediately, no tweens.
-     Full-motion branch drives the hero timeline, reveals and parallax.
+     1 · Scroll-reveal on entry
+     Adds .is-visible to any .reveal element as it enters the viewport.
      ------------------------------------------------------------------------- */
-  mm.add(
-    {
-      reduced: "(prefers-reduced-motion: reduce)",
-      full: "(prefers-reduced-motion: no-preference)",
-    },
-    function (context) {
-      if (context.conditions.reduced) {
-        gsap.set(".reveal", { opacity: 1, y: 0 });
-        return;
-      }
+  var revealEls = document.querySelectorAll(".reveal");
 
-      gsap.set(".reveal", { opacity: 0, y: 20 });
-
-      /* ---------------------------------------------------------------------
-         1 · Hero entrance — a real timeline, staggered on load rather than
-         waiting for scroll (the hero is already in view on arrival).
-         --------------------------------------------------------------------- */
-      var heroTl = gsap.timeline({
-        defaults: { duration: 0.6, ease: "power2.out" },
-      });
-      heroTl
-        .to(".hero-tagline", { opacity: 1, y: 0 })
-        .to(".hero-heading", { opacity: 1, y: 0 }, "<0.08")
-        .to(".hero-subhead", { opacity: 1, y: 0 }, "<0.08")
-        .to(".hero-copy .btn", { opacity: 1, y: 0 }, "<0.08")
-        .to(".hero-collage", { opacity: 1, y: 0 }, "<0.1");
-
-      /* ---------------------------------------------------------------------
-         2 · Scroll reveals — everything below the hero, batched so items
-         entering together animate together with a short stagger.
-         --------------------------------------------------------------------- */
-      ScrollTrigger.batch(".reveal:not(.hero-tagline):not(.hero-heading):not(.hero-subhead):not(.hero-copy .btn):not(.hero-collage)", {
-        start: "top 88%",
-        once: true,
-        onEnter: function (elements) {
-          gsap.to(elements, {
-            opacity: 1,
-            y: 0,
-            duration: 0.6,
-            ease: "power2.out",
-            stagger: 0.08,
-          });
-        },
-      });
-
-      /* ---------------------------------------------------------------------
-         3 · Hero collage parallax — each tile drifts at a different rate as
-         the hero scrolls past, tied to scroll position via scrub instead of
-         a manual scroll listener + requestAnimationFrame loop.
-         --------------------------------------------------------------------- */
-      gsap.utils.toArray("[data-parallax]").forEach(function (tile) {
-        var speed = parseFloat(tile.getAttribute("data-parallax")) || 0.08;
-        gsap.to(tile, {
-          y: function () {
-            return -speed * 400;
-          },
-          ease: "none",
-          scrollTrigger: {
-            trigger: ".hero",
-            start: "top top",
-            end: "bottom top",
-            scrub: true,
-          },
+  if (prefersReducedMotion || !("IntersectionObserver" in window)) {
+    // Show everything immediately — no motion.
+    revealEls.forEach(function (el) {
+      el.classList.add("is-visible");
+    });
+  } else {
+    var revealObserver = new IntersectionObserver(
+      function (entries, observer) {
+        entries.forEach(function (entry) {
+          if (entry.isIntersecting) {
+            entry.target.classList.add("is-visible");
+            observer.unobserve(entry.target); // reveal once, then stop watching
+          }
         });
-      });
+      },
+      { threshold: 0.15, rootMargin: "0px 0px -8% 0px" }
+    );
 
-      return function cleanup() {
-        heroTl.kill();
-      };
-    }
+    revealEls.forEach(function (el) {
+      revealObserver.observe(el);
+    });
+  }
+
+  /* -------------------------------------------------------------------------
+     2 · Hero collage parallax
+     Each tile drifts at a slightly different rate as the page scrolls.
+     Uses requestAnimationFrame + a single scroll listener for smoothness.
+     ------------------------------------------------------------------------- */
+  var parallaxTiles = Array.prototype.slice.call(
+    document.querySelectorAll("[data-parallax]")
   );
 
+  if (!prefersReducedMotion && parallaxTiles.length) {
+    // Capture each tile's baseline transform (they have staggered offsets in CSS).
+    var baselineOffsets = parallaxTiles.map(function (tile) {
+      var t = window.getComputedStyle(tile).transform;
+      if (t && t !== "none") {
+        var match = t.match(/matrix.*\((.+)\)/);
+        if (match) {
+          var values = match[1].split(", ");
+          return parseFloat(values[5]) || 0; // translateY component
+        }
+      }
+      return 0;
+    });
+
+    var ticking = false;
+
+    var updateParallax = function () {
+      var viewportH = window.innerHeight;
+      parallaxTiles.forEach(function (tile, i) {
+        var rect = tile.getBoundingClientRect();
+        // How far the tile is from vertical centre of the viewport (-1..1-ish)
+        var progress = (rect.top + rect.height / 2 - viewportH / 2) / viewportH;
+        var speed = parseFloat(tile.getAttribute("data-parallax")) || 0.08;
+        var drift = -progress * speed * 140; // px of drift
+        tile.style.transform =
+          "translateY(" + (baselineOffsets[i] + drift) + "px)";
+      });
+      ticking = false;
+    };
+
+    var requestParallax = function () {
+      if (!ticking) {
+        window.requestAnimationFrame(updateParallax);
+        ticking = true;
+      }
+    };
+
+    window.addEventListener("scroll", requestParallax, { passive: true });
+    window.addEventListener("resize", requestParallax, { passive: true });
+    updateParallax();
+  }
+
   /* -------------------------------------------------------------------------
-     4 · Mobile nav toggle
+     3 · Mobile nav toggle
      ------------------------------------------------------------------------- */
   var navToggle = document.querySelector(".nav-toggle");
   var navLinks = document.getElementById("nav-links");
@@ -106,6 +108,7 @@
       navToggle.setAttribute("aria-expanded", isOpen ? "true" : "false");
     });
 
+    // Close the menu after a link is tapped (mobile)
     navLinks.querySelectorAll("a").forEach(function (link) {
       link.addEventListener("click", function () {
         navLinks.classList.remove("is-open");
@@ -115,19 +118,23 @@
   }
 
   /* -------------------------------------------------------------------------
-     5 · CTA click analytics event
+     4 · CTA click analytics event
      Fires a custom event on every CTA click, SEPARATE from the page view.
      Works with Plausible OR Google Analytics 4 — whichever you enabled in
      the <head> of index.html. Safe no-op if neither is present.
      <<< No swap needed here — just enable a provider snippet in index.html. >>>
      ------------------------------------------------------------------------- */
   function trackCtaClick(label) {
+    // Plausible
     if (typeof window.plausible === "function") {
       window.plausible("CTA Click", { props: { location: label } });
     }
+    // Google Analytics 4
     if (typeof window.gtag === "function") {
       window.gtag("event", "cta_click", { cta_location: label });
     }
+    // Fallback for debugging before analytics is wired up:
+    // console.log("CTA click:", label);
   }
 
   document.querySelectorAll("[data-cta]").forEach(function (btn) {

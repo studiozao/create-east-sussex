@@ -17,12 +17,11 @@
   <meta name="description" content="Free 1:1 mentoring and practical sessions for freelancers and small creative businesses across East Sussex. Business support that actually gets creative businesses." />
 
   <!-- Fraunces (display serif) + JetBrains Mono (section numerals only) via
-       Google Fonts; General Sans (body) via Fontshare — warmer and more
-       human than the previous Switzer pairing. See README for swap notes. -->
+       Google Fonts; Switzer (body) via Fontshare. See README for swap notes. -->
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,wght@0,300;0,400;0,600;0,700;1,400;1,500&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
-  <link href="https://api.fontshare.com/v2/css?f[]=general-sans@400,500,600&display=swap" rel="stylesheet" />
+  <link href="https://api.fontshare.com/v2/css?f[]=switzer@400,500,600&display=swap" rel="stylesheet" />
 
   <link rel="stylesheet" href="styles.css" />
 
@@ -90,9 +89,9 @@
         </button>
         <ul id="nav-links" class="nav-links">
           <li><a href="#what-you-get">What you get</a></li>
+          <li><a href="#how">How it works</a></li>
           <li><a href="#eligibility">Eligibility</a></li>
           <li><a href="#who">Who&rsquo;s behind this</a></li>
-          <li><a href="#how">How it works</a></li>
           <li><a class="nav-cta" href="#form">Join <span aria-hidden="true">&rarr;</span></a></li>
         </ul>
       </nav>
@@ -185,10 +184,10 @@
 
     <!--
       ======================================================================
-      WHAT YOU GET — outcomes first, mechanics second. Connects leads at
-      full width now (the low-commitment entry point); mentoring and the
-      wider network follow as a paired preview. Full mentoring detail lives
-      in its own section near the end of the page, right before Register.
+      WHAT YOU GET — outcomes first, mechanics second. Mentoring leads at
+      full width (it's the core offer); Connects and the wider network
+      follow as a paired row, per direct stakeholder feedback: sell
+      mentoring first, Connects as the low-commitment way in.
       ======================================================================
     -->
     <section class="section section-programme" id="what-you-get" aria-labelledby="programme-heading">
@@ -196,37 +195,58 @@
         <header class="section-head reveal">
           <h2 id="programme-heading" class="section-heading">What you get</h2>
           <p class="section-intro">
-            Practical sessions to start, a network of people who get it,
-            and free 1:1 mentoring once you know what you need help with.
+            Free 1:1 mentoring matched to what your business actually needs,
+            plus practical sessions and a network of people who get it.
           </p>
         </header>
 
         <div class="programme-index">
-          <!-- Connects — full width, leads: the easiest, lowest-commitment
-               way in. -->
+          <!-- Mentoring — full width, leads: it's the core offer, not the
+               recruitment funnel. -->
           <article class="programme-lead reveal" data-reveal-delay="0">
             <div class="programme-head">
               <span class="programme-icon" aria-hidden="true">
                 <svg viewBox="0 0 40 40" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
-                  <path d="M22 4 8 23h11l-1 13 14-19H21z" />
+                  <circle cx="14" cy="13" r="5" />
+                  <circle cx="27" cy="16" r="4" />
+                  <path d="M5 33c0-5 4-9 9-9s9 4 9 9" />
+                  <path d="M24 33c0-4 3-7 6-7" />
                 </svg>
               </span>
-              <h3 class="programme-title">Connects</h3>
+              <h3 class="programme-title">Mentoring</h3>
             </div>
-            <p class="programme-meta">Open to everyone &middot; 2 hours &middot; free</p>
+            <p class="programme-meta">By invitation &middot; up to 6 hours, one-to-one</p>
             <p class="programme-body">
-              Free, 2-hour practical sessions, and the easiest way in. Come
-              away with something tangible on pricing, audience building,
-              hiring, AI tools and accessing grants, across Lewes, Hastings
-              and Eastbourne.
+              Free one-to-one time with a mentor who has built a creative
+              business themselves. A short diagnostic call comes first to
+              find your focus, then structured sessions built entirely
+              around what you need: more clients, better pricing, a clearer
+              plan, whatever it is.
             </p>
           </article>
 
-          <!-- Network + mentoring teaser — paired, secondary: what carries
-               on after a Connect, and what mentoring leads to further down
-               the page. -->
+          <!-- Connects + the wider network — paired, secondary: the
+               low-commitment way in and what carries on after. -->
           <div class="programme-pair">
             <article class="programme-item reveal" data-reveal-delay="1">
+              <div class="programme-head">
+                <span class="programme-icon" aria-hidden="true">
+                  <svg viewBox="0 0 40 40" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M22 4 8 23h11l-1 13 14-19H21z" />
+                  </svg>
+                </span>
+                <h3 class="programme-title">Connects</h3>
+              </div>
+              <p class="programme-meta">Open to everyone &middot; 2 hours &middot; free</p>
+              <p class="programme-body">
+                Free, 2-hour practical sessions, and the easiest way in. Come
+                away with something tangible on pricing, audience building,
+                hiring, AI tools and accessing grants, across Lewes,
+                Hastings and Eastbourne.
+              </p>
+            </article>
+
+            <article class="programme-item reveal" data-reveal-delay="2">
               <div class="programme-head">
                 <span class="programme-icon" aria-hidden="true">
                   <svg viewBox="0 0 40 40" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
@@ -245,27 +265,92 @@
                 a network that carries on long after your mentoring ends.
               </p>
             </article>
-
-            <article class="programme-item reveal" data-reveal-delay="2">
-              <div class="programme-head">
-                <span class="programme-icon" aria-hidden="true">
-                  <svg viewBox="0 0 40 40" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
-                    <circle cx="14" cy="13" r="5" />
-                    <circle cx="27" cy="16" r="4" />
-                    <path d="M5 33c0-5 4-9 9-9s9 4 9 9" />
-                    <path d="M24 33c0-4 3-7 6-7" />
-                  </svg>
-                </span>
-                <h3 class="programme-title">Mentoring</h3>
-              </div>
-              <p class="programme-meta">By invitation &middot; up to 6 hours, one-to-one</p>
-              <p class="programme-body">
-                Once you know what you need help with, get matched with a
-                mentor who has built a creative business themselves. More on
-                how that works further down.
-              </p>
-            </article>
           </div>
+        </div>
+      </div>
+    </section>
+
+    <!--
+      ======================================================================
+      02 · HOW IT WORKS
+      ======================================================================
+    -->
+    <section class="section section-how" id="how" aria-labelledby="how-heading">
+      <div class="wrap">
+        <header class="section-head reveal">
+          <h2 id="how-heading" class="section-heading">Your route to one-to-one mentoring</h2>
+        </header>
+
+        <div class="how-opening reveal">
+          <p>
+            Free 1:1 mentoring is how you get here. Getting started is
+            simple. Come to a Connect, free and open to anyone, meet people,
+            and see whether going deeper is right for you. No pressure
+            either way.
+          </p>
+        </div>
+
+        <!-- Plain divs with ARIA list semantics, not <ol>/<li> — a native
+             list-item marker was rendering alongside the custom numeral
+             in some browsers, showing as a doubled "1. 2" style number. -->
+        <div class="process" role="list" aria-label="What happens after a Connect">
+          <div class="process-step reveal" data-reveal-delay="0" role="listitem">
+            <span class="process-num" aria-hidden="true">1</span>
+            <h3 class="process-title">Get invited to mentoring</h3>
+            <p class="process-body">
+              Once you&rsquo;ve been to a Connect, or simply told us
+              you&rsquo;re interested, you&rsquo;re invited to start
+              mentoring.
+            </p>
+          </div>
+          <div class="process-step reveal" data-reveal-delay="1" role="listitem">
+            <span class="process-num" aria-hidden="true">2</span>
+            <h3 class="process-title">Go through the diagnostic</h3>
+            <p class="process-body">
+              A short survey, then a 30-minute call to talk through your
+              situation and agree the focus for your mentoring Sprint.
+            </p>
+          </div>
+          <div class="process-step reveal" data-reveal-delay="2" role="listitem">
+            <span class="process-num" aria-hidden="true">3</span>
+            <h3 class="process-title">Start your Sprint</h3>
+            <p class="process-body">
+              You&rsquo;re matched with a mentor and begin your 6-hour
+              Sprint, at whatever pace suits your practice: a few short
+              weekly sessions, or a couple of longer deep-dives.
+            </p>
+          </div>
+          <div class="process-step reveal" data-reveal-delay="3" role="listitem">
+            <span class="process-num" aria-hidden="true">4</span>
+            <h3 class="process-title">Stay part of the network</h3>
+            <p class="process-body">
+              Once your Sprint ends, you&rsquo;re an alum: you&rsquo;ll get a
+              short summary of next steps, keep your invite to future
+              Connects, and, if it&rsquo;s a fit, come back later as a
+              mentor yourself.
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <div class="wrap">
+        <p class="how-caveat reveal">
+          Places on the mentoring Sprint are limited and matched to fit, so
+          we can&rsquo;t guarantee mentoring for everyone who applies.
+          Everyone&rsquo;s welcome at the Connects and the wider network
+          regardless.
+        </p>
+      </div>
+
+      <!-- Community band — the section's closing note, after the caveat -->
+      <div class="how-band">
+        <div class="wrap">
+          <p class="how-band-text reveal">
+            And through all of it, you&rsquo;re part of something bigger: a
+            community of creative people across East Sussex, at the
+            Connects, in the mentoring, and beyond. You&rsquo;re not doing
+            this on your own.
+          </p>
         </div>
       </div>
     </section>
@@ -411,93 +496,6 @@
 
     <!--
       ======================================================================
-      MENTORING / HOW IT WORKS — moved to the very end of the page,
-      deliberately: it's the last full pitch before the Register CTA,
-      right after eligibility and who's-behind-it have built trust.
-      ======================================================================
-    -->
-    <section class="section section-how" id="how" aria-labelledby="how-heading">
-      <div class="wrap">
-        <header class="section-head reveal">
-          <h2 id="how-heading" class="section-heading">Your route to one-to-one mentoring</h2>
-        </header>
-
-        <div class="how-opening reveal">
-          <p>
-            Free 1:1 mentoring is how you get here. Getting started is
-            simple. Come to a Connect, free and open to anyone, meet people,
-            and see whether going deeper is right for you. No pressure
-            either way.
-          </p>
-        </div>
-
-        <!-- Plain divs with ARIA list semantics, not <ol>/<li> — a native
-             list-item marker was rendering alongside the custom numeral
-             in some browsers, showing as a doubled "1. 2" style number. -->
-        <div class="process" role="list" aria-label="What happens after a Connect">
-          <div class="process-step reveal" data-reveal-delay="0" role="listitem">
-            <span class="process-num" aria-hidden="true">1</span>
-            <h3 class="process-title">Get invited to mentoring</h3>
-            <p class="process-body">
-              Once you&rsquo;ve been to a Connect, or simply told us
-              you&rsquo;re interested, you&rsquo;re invited to start
-              mentoring.
-            </p>
-          </div>
-          <div class="process-step reveal" data-reveal-delay="1" role="listitem">
-            <span class="process-num" aria-hidden="true">2</span>
-            <h3 class="process-title">Go through the diagnostic</h3>
-            <p class="process-body">
-              A short survey, then a 30-minute call to talk through your
-              situation and agree the focus for your mentoring Sprint.
-            </p>
-          </div>
-          <div class="process-step reveal" data-reveal-delay="2" role="listitem">
-            <span class="process-num" aria-hidden="true">3</span>
-            <h3 class="process-title">Start your Sprint</h3>
-            <p class="process-body">
-              You&rsquo;re matched with a mentor and begin your 6-hour
-              Sprint, at whatever pace suits your practice: a few short
-              weekly sessions, or a couple of longer deep-dives.
-            </p>
-          </div>
-          <div class="process-step reveal" data-reveal-delay="3" role="listitem">
-            <span class="process-num" aria-hidden="true">4</span>
-            <h3 class="process-title">Stay part of the network</h3>
-            <p class="process-body">
-              Once your Sprint ends, you&rsquo;re an alum: you&rsquo;ll get a
-              short summary of next steps, keep your invite to future
-              Connects, and, if it&rsquo;s a fit, come back later as a
-              mentor yourself.
-            </p>
-          </div>
-        </div>
-      </div>
-
-      <div class="wrap">
-        <p class="how-caveat reveal">
-          Places on the mentoring Sprint are limited and matched to fit, so
-          we can&rsquo;t guarantee mentoring for everyone who applies.
-          Everyone&rsquo;s welcome at the Connects and the wider network
-          regardless.
-        </p>
-      </div>
-
-      <!-- Community band — the section's closing note, after the caveat -->
-      <div class="how-band">
-        <div class="wrap">
-          <p class="how-band-text reveal">
-            And through all of it, you&rsquo;re part of something bigger: a
-            community of creative people across East Sussex, at the
-            Connects, in the mentoring, and beyond. You&rsquo;re not doing
-            this on your own.
-          </p>
-        </div>
-      </div>
-    </section>
-
-    <!--
-      ======================================================================
       05 · CALL TO ACTION / FORM
       ----------------------------------------------------------------------
       This is an EXPRESSION OF INTEREST, not a live booking — Hack dates are
@@ -570,10 +568,6 @@
     </div>
   </footer>
 
-  <!-- GSAP + ScrollTrigger, pinned versions via cdnjs. <<< SWAP >>> if you
-       later self-host, keep the same version pinned to gsap.min.js. -->
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
   <script src="script.js"></script>
 </body>
 </html>
