@@ -5,9 +5,9 @@
      1. Hero type motion ("Create" types out, then "East Sussex" lands)
      2. Hero video pacing + parallax
      3. Scroll reveals across the page (ScrollTrigger.batch)
-     4. Map pins paired with the Connects list
-     5. Header auto-hide on scroll (mobile only, plain scroll listener,
-        works independently of GSAP)
+     4. Header auto-hide on scroll (mobile only, driven by ScrollTrigger's
+        own direction tracking — no manual scroll listener)
+     5. Map pins paired with the Connects list
      6. Mobile nav toggle
      7. CTA click analytics event (separate from page view)
 
@@ -429,6 +429,33 @@
           },
         });
 
+        /* ---------------------------------------------------------------
+           Header auto-hide on scroll — mobile only. Driven by ScrollTrigger
+           itself (self.direction off the shared ticker), not a manual
+           `scroll` listener, so this runs on the same frame budget as
+           everything else instead of its own event. Also means it
+           naturally sits inside prefers-reduced-motion: under reduced
+           motion this whole branch never runs, so the header just stays
+           put rather than sliding.
+           --------------------------------------------------------------- */
+        var header = document.querySelector(".site-header");
+        if (header) {
+          ScrollTrigger.create({
+            start: 0,
+            end: "max",
+            onUpdate: function (self) {
+              var isMobile = window.matchMedia("(max-width: 900px)").matches;
+              if (!isMobile || self.scroll() < header.offsetHeight) {
+                header.classList.remove("is-hidden");
+              } else if (self.direction === 1) {
+                header.classList.add("is-hidden");
+              } else if (self.direction === -1) {
+                header.classList.remove("is-hidden");
+              }
+            },
+          });
+        }
+
         return function cleanup() {
           if (heroTl) heroTl.kill();
         };
@@ -487,57 +514,6 @@
         });
       },
     });
-  })();
-
-  /* =========================================================================
-     3b · Header auto-hide on scroll — mobile only
-     Hides the sticky header while scrolling down, past a small threshold so
-     it doesn't twitch on tiny scroll jitters; shows it again on any
-     scroll-up, and always shows it near the very top of the page. Gated to
-     the same 900px "mobile" breakpoint the CSS uses, and re-evaluated on
-     resize, so rotating a tablet or resizing a desktop window in and out of
-     that range attaches/detaches the behaviour rather than getting stuck.
-     Independent of GSAP — plain scroll listener, works even if the GSAP
-     CDN is blocked.
-     ========================================================================= */
-  (function initHeaderAutoHide() {
-    var header = document.querySelector(".site-header");
-    if (!header) return;
-
-    var THRESHOLD = 8; // px of scroll before deciding direction, ignores jitter
-    var lastY = window.scrollY;
-    var active = false;
-
-    function onScroll() {
-      var y = window.scrollY;
-      var delta = y - lastY;
-
-      if (y < header.offsetHeight) {
-        header.classList.remove("is-hidden");
-      } else if (delta > THRESHOLD) {
-        header.classList.add("is-hidden");
-        lastY = y;
-      } else if (delta < -THRESHOLD) {
-        header.classList.remove("is-hidden");
-        lastY = y;
-      }
-    }
-
-    function sync() {
-      var shouldBeActive = window.matchMedia("(max-width: 900px)").matches;
-      if (shouldBeActive === active) return;
-      active = shouldBeActive;
-      if (active) {
-        lastY = window.scrollY;
-        window.addEventListener("scroll", onScroll, { passive: true });
-      } else {
-        window.removeEventListener("scroll", onScroll);
-        header.classList.remove("is-hidden");
-      }
-    }
-
-    sync();
-    window.addEventListener("resize", sync);
   })();
 
   /* =========================================================================

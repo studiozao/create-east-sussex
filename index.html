@@ -276,7 +276,6 @@
            heading gets a single line instead of wrapping in a column. -->
       <div class="wrap">
         <header class="section-head section-head-wide reveal">
-          <p class="section-kicker">Where we meet</p>
           <h2 id="connects-heading" class="section-heading section-heading-fit">Connects run across East Sussex</h2>
           <p class="section-intro">
             Free, 2-hour sessions. Places are limited and you&rsquo;ll need
@@ -390,7 +389,6 @@
       <div class="wrap split split-text-first">
         <div class="split-copy">
           <header class="section-head reveal">
-            <p class="section-kicker">Who it&rsquo;s for</p>
             <h2 id="eligibility-heading" class="section-heading">Check you&rsquo;re eligible</h2>
           </header>
 
@@ -567,7 +565,6 @@
     <section class="section section-how" id="how" aria-labelledby="how-heading">
       <div class="wrap">
         <header class="section-head section-head-wide reveal">
-          <p class="section-kicker">How it works</p>
           <h2 id="how-heading" class="section-heading">Your route to one-to-one mentoring</h2>
           <p class="section-intro">
             Getting started is simple, and it is the same short route
@@ -761,14 +758,18 @@
     </div>
   </footer>
 
-  <!-- GSAP + ScrollTrigger via cdnjs. Content is visible by default in CSS;
-       script.js sets the pre-animation state at runtime, so a blocked CDN
-       degrades to a static page rather than a blank one. -->
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
-  <!-- Lenis smooths the scroll itself. Entirely optional: script.js checks for
-       it, so if this fails to load the page falls back to native scrolling. -->
-  <script src="https://cdn.jsdelivr.net/npm/lenis@1.1.18/dist/lenis.min.js"></script>
+  <!-- GSAP + ScrollTrigger + Lenis, self-hosted under assets/vendor/ rather
+       than pulled from a public CDN at page-load time — a third party
+       having a bad day shouldn't be able to take the motion layer down.
+       Pinned to GSAP 3.12.5 / Lenis 1.1.18; content is visible by default
+       in CSS and script.js sets the pre-animation state at runtime, so
+       even a missing/corrupted vendor file degrades to a static page
+       rather than a blank one.
+       <<< SWAP >>> to update versions, replace these three files and this
+       comment's pinned numbers together. -->
+  <script src="assets/vendor/gsap.min.js"></script>
+  <script src="assets/vendor/ScrollTrigger.min.js"></script>
+  <script src="assets/vendor/lenis.min.js"></script>
   <script src="script.js"></script>
 </body>
 </html>

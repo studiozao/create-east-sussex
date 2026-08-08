@@ -13,7 +13,8 @@ No frameworks, no build step. Plain HTML, CSS and vanilla JS.
 | `index.html` | Page structure and copy |
 | `styles.css` | Component styles — imports `tokens.css`, references tokens by name throughout |
 | `tokens.css` | Design tokens (colour, type, spacing, motion) — portable, reusable in other tooling |
-| `script.js` | GSAP hero timeline, card flip-in, photo/map scroll reveals, map pins, mobile nav, analytics event |
+| `script.js` | GSAP hero timeline, card flip-in, photo/map scroll reveals, map pins, header auto-hide, mobile nav, analytics event |
+| `assets/vendor/` | Self-hosted GSAP, ScrollTrigger and Lenis (pinned 3.12.5 / 1.1.18) — a third-party CDN having a bad day shouldn't take the motion layer down. Fonts (Archivo, Satoshi) are still loaded from Google Fonts/Fontshare; self-hosting those is a reasonable follow-up but wasn't done in this pass. |
 | `.hallmark/log.json` | Design-system provenance record (see "Design rationale" below) |
 | `README.md` | This file |
 

@@ -4,6 +4,14 @@
     "macrostructure": "Marquee Hero",
     "theme": "near-black + greys on white, red as the only colour (navy dropped)",
     "theme_axes": "dark hero band / wide-heavy-grotesque display / warm accent",
+    "enrichment": "E4 full-bleed video + E5 SVG map, unchanged this pass",
+    "brief": "Create East Sussex \u00b7 studio-zao-website polish pass: removed eyebrow-above-every-heading (anti-slop rejection pattern, 6->3 sections), converted header auto-hide off a raw scroll listener onto ScrollTrigger direction tracking, self-hosted GSAP/ScrollTrigger/Lenis instead of public CDNs"
+  },
+  {
+    "date": "2026-08-08",
+    "macrostructure": "Marquee Hero",
+    "theme": "near-black + greys on white, red as the only colour (navy dropped)",
+    "theme_axes": "dark hero band / wide-heavy-grotesque display / warm accent",
     "enrichment": "E4 full-bleed video (client cliff footage) + E5 SVG map from real ONS boundary data",
     "brief": "Create East Sussex \u00b7 bold rebuild v2: typewriter hero over video, angled 4-photo cluster, accurate county map, disclosure panels, contact footer"
   },
