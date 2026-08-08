@@ -305,7 +305,16 @@
            --------------------------------------------------------------- */
         var tiles = gsap.utils.toArray(".cluster-tile");
         if (tiles.length) {
-          gsap.set(tiles, { opacity: 0, scale: 0.88 });
+          // Each tile starts at its own scattered tilt (data-tilt, degrees)
+          // and settles to dead level. gsap.set reads the attribute per
+          // element via a function value, so no per-tile code is needed here.
+          gsap.set(tiles, {
+            opacity: 0,
+            scale: 0.88,
+            rotation: function (i, el) {
+              return parseFloat(el.getAttribute("data-tilt")) || 0;
+            },
+          });
 
           ScrollTrigger.create({
             trigger: ".cluster",
@@ -315,7 +324,8 @@
               gsap.to(tiles, {
                 opacity: 1,
                 scale: 1,
-                duration: 1.1,
+                rotation: 0,
+                duration: 1.3,
                 ease: "power3.out",
                 stagger: 0.18,
               });

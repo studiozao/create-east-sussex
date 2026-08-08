@@ -250,7 +250,7 @@
                 </svg>
               </span>
               <h3 class="card-title">Mentoring</h3>
-              <p class="card-meta">Up to 6 hours &middot; one-to-one &middot; free</p>
+              <p class="card-meta">Rolling sign-up &middot; up to 6 hours, one-to-one</p>
               <p class="card-body">
                 The heart of the programme. Get matched with a mentor who has
                 built a creative business themselves, and work on whatever
@@ -272,7 +272,7 @@
       <<< SWAP >>> add real dates and booking links once Connects go live.
       ======================================================================
     -->
-    <section class="section section-connects" id="connects" aria-labelledby="connects-heading">
+    <section class="section section-connects section-tint" id="connects" aria-labelledby="connects-heading">
       <!-- Section head sits OUTSIDE the split and full width, so the
            heading gets a single line instead of wrapping in a column. -->
       <div class="wrap">
@@ -387,7 +387,7 @@
       blunt pre-start exclusion are deliberately left off — see README.
       ======================================================================
     -->
-    <section class="section section-eligibility" id="who-is-it-for" aria-labelledby="eligibility-heading">
+    <section class="section section-eligibility section-tint" id="who-is-it-for" aria-labelledby="eligibility-heading">
       <div class="wrap split split-text-first">
         <div class="split-copy">
           <header class="section-head reveal">
@@ -435,11 +435,15 @@
         <!-- The four discipline photographs, angled as one cluster. They
              stagger in as this section scrolls past. Decorative. -->
         <div class="split-media">
+          <!-- Each tile carries its own scattered starting tilt in
+               data-tilt; script.js animates rotation back to level (0deg)
+               as the section scrolls into view, so the photos visibly
+               "settle straight" rather than just fading up. -->
           <div class="cluster" aria-hidden="true">
-            <div class="cluster-tile img-hands"></div>
-            <div class="cluster-tile img-art"></div>
-            <div class="cluster-tile img-textile"></div>
-            <div class="cluster-tile img-photography"></div>
+            <div class="cluster-tile img-hands" data-tilt="-7"></div>
+            <div class="cluster-tile img-art" data-tilt="5"></div>
+            <div class="cluster-tile img-textile" data-tilt="6"></div>
+            <div class="cluster-tile img-photography" data-tilt="-4"></div>
           </div>
         </div>
       </div>
@@ -621,21 +625,14 @@
         </p>
       </div>
 
-      <!-- The programme's actual target, stated plainly. -->
       <div class="how-band">
-        <div class="wrap goal">
-          <p class="goal-num reveal" aria-hidden="true">35</p>
-          <div class="goal-copy">
-            <p class="goal-lead reveal">
-              creative businesses mentored across East Sussex.
-            </p>
-            <p class="goal-sub reveal">
-              That is what this programme is setting out to do, and one of
-              those places could be yours. You will not be doing it on your
-              own either: every business we mentor joins a wider network of
-              creative people across the county.
-            </p>
-          </div>
+        <div class="wrap">
+          <p class="how-band-text reveal">
+            And through all of it, you&rsquo;re part of something bigger: a
+            community of creative people across East Sussex, in the
+            mentoring, at the Connects, and beyond. You&rsquo;re not doing
+            this on your own.
+          </p>
         </div>
       </div>
     </section>
@@ -679,7 +676,13 @@
           </div>
 
           <aside class="register-aside reveal" aria-labelledby="mentor-heading">
+            <span class="mentor-icon" aria-hidden="true">
+              <svg viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M16 27s-10-6-10-14a5.5 5.5 0 0 1 10-3.2A5.5 5.5 0 0 1 26 13c0 8-10 14-10 14z" />
+              </svg>
+            </span>
             <h3 id="mentor-heading" class="mentor-title">Been there, done it?</h3>
+            <p class="mentor-meta">Open to anyone with the experience &middot; low commitment</p>
             <p class="mentor-body">
               Far enough along to help someone a few steps behind you? Give
               a few hours to a local creative business. Low commitment, and

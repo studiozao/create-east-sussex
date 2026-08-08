@@ -369,6 +369,12 @@ summary:focus-visible,
   background: var(--color-paper-2);
   border-block: 1px solid var(--color-line);
 }
+/* Alternating tint bands give the scroll some rhythm without hairlines
+   inside each section — the colour change itself is the divider. */
+.section-tint {
+  background: var(--color-paper-2);
+  border-block: 1px solid var(--color-line);
+}
 .hook-inner { max-width: 64rem; }
 .hook-heading {
   margin-top: var(--space-2xs);
@@ -381,6 +387,7 @@ summary:focus-visible,
 .section-head-wide { max-width: 46rem; }
 
 .section-kicker {
+  display: block;
   font-family: var(--font-body);
   font-weight: 700;
   font-size: var(--text-label);
@@ -388,6 +395,7 @@ summary:focus-visible,
   text-transform: uppercase;
   color: var(--color-red);
   margin-bottom: var(--space-sm);
+  white-space: nowrap;
 }
 
 .section-heading { font-size: var(--text-h2); }
@@ -543,6 +551,7 @@ summary:focus-visible,
   font-weight: 700;
   letter-spacing: 0.02em;
   color: var(--color-red);
+  white-space: nowrap;
 }
 .card-body {
   margin-top: var(--space-md);
@@ -559,11 +568,11 @@ summary:focus-visible,
 .map { width: 100%; height: auto; overflow: visible; }
 
 .map-shadow {
-  fill: var(--color-line);
+  fill: rgba(228, 37, 68, 0.06);
   transform: translate(9px, 11px);
 }
 .map-land {
-  fill: var(--color-paper-2);
+  fill: #FBF7F5;   /* the faintest warm tint, not flat grey */
   stroke: none;
 }
 /* Contour rings — the outline redrawn at decreasing scale about the county's
@@ -571,16 +580,19 @@ summary:focus-visible,
    rather than the screen-print dots this replaced. */
 .map-contours use {
   fill: none;
-  stroke: rgba(17, 17, 17, 0.13);
-  stroke-width: 1.5;
+  stroke: rgba(228, 37, 68, 0.16);
+  stroke-width: 1.3;
   stroke-linejoin: round;
 }
 /* The coastline sits on top so the contours never cross it */
 .map-edge {
   fill: none;
-  stroke: var(--color-ink);
-  stroke-width: 2.5;
+  /* softer than pure ink, and warmed very slightly with the brand red so it
+     doesn't read as a stark technical outline */
+  stroke: #6b5a5c;
+  stroke-width: 2;
   stroke-linejoin: round;
+  stroke-linecap: round;
 }
 
 .map-pin { cursor: pointer; }
@@ -637,7 +649,7 @@ summary:focus-visible,
   color: var(--color-ink);
   transition: color var(--dur-fast) var(--ease-out);
 }
-.connect-date { font-size: var(--text-small); color: var(--color-ink-3); }
+.connect-date { font-size: var(--text-small); color: var(--color-ink-3); white-space: nowrap; }
 .connect-item.is-active .connect-place { color: var(--color-red); }
 
 .connects-note {
@@ -792,36 +804,13 @@ summary:focus-visible,
   margin-top: var(--space-2xl);
   padding-block: var(--space-xl);
 }
-/* The programme's target, given the weight it deserves. The numeral is the
-   one place outside a heading where the display face is allowed, because it
-   is functioning as a display element, not as running text. */
-.goal {
-  display: flex;
-  align-items: baseline;
-  gap: clamp(1.5rem, 3.5vw, 3.5rem);
-  flex-wrap: wrap;
-}
-.goal-num {
-  font-family: var(--font-display);
-  font-variation-settings: "wdth" 118;
-  font-weight: 900;
-  font-size: clamp(4.5rem, 11vw, 9rem);
-  line-height: 0.8;
-  letter-spacing: -0.04em;
-  color: var(--color-red);
-}
-.goal-copy { flex: 1 1 24rem; min-width: 0; }
-.goal-lead {
-  font-size: clamp(1.25rem, 2.2vw, 1.875rem);
-  font-weight: 700;
-  line-height: 1.25;
+.how-band-text {
+  /* body face — this is a paragraph, not a heading */
+  font-size: clamp(1.1875rem, 2vw, 1.625rem);
+  font-weight: 500;
+  line-height: 1.45;
   color: var(--color-white);
-  max-width: 26ch;
-}
-.goal-sub {
-  margin-top: var(--space-md);
-  color: var(--color-on-dark-dim);
-  max-width: 62ch;
+  max-width: 38ch;
 }
 
 /* ---------------------------------------------------------------------------
@@ -847,13 +836,49 @@ summary:focus-visible,
   max-width: 56ch;
 }
 
+/* Matches the .card-inner language from "What you get": red top rule, icon
+   in a tinted circle, meta in brand red over a divider, so the closing
+   mentor ask reads as a sibling of those cards rather than a plain box. */
 .register-aside {
-  padding: clamp(1.75rem, 3vw, 2.5rem);
-  border: 2px solid var(--color-ink);
+  position: relative;
+  padding: clamp(1.75rem, 2.4vw, 2.75rem);
+  background: var(--color-white);
+  border: 1px solid var(--color-line);
+  overflow: hidden;
 }
-.mentor-title { font-size: var(--text-h3); }
+.register-aside::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 4px;
+  background: var(--color-red);
+}
+.mentor-icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 3.25rem;
+  height: 3.25rem;
+  margin-bottom: var(--space-md);
+  border-radius: 50%;
+  background: rgba(228, 37, 68, 0.09);
+  color: var(--color-red);
+}
+.mentor-icon svg { width: 26px; height: 26px; }
+.mentor-title { font-size: clamp(1.375rem, 1.9vw, 1.75rem); }
+.mentor-meta {
+  margin-top: var(--space-2xs);
+  font-size: var(--text-small);
+  font-weight: 700;
+  letter-spacing: 0.02em;
+  color: var(--color-red);
+}
 .mentor-body {
-  margin-top: var(--space-sm);
+  margin-top: var(--space-md);
+  padding-top: var(--space-md);
+  border-top: 1px solid var(--color-line);
   color: var(--color-ink-2);
 }
 .register-aside .btn { margin-top: var(--space-lg); }
@@ -1020,6 +1045,7 @@ summary:focus-visible,
 
   .reveal { opacity: 1; transform: none; }
   .card-inner { transform: none !important; opacity: 1 !important; }
+  .cluster-tile { transform: none !important; opacity: 1 !important; }
   .type { border-right-color: transparent !important; }
   /* the looping hero video is spatial motion too — hold the poster frame */
   .hero-video { display: none !important; }
