@@ -162,6 +162,92 @@
         });
 
         /* ---------------------------------------------------------------
+           Cards flip in on scroll.
+           This is a reveal, not a hover/click state: the card has one face,
+           so nothing is ever hidden behind an interaction. The perspective
+           lives on the .cards container in CSS.
+           --------------------------------------------------------------- */
+        var cardInners = gsap.utils.toArray(".card-inner");
+        if (cardInners.length) {
+          gsap.set(cardInners, { rotationY: -88, opacity: 0 });
+
+          ScrollTrigger.batch(cardInners, {
+            start: "top 85%",
+            once: true,
+            onEnter: function (batch) {
+              gsap.to(batch, {
+                rotationY: 0,
+                opacity: 1,
+                duration: 0.9,
+                ease: "power3.out",
+                stagger: 0.14,
+              });
+            },
+          });
+        }
+
+        /* ---------------------------------------------------------------
+           Photo cluster — the four tiles settle in one at a time rather
+           than the whole block fading as a lump. The static angle lives on
+           the standalone `rotate`/`translate` CSS properties, so animating
+           `transform` here composes with it instead of wiping it.
+           --------------------------------------------------------------- */
+        var tiles = gsap.utils.toArray(".cluster-tile");
+        if (tiles.length) {
+          gsap.set(tiles, { opacity: 0, scale: 0.88 });
+
+          ScrollTrigger.create({
+            trigger: ".cluster",
+            start: "top 82%",
+            once: true,
+            onEnter: function () {
+              gsap.to(tiles, {
+                opacity: 1,
+                scale: 1,
+                duration: 0.75,
+                ease: "power3.out",
+                stagger: 0.11,
+              });
+            },
+          });
+        }
+
+        /* ---------------------------------------------------------------
+           Map — the coastline draws itself, then the contours fade up
+           underneath it. Length is read from the referenced <path>, since
+           <use> elements have no getTotalLength() of their own.
+           --------------------------------------------------------------- */
+        var mapShape = document.querySelector("#esShape");
+        var mapEdge = document.querySelector(".map-edge");
+        var contours = gsap.utils.toArray(".map-contours use");
+
+        if (mapShape && mapEdge && typeof mapShape.getTotalLength === "function") {
+          var len = mapShape.getTotalLength();
+          gsap.set(mapEdge, { strokeDasharray: len, strokeDashoffset: len });
+          gsap.set(contours, { opacity: 0 });
+
+          ScrollTrigger.create({
+            trigger: ".map-figure",
+            start: "top 78%",
+            once: true,
+            onEnter: function () {
+              gsap
+                .timeline()
+                .to(mapEdge, {
+                  strokeDashoffset: 0,
+                  duration: 1.5,
+                  ease: "power2.inOut",
+                })
+                .to(
+                  contours,
+                  { opacity: 1, duration: 0.5, stagger: 0.06 },
+                  "-=0.9"
+                );
+            },
+          });
+        }
+
+        /* ---------------------------------------------------------------
            Scroll reveals — batched so items entering together animate
            together. Hero elements are excluded; the timeline owns those.
            --------------------------------------------------------------- */
@@ -231,7 +317,7 @@
 
     ScrollTrigger.create({
       trigger: ".map-figure",
-      start: "top 70%",
+      start: "top 62%",
       once: true,
       onEnter: function () {
         pins.forEach(function (pin, i) {

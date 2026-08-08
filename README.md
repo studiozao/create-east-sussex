@@ -13,7 +13,7 @@ No frameworks, no build step. Plain HTML, CSS and vanilla JS.
 | `index.html` | Page structure and copy |
 | `styles.css` | Component styles — imports `tokens.css`, references tokens by name throughout |
 | `tokens.css` | Design tokens (colour, type, spacing, motion) — portable, reusable in other tooling |
-| `script.js` | GSAP hero timeline, scroll reveals, frame swapping, map pins, mobile nav, analytics event |
+| `script.js` | GSAP hero timeline, card flip-in, photo/map scroll reveals, map pins, mobile nav, analytics event |
 | `.hallmark/log.json` | Design-system provenance record (see "Design rationale" below) |
 | `README.md` | This file |
 
@@ -54,7 +54,8 @@ fast (Cmd/Ctrl+F).
 2. **Discipline images — TEMPORARY, replace before launch.** All four
    photos are generic (but real, credited) stock, not actual programme
    photography, dropped in so the page doesn't look unfinished. They appear
-   together as one angled cluster in the "Is this you?" section. Files live
+   together as one angled cluster in the "Is this you?" section, staggering
+   in as it scrolls into view. Files live
    in `assets/hero/`; swap each directly (keep the filename) or update the
    `url()` in `styles.css`.
    Suggested export: ~800×1000px, under 200KB each.

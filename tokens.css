@@ -50,11 +50,11 @@
   --space-lg:  2.5rem;
   --space-xl:  4rem;
   --space-2xl: 6rem;
-  --space-3xl: 8.5rem;
+  --space-3xl: 7.25rem;
 
   /* Layout */
   --wrap-max:  1280px;
-  --wrap-pad:  clamp(1.25rem, 5vw, 4.5rem);
+  --wrap-pad:  clamp(1.25rem, 4vw, 3.5rem);
   --measure:   58ch;
   --header-h:  4.75rem;
 
@@ -75,6 +75,7 @@
   --z-sticky:  200;
 }
 
-@media (min-width: 1600px) {
-  :root { --wrap-max: 1440px; }
-}
+/* Laptop and up: let the container breathe wider so the page doesn't sit in
+   a narrow ribbon on a 1440px screen. */
+@media (min-width: 1200px) { :root { --wrap-max: 1400px; } }
+@media (min-width: 1600px) { :root { --wrap-max: 1520px; } }

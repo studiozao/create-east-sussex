@@ -162,24 +162,20 @@
             <h2 id="hook-heading" class="section-heading">You already make the thing</h2>
           </header>
 
-          <ul class="hook-list">
-            <li class="hook-item reveal">
-              You make, design, write, film, craft or build things for a living
-            </li>
-            <li class="hook-item reveal">
-              You&rsquo;re a freelancer or small business based in East Sussex
-            </li>
-            <li class="hook-item reveal">
-              You want to grow but could use a sounding board
-            </li>
-          </ul>
+          <p class="hook-copy reveal">
+            You make, design, write, film, craft or build things for a
+            living. You&rsquo;re freelance or running a small business
+            somewhere in East Sussex. You want to grow, and you could use
+            someone to think it through with. If that&rsquo;s roughly you,
+            this is for you.
+          </p>
         </div>
 
         <!-- Four photographs as one angled cluster. Decorative.
              The reveal sits on the WRAPPER, not on .cluster: GSAP animates
              `transform` on revealed elements, which would overwrite the
              cluster's CSS rotation. -->
-        <div class="split-media reveal">
+        <div class="split-media">
           <div class="cluster" aria-hidden="true">
             <div class="cluster-tile img-hands"></div>
             <div class="cluster-tile img-art"></div>
@@ -208,62 +204,65 @@
           </p>
         </header>
 
-        <div class="offer-grid">
-          <article class="offer reveal">
-            <span class="offer-icon" aria-hidden="true">
-              <svg viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
-                <path d="M18 3 6 19h8l-1 10 12-16h-8z" />
-              </svg>
-            </span>
-            <div class="offer-head">
-              <h3 class="offer-title">Connects</h3>
-              <p class="offer-meta">Open to everyone &middot; 2 hours &middot; free</p>
+        <!-- Three cards that flip into view as you scroll. The flip is a
+             REVEAL, not a hover state: everything stays on one face, so no
+             copy is hidden behind an interaction. -->
+        <div class="cards">
+          <article class="card reveal-card">
+            <div class="card-inner">
+              <span class="card-icon" aria-hidden="true">
+                <svg viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M18 3 6 19h8l-1 10 12-16h-8z" />
+                </svg>
+              </span>
+              <h3 class="card-title">Connects</h3>
+              <p class="card-meta">Open to everyone &middot; 2 hours &middot; free</p>
+              <p class="card-body">
+                Free, 2-hour practical sessions, and the easiest way in. Come
+                away with something tangible on pricing, audience building,
+                hiring, AI tools and accessing grants.
+              </p>
             </div>
-            <p class="offer-body">
-              Free, 2-hour practical sessions, and the easiest way in. Come
-              away with something tangible on pricing, audience building,
-              hiring, AI tools and accessing grants.
-            </p>
           </article>
 
-          <article class="offer reveal">
-            <span class="offer-icon" aria-hidden="true">
-              <svg viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
-                <circle cx="16" cy="7" r="3.5" />
-                <circle cx="7" cy="23" r="3.5" />
-                <circle cx="25" cy="23" r="3.5" />
-                <path d="M13.6 9.6 9.4 19.8M18.4 9.6l4.2 10.2M10.5 23h11" />
-              </svg>
-            </span>
-            <div class="offer-head">
-              <h3 class="offer-title">A growing network</h3>
-              <p class="offer-meta">Free &middot; ongoing</p>
+          <article class="card reveal-card">
+            <div class="card-inner">
+              <span class="card-icon" aria-hidden="true">
+                <svg viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+                  <circle cx="16" cy="7" r="3.5" />
+                  <circle cx="7" cy="23" r="3.5" />
+                  <circle cx="25" cy="23" r="3.5" />
+                  <path d="M13.6 9.6 9.4 19.8M18.4 9.6l4.2 10.2M10.5 23h11" />
+                </svg>
+              </span>
+              <h3 class="card-title">A growing network</h3>
+              <p class="card-meta">Free &middot; ongoing</p>
+              <p class="card-body">
+                Open to any actively trading creative business in East Sussex.
+                Meet other creatives and swap ideas and referrals, a network
+                that carries on long after your mentoring ends.
+              </p>
             </div>
-            <p class="offer-body">
-              Open to any actively trading creative business in East Sussex.
-              Meet other creatives and swap ideas and referrals, a network
-              that carries on long after your mentoring ends.
-            </p>
           </article>
 
-          <article class="offer reveal">
-            <span class="offer-icon" aria-hidden="true">
-              <svg viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
-                <circle cx="12" cy="11" r="4.5" />
-                <circle cx="22.5" cy="13" r="3.5" />
-                <path d="M4 26c0-4.4 3.6-8 8-8s8 3.6 8 8" />
-                <path d="M21 26c0-3.3 2.4-6 5-6" />
-              </svg>
-            </span>
-            <div class="offer-head">
-              <h3 class="offer-title">Mentoring</h3>
-              <p class="offer-meta">By invitation &middot; up to 6 hours, one-to-one</p>
+          <article class="card reveal-card">
+            <div class="card-inner">
+              <span class="card-icon" aria-hidden="true">
+                <svg viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+                  <circle cx="12" cy="11" r="4.5" />
+                  <circle cx="22.5" cy="13" r="3.5" />
+                  <path d="M4 26c0-4.4 3.6-8 8-8s8 3.6 8 8" />
+                  <path d="M21 26c0-3.3 2.4-6 5-6" />
+                </svg>
+              </span>
+              <h3 class="card-title">Mentoring</h3>
+              <p class="card-meta">By invitation &middot; up to 6 hours, one-to-one</p>
+              <p class="card-body">
+                Once you know what you need help with, get matched with a
+                mentor who has built a creative business themselves. More on
+                how that works further down.
+              </p>
             </div>
-            <p class="offer-body">
-              Once you know what you need help with, get matched with a
-              mentor who has built a creative business themselves. More on
-              how that works further down.
-            </p>
           </article>
         </div>
       </div>
@@ -279,18 +278,22 @@
       ======================================================================
     -->
     <section class="section section-connects" id="connects" aria-labelledby="connects-heading">
+      <!-- Section head sits OUTSIDE the split and full width, so the
+           heading gets a single line instead of wrapping in a column. -->
+      <div class="wrap">
+        <header class="section-head section-head-wide reveal">
+          <p class="section-kicker">Where we meet</p>
+          <h2 id="connects-heading" class="section-heading section-heading-fit">Connects run across East Sussex</h2>
+          <p class="section-intro">
+            Free, 2-hour sessions. Places are limited and you&rsquo;ll need
+            to sign up. Register your interest and we&rsquo;ll email you as
+            soon as dates open for booking.
+          </p>
+        </header>
+      </div>
+
       <div class="wrap split split-text-first">
         <div class="split-copy">
-          <header class="section-head reveal">
-            <p class="section-kicker">Where we meet</p>
-            <h2 id="connects-heading" class="section-heading">Connects run across East Sussex</h2>
-            <p class="section-intro">
-              Free, 2-hour sessions. Places are limited and you&rsquo;ll need
-              to sign up. Register your interest and we&rsquo;ll email you as
-              soon as dates open for booking.
-            </p>
-          </header>
-
           <ul class="connects-list">
             <li class="connect-item reveal" data-place="lewes" tabindex="0">
               <span class="connect-place">Lewes</span>
@@ -328,16 +331,28 @@
               <desc id="map-desc">East Sussex with the first five Connect locations marked: Lewes, Uckfield, Eastbourne, Bexhill and Hastings.</desc>
 
               <defs>
-                <pattern id="landDots" width="9" height="9" patternUnits="userSpaceOnUse">
-                  <circle cx="1.6" cy="1.6" r="1.05" />
-                </pattern>
+                <!-- The boundary is defined once and re-used, so the long
+                     path string isn't repeated for every layer. -->
+                <path id="esShape" d="M187.0,33.0 L199.6,41.3 L233.4,32.4 L244.8,41.8 L263.9,44.3 L263.5,36.1 L294.6,33.9 L300.7,51.0 L315.5,51.9 L310.4,72.0 L324.7,67.7 L338.7,72.9 L352.1,93.0 L379.9,100.7 L385.5,124.6 L425.8,133.2 L428.4,143.6 L446.4,151.0 L467.8,142.6 L502.4,137.0 L512.0,151.2 L530.4,160.7 L551.3,153.8 L575.0,164.8 L573.9,178.6 L578.4,176.8 L596.0,211.4 L613.6,196.0 L622.6,200.4 L630.0,219.9 L622.0,229.1 L615.5,228.2 L570.7,221.9 L572.5,225.7 L544.6,239.4 L500.6,282.1 L500.2,282.2 L492.7,285.2 L418.0,306.3 L404.3,308.9 L403.1,309.2 L327.4,330.5 L326.9,330.7 L303.3,351.5 L303.2,351.6 L285.2,373.5 L258.3,406.3 L254.5,410.9 L223.4,411.0 L223.3,410.9 L189.7,393.0 L186.3,391.1 L185.7,390.8 L169.0,391.5 L159.7,386.0 L135.9,368.5 L130.4,368.6 L129.7,368.1 L129.7,368.6 L128.1,368.6 L129.3,374.1 L114.5,368.5 L84.4,357.1 L69.8,351.6 L83.7,336.0 L81.0,329.2 L65.2,329.2 L70.8,310.2 L48.2,310.2 L41.1,278.9 L33.3,274.2 L18.3,278.6 L10.0,274.0 L10.2,265.6 L19.6,211.1 L29.2,207.0 L22.4,177.9 L48.1,162.6 L55.5,175.6 L78.4,174.1 L83.5,152.0 L80.1,128.5 L92.6,119.4 L91.8,107.8 L102.1,98.6 L88.3,99.1 L85.4,81.9 L77.0,80.8 L71.2,62.8 L100.1,54.3 L99.5,46.2 L105.1,52.9 L121.1,46.0 L111.0,39.0 L110.5,17.3 L124.5,14.5 L175.9,10.0 L192.9,19.8 L187.0,33.0 Z" />
+                <clipPath id="esClip"><use href="#esShape" /></clipPath>
               </defs>
 
-              <!-- Real ONS boundary, generalised. Drawn twice: a soft offset
-                   copy for depth, then the textured land on top. -->
-              <path class="map-shadow" d="M187.0,33.0 L199.6,41.3 L233.4,32.4 L244.8,41.8 L263.9,44.3 L263.5,36.1 L294.6,33.9 L300.7,51.0 L315.5,51.9 L310.4,72.0 L324.7,67.7 L338.7,72.9 L352.1,93.0 L379.9,100.7 L385.5,124.6 L425.8,133.2 L428.4,143.6 L446.4,151.0 L467.8,142.6 L502.4,137.0 L512.0,151.2 L530.4,160.7 L551.3,153.8 L575.0,164.8 L573.9,178.6 L578.4,176.8 L596.0,211.4 L613.6,196.0 L622.6,200.4 L630.0,219.9 L622.0,229.1 L615.5,228.2 L570.7,221.9 L572.5,225.7 L544.6,239.4 L500.6,282.1 L500.2,282.2 L492.7,285.2 L418.0,306.3 L404.3,308.9 L403.1,309.2 L327.4,330.5 L326.9,330.7 L303.3,351.5 L303.2,351.6 L285.2,373.5 L258.3,406.3 L254.5,410.9 L223.4,411.0 L223.3,410.9 L189.7,393.0 L186.3,391.1 L185.7,390.8 L169.0,391.5 L159.7,386.0 L135.9,368.5 L130.4,368.6 L129.7,368.1 L129.7,368.6 L128.1,368.6 L129.3,374.1 L114.5,368.5 L84.4,357.1 L69.8,351.6 L83.7,336.0 L81.0,329.2 L65.2,329.2 L70.8,310.2 L48.2,310.2 L41.1,278.9 L33.3,274.2 L18.3,278.6 L10.0,274.0 L10.2,265.6 L19.6,211.1 L29.2,207.0 L22.4,177.9 L48.1,162.6 L55.5,175.6 L78.4,174.1 L83.5,152.0 L80.1,128.5 L92.6,119.4 L91.8,107.8 L102.1,98.6 L88.3,99.1 L85.4,81.9 L77.0,80.8 L71.2,62.8 L100.1,54.3 L99.5,46.2 L105.1,52.9 L121.1,46.0 L111.0,39.0 L110.5,17.3 L124.5,14.5 L175.9,10.0 L192.9,19.8 L187.0,33.0 Z" />
-              <path class="map-land" d="M187.0,33.0 L199.6,41.3 L233.4,32.4 L244.8,41.8 L263.9,44.3 L263.5,36.1 L294.6,33.9 L300.7,51.0 L315.5,51.9 L310.4,72.0 L324.7,67.7 L338.7,72.9 L352.1,93.0 L379.9,100.7 L385.5,124.6 L425.8,133.2 L428.4,143.6 L446.4,151.0 L467.8,142.6 L502.4,137.0 L512.0,151.2 L530.4,160.7 L551.3,153.8 L575.0,164.8 L573.9,178.6 L578.4,176.8 L596.0,211.4 L613.6,196.0 L622.6,200.4 L630.0,219.9 L622.0,229.1 L615.5,228.2 L570.7,221.9 L572.5,225.7 L544.6,239.4 L500.6,282.1 L500.2,282.2 L492.7,285.2 L418.0,306.3 L404.3,308.9 L403.1,309.2 L327.4,330.5 L326.9,330.7 L303.3,351.5 L303.2,351.6 L285.2,373.5 L258.3,406.3 L254.5,410.9 L223.4,411.0 L223.3,410.9 L189.7,393.0 L186.3,391.1 L185.7,390.8 L169.0,391.5 L159.7,386.0 L135.9,368.5 L130.4,368.6 L129.7,368.1 L129.7,368.6 L128.1,368.6 L129.3,374.1 L114.5,368.5 L84.4,357.1 L69.8,351.6 L83.7,336.0 L81.0,329.2 L65.2,329.2 L70.8,310.2 L48.2,310.2 L41.1,278.9 L33.3,274.2 L18.3,278.6 L10.0,274.0 L10.2,265.6 L19.6,211.1 L29.2,207.0 L22.4,177.9 L48.1,162.6 L55.5,175.6 L78.4,174.1 L83.5,152.0 L80.1,128.5 L92.6,119.4 L91.8,107.8 L102.1,98.6 L88.3,99.1 L85.4,81.9 L77.0,80.8 L71.2,62.8 L100.1,54.3 L99.5,46.2 L105.1,52.9 L121.1,46.0 L111.0,39.0 L110.5,17.3 L124.5,14.5 L175.9,10.0 L192.9,19.8 L187.0,33.0 Z" />
-              <path class="map-texture" d="M187.0,33.0 L199.6,41.3 L233.4,32.4 L244.8,41.8 L263.9,44.3 L263.5,36.1 L294.6,33.9 L300.7,51.0 L315.5,51.9 L310.4,72.0 L324.7,67.7 L338.7,72.9 L352.1,93.0 L379.9,100.7 L385.5,124.6 L425.8,133.2 L428.4,143.6 L446.4,151.0 L467.8,142.6 L502.4,137.0 L512.0,151.2 L530.4,160.7 L551.3,153.8 L575.0,164.8 L573.9,178.6 L578.4,176.8 L596.0,211.4 L613.6,196.0 L622.6,200.4 L630.0,219.9 L622.0,229.1 L615.5,228.2 L570.7,221.9 L572.5,225.7 L544.6,239.4 L500.6,282.1 L500.2,282.2 L492.7,285.2 L418.0,306.3 L404.3,308.9 L403.1,309.2 L327.4,330.5 L326.9,330.7 L303.3,351.5 L303.2,351.6 L285.2,373.5 L258.3,406.3 L254.5,410.9 L223.4,411.0 L223.3,410.9 L189.7,393.0 L186.3,391.1 L185.7,390.8 L169.0,391.5 L159.7,386.0 L135.9,368.5 L130.4,368.6 L129.7,368.1 L129.7,368.6 L128.1,368.6 L129.3,374.1 L114.5,368.5 L84.4,357.1 L69.8,351.6 L83.7,336.0 L81.0,329.2 L65.2,329.2 L70.8,310.2 L48.2,310.2 L41.1,278.9 L33.3,274.2 L18.3,278.6 L10.0,274.0 L10.2,265.6 L19.6,211.1 L29.2,207.0 L22.4,177.9 L48.1,162.6 L55.5,175.6 L78.4,174.1 L83.5,152.0 L80.1,128.5 L92.6,119.4 L91.8,107.8 L102.1,98.6 L88.3,99.1 L85.4,81.9 L77.0,80.8 L71.2,62.8 L100.1,54.3 L99.5,46.2 L105.1,52.9 L121.1,46.0 L111.0,39.0 L110.5,17.3 L124.5,14.5 L175.9,10.0 L192.9,19.8 L187.0,33.0 Z" />
+              <use class="map-shadow" href="#esShape" />
+              <use class="map-land" href="#esShape" />
+
+              <!-- Topographic contour rings: the same outline scaled down
+                   about the polygon's centroid and clipped to the county. -->
+              <g class="map-contours" clip-path="url(#esClip)" aria-hidden="true">
+                <use href="#esShape" transform="translate(263.7 211.3) scale(0.88) translate(-263.7 -211.3)" />
+                <use href="#esShape" transform="translate(263.7 211.3) scale(0.76) translate(-263.7 -211.3)" />
+                <use href="#esShape" transform="translate(263.7 211.3) scale(0.645) translate(-263.7 -211.3)" />
+                <use href="#esShape" transform="translate(263.7 211.3) scale(0.53) translate(-263.7 -211.3)" />
+                <use href="#esShape" transform="translate(263.7 211.3) scale(0.415) translate(-263.7 -211.3)" />
+                <use href="#esShape" transform="translate(263.7 211.3) scale(0.3) translate(-263.7 -211.3)" />
+                <use href="#esShape" transform="translate(263.7 211.3) scale(0.185) translate(-263.7 -211.3)" />
+              </g>
+
+              <use class="map-edge" href="#esShape" />
 
               <g class="map-pin" data-place="uckfield" tabindex="0" role="button" aria-label="Uckfield, Connect location">
                 <circle class="map-pin-halo" cx="155.3" cy="185.9" r="24" />
@@ -435,7 +450,10 @@
       <div class="wrap">
         <div class="about-inner">
           <header class="section-head reveal">
-            <p class="section-kicker">Delivered by Studio Zao</p>
+            <p class="section-kicker">
+              Delivered by
+              <a class="kicker-link" href="https://www.studiozao.com/" target="_blank" rel="noopener">Studio Zao</a>
+            </p>
             <h2 id="about-heading" class="section-heading">About our team</h2>
             <p class="section-intro">
               Create East Sussex is delivered by Studio Zao, an innovation
@@ -449,6 +467,9 @@
           <div class="panels reveal">
             <details class="panel" open>
               <summary class="panel-summary">
+                <span class="panel-icon" aria-hidden="true">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="7.5" r="3.2"/><circle cx="18.5" cy="9" r="2.6"/><path d="M4 19c0-3.3 3.1-6 7-6s7 2.7 7 6"/><path d="M18 19c0-2.4 1.7-4.4 4-4.4"/></svg>
+                </span>
                 <span class="panel-title">Who we are</span>
                 <span class="panel-mark" aria-hidden="true"></span>
               </summary>
@@ -472,6 +493,9 @@
 
             <details class="panel">
               <summary class="panel-summary">
+                <span class="panel-icon" aria-hidden="true">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M4 18.5 9.5 8l3.2 5.6L15.2 9l4.8 9.5z"/><path d="M3 20.5h18"/></svg>
+                </span>
                 <span class="panel-title">What we do</span>
                 <span class="panel-mark" aria-hidden="true"></span>
               </summary>
@@ -496,6 +520,9 @@
 
             <details class="panel">
               <summary class="panel-summary">
+                <span class="panel-icon" aria-hidden="true">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M12 20s-7-4.2-7-9a4 4 0 0 1 7-2.6A4 4 0 0 1 19 11c0 4.8-7 9-7 9z"/></svg>
+                </span>
                 <span class="panel-title">Who we&rsquo;ve helped</span>
                 <span class="panel-mark" aria-hidden="true"></span>
               </summary>
@@ -618,7 +645,7 @@
         <div class="register-grid">
           <div class="register-main reveal">
             <p class="section-kicker">Register</p>
-            <h2 id="register-heading" class="section-heading">Ready when you are</h2>
+            <h2 id="register-heading" class="section-heading section-heading-fit">Ready when you are</h2>
             <p class="register-body">
               Interested in getting involved? Register below and we&rsquo;ll be
               in touch with details on the first Connects as soon as
@@ -644,9 +671,9 @@
           <aside class="register-aside reveal" aria-labelledby="mentor-heading">
             <h3 id="mentor-heading" class="mentor-title">Been there, done it?</h3>
             <p class="mentor-body">
-              Give a few hours to help a local creative business grow.
-              Mentoring is volunteer-based and low commitment: you choose
-              how much time you give.
+              Far enough along to help someone a few steps behind you? Give
+              a few hours to a local creative business. Low commitment, and
+              you choose how much time you give.
             </p>
             <!-- <<< SWAP >>> point this at a dedicated mentor form when one
                  exists; for now it shares the expression-of-interest form. -->

@@ -357,6 +357,25 @@ summary:focus-visible,
 
 .section-heading { font-size: var(--text-h2); }
 
+/* Headings the client wants held to a single line. Only applied once there
+   is room for it; below 900px they wrap normally. */
+@media (min-width: 900px) {
+  .section-heading-fit {
+    white-space: nowrap;
+    font-size: clamp(2rem, 4.1vw, 3.5rem);
+  }
+}
+
+.kicker-link {
+  color: var(--color-red);
+  font-weight: 700;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+  text-decoration-thickness: 2px;
+  transition: color var(--dur-fast) var(--ease-out);
+}
+.kicker-link:hover { color: var(--color-ink); }
+
 .section-intro {
   margin-top: var(--space-md);
   font-size: var(--text-lead);
@@ -381,7 +400,9 @@ summary:focus-visible,
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
   gap: clamp(0.6rem, 1.2vw, 1rem);
-  transform: rotate(-5deg);
+  /* standalone `rotate`, not `transform` — GSAP animates `transform` on the
+     tiles and the two must compose rather than overwrite each other */
+  rotate: -5deg;
   /* the rotation pushes the corners out, so pull the box in to compensate */
   margin: clamp(1rem, 3vw, 2.25rem);
 }
@@ -392,8 +413,8 @@ summary:focus-visible,
   background-color: var(--color-paper-2);
 }
 /* Stagger the tiles so the cluster reads as arranged, not as a plain grid */
-.cluster-tile:nth-child(1) { transform: translateY(-6%); }
-.cluster-tile:nth-child(4) { transform: translateY(6%); }
+.cluster-tile:nth-child(1) { translate: 0 -6%; }
+.cluster-tile:nth-child(4) { translate: 0 6%; }
 
 /* <<< SWAP >>> real programme photography — see README for current credits */
 .img-hands       { background-image: url("assets/hero/hands.jpg"); }
@@ -401,53 +422,50 @@ summary:focus-visible,
 .img-textile     { background-image: url("assets/hero/textile.jpg"); }
 .img-photography { background-image: url("assets/hero/photography.jpg"); background-position: center 60%; }
 
-/* --- Hook copy ---------------------------------------------------------- */
-.hook-list { display: flex; flex-direction: column; }
-.hook-item {
-  /* body face, not the display face — non-heading text stays consistent */
-  font-size: clamp(1.0625rem, 1.5vw, 1.3125rem);
-  line-height: 1.45;
+/* --- Hook copy: one short paragraph, no rules --------------------------- */
+.hook-copy {
+  font-size: clamp(1.125rem, 1.6vw, 1.375rem);
+  line-height: 1.55;
   color: var(--color-ink-2);
-  padding-block: var(--space-md);
-  border-top: 1px solid var(--color-line);
+  max-width: 40ch;
 }
-.hook-item:last-child { border-bottom: 1px solid var(--color-line); }
 
 /* ---------------------------------------------------------------------------
-   7 · Offer — an editorial index of rows, not a card grid
+   7 · Cards — three panels that flip into view on scroll. The flip is a
+   REVEAL, not a hover state, so nothing is hidden behind an interaction and
+   there is no keyboard/touch trap. script.js drives the rotation; without it
+   the cards simply sit flat and readable.
    --------------------------------------------------------------------------- */
-.offer-grid { display: flex; flex-direction: column; }
-.offer {
+.cards {
   display: grid;
-  grid-template-columns: 3rem minmax(0, 0.9fr) minmax(0, 1.4fr);
-  gap: clamp(1rem, 3vw, 2.5rem);
-  align-items: start;
-  padding-block: clamp(2rem, 4vw, 2.75rem);
-  border-top: 1px solid var(--color-line);
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: clamp(1rem, 1.8vw, 1.75rem);
+  perspective: 1600px;
 }
-.offer:last-child { border-bottom: 1px solid var(--color-line); }
-
-/* Explicit placement: four children, three columns — auto-flow would drop
-   the body into the icon column and wrap it to a sliver. */
-.offer-icon {
-  grid-column: 1;
-  grid-row: 1 / span 2;
+.card { min-width: 0; }
+.card-inner {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: var(--space-2xs);
+  padding: clamp(1.75rem, 2.4vw, 2.5rem);
+  background: var(--color-paper-2);
+  border: 1px solid var(--color-line);
+  transform-origin: center center;
+  will-change: transform;
+}
+.card-icon {
   display: inline-flex;
   color: var(--color-red);
+  margin-bottom: var(--space-sm);
 }
-.offer-icon svg { width: 30px; height: 30px; }
-.offer-head { grid-column: 2; grid-row: 1; }
-.offer-title { font-size: var(--text-h3); }
-.offer-meta {
+.card-icon svg { width: 32px; height: 32px; }
+.card-title { font-size: var(--text-h3); }
+.card-meta { font-size: var(--text-small); color: var(--color-ink-3); }
+.card-body {
   margin-top: var(--space-2xs);
-  font-size: var(--text-small);
-  color: var(--color-ink-3);
-}
-.offer-body {
-  grid-column: 3;
-  grid-row: 1 / span 2;
   color: var(--color-ink-2);
-  max-width: var(--measure);
 }
 
 /* ---------------------------------------------------------------------------
@@ -459,21 +477,28 @@ summary:focus-visible,
 
 .map-shadow {
   fill: var(--color-line);
-  transform: translate(10px, 12px);
+  transform: translate(9px, 11px);
 }
 .map-land {
   fill: var(--color-paper-2);
-  stroke: var(--color-ink);
-  stroke-width: 2;
+  stroke: none;
+}
+/* Contour rings — the outline redrawn at decreasing scale about the county's
+   centroid, clipped so nothing spills past the coast. Reads as topography
+   rather than the screen-print dots this replaced. */
+.map-contours use {
+  fill: none;
+  stroke: rgba(17, 17, 17, 0.13);
+  stroke-width: 1.5;
   stroke-linejoin: round;
 }
-.map-texture {
-  fill: url(#landDots);
-  color: rgba(17, 17, 17, 0.16);   /* pattern circles inherit this */
-  stroke: none;
-  pointer-events: none;
+/* The coastline sits on top so the contours never cross it */
+.map-edge {
+  fill: none;
+  stroke: var(--color-ink);
+  stroke-width: 2.5;
+  stroke-linejoin: round;
 }
-#landDots circle { fill: currentColor; }
 
 .map-pin { cursor: pointer; }
 .map-pin-dot {
@@ -510,18 +535,18 @@ summary:focus-visible,
 .map-pin.is-active .map-pin-label { opacity: 1; }
 
 /* --- Connects list ------------------------------------------------------- */
-.connects-list { display: flex; flex-direction: column; }
+/* No rules between rows — spacing alone separates them, and the gap is
+   deliberately tight so the five towns read as one list, not five blocks. */
+.connects-list { display: flex; flex-direction: column; gap: 0.35rem; }
 .connect-item {
   display: flex;
   align-items: baseline;
   justify-content: space-between;
   flex-wrap: wrap;
   gap: var(--space-sm);
-  padding-block: var(--space-md);
-  border-top: 1px solid var(--color-line);
+  padding-block: 0.45rem;
   transition: color var(--dur-fast) var(--ease-out);
 }
-.connect-item:last-child { border-bottom: 1px solid var(--color-line); }
 .connect-place {
   /* body face at a heavier weight, not the display face */
   font-weight: 700;
@@ -581,8 +606,7 @@ summary:focus-visible,
 .panel-summary {
   display: flex;
   align-items: center;
-  justify-content: space-between;
-  gap: var(--space-md);
+  gap: 0.9rem;
   padding-block: var(--space-md);
   cursor: pointer;
   list-style: none;
@@ -591,7 +615,19 @@ summary:focus-visible,
 .panel-summary::-webkit-details-marker { display: none; }
 .panel-summary::marker { content: ""; }
 
+/* The icon is what creates the indent: the body below is padded by exactly
+   the icon's width plus the gap, so copy hangs off the title, not the edge. */
+.panel-icon {
+  flex-shrink: 0;
+  display: inline-flex;
+  width: 1.5rem;
+  height: 1.5rem;
+  color: var(--color-red);
+}
+.panel-icon svg { width: 100%; height: 100%; }
+
 .panel-title {
+  flex: 1;                 /* pushes the +/- mark to the right edge */
   font-family: var(--font-body);
   font-weight: 700;
   font-size: clamp(1.125rem, 1.7vw, 1.4375rem);
@@ -622,6 +658,7 @@ summary:focus-visible,
   flex-direction: column;
   gap: var(--space-sm);
   padding-bottom: var(--space-lg);
+  padding-left: calc(1.5rem + 0.9rem);   /* aligns with the title above */
   max-width: var(--measure);
   color: var(--color-ink-2);
 }
@@ -841,10 +878,7 @@ summary:focus-visible,
   .split-media-first { grid-template-columns: minmax(0, 1fr); }
   .cluster { max-width: 30rem; margin-inline: auto; }
 
-  .offer { grid-template-columns: 2.5rem minmax(0, 1fr); }
-  .offer-icon { grid-row: 1; }
-  .offer-icon svg { width: 26px; height: 26px; }
-  .offer-body { grid-column: 2; grid-row: 2; margin-top: var(--space-sm); }
+  .cards { grid-template-columns: minmax(0, 1fr); }
 
   .process { grid-template-columns: minmax(0, 1fr); }
 
@@ -861,7 +895,7 @@ summary:focus-visible,
   .hero { min-height: auto; padding-block: var(--space-xl) var(--space-2xl); }
   .register-main .btn, .register-aside .btn { width: 100%; }
   .connect-item { flex-direction: column; align-items: flex-start; gap: 0.35rem; }
-  .cluster { transform: rotate(-3deg); margin: 0.75rem; }
+  .cluster { rotate: -3deg; margin: 0.75rem; }
 }
 
 /* ---------------------------------------------------------------------------
@@ -880,6 +914,7 @@ summary:focus-visible,
   }
 
   .reveal { opacity: 1; transform: none; }
+  .card-inner { transform: none !important; opacity: 1 !important; }
   .type { border-right-color: transparent !important; }
   /* the looping hero video is spatial motion too — hold the poster frame */
   .hero-video { display: none; }
