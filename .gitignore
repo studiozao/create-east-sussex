@@ -4,3 +4,7 @@
 # Full-resolution hero source (5.5MB). The web-sized copy that the page
 # actually loads is committed at assets/hero/hero-cliffs.jpg.
 heroeastsussex.jpg
+
+# Full-resolution hero video source (8.1MB, HEVC .mov). The web-safe H.264
+# copy the page loads is committed at assets/hero/hero-cliffs.mp4.
+IMG_4627.mov

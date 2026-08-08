@@ -4,15 +4,8 @@
   ----------------------------------------------------------------------------
   Static site. No build step. Open index.html directly or serve the folder.
   Files:   index.html  ·  styles.css  ·  script.js  ·  tokens.css
-  Swap-before-launch items are listed in README.md and flagged inline with
-  the marker  <<< SWAP >>>  so they are easy to find (Cmd/Ctrl+F).
-
-  Aug 2026 redesign (branch: redesign-v2). Bold editorial rebuild:
-  type-motion hero over the Seven Sisters photograph, scroll-driven framed
-  imagery beside the qualifying copy, and a stylised county map anchoring
-  the Connects locations. Section order was re-planned with the client:
-  the mentor-recruitment block now closes the page before the form, and the
-  old duplicate "Is this for you?" eligibility heading was renamed.
+  Swap-before-launch items are flagged inline with  <<< SWAP >>>  and listed
+  in README.md.
   ============================================================================
 -->
 <!DOCTYPE html>
@@ -23,13 +16,15 @@
   <title>Create East Sussex</title>
   <meta name="description" content="Free 1:1 mentoring and practical sessions for freelancers and small creative businesses across East Sussex. Business support that actually gets creative businesses." />
 
-  <!-- Clash Display (bold geometric display) + Satoshi (body), both via
-       Fontshare. Swapped in Aug 2026 from Fraunces/Switzer after direct
-       feedback that the old serif read too thin. See README for swap notes. -->
+  <!-- Archivo (headings only) via Google Fonts; Satoshi (everything else) via
+       Fontshare. Headings use the wide, heavy end of Archivo's variable axes. -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link rel="preconnect" href="https://api.fontshare.com" crossorigin />
-  <link href="https://api.fontshare.com/v2/css?f[]=clash-display@500,600,700&f[]=satoshi@400,500,700&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@100..125,500..900&display=swap" rel="stylesheet" />
+  <link href="https://api.fontshare.com/v2/css?f[]=satoshi@400,500,700&display=swap" rel="stylesheet" />
 
-  <link rel="preload" as="image" href="assets/hero/hero-cliffs.jpg" />
+  <link rel="preload" as="image" href="assets/hero/hero-poster.jpg" />
   <link rel="stylesheet" href="styles.css" />
 
   <!--
@@ -58,21 +53,18 @@
   -->
   <!--
     A custom CTA-click event (separate from the page view) is fired from
-    script.js — see the trackCtaClick() function there. It works with either
-    provider above once the snippet is uncommented.
+    script.js — see trackCtaClick(). Works with either provider above.
     ========================================================================
   -->
 </head>
 
 <body>
-  <!-- Skip link for keyboard / screen-reader users -->
   <a class="skip-link" href="#main">Skip to content</a>
 
   <!--
     ========================================================================
     HEADER — solid white, sticky, slim. Deliberately NOT floating over the
-    hero: the ESCC crest is navy-on-white artwork and needs a light ground
-    to stay legible, so the dark hero starts beneath the bar instead.
+    hero: the ESCC crest is blue-on-white artwork and needs a light ground.
     ========================================================================
   -->
   <header class="site-header" id="top">
@@ -94,10 +86,10 @@
         </button>
         <ul id="nav-links" class="nav-links">
           <li><a href="#what-you-get">What you get</a></li>
-          <li><a href="#connects">Connects</a></li>
-          <li><a href="#eligibility">Eligibility</a></li>
-          <li><a href="#how">How it works</a></li>
-          <li><a class="nav-cta" href="#form">Join <span aria-hidden="true">&rarr;</span></a></li>
+          <li><a href="#connects">Where we meet</a></li>
+          <li><a href="#who-is-it-for">Who it&rsquo;s for</a></li>
+          <li><a href="#about">About</a></li>
+          <li><a class="nav-cta" href="#register">Join <span aria-hidden="true">&rarr;</span></a></li>
         </ul>
       </nav>
     </div>
@@ -107,17 +99,27 @@
 
     <!--
       ======================================================================
-      HERO — type motion. "CREATE" masks up first on flat navy; the Seven
-      Sisters photograph then fades in behind as "EAST SUSSEX" lands. The
-      letter spans are decorative (aria-hidden); the h1 carries the real
-      accessible name.
-      <<< SWAP >>> assets/hero/hero-cliffs.jpg is a client-supplied photo,
-      resized to 2400px wide. Replace with programme photography later.
+      HERO — "Create" types out character by character behind a caret, then
+      "East Sussex" lands beneath it. Behind: client-supplied golden-hour
+      cliff footage, cropped to a wide band (the source is a vertical phone
+      video, so most of the frame is deliberately cropped away on desktop).
+      The scrim is neutral black, not a colour cast — the footage is already
+      moody enough that it only needs darkening for type contrast.
+      <<< SWAP >>> assets/hero/hero-cliffs.mp4 + hero-poster.jpg
       ======================================================================
     -->
     <section class="hero" aria-labelledby="hero-heading">
       <div class="hero-bg" aria-hidden="true">
-        <div class="hero-bg-img"></div>
+        <video
+          class="hero-video"
+          src="assets/hero/hero-cliffs.mp4"
+          poster="assets/hero/hero-poster.jpg"
+          autoplay
+          muted
+          loop
+          playsinline
+          preload="auto"
+        ></video>
       </div>
       <div class="hero-shade" aria-hidden="true"></div>
 
@@ -126,12 +128,9 @@
 
         <h1 id="hero-heading" class="hero-heading" aria-label="Create East Sussex">
           <span class="hero-line hero-line-create" aria-hidden="true">
-            <span class="mask"><span class="mask-in">C</span></span><span class="mask"><span class="mask-in">r</span></span><span class="mask"><span class="mask-in">e</span></span><span class="mask"><span class="mask-in">a</span></span><span class="mask"><span class="mask-in">t</span></span><span class="mask"><span class="mask-in">e</span></span>
+            <span class="type" data-type>Create</span>
           </span>
-          <span class="hero-line hero-line-place" aria-hidden="true">
-            <span class="mask"><span class="mask-in">East</span></span>
-            <span class="mask"><span class="mask-in">Sussex</span></span>
-          </span>
+          <span class="hero-line hero-line-place" aria-hidden="true">East Sussex</span>
         </h1>
 
         <div class="hero-foot">
@@ -141,50 +140,51 @@
             and practical sessions, built for creatives across East Sussex.
           </p>
           <div class="hero-actions">
-            <a class="btn btn-primary" href="#form" data-cta="hero">Register your interest</a>
+            <a class="btn btn-primary" href="#register" data-cta="hero">Register your interest</a>
             <a class="btn btn-ghost" href="#what-you-get">See what you get</a>
           </div>
         </div>
       </div>
-
     </section>
 
     <!--
       ======================================================================
-      IS THIS YOU? — self-qualifying identity lines, before any programme
-      mechanics. A sticky photo frame tracks alongside: each line swaps the
-      image, so the reader sees the disciplines while placing themselves.
+      HOOK — short. Three lines to place yourself, and the four discipline
+      photographs together as one angled cluster. The formal criteria live
+      further down in "Who it's for".
       ======================================================================
     -->
-    <section class="section section-is-you" id="is-this-you" aria-labelledby="is-you-heading">
+    <section class="section section-hook" id="is-this-you" aria-labelledby="hook-heading">
       <div class="wrap split split-text-first">
         <div class="split-copy">
           <header class="section-head reveal">
             <p class="section-kicker">Is this you?</p>
-            <h2 id="is-you-heading" class="section-heading">You already make the thing</h2>
+            <h2 id="hook-heading" class="section-heading">You already make the thing</h2>
           </header>
 
-          <ul class="qual-list" data-frames-driver>
-            <li class="qual-item reveal" data-frame="0">
+          <ul class="hook-list">
+            <li class="hook-item reveal">
               You make, design, write, film, craft or build things for a living
             </li>
-            <li class="qual-item reveal" data-frame="1">
+            <li class="hook-item reveal">
               You&rsquo;re a freelancer or small business based in East Sussex
             </li>
-            <li class="qual-item reveal" data-frame="2">
+            <li class="hook-item reveal">
               You want to grow but could use a sounding board
             </li>
           </ul>
         </div>
 
-        <!-- Sticky frame: images cross-fade as each line above activates.
-             Decorative, so the whole stack is aria-hidden. -->
-        <div class="split-media">
-          <div class="frame" data-frames aria-hidden="true">
-            <div class="frame-img img-hands is-active" data-frame="0"></div>
-            <div class="frame-img img-textile" data-frame="1"></div>
-            <div class="frame-img img-art" data-frame="2"></div>
-            <span class="frame-edge" aria-hidden="true"></span>
+        <!-- Four photographs as one angled cluster. Decorative.
+             The reveal sits on the WRAPPER, not on .cluster: GSAP animates
+             `transform` on revealed elements, which would overwrite the
+             cluster's CSS rotation. -->
+        <div class="split-media reveal">
+          <div class="cluster" aria-hidden="true">
+            <div class="cluster-tile img-hands"></div>
+            <div class="cluster-tile img-art"></div>
+            <div class="cluster-tile img-textile"></div>
+            <div class="cluster-tile img-photography"></div>
           </div>
         </div>
       </div>
@@ -192,9 +192,9 @@
 
     <!--
       ======================================================================
-      WHAT YOU GET — outcomes first, mechanics second. Connects leads (the
-      low-commitment entry point); network and mentoring follow as a pair,
-      with the full mentoring detail living further down the page.
+      WHAT YOU GET — an editorial index of rows, each with a line icon.
+      Connects leads (the low-commitment entry point); the network and
+      mentoring follow, with full mentoring detail further down.
       ======================================================================
     -->
     <section class="section section-programme" id="what-you-get" aria-labelledby="programme-heading">
@@ -209,22 +209,36 @@
         </header>
 
         <div class="offer-grid">
-          <article class="offer offer-lead reveal">
-            <p class="offer-index" aria-hidden="true">01</p>
-            <h3 class="offer-title">Connects</h3>
-            <p class="offer-meta">Open to everyone &middot; 2 hours &middot; free</p>
+          <article class="offer reveal">
+            <span class="offer-icon" aria-hidden="true">
+              <svg viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M18 3 6 19h8l-1 10 12-16h-8z" />
+              </svg>
+            </span>
+            <div class="offer-head">
+              <h3 class="offer-title">Connects</h3>
+              <p class="offer-meta">Open to everyone &middot; 2 hours &middot; free</p>
+            </div>
             <p class="offer-body">
               Free, 2-hour practical sessions, and the easiest way in. Come
               away with something tangible on pricing, audience building,
-              hiring, AI tools and accessing grants, across Lewes, Hastings
-              and Eastbourne.
+              hiring, AI tools and accessing grants.
             </p>
           </article>
 
           <article class="offer reveal">
-            <p class="offer-index" aria-hidden="true">02</p>
-            <h3 class="offer-title">A growing network</h3>
-            <p class="offer-meta">Free &middot; ongoing</p>
+            <span class="offer-icon" aria-hidden="true">
+              <svg viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+                <circle cx="16" cy="7" r="3.5" />
+                <circle cx="7" cy="23" r="3.5" />
+                <circle cx="25" cy="23" r="3.5" />
+                <path d="M13.6 9.6 9.4 19.8M18.4 9.6l4.2 10.2M10.5 23h11" />
+              </svg>
+            </span>
+            <div class="offer-head">
+              <h3 class="offer-title">A growing network</h3>
+              <p class="offer-meta">Free &middot; ongoing</p>
+            </div>
             <p class="offer-body">
               Open to any actively trading creative business in East Sussex.
               Meet other creatives and swap ideas and referrals, a network
@@ -233,9 +247,18 @@
           </article>
 
           <article class="offer reveal">
-            <p class="offer-index" aria-hidden="true">03</p>
-            <h3 class="offer-title">Mentoring</h3>
-            <p class="offer-meta">By invitation &middot; up to 6 hours, one-to-one</p>
+            <span class="offer-icon" aria-hidden="true">
+              <svg viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+                <circle cx="12" cy="11" r="4.5" />
+                <circle cx="22.5" cy="13" r="3.5" />
+                <path d="M4 26c0-4.4 3.6-8 8-8s8 3.6 8 8" />
+                <path d="M21 26c0-3.3 2.4-6 5-6" />
+              </svg>
+            </span>
+            <div class="offer-head">
+              <h3 class="offer-title">Mentoring</h3>
+              <p class="offer-meta">By invitation &middot; up to 6 hours, one-to-one</p>
+            </div>
             <p class="offer-body">
               Once you know what you need help with, get matched with a
               mentor who has built a creative business themselves. More on
@@ -248,58 +271,23 @@
 
     <!--
       ======================================================================
-      CONNECTS + MAP — a stylised (not survey-accurate) county outline with
-      the three Connect towns pinned. Hovering or focusing a pin, or the
-      matching row in the list, highlights both. Dates aren't confirmed yet,
-      so the list stays expression-of-interest framed.
-      <<< SWAP >>> Replace the "Dates to be confirmed" rows with real dates
-      and Eventbrite links once Connects go live.
+      WHERE WE MEET — the county map sits on the RIGHT, the list on the left.
+      Boundary is real: ONS "Counties and Unitary Authorities (Dec 2023)"
+      generalised boundary for East Sussex, projected to this viewBox, so
+      the outline and all five town positions are geographically placed.
+      <<< SWAP >>> add real dates and booking links once Connects go live.
       ======================================================================
     -->
     <section class="section section-connects" id="connects" aria-labelledby="connects-heading">
-      <div class="wrap split split-media-first">
-        <div class="split-media">
-          <figure class="map-figure reveal">
-            <svg class="map" viewBox="0 0 640 400" role="img" aria-labelledby="map-title map-desc">
-              <title id="map-title">Stylised map of East Sussex</title>
-              <desc id="map-desc">A simplified county outline marking the three Connect locations: Lewes, Eastbourne and Hastings.</desc>
-
-              <!-- Simplified county outline: an irregular northern border, the
-                   coast running from Newhaven in the south-west out to Rye in
-                   the east, and the Beachy Head point at its southern tip.
-                   Drawn by hand to read as East Sussex, not surveyed. -->
-              <path class="map-shape" d="M62,152 L104,120 L168,104 L232,118 L292,99 L352,113 L414,96 L472,110 L522,128 L562,152 L578,190 L566,226 L548,240 L500,256 L456,268 L404,288 L356,304 L322,332 L300,316 L262,302 L214,288 L160,266 L108,224 L74,186 Z" />
-
-              <g class="map-pin" data-place="lewes" tabindex="0" role="button" aria-label="Lewes, Connect location">
-                <circle class="map-pin-halo" cx="230" cy="250" r="26" />
-                <circle class="map-pin-dot" cx="230" cy="250" r="8" />
-                <text class="map-pin-label" x="230" y="228">Lewes</text>
-              </g>
-              <g class="map-pin" data-place="eastbourne" tabindex="0" role="button" aria-label="Eastbourne, Connect location">
-                <circle class="map-pin-halo" cx="318" cy="310" r="26" />
-                <circle class="map-pin-dot" cx="318" cy="310" r="8" />
-                <text class="map-pin-label" x="318" y="288">Eastbourne</text>
-              </g>
-              <g class="map-pin" data-place="hastings" tabindex="0" role="button" aria-label="Hastings, Connect location">
-                <circle class="map-pin-halo" cx="452" cy="256" r="26" />
-                <circle class="map-pin-dot" cx="452" cy="256" r="8" />
-                <text class="map-pin-label" x="452" y="234">Hastings</text>
-              </g>
-            </svg>
-            <figcaption class="map-caption">
-              A stylised outline, not a survey map. Connects run across the county.
-            </figcaption>
-          </figure>
-        </div>
-
+      <div class="wrap split split-text-first">
         <div class="split-copy">
           <header class="section-head reveal">
             <p class="section-kicker">Where we meet</p>
-            <h2 id="connects-heading" class="section-heading">Upcoming Connects</h2>
+            <h2 id="connects-heading" class="section-heading">Connects run across East Sussex</h2>
             <p class="section-intro">
-              Free, 2-hour sessions, no booking needed yet. Register your
-              interest and we&rsquo;ll email you the moment dates and
-              locations are confirmed.
+              Free, 2-hour sessions. Places are limited and you&rsquo;ll need
+              to sign up. Register your interest and we&rsquo;ll email you as
+              soon as dates open for booking.
             </p>
           </header>
 
@@ -308,8 +296,16 @@
               <span class="connect-place">Lewes</span>
               <span class="connect-date">Dates to be confirmed</span>
             </li>
+            <li class="connect-item reveal" data-place="uckfield" tabindex="0">
+              <span class="connect-place">Uckfield</span>
+              <span class="connect-date">Dates to be confirmed</span>
+            </li>
             <li class="connect-item reveal" data-place="eastbourne" tabindex="0">
               <span class="connect-place">Eastbourne</span>
+              <span class="connect-date">Dates to be confirmed</span>
+            </li>
+            <li class="connect-item reveal" data-place="bexhill" tabindex="0">
+              <span class="connect-place">Bexhill</span>
               <span class="connect-date">Dates to be confirmed</span>
             </li>
             <li class="connect-item reveal" data-place="hastings" tabindex="0">
@@ -317,42 +313,104 @@
               <span class="connect-date">Dates to be confirmed</span>
             </li>
           </ul>
+
+          <p class="connects-note reveal">
+            These are the first locations, not the full list. More towns
+            across East Sussex will be added as the programme grows, so
+            tell us where you are and we&rsquo;ll try to get closer to you.
+          </p>
+        </div>
+
+        <div class="split-media">
+          <figure class="map-figure reveal">
+            <svg class="map" viewBox="0 0 640 421" role="img" aria-labelledby="map-title map-desc">
+              <title id="map-title">Map of East Sussex</title>
+              <desc id="map-desc">East Sussex with the first five Connect locations marked: Lewes, Uckfield, Eastbourne, Bexhill and Hastings.</desc>
+
+              <defs>
+                <pattern id="landDots" width="9" height="9" patternUnits="userSpaceOnUse">
+                  <circle cx="1.6" cy="1.6" r="1.05" />
+                </pattern>
+              </defs>
+
+              <!-- Real ONS boundary, generalised. Drawn twice: a soft offset
+                   copy for depth, then the textured land on top. -->
+              <path class="map-shadow" d="M187.0,33.0 L199.6,41.3 L233.4,32.4 L244.8,41.8 L263.9,44.3 L263.5,36.1 L294.6,33.9 L300.7,51.0 L315.5,51.9 L310.4,72.0 L324.7,67.7 L338.7,72.9 L352.1,93.0 L379.9,100.7 L385.5,124.6 L425.8,133.2 L428.4,143.6 L446.4,151.0 L467.8,142.6 L502.4,137.0 L512.0,151.2 L530.4,160.7 L551.3,153.8 L575.0,164.8 L573.9,178.6 L578.4,176.8 L596.0,211.4 L613.6,196.0 L622.6,200.4 L630.0,219.9 L622.0,229.1 L615.5,228.2 L570.7,221.9 L572.5,225.7 L544.6,239.4 L500.6,282.1 L500.2,282.2 L492.7,285.2 L418.0,306.3 L404.3,308.9 L403.1,309.2 L327.4,330.5 L326.9,330.7 L303.3,351.5 L303.2,351.6 L285.2,373.5 L258.3,406.3 L254.5,410.9 L223.4,411.0 L223.3,410.9 L189.7,393.0 L186.3,391.1 L185.7,390.8 L169.0,391.5 L159.7,386.0 L135.9,368.5 L130.4,368.6 L129.7,368.1 L129.7,368.6 L128.1,368.6 L129.3,374.1 L114.5,368.5 L84.4,357.1 L69.8,351.6 L83.7,336.0 L81.0,329.2 L65.2,329.2 L70.8,310.2 L48.2,310.2 L41.1,278.9 L33.3,274.2 L18.3,278.6 L10.0,274.0 L10.2,265.6 L19.6,211.1 L29.2,207.0 L22.4,177.9 L48.1,162.6 L55.5,175.6 L78.4,174.1 L83.5,152.0 L80.1,128.5 L92.6,119.4 L91.8,107.8 L102.1,98.6 L88.3,99.1 L85.4,81.9 L77.0,80.8 L71.2,62.8 L100.1,54.3 L99.5,46.2 L105.1,52.9 L121.1,46.0 L111.0,39.0 L110.5,17.3 L124.5,14.5 L175.9,10.0 L192.9,19.8 L187.0,33.0 Z" />
+              <path class="map-land" d="M187.0,33.0 L199.6,41.3 L233.4,32.4 L244.8,41.8 L263.9,44.3 L263.5,36.1 L294.6,33.9 L300.7,51.0 L315.5,51.9 L310.4,72.0 L324.7,67.7 L338.7,72.9 L352.1,93.0 L379.9,100.7 L385.5,124.6 L425.8,133.2 L428.4,143.6 L446.4,151.0 L467.8,142.6 L502.4,137.0 L512.0,151.2 L530.4,160.7 L551.3,153.8 L575.0,164.8 L573.9,178.6 L578.4,176.8 L596.0,211.4 L613.6,196.0 L622.6,200.4 L630.0,219.9 L622.0,229.1 L615.5,228.2 L570.7,221.9 L572.5,225.7 L544.6,239.4 L500.6,282.1 L500.2,282.2 L492.7,285.2 L418.0,306.3 L404.3,308.9 L403.1,309.2 L327.4,330.5 L326.9,330.7 L303.3,351.5 L303.2,351.6 L285.2,373.5 L258.3,406.3 L254.5,410.9 L223.4,411.0 L223.3,410.9 L189.7,393.0 L186.3,391.1 L185.7,390.8 L169.0,391.5 L159.7,386.0 L135.9,368.5 L130.4,368.6 L129.7,368.1 L129.7,368.6 L128.1,368.6 L129.3,374.1 L114.5,368.5 L84.4,357.1 L69.8,351.6 L83.7,336.0 L81.0,329.2 L65.2,329.2 L70.8,310.2 L48.2,310.2 L41.1,278.9 L33.3,274.2 L18.3,278.6 L10.0,274.0 L10.2,265.6 L19.6,211.1 L29.2,207.0 L22.4,177.9 L48.1,162.6 L55.5,175.6 L78.4,174.1 L83.5,152.0 L80.1,128.5 L92.6,119.4 L91.8,107.8 L102.1,98.6 L88.3,99.1 L85.4,81.9 L77.0,80.8 L71.2,62.8 L100.1,54.3 L99.5,46.2 L105.1,52.9 L121.1,46.0 L111.0,39.0 L110.5,17.3 L124.5,14.5 L175.9,10.0 L192.9,19.8 L187.0,33.0 Z" />
+              <path class="map-texture" d="M187.0,33.0 L199.6,41.3 L233.4,32.4 L244.8,41.8 L263.9,44.3 L263.5,36.1 L294.6,33.9 L300.7,51.0 L315.5,51.9 L310.4,72.0 L324.7,67.7 L338.7,72.9 L352.1,93.0 L379.9,100.7 L385.5,124.6 L425.8,133.2 L428.4,143.6 L446.4,151.0 L467.8,142.6 L502.4,137.0 L512.0,151.2 L530.4,160.7 L551.3,153.8 L575.0,164.8 L573.9,178.6 L578.4,176.8 L596.0,211.4 L613.6,196.0 L622.6,200.4 L630.0,219.9 L622.0,229.1 L615.5,228.2 L570.7,221.9 L572.5,225.7 L544.6,239.4 L500.6,282.1 L500.2,282.2 L492.7,285.2 L418.0,306.3 L404.3,308.9 L403.1,309.2 L327.4,330.5 L326.9,330.7 L303.3,351.5 L303.2,351.6 L285.2,373.5 L258.3,406.3 L254.5,410.9 L223.4,411.0 L223.3,410.9 L189.7,393.0 L186.3,391.1 L185.7,390.8 L169.0,391.5 L159.7,386.0 L135.9,368.5 L130.4,368.6 L129.7,368.1 L129.7,368.6 L128.1,368.6 L129.3,374.1 L114.5,368.5 L84.4,357.1 L69.8,351.6 L83.7,336.0 L81.0,329.2 L65.2,329.2 L70.8,310.2 L48.2,310.2 L41.1,278.9 L33.3,274.2 L18.3,278.6 L10.0,274.0 L10.2,265.6 L19.6,211.1 L29.2,207.0 L22.4,177.9 L48.1,162.6 L55.5,175.6 L78.4,174.1 L83.5,152.0 L80.1,128.5 L92.6,119.4 L91.8,107.8 L102.1,98.6 L88.3,99.1 L85.4,81.9 L77.0,80.8 L71.2,62.8 L100.1,54.3 L99.5,46.2 L105.1,52.9 L121.1,46.0 L111.0,39.0 L110.5,17.3 L124.5,14.5 L175.9,10.0 L192.9,19.8 L187.0,33.0 Z" />
+
+              <g class="map-pin" data-place="uckfield" tabindex="0" role="button" aria-label="Uckfield, Connect location">
+                <circle class="map-pin-halo" cx="155.3" cy="185.9" r="24" />
+                <circle class="map-pin-dot" cx="155.3" cy="185.9" r="7" />
+                <text class="map-pin-label" x="155.3" y="167">Uckfield</text>
+              </g>
+              <g class="map-pin" data-place="lewes" tabindex="0" role="button" aria-label="Lewes, Connect location">
+                <circle class="map-pin-halo" cx="99.1" cy="278.2" r="24" />
+                <circle class="map-pin-dot" cx="99.1" cy="278.2" r="7" />
+                <text class="map-pin-label" x="99.1" y="259">Lewes</text>
+              </g>
+              <g class="map-pin" data-place="eastbourne" tabindex="0" role="button" aria-label="Eastbourne, Connect location">
+                <circle class="map-pin-halo" cx="269.4" cy="381.4" r="24" />
+                <circle class="map-pin-dot" cx="269.4" cy="381.4" r="7" />
+                <text class="map-pin-label" x="269.4" y="362">Eastbourne</text>
+              </g>
+              <g class="map-pin" data-place="bexhill" tabindex="0" role="button" aria-label="Bexhill, Connect location">
+                <circle class="map-pin-halo" cx="382.6" cy="308.5" r="24" />
+                <circle class="map-pin-dot" cx="382.6" cy="308.5" r="7" />
+                <text class="map-pin-label" x="382.6" y="333">Bexhill</text>
+              </g>
+              <g class="map-pin" data-place="hastings" tabindex="0" role="button" aria-label="Hastings, Connect location">
+                <circle class="map-pin-halo" cx="447.7" cy="296.5" r="24" />
+                <circle class="map-pin-dot" cx="447.7" cy="296.5" r="7" />
+                <text class="map-pin-label" x="447.7" y="277">Hastings</text>
+              </g>
+            </svg>
+          </figure>
         </div>
       </div>
     </section>
 
     <!--
       ======================================================================
-      ELIGIBILITY — grounded in the Lot 3 spec (SME/trading-status criteria),
-      lightly summarised: exact numeric SME thresholds (staff/turnover/
-      balance-sheet caps) and the blunt pre-start exclusion are deliberately
-      left off the public checklist — see README.
-      Heading renamed from "Is this for you?" to avoid echoing the earlier
-      "Is this you?" self-qualifying section.
+      WHO IT'S FOR — the formal criteria, grounded in the Lot 3 spec. Exact
+      numeric SME thresholds (staff/turnover/balance-sheet caps) and the
+      blunt pre-start exclusion are deliberately left off — see README.
       ======================================================================
     -->
-    <section class="section section-eligibility" id="eligibility" aria-labelledby="eligibility-heading">
-      <div class="wrap split split-text-first">
-        <div class="split-copy">
+    <section class="section section-eligibility" id="who-is-it-for" aria-labelledby="eligibility-heading">
+      <div class="wrap">
+        <div class="eligibility-inner">
           <header class="section-head reveal">
-            <p class="section-kicker">The fine print</p>
+            <p class="section-kicker">Who it&rsquo;s for</p>
             <h2 id="eligibility-heading" class="section-heading">Check you&rsquo;re eligible</h2>
           </header>
 
           <ul class="checklist">
             <li class="check-item reveal">
-              <span class="check-dot" aria-hidden="true"></span>
+              <span class="check-icon" aria-hidden="true">
+                <svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M4 10.5 8 14.5 16 5.5" />
+                </svg>
+              </span>
               Actively trading creative business based in East Sussex
             </li>
             <li class="check-item reveal">
-              <span class="check-dot" aria-hidden="true"></span>
+              <span class="check-icon" aria-hidden="true">
+                <svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M4 10.5 8 14.5 16 5.5" />
+                </svg>
+              </span>
               Working in design, digital, craft, fashion, film, gaming, music,
               publishing or a related creative field, including tech-enabled
               work like web or app design (general IT support doesn&rsquo;t
               count)
             </li>
             <li class="check-item reveal">
-              <span class="check-dot" aria-hidden="true"></span>
+              <span class="check-icon" aria-hidden="true">
+                <svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M4 10.5 8 14.5 16 5.5" />
+                </svg>
+              </span>
               Sole trader, freelancer, small business, social enterprise,
               co-operative or charity (trading arm)
             </li>
@@ -363,48 +421,102 @@
             and we&rsquo;ll help you work it out.
           </p>
         </div>
-
-        <div class="split-media">
-          <div class="frame frame-static reveal" aria-hidden="true">
-            <div class="frame-img img-photography is-active"></div>
-            <span class="frame-edge" aria-hidden="true"></span>
-          </div>
-        </div>
       </div>
     </section>
 
     <!--
       ======================================================================
-      WHO'S BEHIND THIS — the long "delivered by people who've done this
-      before" line now runs as the section intro so the heading can carry
-      the bold display treatment at a readable length.
+      ABOUT OUR TEAM — short intro, then the detail in disclosure panels so
+      the section stays scannable. Panels are native <details>/<summary>,
+      so they open and close without JavaScript.
       ======================================================================
     -->
-    <section class="section section-who" id="who" aria-labelledby="who-heading">
+    <section class="section section-about" id="about" aria-labelledby="about-heading">
       <div class="wrap">
-        <div class="who-inner">
+        <div class="about-inner">
           <header class="section-head reveal">
-            <p class="section-kicker">Who&rsquo;s behind this</p>
-            <h2 id="who-heading" class="section-heading">Delivered by people who&rsquo;ve done this before</h2>
+            <p class="section-kicker">Delivered by Studio Zao</p>
+            <h2 id="about-heading" class="section-heading">About our team</h2>
+            <p class="section-intro">
+              Create East Sussex is delivered by Studio Zao, an innovation
+              and growth consultancy, in partnership with East Sussex County
+              Council. Led locally by Sara Carter, who&rsquo;s spent years
+              mentoring creative founders and building programmes like this
+              one.
+            </p>
           </header>
 
-          <div class="who-copy">
-            <p class="who-lead reveal">
-              Create East Sussex is delivered by Studio Zao, an innovation
-              and growth consultancy that&rsquo;s supported hundreds of small
-              businesses across the UK, working in partnership with East
-              Sussex County Council.
-            </p>
-            <p class="who-lead reveal">
-              Led locally by Sara Carter, who&rsquo;s spent years mentoring
-              creative founders and building programmes like this one,
-              alongside a team who&rsquo;ve delivered similar work in Torbay,
-              Croydon and Tamworth.
-            </p>
-            <p class="who-note reveal">
-              Real people, not a call centre. You&rsquo;ll meet the same faces
-              throughout.
-            </p>
+          <div class="panels reveal">
+            <details class="panel" open>
+              <summary class="panel-summary">
+                <span class="panel-title">Who we are</span>
+                <span class="panel-mark" aria-hidden="true"></span>
+              </summary>
+              <div class="panel-body">
+                <p>We&rsquo;re a nimble team focused on making good ideas happen.</p>
+                <p>
+                  We&rsquo;ve worked with corporations, the public sector and
+                  SMEs, always keeping things grounded in real-world
+                  experience, not theory.
+                </p>
+                <p>
+                  Our approach is people-first: understanding customers and
+                  users is at the heart of finding real solutions.
+                </p>
+                <p>
+                  We believe successful growth comes from entrepreneurial
+                  mindsets: testing, learning, and staying solution-oriented.
+                </p>
+              </div>
+            </details>
+
+            <details class="panel">
+              <summary class="panel-summary">
+                <span class="panel-title">What we do</span>
+                <span class="panel-mark" aria-hidden="true"></span>
+              </summary>
+              <div class="panel-body">
+                <p>
+                  We help businesses turn ideas into investable, scalable
+                  opportunities through programmes, coaching and hands-on
+                  support.
+                </p>
+                <p>
+                  From accelerators in Devon and Croydon to projects with the
+                  NHS, TfL and Sony, we support teams to test, prove and
+                  scale what works.
+                </p>
+                <p>
+                  We also equip the public sector and large corporations with
+                  practical tools and entrepreneurial methods so they can
+                  keep creating new opportunities long after we&rsquo;ve gone.
+                </p>
+              </div>
+            </details>
+
+            <details class="panel">
+              <summary class="panel-summary">
+                <span class="panel-title">Who we&rsquo;ve helped</span>
+                <span class="panel-mark" aria-hidden="true"></span>
+              </summary>
+              <div class="panel-body">
+                <p>
+                  We&rsquo;ve supported hundreds of businesses to secure
+                  funding, launch products and grow with confidence.
+                </p>
+                <p>
+                  We&rsquo;ve worked with everyone from manufacturers like
+                  Hymid to night-time venues, creatives, tech start-ups and
+                  social enterprises, helping with raising investment,
+                  positioning new offers and testing ideas with customers.
+                </p>
+                <p>
+                  Backed by our innovation and growth expertise, we&rsquo;ve
+                  delivered with partners including Innovate UK, UKSPF-funded
+                  councils, UKRI and Sport England.
+                </p>
+              </div>
+            </details>
           </div>
         </div>
       </div>
@@ -412,8 +524,8 @@
 
     <!--
       ======================================================================
-      HOW IT WORKS / MENTORING — the full mentoring detail, kept late on the
-      page so it lands as the last substantive pitch before the CTAs.
+      HOW IT WORKS / MENTORING — the full mentoring detail, kept late so it
+      lands as the last substantive pitch before the closing asks.
       ======================================================================
     -->
     <section class="section section-how" id="how" aria-labelledby="how-heading">
@@ -430,8 +542,8 @@
         </header>
 
         <!-- Plain divs with ARIA list semantics, not <ol>/<li> — a native
-             list-item marker was rendering alongside the custom numeral
-             in some browsers, showing as a doubled "1. 2" style number. -->
+             list marker was rendering alongside the custom numeral in some
+             browsers, showing as a doubled "1. 2" style number. -->
         <div class="process" role="list" aria-label="What happens after a Connect">
           <div class="process-step reveal" role="listitem">
             <span class="process-num" aria-hidden="true">1</span>
@@ -479,7 +591,6 @@
         </p>
       </div>
 
-      <!-- Community band — the section's closing note, after the caveat -->
       <div class="how-band">
         <div class="wrap">
           <p class="how-band-text reveal">
@@ -494,68 +605,61 @@
 
     <!--
       ======================================================================
-      BECOME A MENTOR — moved to the end of the page at client request, so
-      it reads as the closing ask rather than interrupting the participant
-      journey. Placeholder: no dedicated mentor sign-up flow exists yet, so
-      the CTA points at the same expression-of-interest form.
-      <<< SWAP >>> point this at a dedicated mentor form when one exists.
+      REGISTER — both closing asks in one block: join as a creative
+      business, or come back as a mentor.
+      This is an EXPRESSION OF INTEREST, not a live booking.
+      <<< SWAP >>> Replace FORM_URL with the real Google Form link. We
+      intentionally do NOT iframe-embed the form (it can't be restyled to
+      match the brand); a clean outbound button is the right call.
       ======================================================================
     -->
-    <section class="section section-become-mentor" id="become-mentor" aria-labelledby="become-mentor-heading">
+    <section class="section section-register" id="register" aria-labelledby="register-heading">
       <div class="wrap">
-        <div class="mentor-inner reveal">
-          <div class="mentor-copy">
-            <p class="section-kicker">Become a mentor</p>
-            <h2 id="become-mentor-heading" class="section-heading">Been there, done it?</h2>
-            <p class="section-intro">
+        <div class="register-grid">
+          <div class="register-main reveal">
+            <p class="section-kicker">Register</p>
+            <h2 id="register-heading" class="section-heading">Ready when you are</h2>
+            <p class="register-body">
+              Interested in getting involved? Register below and we&rsquo;ll be
+              in touch with details on the first Connects as soon as
+              they&rsquo;re confirmed.
+            </p>
+            <!-- <<< SWAP >>> Replace the href with your Google Form URL. -->
+            <a
+              class="btn btn-primary btn-lg"
+              href="https://forms.gle/REPLACE_WITH_REAL_FORM_URL"
+              target="_blank"
+              rel="noopener"
+              data-cta="register"
+            >
+              Register your interest
+            </a>
+            <p class="register-microcopy">
+              This is an expression of interest, with no dates to pick just
+              yet. We&rsquo;ll email you first when the first Connects open
+              for booking.
+            </p>
+          </div>
+
+          <aside class="register-aside reveal" aria-labelledby="mentor-heading">
+            <h3 id="mentor-heading" class="mentor-title">Been there, done it?</h3>
+            <p class="mentor-body">
               Give a few hours to help a local creative business grow.
               Mentoring is volunteer-based and low commitment: you choose
               how much time you give.
             </p>
-          </div>
-          <a class="btn btn-primary" href="#form" data-cta="become-mentor">
-            Register your interest as a mentor
-          </a>
-        </div>
-      </div>
-    </section>
-
-    <!--
-      ======================================================================
-      CALL TO ACTION / FORM
-      ----------------------------------------------------------------------
-      This is an EXPRESSION OF INTEREST, not a live booking — Connect dates
-      are not yet confirmed. Once dates are live, update the copy below and,
-      if you wish, swap the outbound button for a booking link.
-
-      <<< SWAP >>> Replace FORM_URL below with the real Google Form link.
-         We intentionally do NOT iframe-embed the form (it can't be restyled
-         to match the brand). A clean outbound button is the right call.
-      ======================================================================
-    -->
-    <section class="section section-form" id="form" aria-labelledby="form-heading">
-      <div class="wrap">
-        <div class="form-inner">
-          <h2 id="form-heading" class="form-heading reveal">Ready when you are</h2>
-          <p class="form-body reveal">
-            Interested in getting involved? Register below and we&rsquo;ll be
-            in touch with details on the first Connects as soon as
-            they&rsquo;re confirmed.
-          </p>
-          <!-- <<< SWAP >>> Replace the href with your Google Form URL. -->
-          <a
-            class="btn btn-primary btn-lg reveal"
-            href="https://forms.gle/REPLACE_WITH_REAL_FORM_URL"
-            target="_blank"
-            rel="noopener"
-            data-cta="form"
-          >
-            Register your interest
-          </a>
-          <p class="form-microcopy reveal">
-            This is an expression of interest, with no dates to pick just yet.
-            We&rsquo;ll email you first when the first Connects are confirmed.
-          </p>
+            <!-- <<< SWAP >>> point this at a dedicated mentor form when one
+                 exists; for now it shares the expression-of-interest form. -->
+            <a
+              class="btn btn-outline"
+              href="https://forms.gle/REPLACE_WITH_REAL_FORM_URL"
+              target="_blank"
+              rel="noopener"
+              data-cta="become-mentor"
+            >
+              Register as a mentor
+            </a>
+          </aside>
         </div>
       </div>
     </section>
@@ -564,21 +668,47 @@
 
   <!--
     ========================================================================
-    FOOTER — mast-headed band: Studio Zao and the tagline lead, the funder
-    trio (UK Government, SBSA, ESCC, in that order) sits on its own row.
+    FOOTER — three columns: mast + contact + navigation, then the funder
+    row, then the legal line.
     ========================================================================
   -->
   <footer class="site-footer">
-    <div class="wrap footer-inner">
-      <div class="logo-lockup footer-lockup" aria-label="Studio Zao">
+    <div class="wrap footer-top">
+      <div class="footer-brand">
         <a class="logo-link" href="https://www.studiozao.com/" target="_blank" rel="noopener" aria-label="Studio Zao (opens in a new tab)">
           <img src="assets/studiozao-logo.png" alt="Studio Zao" class="logo-img logo-img-zao" width="2355" height="734" />
         </a>
+        <p class="footer-line">
+          Create East Sussex is delivered by Studio Zao in partnership with
+          East Sussex County Council.
+        </p>
       </div>
-      <p class="footer-line">
-        Delivered by Studio Zao, funded by East Sussex County Council.
-      </p>
+
+      <div class="footer-col">
+        <h2 class="footer-heading">Contact</h2>
+        <ul class="footer-list">
+          <li>
+            <a class="footer-contact" href="mailto:keona@studiozao.com">keona@studiozao.com</a>
+          </li>
+          <li class="footer-note">
+            Questions about eligibility, Connects or mentoring? Email us and
+            a person will reply.
+          </li>
+        </ul>
+      </div>
+
+      <nav class="footer-col" aria-label="Footer">
+        <h2 class="footer-heading">Explore</h2>
+        <ul class="footer-list">
+          <li><a href="#what-you-get">What you get</a></li>
+          <li><a href="#connects">Where we meet</a></li>
+          <li><a href="#who-is-it-for">Who it&rsquo;s for</a></li>
+          <li><a href="#about">About our team</a></li>
+          <li><a href="#register">Register your interest</a></li>
+        </ul>
+      </nav>
     </div>
+
     <div class="wrap footer-funders">
       <img src="assets/Logos/Funded by UK Gov - Black.png" alt="Funded by UK Government" class="logo-img logo-img-ukgov" width="1488" height="325" />
       <img src="assets/Logos/SBSAlogo1.png" alt="South Coast Business Support Alliance" class="logo-img logo-img-sbsa" width="1977" height="460" />
@@ -586,14 +716,15 @@
         <img src="assets/Logos/ESCC Logo - Blue.png" alt="East Sussex County Council" class="logo-img logo-img-escc" width="1200" height="867" />
       </a>
     </div>
+
     <div class="wrap footer-bottom">
       <p class="footer-copyright">Copyright &copy; 2026 Studio Zao Innovations Ltd. All rights reserved.</p>
     </div>
   </footer>
 
-  <!-- GSAP + ScrollTrigger, pinned versions via cdnjs. Content is visible by
-       default in CSS; script.js sets the pre-animation state at runtime, so a
-       blocked CDN degrades to a static page rather than a blank one. -->
+  <!-- GSAP + ScrollTrigger via cdnjs. Content is visible by default in CSS;
+       script.js sets the pre-animation state at runtime, so a blocked CDN
+       degrades to a static page rather than a blank one. -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
   <script src="script.js"></script>

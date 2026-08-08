@@ -2,9 +2,7 @@
 
 A single-page static site for Create East Sussex, a free programme for
 creative businesses across East Sussex, delivered by Studio Zao in
-partnership with East Sussex County Council. (Working title: the programme's
-internal community offering is still called "The Collective" throughout the
-copy — this is separate from the overall programme name.)
+partnership with East Sussex County Council.
 
 No frameworks, no build step. Plain HTML, CSS and vanilla JS.
 
@@ -40,20 +38,25 @@ fast (Cmd/Ctrl+F).
    *visual* height (not the same box) via `.logo-img` / `.logo-img-escc` in
    `styles.css` — adjust those two rules if either logo is replaced later.
 
-2a. **Hero background photograph.** `assets/hero/hero-cliffs.jpg` is a
-   client-supplied Seven Sisters shot, resized to 2400px wide (~900KB) for
-   the web. The full-resolution original (`heroeastsussex.jpg`, 5.5MB) is
-   gitignored rather than committed. The hero applies a strong navy
-   gradient over it: the source is a bright daytime image, and the overlay
-   is what keeps the white headline at AA contrast, so don't lighten it
-   without re-checking the type.
+2a. **Hero background video.** `assets/hero/hero-cliffs.mp4` is a
+   client-supplied golden-hour cliff clip, transcoded from the original
+   HEVC `.mov` to H.264 with `avconvert` so Chrome and Firefox can play it
+   (they do not reliably decode HEVC). `assets/hero/hero-poster.jpg` is its
+   first frame, used as the poster and as the still fallback under
+   `prefers-reduced-motion`. Two caveats worth knowing before you swap it:
+   the source is a **vertical** phone video, so on desktop most of the frame
+   is cropped away to a wide band; and it is only ~2.3s, so `script.js`
+   slows playback to 0.6x to make the loop less obvious. The full-res
+   original (`IMG_4627.mov`, 8.1MB) is gitignored. The hero scrim is neutral
+   black and is what holds the white headline at AA contrast, so do not
+   lighten it without re-checking the type.
 
 2. **Discipline images — TEMPORARY, replace before launch.** All four
    photos are generic (but real, credited) stock, not actual programme
-   photography, dropped in so the page doesn't look unfinished. Three
-   cross-fade in the sticky frame beside "Is this you?"; the fourth sits
-   beside the eligibility checklist. Files live in `assets/hero/`; swap
-   each directly (keep the filename) or update the `url()` in `styles.css`.
+   photography, dropped in so the page doesn't look unfinished. They appear
+   together as one angled cluster in the "Is this you?" section. Files live
+   in `assets/hero/`; swap each directly (keep the filename) or update the
+   `url()` in `styles.css`.
    Suggested export: ~800×1000px, under 200KB each.
 
    | Tile | Discipline | File | `styles.css` rule |
@@ -94,7 +97,7 @@ fast (Cmd/Ctrl+F).
      approach it) and reads as generic tender-boilerplate exactly where the
      site is trying not to.
    - **A blunt "pre-start businesses are excluded" line** — the existing
-     closing line ("Not sure if you fit? Come along to a Hack or get in
+     closing line ("Not sure if you fit? Come along to a Connect or get in
      touch") already handles that ambiguity without a discouraging
      exclusion statement up front.
 
@@ -102,8 +105,9 @@ fast (Cmd/Ctrl+F).
    than this checklist), the source figures are in the Lot 3 specification
    document, not repeated here.
 
-6. **Hack dates** — the form section is currently framed as an *expression of
-   interest*, not a live booking, because Hack dates aren't confirmed. Once
+6. **Connect dates** — the register section is currently framed as an
+   *expression of interest*, not a live booking, because Connect dates
+   aren't confirmed. Once
    dates are live, update the copy in the form section (and the small microcopy
    line beneath the button), and swap the outbound button for a booking link if
    you move to live booking. This is flagged in `index.html`.
@@ -114,13 +118,17 @@ Colours are the client's exact locked hex values (defined in `tokens.css`):
 
 | Token | Value | Use |
 | --- | --- | --- |
-| `--color-white` | `#FFFFFF` | Background |
-| `--color-black` | `#000000` | Primary body text |
-| `--color-navy` | `#122D54` | Headings, structural colour |
-| `--color-grey` | `#6B7280` | Large/decorative text only — fails 4.5:1 at small sizes, see below |
-| `--color-light-grey` | `#D1D5DB` | Hairline dividers |
-| `--color-darker-grey` | `#4B5563` | Small body text, captions, footer type |
-| `--color-red` | `#E42544` | CTA buttons + sparing highlights |
+| `--color-white` / `--color-paper` | `#FFFFFF` | Background |
+| `--color-paper-2` | `#F4F4F5` | Faint alternating band (About section) |
+| `--color-ink` | `#111111` | Headings + primary text |
+| `--color-ink-2` | `#3F3F46` | Body copy (10.9:1 on white) |
+| `--color-ink-3` | `#6B6B72` | Small print, captions (5.3:1 on white) |
+| `--color-red` | `#E42544` | CTA buttons + the only colour on the page |
+
+> **The navy is gone.** `#122D54` was dropped from the page in Aug 2026 at
+> client request in favour of near-black and greys, leaving red as the only
+> colour. The ESCC crest artwork is still blue, so the two sit side by side
+> in the header and footer; that is intentional, not an oversight.
 
 > Note: `--color-red-hover` (`#C51D38`) is a slightly darker red derived for
 > button hover so white button text keeps AA contrast. `--color-grey` reads
@@ -132,11 +140,14 @@ Colours are the client's exact locked hex values (defined in `tokens.css`):
 
 ### Typography
 
-- **Display:** Clash Display (bold geometric sans) — Fontshare
-- **Body:** Satoshi (clean geometric sans) — Fontshare
+- **Display:** Archivo (wide, heavy grotesque) — Google Fonts. HEADINGS ONLY.
+- **Body:** Satoshi — Fontshare. Everything that is not an h1/h2/h3, including list items, pull quotes and labels, so non-heading copy stays consistent.
 
 Font history, newest first:
 
+- **Aug 2026 (second pass)** — Clash Display replaced with **Archivo** at
+  its wide, heavy end. Archivo is used for headings ONLY; every other piece
+  of text uses Satoshi, so non-heading copy is consistent throughout.
 - **Aug 2026** — Fraunces + Switzer replaced with Clash Display + Satoshi
   after direct feedback that the serif read too light ("looks a bit drunk",
   "I was thinking more bold"). The JetBrains Mono outlier face was dropped
@@ -155,36 +166,47 @@ Font history, newest first:
 - All animation respects `prefers-reduced-motion` — spatial motion collapses to
   a quick fade and looping animations are disabled.
 
-## Design rationale (July 2026 redesign)
+## Design rationale (Aug 2026 rebuild)
 
-The original build used a generic template shape — a centred-ish hero, a
-3-column icon-card grid for the programme offerings, a circle-and-connector-
-line "3 steps" pattern, and a sticky nav with a blurred glass background. That
-shape is genre-blind: it's the same structure a SaaS product page, a bakery,
-and a council-funded creative programme would all get by default, and it
-reads as generic to exactly the audience (designers, filmmakers, musicians,
-makers) this page is trying to reach.
+The page has been through three shapes. The first was a generic template
+(centred hero, 3-column icon-card grid, glass nav). The second was a quiet
+serif editorial layout. This third one is a bold editorial rebuild, driven
+by direct client feedback that the type read too light and the page felt
+passive.
 
-The redesign keeps every word of copy and the same six sections, but changes
-the structural fingerprint:
+What defines the current shape:
 
-- **Programme section** — the three offerings (Hacks / Mentoring Sprints /
-  The Collective) were an equal 3-card grid; now Hacks leads at full width
-  (it's genuinely the primary entry point) with the other two paired beneath,
-  divided by a hairline rule instead of card borders.
-- **How it works** — the circle-icon + animated connector-line steps became a
-  simpler numbered list with large serif numerals, no JS-driven line-drawing
-  needed.
-- **Section index** — each major section carries a small numbered label
-  (01–05) above its heading, in the same order as the nav links, so the page
-  reads as a considered, ordered whole rather than a stack of disconnected
-  blocks.
-- **Header** — dropped the blurred glass background and the filled pill
-  "Join" button; nav links are now quiet small-caps text, and the CTA is a
-  text+arrow link (the one bold filled button stays reserved for the hero
-  and the final register section, so it isn't diluted by repetition).
-- **Typography** — Space Grotesk/Inter (the most common default LLM pairing)
-  replaced with Fraunces + Switzer.
+- **Hero** — the page's only dark band. "Create" types out character by
+  character behind a caret, then "East Sussex" lands beneath it, over
+  looping cliff footage. The second line is scaled to ~0.55em because it is
+  11 characters against "Create"'s 6; at a shared size it overflows the
+  viewport instead of sitting on the same measure.
+- **Type discipline** — Archivo (wide, heavy) for headings ONLY. Everything
+  else is Satoshi. This is deliberate: an earlier pass let list items and
+  pull quotes use the display face, and the page read inconsistently.
+- **Offer section** — an editorial index of full-width rows with line icons,
+  specifically NOT a 3-card grid.
+- **Map** — a real ONS county boundary rather than a drawn approximation,
+  with the first five Connect towns positioned by their actual coordinates.
+  See "Map data" below.
+- **About** — native `<details>` disclosure panels, so the Studio Zao detail
+  is available without dominating the page, and works with JavaScript off.
+- **Section order** — the mentoring detail and the mentor-recruitment ask
+  both sit at the end, so the participant journey runs uninterrupted and
+  both closing asks land together.
+
+## Map data
+
+The county outline in the "Where we meet" section is **real**, not drawn:
+it comes from the ONS "Counties and Unitary Authorities (December 2023)
+Boundaries UK BUC" (ultra-generalised) dataset, filtered to East Sussex,
+projected with a cosine-corrected equirectangular transform into the SVG
+viewBox. The five town pins are placed from actual lat/lon and were checked
+with a point-in-polygon test. If you add a town, project its coordinates the
+same way rather than eyeballing the position.
+
+Note this is administrative East Sussex, which excludes Brighton & Hove
+(a separate unitary authority).
 
 `tokens.css` and `.hallmark/log.json` exist so this reasoning and the actual
 token values are machine-readable if the page is redesigned again later.

@@ -1,49 +1,47 @@
 /* Hallmark · design tokens for Create East Sussex
    ----------------------------------------------------------------------------
-   Colour values are the client's LOCKED brand hex (explicit brief: "use
-   exactly these, no substitutions") — kept as literal hex rather than
-   converted to OKLCH, which is a deliberate deviation from the usual
-   Hallmark catalog-theme convention. Everything else follows the standard
-   token shape so this file is portable to other tooling.
+   Aug 2026 (redesign-v2): the navy was dropped at client request. The palette
+   is now near-black + greys on white, with the brand red as the only colour.
+   Red and the greys are the client's original locked values; the navy they
+   replaced (#122D54) is gone from the page, though the ESCC crest artwork
+   itself is still blue, so the two sit side by side in the header and footer.
 
-   Aug 2026 redesign: type stack swapped from Fraunces/Switzer to Clash
-   Display + Satoshi after direct feedback that the serif read too thin
-   ("looks a bit drunk", "I was thinking more bold").
+   Type: Archivo (bold, wide grotesque) for headings only, Satoshi for
+   everything else. Third pairing on this project: Space Grotesk/Inter was
+   generic, Fraunces/Switzer read too light, Clash Display missed as well.
    ============================================================================ */
 
 :root {
-  /* Colour — brand-locked */
+  /* Colour */
   --color-white:        #FFFFFF;
-  --color-black:        #000000;
-  --color-navy:         #122D54;
-  --color-grey:         #6B7280;
-  --color-light-grey:   #D1D5DB;
-  --color-darker-grey:  #4B5563;
+  --color-paper:        #FFFFFF;
+  --color-paper-2:      #F4F4F5;   /* faint band for alternating sections */
+
+  --color-ink:          #111111;   /* headings + primary text */
+  --color-ink-2:        #3F3F46;   /* body copy — 10.9:1 on white */
+  --color-ink-3:        #6B6B72;   /* small print, captions — 5.3:1 on white */
+  --color-line:         rgba(17, 17, 17, 0.14);
+  --color-line-strong:  rgba(17, 17, 17, 0.28);
+
   --color-red:          #E42544;
   --color-red-hover:    #C51D38;
 
-  /* Derived surfaces — built from the locked palette, not new brand colours */
-  --color-paper:        #FFFFFF;
-  --color-paper-2:      #F5F6F8;   /* faint off-white band */
-  --color-ink-dim:      rgba(18, 45, 84, 0.62);
-  --color-hairline:     rgba(18, 45, 84, 0.14);
   --color-on-dark:      #FFFFFF;
-  --color-on-dark-dim:  rgba(255, 255, 255, 0.74);
+  --color-on-dark-dim:  rgba(255, 255, 255, 0.72);
 
   /* Typography */
-  --font-display: "Clash Display", ui-sans-serif, system-ui, sans-serif;
+  --font-display: "Archivo", ui-sans-serif, system-ui, sans-serif;
   --font-body:    "Satoshi", ui-sans-serif, system-ui, -apple-system, sans-serif;
 
-  --text-hero:    clamp(3.25rem, 12.5vw, 11rem);
-  --text-h2:      clamp(2.25rem, 5.5vw, 4.5rem);
-  --text-h3:      clamp(1.375rem, 2vw, 1.875rem);
-  --text-lead:    clamp(1.125rem, 1.5vw, 1.4rem);
+  --text-hero:    clamp(3rem, 11.5vw, 10rem);
+  --text-h2:      clamp(2rem, 4.8vw, 3.75rem);
+  --text-h3:      clamp(1.25rem, 1.8vw, 1.625rem);
+  --text-lead:    clamp(1.0625rem, 1.35vw, 1.3125rem);
   --text-body:    1.0625rem;
   --text-small:   0.9375rem;
   --text-label:   0.75rem;
-  --text-num:     clamp(2.5rem, 5vw, 4rem);
 
-  /* Spacing — 4pt scale, used with deliberate variation, not uniformly */
+  /* Spacing — 4pt scale */
   --space-3xs: 0.25rem;
   --space-2xs: 0.5rem;
   --space-xs:  0.75rem;
@@ -52,7 +50,7 @@
   --space-lg:  2.5rem;
   --space-xl:  4rem;
   --space-2xl: 6rem;
-  --space-3xl: 9rem;
+  --space-3xl: 8.5rem;
 
   /* Layout */
   --wrap-max:  1280px;
@@ -62,21 +60,21 @@
 
   /* Motion */
   --dur-fast:  200ms;
-  --dur-mid:   500ms;
+  --dur-mid:   450ms;
   --dur-slow:  800ms;
   --ease-out:  cubic-bezier(0.16, 1, 0.3, 1);
   --ease-in-out: cubic-bezier(0.65, 0, 0.35, 1);
 
-  /* Radii — near-square, per the bold editorial voice */
+  /* Radii */
   --radius-pill: 999px;
   --radius-sm:   2px;
 
-  /* Z-index — named scale, never freestyled */
+  /* Z-index */
   --z-base:    1;
   --z-raised:  10;
   --z-sticky:  200;
 }
 
 @media (min-width: 1600px) {
-  :root { --wrap-max: 1480px; }
+  :root { --wrap-max: 1440px; }
 }

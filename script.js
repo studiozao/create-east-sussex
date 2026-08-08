@@ -2,32 +2,65 @@
    Create East Sussex — script.js
    ----------------------------------------------------------------------------
    GSAP + ScrollTrigger. Handles:
-     1. Hero type motion ("Create" masks up, photo fades in, "East Sussex" lands)
-     2. Hero photograph parallax (scrubbed to scroll)
+     1. Hero type motion ("Create" types out, then "East Sussex" lands)
+     2. Hero video pacing + parallax
      3. Scroll reveals across the page (ScrollTrigger.batch)
-     4. Sticky frame swapping beside the qualifying copy
-     5. Map pins paired with the Connects list (hover, focus, and on scroll)
-     6. Mobile nav toggle
-     7. CTA click analytics event (separate from page view)
+     4. Map pins paired with the Connects list
+     5. Mobile nav toggle
+     6. CTA click analytics event (separate from page view)
 
    Motion is gated behind prefers-reduced-motion via gsap.matchMedia(). The
    CSS renders everything visible by default; the pre-animation state is set
    here at runtime, so a blocked GSAP CDN degrades to a static page rather
    than a blank one.
+
+   The disclosure panels in "About our team" are native <details> elements
+   and deliberately have no JavaScript at all.
    ============================================================================ */
 
 (function () {
   "use strict";
 
   var hasGsap = typeof window.gsap !== "undefined";
+  var prefersReduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 
   /* =========================================================================
-     Motion
+     1 · Hero video — the source clip is only ~2.3s, so it loops often. Slowing
+     it down stretches each pass and makes the loop point far less obvious.
+     ========================================================================= */
+  (function initHeroVideo() {
+    var video = document.querySelector(".hero-video");
+    if (!video) return;
+
+    if (prefersReduced) {
+      video.pause();
+      return;
+    }
+
+    video.playbackRate = 0.6;
+
+    // Some browsers reject autoplay until the metadata is in; retry once.
+    var play = function () {
+      var attempt = video.play();
+      if (attempt && typeof attempt.catch === "function") {
+        attempt.catch(function () {
+          /* Autoplay blocked — the poster frame stands in. Nothing to do. */
+        });
+      }
+    };
+    if (video.readyState >= 2) play();
+    else video.addEventListener("loadeddata", play, { once: true });
+  })();
+
+  /* =========================================================================
+     2 · Motion
      ========================================================================= */
   if (hasGsap) {
     gsap.registerPlugin(ScrollTrigger);
 
-    gsap.matchMedia().add(
+    var mm = gsap.matchMedia();
+
+    mm.add(
       {
         reduced: "(prefers-reduced-motion: reduce)",
         full: "(prefers-reduced-motion: no-preference)",
@@ -39,66 +72,86 @@
         }
 
         /* ---------------------------------------------------------------
-           1 · Hero type motion
-           The two lines reveal in sequence, with the photograph fading in
-           between them so "East Sussex" lands on the image, not the flat
-           navy it started on.
+           Hero type motion.
+           "Create" is clipped to an animating width with a caret on its
+           trailing edge, stepped one character at a time so it reads as
+           typing rather than a wipe. Fonts must be ready before the width
+           is measured, or the target width is wrong.
            --------------------------------------------------------------- */
-        var createLetters = gsap.utils.toArray(".hero-line-create .mask-in");
-        var placeWords = gsap.utils.toArray(".hero-line-place .mask-in");
+        var typeEl = document.querySelector("[data-type]");
+        var placeEl = document.querySelector(".hero-line-place");
+        var heroTl = null;
 
-        gsap.set([createLetters, placeWords], { yPercent: 115 });
-        gsap.set(".hero-bg-img", { opacity: 0, scale: 1.12 });
-        gsap.set(".hero-shade", { opacity: 0 });
-        gsap.set([".hero-tagline", ".hero-sub", ".hero-actions"], {
-          opacity: 0,
-          y: 18,
-        });
+        function buildHero() {
+          var chars = typeEl ? typeEl.textContent.trim().length : 0;
+          var fullWidth = typeEl ? typeEl.getBoundingClientRect().width : 0;
 
-        var heroTl = gsap.timeline({ defaults: { ease: "power3.out" } });
+          if (typeEl) gsap.set(typeEl, { width: 0 });
+          if (placeEl) gsap.set(placeEl, { opacity: 0, y: 24 });
+          gsap.set([".hero-tagline", ".hero-sub", ".hero-actions"], {
+            opacity: 0,
+            y: 18,
+          });
 
-        heroTl
-          .to(".hero-tagline", { opacity: 1, y: 0, duration: 0.6 })
-          .to(
-            createLetters,
-            { yPercent: 0, duration: 0.9, stagger: 0.055 },
-            "-=0.3"
-          )
-          // Photograph arrives as the first word finishes settling.
-          .to(
-            ".hero-bg-img",
-            { opacity: 1, scale: 1, duration: 1.6, ease: "power2.out" },
-            "-=0.35"
-          )
-          .to(".hero-shade", { opacity: 1, duration: 1.2 }, "<")
-          .to(
-            placeWords,
-            { yPercent: 0, duration: 0.9, stagger: 0.08 },
-            "<0.15"
-          )
-          .to(
-            [".hero-sub", ".hero-actions"],
-            { opacity: 1, y: 0, duration: 0.7, stagger: 0.08 },
-            "-=0.5"
-          );
+          heroTl = gsap.timeline({ defaults: { ease: "power3.out" } });
 
-        /* Failsafe. The hero's pre-animation state is set in JS, so if the
-           timeline never advances the hero would sit invisible. That can
-           happen when the tab loads hidden (rAF is throttled, so GSAP's
-           ticker never ticks). GSAP resumes normally once the tab is
-           focused, so only step in when the page IS visible and the
-           timeline still hasn't moved. */
-        window.setTimeout(function () {
-          if (!document.hidden && heroTl.progress() === 0) {
-            heroTl.progress(1);
-          }
-        }, 3000);
+          heroTl
+            .to(".hero-tagline", { opacity: 1, y: 0, duration: 0.5 })
+            .add(function () {
+              if (typeEl) typeEl.classList.add("is-typing");
+            })
+            .to(
+              typeEl,
+              {
+                width: fullWidth,
+                duration: Math.max(0.5, chars * 0.13),
+                ease: "steps(" + Math.max(1, chars) + ")",
+              },
+              "<"
+            )
+            .add(function () {
+              // Let the caret sit and blink for a beat before the second line.
+              if (typeEl) typeEl.classList.add("is-blinking");
+            })
+            .to({}, { duration: 0.45 })
+            .add(function () {
+              if (typeEl) {
+                typeEl.classList.remove("is-typing", "is-blinking");
+                // Release the fixed width so the line reflows on resize.
+                typeEl.style.width = "auto";
+              }
+            })
+            .to(placeEl, { opacity: 1, y: 0, duration: 0.7 })
+            .to(
+              [".hero-sub", ".hero-actions"],
+              { opacity: 1, y: 0, duration: 0.6, stagger: 0.08 },
+              "-=0.35"
+            );
+
+          /* Failsafe. The hero's pre-animation state is set in JS, so if the
+             timeline never advances the hero would sit invisible. That can
+             happen when the tab loads hidden (rAF is throttled, so GSAP's
+             ticker never ticks). GSAP resumes normally once the tab is
+             focused, so only step in when the page IS visible and the
+             timeline still hasn't moved. */
+          window.setTimeout(function () {
+            if (!document.hidden && heroTl && heroTl.progress() === 0) {
+              heroTl.progress(1);
+            }
+          }, 3000);
+        }
+
+        if (document.fonts && document.fonts.ready) {
+          document.fonts.ready.then(buildHero);
+        } else {
+          buildHero();
+        }
 
         /* ---------------------------------------------------------------
-           2 · Hero parallax — the photograph drifts slower than the page
+           Hero video parallax — drifts slower than the page scrolls
            --------------------------------------------------------------- */
-        gsap.to(".hero-bg-img", {
-          yPercent: 12,
+        gsap.to(".hero-video", {
+          yPercent: 10,
           ease: "none",
           scrollTrigger: {
             trigger: ".hero",
@@ -109,14 +162,12 @@
         });
 
         /* ---------------------------------------------------------------
-           3 · Scroll reveals — batched so items entering together animate
+           Scroll reveals — batched so items entering together animate
            together. Hero elements are excluded; the timeline owns those.
            --------------------------------------------------------------- */
-        var revealEls = gsap.utils
-          .toArray(".reveal")
-          .filter(function (el) {
-            return !el.closest(".hero");
-          });
+        var revealEls = gsap.utils.toArray(".reveal").filter(function (el) {
+          return !el.closest(".hero");
+        });
 
         gsap.set(revealEls, { opacity: 0, y: 24 });
 
@@ -135,76 +186,14 @@
         });
 
         return function cleanup() {
-          heroTl.kill();
+          if (heroTl) heroTl.kill();
         };
       }
     );
   }
 
   /* =========================================================================
-     4 · Sticky frames — each qualifying line swaps the photo beside it.
-     Driven by ScrollTrigger when available, and by a plain IntersectionObserver
-     fallback when it isn't, so the frames still track without GSAP.
-     ========================================================================= */
-  (function initFrames() {
-    var driver = document.querySelector("[data-frames-driver]");
-    var frameWrap = document.querySelector("[data-frames]");
-    if (!driver || !frameWrap) return;
-
-    var items = Array.prototype.slice.call(
-      driver.querySelectorAll("[data-frame]")
-    );
-    var frames = Array.prototype.slice.call(
-      frameWrap.querySelectorAll(".frame-img")
-    );
-    if (!items.length || !frames.length) return;
-
-    function activate(index) {
-      items.forEach(function (item, i) {
-        item.classList.toggle("is-active", i === index);
-      });
-      frames.forEach(function (frame, i) {
-        frame.classList.toggle("is-active", i === index);
-      });
-    }
-
-    activate(0);
-
-    if (hasGsap) {
-      items.forEach(function (item, i) {
-        ScrollTrigger.create({
-          trigger: item,
-          start: "top 65%",
-          end: "bottom 45%",
-          onEnter: function () {
-            activate(i);
-          },
-          onEnterBack: function () {
-            activate(i);
-          },
-        });
-      });
-      return;
-    }
-
-    if (!("IntersectionObserver" in window)) return;
-    var observer = new IntersectionObserver(
-      function (entries) {
-        entries.forEach(function (entry) {
-          if (entry.isIntersecting) {
-            activate(items.indexOf(entry.target));
-          }
-        });
-      },
-      { rootMargin: "-35% 0px -45% 0px" }
-    );
-    items.forEach(function (item) {
-      observer.observe(item);
-    });
-  })();
-
-  /* =========================================================================
-     5 · Map pins paired with the Connects list
+     3 · Map pins paired with the Connects list
      Hovering or focusing either half highlights both. Pins are keyboard
      reachable (tabindex + role=button in the markup), so focus counts as a
      first-class interaction here, not a hover afterthought.
@@ -216,36 +205,29 @@
     );
     if (!pins.length) return;
 
+    var all = pins.concat(rows);
+
     function setActive(place, on) {
-      pins.concat(rows).forEach(function (el) {
+      all.forEach(function (el) {
         if (el.getAttribute("data-place") === place) {
           el.classList.toggle("is-active", on);
         }
       });
     }
 
-    pins.concat(rows).forEach(function (el) {
+    all.forEach(function (el) {
       var place = el.getAttribute("data-place");
       if (!place) return;
 
-      el.addEventListener("mouseenter", function () {
-        setActive(place, true);
-      });
-      el.addEventListener("mouseleave", function () {
-        setActive(place, false);
-      });
-      el.addEventListener("focus", function () {
-        setActive(place, true);
-      });
-      el.addEventListener("blur", function () {
-        setActive(place, false);
-      });
+      el.addEventListener("mouseenter", function () { setActive(place, true); });
+      el.addEventListener("mouseleave", function () { setActive(place, false); });
+      el.addEventListener("focus", function () { setActive(place, true); });
+      el.addEventListener("blur", function () { setActive(place, false); });
     });
 
     // On first scroll into view, light each pin briefly in sequence so the
     // map reads as interactive rather than decorative.
-    if (!hasGsap) return;
-    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+    if (!hasGsap || prefersReduced) return;
 
     ScrollTrigger.create({
       trigger: ".map-figure",
@@ -256,17 +238,15 @@
           var place = pin.getAttribute("data-place");
           window.setTimeout(function () {
             setActive(place, true);
-            window.setTimeout(function () {
-              setActive(place, false);
-            }, 900);
-          }, i * 260);
+            window.setTimeout(function () { setActive(place, false); }, 800);
+          }, i * 220);
         });
       },
     });
   })();
 
   /* =========================================================================
-     6 · Mobile nav toggle
+     4 · Mobile nav toggle
      ========================================================================= */
   var navToggle = document.querySelector(".nav-toggle");
   var navLinks = document.getElementById("nav-links");
@@ -277,7 +257,6 @@
       navToggle.setAttribute("aria-expanded", isOpen ? "true" : "false");
     });
 
-    // Close the menu after a link is tapped (mobile)
     navLinks.querySelectorAll("a").forEach(function (link) {
       link.addEventListener("click", function () {
         navLinks.classList.remove("is-open");
@@ -287,7 +266,7 @@
   }
 
   /* =========================================================================
-     7 · CTA click analytics event
+     5 · CTA click analytics event
      Fires a custom event on every CTA click, SEPARATE from the page view.
      Works with Plausible OR Google Analytics 4 — whichever you enabled in
      the <head> of index.html. Safe no-op if neither is present.
