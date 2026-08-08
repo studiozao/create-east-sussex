@@ -476,6 +476,13 @@ summary:focus-visible,
   color: var(--color-ink-2);
   max-width: 62ch;
 }
+.hook-close {
+  margin-top: var(--space-lg);
+  font-family: var(--font-body);
+  font-weight: 700;
+  font-size: clamp(1.125rem, 1.6vw, 1.375rem);
+  color: var(--color-ink);
+}
 
 /* ---------------------------------------------------------------------------
    7 · Cards — three panels that flip into view on scroll. The flip is a
@@ -682,6 +689,11 @@ summary:focus-visible,
   color: var(--color-white);
 }
 .check-icon svg { width: 14px; height: 14px; }
+/* The tick draws itself in via script.js (stroke-dashoffset, measured from
+   the path's real length with getTotalLength()). Drawn at full length by
+   default, so a page with JS disabled or the GSAP CDN blocked still shows a
+   complete tick rather than an empty circle. */
+.check-tick { stroke-dashoffset: 0; }
 .eligibility-close {
   margin-top: var(--space-xl);
   font-size: var(--text-lead);
@@ -810,6 +822,11 @@ summary:focus-visible,
   line-height: 1.45;
   color: var(--color-white);
   max-width: 38ch;
+}
+/* On laptop and up there's a full line of width going unused inside the
+   dark band — let the text run the wrap's width instead of stopping short. */
+@media (min-width: 900px) {
+  .how-band-text { max-width: none; }
 }
 
 /* ---------------------------------------------------------------------------

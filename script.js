@@ -369,6 +369,41 @@
         }
 
         /* ---------------------------------------------------------------
+           Eligibility ticks — each draws itself in, then the red circle
+           behind it pops slightly, as its row scrolls into view. Length is
+           read per-path via getTotalLength(), so it isn't hard-coded and
+           stays correct if the tick's own d= ever changes.
+           --------------------------------------------------------------- */
+        var checkItems = gsap.utils.toArray(".check-item");
+        if (checkItems.length) {
+          checkItems.forEach(function (item) {
+            var tick = item.querySelector(".check-tick");
+            var badge = item.querySelector(".check-icon");
+            if (!tick || typeof tick.getTotalLength !== "function") return;
+
+            var len = tick.getTotalLength();
+            gsap.set(tick, { strokeDasharray: len, strokeDashoffset: len });
+            gsap.set(badge, { scale: 0.7, transformOrigin: "center center" });
+
+            ScrollTrigger.create({
+              trigger: item,
+              start: "top 85%",
+              once: true,
+              onEnter: function () {
+                gsap
+                  .timeline()
+                  .to(badge, { scale: 1, duration: 0.3, ease: "back.out(2.4)" })
+                  .to(
+                    tick,
+                    { strokeDashoffset: 0, duration: 0.45, ease: "power2.out" },
+                    "-=0.15"
+                  );
+              },
+            });
+          });
+        }
+
+        /* ---------------------------------------------------------------
            Scroll reveals — batched so items entering together animate
            together. Hero elements are excluded; the timeline owns those.
            --------------------------------------------------------------- */
