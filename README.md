@@ -61,9 +61,8 @@ fast (Cmd/Ctrl+F).
 
 2. **Discipline images — TEMPORARY, replace before launch.** All four
    photos are generic (but real, credited) stock, not actual programme
-   photography, dropped in so the page doesn't look unfinished. They appear
-   together as one angled cluster in the "Is this you?" section, staggering
-   in as it scrolls into view. Files live
+   photography, dropped in so the page doesn't look unfinished. They appear together as one angled cluster in "Who it's for" (eligibility),
+   staggering in as it scrolls into view. Files live
    in `assets/hero/`; swap each directly (keep the filename) or update the
    `url()` in `styles.css`.
    Suggested export: ~800×1000px, under 200KB each.

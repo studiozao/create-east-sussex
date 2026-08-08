@@ -160,40 +160,22 @@
 
     <!--
       ======================================================================
-      HOOK — short. Three lines to place yourself, and the four discipline
-      photographs together as one angled cluster. The formal criteria live
-      further down in "Who it's for".
+      HOOK — deliberately short and full width, on its own tinted band so it
+      reads as a beat between the hero and the offer rather than a section.
+      The discipline photographs moved down to "Who it's for".
       ======================================================================
     -->
     <section class="section section-hook" id="is-this-you" aria-labelledby="hook-heading">
-      <div class="wrap split split-text-first">
-        <div class="split-copy">
-          <header class="section-head reveal">
-            <p class="section-kicker">Is this you?</p>
-            <h2 id="hook-heading" class="section-heading">You already make the thing</h2>
-          </header>
-
-          <p class="hook-copy reveal">
-            You make, design, write, film, craft or build things for a
-            living. You&rsquo;re freelance or running a small business
-            somewhere in East Sussex. You want to grow, and you could use
-            someone to think it through with. If that&rsquo;s roughly you,
-            this is for you.
-          </p>
-        </div>
-
-        <!-- Four photographs as one angled cluster. Decorative.
-             The reveal sits on the WRAPPER, not on .cluster: GSAP animates
-             `transform` on revealed elements, which would overwrite the
-             cluster's CSS rotation. -->
-        <div class="split-media">
-          <div class="cluster" aria-hidden="true">
-            <div class="cluster-tile img-hands"></div>
-            <div class="cluster-tile img-art"></div>
-            <div class="cluster-tile img-textile"></div>
-            <div class="cluster-tile img-photography"></div>
-          </div>
-        </div>
+      <div class="wrap hook-inner">
+        <p class="section-kicker">Is this you?</p>
+        <h2 id="hook-heading" class="section-heading hook-heading reveal">
+          You already make the thing. We help you build the business round it.
+        </h2>
+        <p class="hook-copy reveal">
+          Freelance or running a small creative business somewhere in East
+          Sussex, doing good work and ready to grow. If that is roughly you,
+          you are in the right place.
+        </p>
       </div>
     </section>
 
@@ -210,8 +192,9 @@
           <p class="section-kicker">What you get</p>
           <h2 id="programme-heading" class="section-heading">Three ways in, all free</h2>
           <p class="section-intro">
-            Practical sessions to start, a network of people who get it,
-            and free 1:1 mentoring once you know what you need help with.
+            Free 1:1 mentoring is the heart of it, and you can go straight
+            there. Practical sessions and a network of people who get it sit
+            alongside, for whenever you want them.
           </p>
         </header>
 
@@ -267,11 +250,12 @@
                 </svg>
               </span>
               <h3 class="card-title">Mentoring</h3>
-              <p class="card-meta">By invitation &middot; up to 6 hours, one-to-one</p>
+              <p class="card-meta">Up to 6 hours &middot; one-to-one &middot; free</p>
               <p class="card-body">
-                Once you know what you need help with, get matched with a
-                mentor who has built a creative business themselves. More on
-                how that works further down.
+                The heart of the programme. Get matched with a mentor who has
+                built a creative business themselves, and work on whatever
+                your business actually needs. Register and we&rsquo;ll take it
+                from there.
               </p>
             </div>
           </article>
@@ -404,8 +388,8 @@
       ======================================================================
     -->
     <section class="section section-eligibility" id="who-is-it-for" aria-labelledby="eligibility-heading">
-      <div class="wrap">
-        <div class="eligibility-inner">
+      <div class="wrap split split-text-first">
+        <div class="split-copy">
           <header class="section-head reveal">
             <p class="section-kicker">Who it&rsquo;s for</p>
             <h2 id="eligibility-heading" class="section-heading">Check you&rsquo;re eligible</h2>
@@ -443,9 +427,20 @@
           </ul>
 
           <p class="eligibility-close reveal">
-            Not sure if you fit? Come along to a Connect or get in touch,
-            and we&rsquo;ll help you work it out.
+            Not sure if you fit? Get in touch and we&rsquo;ll help you work
+            it out.
           </p>
+        </div>
+
+        <!-- The four discipline photographs, angled as one cluster. They
+             stagger in as this section scrolls past. Decorative. -->
+        <div class="split-media">
+          <div class="cluster" aria-hidden="true">
+            <div class="cluster-tile img-hands"></div>
+            <div class="cluster-tile img-art"></div>
+            <div class="cluster-tile img-textile"></div>
+            <div class="cluster-tile img-photography"></div>
+          </div>
         </div>
       </div>
     </section>
@@ -572,10 +567,9 @@
           <p class="section-kicker">How it works</p>
           <h2 id="how-heading" class="section-heading">Your route to one-to-one mentoring</h2>
           <p class="section-intro">
-            Free 1:1 mentoring is how you get here. Getting started is
-            simple. Come to a Connect, free and open to anyone, meet people,
-            and see whether going deeper is right for you. No pressure
-            either way.
+            Getting started is simple, and it is the same short route
+            whether you have been to a Connect or you are coming to us cold.
+            Tell us you are interested and we will pick it up from there.
           </p>
         </header>
 
@@ -585,11 +579,10 @@
         <div class="process" role="list" aria-label="What happens after a Connect">
           <div class="process-step reveal" role="listitem">
             <span class="process-num" aria-hidden="true">1</span>
-            <h3 class="process-title">Get invited to mentoring</h3>
+            <h3 class="process-title">Tell us you&rsquo;re interested</h3>
             <p class="process-body">
-              Once you&rsquo;ve been to a Connect, or simply told us
-              you&rsquo;re interested, you&rsquo;re invited to start
-              mentoring.
+              Register in a couple of minutes. Meeting us at a Connect first
+              is welcome, but it is not a step you have to take.
             </p>
           </div>
           <div class="process-step reveal" role="listitem">
@@ -622,21 +615,27 @@
         </div>
 
         <p class="how-caveat reveal">
-          Places on the mentoring Sprint are limited and matched to fit, so
-          we can&rsquo;t guarantee mentoring for everyone who applies.
-          Everyone&rsquo;s welcome at the Connects and the wider network
-          regardless.
+          Mentoring places are limited and matched to fit, so we
+          can&rsquo;t promise one to everyone who applies. The Connects and
+          the wider network stay open to you either way.
         </p>
       </div>
 
+      <!-- The programme's actual target, stated plainly. -->
       <div class="how-band">
-        <div class="wrap">
-          <p class="how-band-text reveal">
-            And through all of it, you&rsquo;re part of something bigger: a
-            community of creative people across East Sussex, at the
-            Connects, in the mentoring, and beyond. You&rsquo;re not doing
-            this on your own.
-          </p>
+        <div class="wrap goal">
+          <p class="goal-num reveal" aria-hidden="true">35</p>
+          <div class="goal-copy">
+            <p class="goal-lead reveal">
+              creative businesses mentored across East Sussex.
+            </p>
+            <p class="goal-sub reveal">
+              That is what this programme is setting out to do, and one of
+              those places could be yours. You will not be doing it on your
+              own either: every business we mentor joins a wider network of
+              creative people across the county.
+            </p>
+          </div>
         </div>
       </div>
     </section>
@@ -765,6 +764,9 @@
        degrades to a static page rather than a blank one. -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+  <!-- Lenis smooths the scroll itself. Entirely optional: script.js checks for
+       it, so if this fails to load the page falls back to native scrolling. -->
+  <script src="https://cdn.jsdelivr.net/npm/lenis@1.1.18/dist/lenis.min.js"></script>
   <script src="script.js"></script>
 </body>
 </html>

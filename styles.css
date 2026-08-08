@@ -364,7 +364,16 @@ summary:focus-visible,
    reads as a single scroll rather than a stack of differently-padded blocks
    --------------------------------------------------------------------------- */
 .section { position: relative; padding-block: var(--space-3xl); }
-.section-hook   { padding-block: var(--space-2xl); }
+.section-hook {
+  padding-block: var(--space-2xl);
+  background: var(--color-paper-2);
+  border-block: 1px solid var(--color-line);
+}
+.hook-inner { max-width: 64rem; }
+.hook-heading {
+  margin-top: var(--space-2xs);
+  font-size: clamp(1.75rem, 3.6vw, 3rem);
+}
 .section-about  { background: var(--color-paper-2); }
 .section-register { padding-block: var(--space-2xl) var(--space-3xl); }
 
@@ -406,8 +415,12 @@ summary:focus-visible,
   margin-top: var(--space-md);
   font-size: var(--text-lead);
   color: var(--color-ink-2);
-  max-width: 46ch;
+  /* wide enough to use the line on a laptop, still inside a comfortable
+     reading measure */
+  max-width: 64ch;
 }
+/* ...but inside a split column there is only half the width to play with */
+.split-copy .section-intro { max-width: 42ch; }
 
 /* ---------------------------------------------------------------------------
    6 · Split layout — copy beside media. DOM order matches visual order in
@@ -450,10 +463,11 @@ summary:focus-visible,
 
 /* --- Hook copy: one short paragraph, no rules --------------------------- */
 .hook-copy {
-  font-size: clamp(1.125rem, 1.6vw, 1.375rem);
-  line-height: 1.55;
+  margin-top: var(--space-md);
+  font-size: clamp(1.0625rem, 1.4vw, 1.25rem);
+  line-height: 1.6;
   color: var(--color-ink-2);
-  max-width: 40ch;
+  max-width: 62ch;
 }
 
 /* ---------------------------------------------------------------------------
@@ -465,32 +479,75 @@ summary:focus-visible,
 .cards {
   display: grid;
   grid-template-columns: repeat(3, minmax(0, 1fr));
-  gap: clamp(1rem, 1.8vw, 1.75rem);
+  gap: clamp(1rem, 1.6vw, 1.5rem);
   perspective: 1600px;
 }
 .card { min-width: 0; }
+
 .card-inner {
+  position: relative;
   height: 100%;
   display: flex;
   flex-direction: column;
   align-items: flex-start;
-  gap: var(--space-2xs);
-  padding: clamp(1.75rem, 2.4vw, 2.5rem);
-  background: var(--color-paper-2);
+  padding: clamp(1.75rem, 2.4vw, 2.75rem);
+  background: var(--color-white);
   border: 1px solid var(--color-line);
+  overflow: hidden;
   transform-origin: center center;
   will-change: transform;
+  transition: border-color var(--dur-fast) var(--ease-out),
+              box-shadow var(--dur-mid) var(--ease-out),
+              transform var(--dur-mid) var(--ease-out);
 }
+/* Red rule across the top edge, drawn in rather than bordered on, so it can
+   grow on hover without shifting anything. */
+.card-inner::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 4px;
+  background: var(--color-red);
+  transform: scaleX(0.18);
+  transform-origin: left center;
+  transition: transform var(--dur-slow) var(--ease-out);
+}
+.card:hover .card-inner {
+  border-color: var(--color-line-strong);
+  box-shadow: 0 18px 40px -24px rgba(17, 17, 17, 0.4);
+  transform: translateY(-4px);
+}
+.card:hover .card-inner::before { transform: scaleX(1); }
+
 .card-icon {
   display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 3.25rem;
+  height: 3.25rem;
+  margin-bottom: var(--space-md);
+  border-radius: 50%;
+  background: rgba(228, 37, 68, 0.09);
   color: var(--color-red);
-  margin-bottom: var(--space-sm);
 }
-.card-icon svg { width: 32px; height: 32px; }
-.card-title { font-size: var(--text-h3); }
-.card-meta { font-size: var(--text-small); color: var(--color-ink-3); }
+.card-icon svg { width: 26px; height: 26px; }
+
+.card-title {
+  font-size: clamp(1.375rem, 1.9vw, 1.75rem);
+  margin-bottom: var(--space-2xs);
+}
+.card-meta {
+  font-size: var(--text-small);
+  font-weight: 700;
+  letter-spacing: 0.02em;
+  color: var(--color-red);
+}
 .card-body {
-  margin-top: var(--space-2xs);
+  margin-top: var(--space-md);
+  padding-top: var(--space-md);
+  border-top: 1px solid var(--color-line);
   color: var(--color-ink-2);
 }
 
@@ -587,13 +644,12 @@ summary:focus-visible,
   margin-top: var(--space-lg);
   font-size: var(--text-small);
   color: var(--color-ink-3);
-  max-width: 46ch;
+  max-width: 54ch;
 }
 
 /* ---------------------------------------------------------------------------
    9 · Eligibility checklist
    --------------------------------------------------------------------------- */
-.eligibility-inner { max-width: 52rem; }
 .checklist { display: flex; flex-direction: column; gap: var(--space-lg); }
 .check-item {
   display: flex;
@@ -619,7 +675,7 @@ summary:focus-visible,
   margin-top: var(--space-xl);
   font-size: var(--text-lead);
   color: var(--color-ink);
-  max-width: 44ch;
+  max-width: 46ch;
 }
 
 /* ---------------------------------------------------------------------------
@@ -736,13 +792,36 @@ summary:focus-visible,
   margin-top: var(--space-2xl);
   padding-block: var(--space-xl);
 }
-.how-band-text {
-  /* body face — this is a paragraph, not a heading */
-  font-size: clamp(1.1875rem, 2vw, 1.625rem);
-  font-weight: 500;
-  line-height: 1.45;
+/* The programme's target, given the weight it deserves. The numeral is the
+   one place outside a heading where the display face is allowed, because it
+   is functioning as a display element, not as running text. */
+.goal {
+  display: flex;
+  align-items: baseline;
+  gap: clamp(1.5rem, 3.5vw, 3.5rem);
+  flex-wrap: wrap;
+}
+.goal-num {
+  font-family: var(--font-display);
+  font-variation-settings: "wdth" 118;
+  font-weight: 900;
+  font-size: clamp(4.5rem, 11vw, 9rem);
+  line-height: 0.8;
+  letter-spacing: -0.04em;
+  color: var(--color-red);
+}
+.goal-copy { flex: 1 1 24rem; min-width: 0; }
+.goal-lead {
+  font-size: clamp(1.25rem, 2.2vw, 1.875rem);
+  font-weight: 700;
+  line-height: 1.25;
   color: var(--color-white);
-  max-width: 38ch;
+  max-width: 26ch;
+}
+.goal-sub {
+  margin-top: var(--space-md);
+  color: var(--color-on-dark-dim);
+  max-width: 62ch;
 }
 
 /* ---------------------------------------------------------------------------
@@ -758,14 +837,14 @@ summary:focus-visible,
   margin-top: var(--space-md);
   font-size: var(--text-lead);
   color: var(--color-ink-2);
-  max-width: 44ch;
+  max-width: 52ch;
 }
 .register-main .btn { margin-top: var(--space-lg); }
 .register-microcopy {
   margin-top: var(--space-md);
   font-size: var(--text-small);
   color: var(--color-ink-3);
-  max-width: 46ch;
+  max-width: 56ch;
 }
 
 .register-aside {

@@ -119,6 +119,51 @@
   })();
 
   /* =========================================================================
+     2 · Smooth scrolling (Lenis, optional)
+
+     Lerps the scroll position so the page glides rather than stepping. Driven
+     from GSAP's ticker and reporting back into ScrollTrigger.update(), so the
+     scroll-linked animations stay in sync with the smoothed position instead
+     of fighting it.
+
+     Skipped entirely under prefers-reduced-motion, and skipped silently if the
+     library did not load, in which case native scrolling just carries on.
+     ========================================================================= */
+  var lenis = null;
+
+  if (hasGsap && typeof window.Lenis === "function" && !prefersReduced) {
+    lenis = new window.Lenis({
+      duration: 1.05,        // low enough to still feel connected to the wheel
+      smoothWheel: true,
+      touchMultiplier: 1.6,
+    });
+
+    lenis.on("scroll", ScrollTrigger.update);
+
+    gsap.ticker.add(function (time) {
+      lenis.raf(time * 1000);
+    });
+    gsap.ticker.lagSmoothing(0);
+
+    // CSS smooth-scroll would fight Lenis over the same anchor jump.
+    document.documentElement.style.scrollBehavior = "auto";
+
+    var headerH = document.querySelector(".site-header");
+    document.querySelectorAll('a[href^="#"]').forEach(function (link) {
+      link.addEventListener("click", function (e) {
+        var id = link.getAttribute("href");
+        if (!id || id === "#") return;
+        var target = document.querySelector(id);
+        if (!target) return;
+        e.preventDefault();
+        lenis.scrollTo(target, {
+          offset: headerH ? -(headerH.offsetHeight + 16) : 0,
+        });
+      });
+    });
+  }
+
+  /* =========================================================================
      2 · Motion
      ========================================================================= */
   if (hasGsap) {
@@ -270,9 +315,9 @@
               gsap.to(tiles, {
                 opacity: 1,
                 scale: 1,
-                duration: 0.75,
+                duration: 1.1,
                 ease: "power3.out",
-                stagger: 0.11,
+                stagger: 0.18,
               });
             },
           });
@@ -301,13 +346,13 @@
                 .timeline()
                 .to(mapEdge, {
                   strokeDashoffset: 0,
-                  duration: 1.5,
-                  ease: "power2.inOut",
+                  duration: 3.2,          // deliberately unhurried
+                  ease: "power1.inOut",
                 })
                 .to(
                   contours,
-                  { opacity: 1, duration: 0.5, stagger: 0.06 },
-                  "-=0.9"
+                  { opacity: 1, duration: 1.1, stagger: 0.16 },
+                  "-=2.1"
                 );
             },
           });
@@ -321,18 +366,18 @@
           return !el.closest(".hero");
         });
 
-        gsap.set(revealEls, { opacity: 0, y: 24 });
+        gsap.set(revealEls, { opacity: 0, y: 30 });
 
         ScrollTrigger.batch(revealEls, {
-          start: "top 88%",
+          start: "top 90%",
           once: true,
           onEnter: function (batch) {
             gsap.to(batch, {
               opacity: 1,
               y: 0,
-              duration: 0.7,
+              duration: 1.05,
               ease: "power2.out",
-              stagger: 0.08,
+              stagger: 0.1,
             });
           },
         });
@@ -390,8 +435,8 @@
           var place = pin.getAttribute("data-place");
           window.setTimeout(function () {
             setActive(place, true);
-            window.setTimeout(function () { setActive(place, false); }, 800);
-          }, i * 220);
+            window.setTimeout(function () { setActive(place, false); }, 1100);
+          }, 1600 + i * 340);
         });
       },
     });

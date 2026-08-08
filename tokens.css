@@ -55,7 +55,7 @@
   /* Layout */
   --wrap-max:  1280px;
   --wrap-pad:  clamp(1.25rem, 4vw, 3.5rem);
-  --measure:   58ch;
+  --measure:   66ch;
   --header-h:  4.75rem;
 
   /* Motion */
