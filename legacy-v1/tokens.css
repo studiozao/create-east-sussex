@@ -1,0 +1,65 @@
+/* Hallmark · design tokens for East Sussex Creative Collective
+   ----------------------------------------------------------------------------
+   Colour values are the client's LOCKED brand hex (explicit brief: "use
+   exactly these, no substitutions") — kept as literal hex rather than
+   converted to OKLCH, which is a deliberate deviation from the usual
+   Hallmark catalog-theme convention. Everything else follows the standard
+   token shape so this file is portable to other tooling.
+   ============================================================================ */
+
+:root {
+  /* Colour — brand-locked */
+  --color-white:        #FFFFFF;
+  --color-black:        #000000;
+  --color-navy:         #122D54;
+  --color-grey:         #6B7280;
+  --color-light-grey:   #D1D5DB;
+  --color-darker-grey:  #4B5563;
+  --color-red:          #E42544;
+  --color-red-hover:    #C51D38;
+
+  /* Typography */
+  --font-display: "Fraunces", ui-serif, Georgia, serif;
+  --font-body:    "Switzer", ui-sans-serif, system-ui, -apple-system, sans-serif;
+  --font-mono:    "JetBrains Mono", ui-monospace, "SF Mono", monospace;
+
+  --text-hero:    clamp(2.5rem, 5.2vw, 4.75rem);
+  --text-h2:      clamp(1.875rem, 3.2vw, 3rem);
+  --text-h3:      clamp(1.25rem, 1.6vw, 1.5rem);
+  --text-lead:    clamp(1.125rem, 1.5vw, 1.4rem);
+  --text-body:    1.0625rem;
+  --text-small:   0.9375rem;
+  --text-num:     clamp(2.5rem, 4vw, 3.5rem);
+
+  /* Spacing — 4pt scale, used with deliberate variation, not uniformly */
+  --space-3xs: 0.25rem;
+  --space-2xs: 0.5rem;
+  --space-xs:  0.75rem;
+  --space-sm:  1rem;
+  --space-md:  1.5rem;
+  --space-lg:  2.5rem;
+  --space-xl:  4rem;
+  --space-2xl: 6rem;
+  --space-3xl: 8rem;
+
+  /* Layout */
+  --wrap-max:  1200px;
+  --wrap-pad:  clamp(1.25rem, 5vw, 4rem);
+  --measure:   62ch;
+
+  /* Motion */
+  --dur-fast:  200ms;
+  --dur-mid:   500ms;
+  --dur-slow:  800ms;
+  --ease-out:  cubic-bezier(0.16, 1, 0.3, 1);
+  --ease-in-out: cubic-bezier(0.65, 0, 0.35, 1);
+
+  /* Radii */
+  --radius-pill: 999px;
+  --radius-sm:   4px;
+
+  /* Z-index — named scale, never freestyled */
+  --z-base:    1;
+  --z-raised:  10;
+  --z-sticky:  200;
+}

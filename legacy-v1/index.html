@@ -1,0 +1,573 @@
+<!--
+  ============================================================================
+  Create East Sussex — landing page
+  ----------------------------------------------------------------------------
+  Static site. No build step. Open index.html directly or serve the folder.
+  Files:   index.html  ·  styles.css  ·  script.js  ·  tokens.css
+  Swap-before-launch items are listed in README.md and flagged inline with
+  the marker  <<< SWAP >>>  so they are easy to find (Cmd/Ctrl+F).
+  ============================================================================
+-->
+<!DOCTYPE html>
+<html lang="en-GB">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Create East Sussex</title>
+  <meta name="description" content="Free 1:1 mentoring and practical sessions for freelancers and small creative businesses across East Sussex. Business support that actually gets creative businesses." />
+
+  <!-- Fraunces (display serif) + JetBrains Mono (section numerals only) via
+       Google Fonts; Switzer (body) via Fontshare. See README for swap notes. -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,wght@0,300;0,400;0,600;0,700;1,400;1,500&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+  <link href="https://api.fontshare.com/v2/css?f[]=switzer@400,500,600&display=swap" rel="stylesheet" />
+
+  <link rel="stylesheet" href="styles.css" />
+
+  <!--
+    ========================================================================
+    ANALYTICS  —  <<< SWAP >>>  add your tracking ID below.
+    Two options are pre-wired; pick ONE, uncomment it, and delete the other.
+
+    Option A — Plausible (simplest, privacy-friendly, no cookie banner needed):
+      Replace  YOUR-DOMAIN.com  with the live domain.
+  -->
+  <!--
+  <script defer data-domain="YOUR-DOMAIN.com" src="https://plausible.io/js/script.js"></script>
+  -->
+  <!--
+    Option B — Google Analytics 4:
+      Replace  G-XXXXXXXXXX  (appears twice) with your GA4 Measurement ID.
+  -->
+  <!--
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-XXXXXXXXXX"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-XXXXXXXXXX');
+  </script>
+  -->
+  <!--
+    A custom CTA-click event (separate from the page view) is fired from
+    script.js — see the trackCtaClick() function there. It works with either
+    provider above once the snippet is uncommented.
+    ========================================================================
+  -->
+</head>
+
+<body>
+  <!-- Skip link for keyboard / screen-reader users -->
+  <a class="skip-link" href="#main">Skip to content</a>
+
+  <!--
+    ========================================================================
+    HEADER — edge-aligned, quiet. Logos anchor the left edge; the four
+    section links sit in the middle at small-caps scale; a single text+arrow
+    link stands in for a CTA (the bold button is reserved for the hero and
+    the final register section, so it isn't diluted by repetition).
+    <<< SWAP >>> logo files live in assets/ — see README for dimensions.
+    ========================================================================
+  -->
+  <header class="site-header" id="top">
+    <div class="wrap header-inner">
+      <div class="logo-lockup" aria-label="Studio Zao and East Sussex County Council">
+        <a class="logo-link" href="https://www.studiozao.com/" target="_blank" rel="noopener" aria-label="Studio Zao (opens in a new tab)">
+          <img src="assets/studiozao-logo.png" alt="Studio Zao" class="logo-img logo-img-zao" width="2355" height="734" />
+        </a>
+        <span class="logo-rule" aria-hidden="true"></span>
+        <a class="logo-link" href="https://www.eastsussex.gov.uk/" target="_blank" rel="noopener" aria-label="East Sussex County Council (opens in a new tab)">
+          <img src="assets/Logos/ESCC Logo - Blue.png" alt="East Sussex County Council" class="logo-img logo-img-escc" width="1200" height="867" />
+        </a>
+      </div>
+
+      <nav class="site-nav" aria-label="Primary">
+        <button class="nav-toggle" aria-expanded="false" aria-controls="nav-links" aria-label="Menu">
+          <span class="nav-toggle-bar" aria-hidden="true"></span>
+          <span class="nav-toggle-bar" aria-hidden="true"></span>
+        </button>
+        <ul id="nav-links" class="nav-links">
+          <li><a href="#what-you-get">What you get</a></li>
+          <li><a href="#how">How it works</a></li>
+          <li><a href="#eligibility">Eligibility</a></li>
+          <li><a href="#who">Who&rsquo;s behind this</a></li>
+          <li><a class="nav-cta" href="#form">Join <span aria-hidden="true">&rarr;</span></a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <main id="main">
+
+    <!--
+      ======================================================================
+      HERO — no section number (the masthead sits outside the index below)
+      ======================================================================
+    -->
+    <section class="hero" aria-labelledby="hero-heading">
+      <div class="wrap hero-inner">
+        <div class="hero-copy">
+          <p class="hero-tagline reveal">Business support that actually gets creative businesses.</p>
+          <h1 id="hero-heading" class="hero-heading reveal">
+            Create<br /><em>East Sussex</em>
+          </h1>
+          <p class="hero-subhead reveal" data-reveal-delay="1">
+            If most networking events and business programmes don&rsquo;t
+            feel like they&rsquo;re for you, this one is. Free 1:1 mentoring
+            and practical sessions, built for creatives across East Sussex.
+          </p>
+          <a class="btn btn-primary reveal" data-reveal-delay="2" href="#form" data-cta="hero">
+            Register your interest
+          </a>
+        </div>
+
+        <!--
+          Hero collage — four real photographs, one per creative discipline.
+          <<< SWAP >>> photo credits are in README.md; swap the files in
+          assets/hero/ for real programme photography.
+        -->
+        <div class="hero-collage reveal" data-reveal-delay="1" aria-label="Creative disciplines across East Sussex">
+          <figure class="collage-tile tile-a" data-parallax="0.06">
+            <div class="collage-img img-hands" role="img" aria-label="A maker's hands at work on a potter's wheel"></div>
+          </figure>
+          <figure class="collage-tile tile-b" data-parallax="0.12">
+            <div class="collage-img img-art" role="img" aria-label="An artist painting a large illustrated portrait mural"></div>
+          </figure>
+          <figure class="collage-tile tile-c" data-parallax="0.09">
+            <div class="collage-img img-textile" role="img" aria-label="A tailor sewing patterned fabric in her shop"></div>
+          </figure>
+          <figure class="collage-tile tile-d" data-parallax="0.15">
+            <div class="collage-img img-photography" role="img" aria-label="A camera drone in flight for aerial and property photography"></div>
+          </figure>
+        </div>
+      </div>
+
+      <!-- Scroll cue — desktop only; see .scroll-cue in styles.css -->
+      <a class="scroll-cue" href="#is-this-you" aria-label="Scroll to is this you">
+        <span class="scroll-cue-text">Scroll</span>
+        <span class="scroll-cue-line" aria-hidden="true"></span>
+      </a>
+    </section>
+
+    <!--
+      ======================================================================
+      IS THIS YOU? — self-qualifying identity bullets, before any programme
+      mechanics. Lets a reader place themselves emotionally before hitting
+      the formal eligibility checklist further down the page.
+      ======================================================================
+    -->
+    <section class="section section-is-you" id="is-this-you" aria-labelledby="is-you-heading">
+      <div class="wrap">
+        <div class="is-you-inner">
+          <header class="section-head reveal">
+            <h2 id="is-you-heading" class="section-heading">Is this you?</h2>
+          </header>
+
+          <ul class="checklist">
+            <li class="check-item reveal" data-reveal-delay="0">
+              <span class="check-dot" aria-hidden="true"></span>
+              You make, design, write, film, craft or build things for a living
+            </li>
+            <li class="check-item reveal" data-reveal-delay="1">
+              <span class="check-dot" aria-hidden="true"></span>
+              You&rsquo;re a freelancer or small business based in East Sussex
+            </li>
+            <li class="check-item reveal" data-reveal-delay="2">
+              <span class="check-dot" aria-hidden="true"></span>
+              You want to grow but could use a sounding board
+            </li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <!--
+      ======================================================================
+      WHAT YOU GET — outcomes first, mechanics second. Mentoring leads at
+      full width (it's the core offer); Connects and the wider network
+      follow as a paired row, per direct stakeholder feedback: sell
+      mentoring first, Connects as the low-commitment way in.
+      ======================================================================
+    -->
+    <section class="section section-programme" id="what-you-get" aria-labelledby="programme-heading">
+      <div class="wrap">
+        <header class="section-head reveal">
+          <h2 id="programme-heading" class="section-heading">What you get</h2>
+          <p class="section-intro">
+            Free 1:1 mentoring matched to what your business actually needs,
+            plus practical sessions and a network of people who get it.
+          </p>
+        </header>
+
+        <div class="programme-index">
+          <!-- Mentoring — full width, leads: it's the core offer, not the
+               recruitment funnel. -->
+          <article class="programme-lead reveal" data-reveal-delay="0">
+            <div class="programme-head">
+              <span class="programme-icon" aria-hidden="true">
+                <svg viewBox="0 0 40 40" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                  <circle cx="14" cy="13" r="5" />
+                  <circle cx="27" cy="16" r="4" />
+                  <path d="M5 33c0-5 4-9 9-9s9 4 9 9" />
+                  <path d="M24 33c0-4 3-7 6-7" />
+                </svg>
+              </span>
+              <h3 class="programme-title">Mentoring</h3>
+            </div>
+            <p class="programme-meta">By invitation &middot; up to 6 hours, one-to-one</p>
+            <p class="programme-body">
+              Free one-to-one time with a mentor who has built a creative
+              business themselves. A short diagnostic call comes first to
+              find your focus, then structured sessions built entirely
+              around what you need: more clients, better pricing, a clearer
+              plan, whatever it is.
+            </p>
+          </article>
+
+          <!-- Connects + the wider network — paired, secondary: the
+               low-commitment way in and what carries on after. -->
+          <div class="programme-pair">
+            <article class="programme-item reveal" data-reveal-delay="1">
+              <div class="programme-head">
+                <span class="programme-icon" aria-hidden="true">
+                  <svg viewBox="0 0 40 40" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M22 4 8 23h11l-1 13 14-19H21z" />
+                  </svg>
+                </span>
+                <h3 class="programme-title">Connects</h3>
+              </div>
+              <p class="programme-meta">Open to everyone &middot; 2 hours &middot; free</p>
+              <p class="programme-body">
+                Free, 2-hour practical sessions, and the easiest way in. Come
+                away with something tangible on pricing, audience building,
+                hiring, AI tools and accessing grants, across Lewes,
+                Hastings and Eastbourne.
+              </p>
+            </article>
+
+            <article class="programme-item reveal" data-reveal-delay="2">
+              <div class="programme-head">
+                <span class="programme-icon" aria-hidden="true">
+                  <svg viewBox="0 0 40 40" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                    <circle cx="20" cy="9" r="4" />
+                    <circle cx="9" cy="28" r="4" />
+                    <circle cx="31" cy="28" r="4" />
+                    <path d="M17 12 12 25M23 12l5 13M13 28h14" />
+                  </svg>
+                </span>
+                <h3 class="programme-title">A growing network</h3>
+              </div>
+              <p class="programme-meta">Free &middot; ongoing</p>
+              <p class="programme-body">
+                Open to any actively trading creative business in East
+                Sussex. Meet other creatives and swap ideas and referrals,
+                a network that carries on long after your mentoring ends.
+              </p>
+            </article>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!--
+      ======================================================================
+      02 · HOW IT WORKS
+      ======================================================================
+    -->
+    <section class="section section-how" id="how" aria-labelledby="how-heading">
+      <div class="wrap">
+        <header class="section-head reveal">
+          <h2 id="how-heading" class="section-heading">Your route to one-to-one mentoring</h2>
+        </header>
+
+        <div class="how-opening reveal">
+          <p>
+            Free 1:1 mentoring is how you get here. Getting started is
+            simple. Come to a Connect, free and open to anyone, meet people,
+            and see whether going deeper is right for you. No pressure
+            either way.
+          </p>
+        </div>
+
+        <!-- Plain divs with ARIA list semantics, not <ol>/<li> — a native
+             list-item marker was rendering alongside the custom numeral
+             in some browsers, showing as a doubled "1. 2" style number. -->
+        <div class="process" role="list" aria-label="What happens after a Connect">
+          <div class="process-step reveal" data-reveal-delay="0" role="listitem">
+            <span class="process-num" aria-hidden="true">1</span>
+            <h3 class="process-title">Get invited to mentoring</h3>
+            <p class="process-body">
+              Once you&rsquo;ve been to a Connect, or simply told us
+              you&rsquo;re interested, you&rsquo;re invited to start
+              mentoring.
+            </p>
+          </div>
+          <div class="process-step reveal" data-reveal-delay="1" role="listitem">
+            <span class="process-num" aria-hidden="true">2</span>
+            <h3 class="process-title">Go through the diagnostic</h3>
+            <p class="process-body">
+              A short survey, then a 30-minute call to talk through your
+              situation and agree the focus for your mentoring Sprint.
+            </p>
+          </div>
+          <div class="process-step reveal" data-reveal-delay="2" role="listitem">
+            <span class="process-num" aria-hidden="true">3</span>
+            <h3 class="process-title">Start your Sprint</h3>
+            <p class="process-body">
+              You&rsquo;re matched with a mentor and begin your 6-hour
+              Sprint, at whatever pace suits your practice: a few short
+              weekly sessions, or a couple of longer deep-dives.
+            </p>
+          </div>
+          <div class="process-step reveal" data-reveal-delay="3" role="listitem">
+            <span class="process-num" aria-hidden="true">4</span>
+            <h3 class="process-title">Stay part of the network</h3>
+            <p class="process-body">
+              Once your Sprint ends, you&rsquo;re an alum: you&rsquo;ll get a
+              short summary of next steps, keep your invite to future
+              Connects, and, if it&rsquo;s a fit, come back later as a
+              mentor yourself.
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <div class="wrap">
+        <p class="how-caveat reveal">
+          Places on the mentoring Sprint are limited and matched to fit, so
+          we can&rsquo;t guarantee mentoring for everyone who applies.
+          Everyone&rsquo;s welcome at the Connects and the wider network
+          regardless.
+        </p>
+      </div>
+
+      <!-- Community band — the section's closing note, after the caveat -->
+      <div class="how-band">
+        <div class="wrap">
+          <p class="how-band-text reveal">
+            And through all of it, you&rsquo;re part of something bigger: a
+            community of creative people across East Sussex, at the
+            Connects, in the mentoring, and beyond. You&rsquo;re not doing
+            this on your own.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!--
+      ======================================================================
+      UPCOMING CONNECTS — placeholder: dates/locations aren't confirmed yet,
+      same expression-of-interest framing as the form section below. Swap
+      for real dates/Eventbrite links once they're live.
+      ======================================================================
+    -->
+    <section class="section section-connects-list" id="connects" aria-labelledby="connects-heading">
+      <div class="wrap">
+        <div class="connects-inner">
+          <header class="section-head reveal">
+            <h2 id="connects-heading" class="section-heading">Upcoming Connects</h2>
+            <p class="section-intro">
+              Free, 2-hour sessions, no booking needed yet. Register your
+              interest and we&rsquo;ll email you the moment dates and
+              locations are confirmed.
+            </p>
+          </header>
+          <!-- <<< SWAP >>> Replace with real dates/locations and Eventbrite
+               links once Connects go live. -->
+          <ul class="connects-list">
+            <li class="connect-item reveal" data-reveal-delay="0">
+              <span class="connect-place">Lewes</span>
+              <span class="connect-date">Dates to be confirmed</span>
+            </li>
+            <li class="connect-item reveal" data-reveal-delay="1">
+              <span class="connect-place">Hastings</span>
+              <span class="connect-date">Dates to be confirmed</span>
+            </li>
+            <li class="connect-item reveal" data-reveal-delay="2">
+              <span class="connect-place">Eastbourne</span>
+              <span class="connect-date">Dates to be confirmed</span>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <!--
+      ======================================================================
+      BECOME A MENTOR — placeholder section/link. No sign-up flow exists
+      yet; CTA scrolls to the same expression-of-interest form as the rest
+      of the page. Swap for a dedicated mentor form later if needed.
+      ======================================================================
+    -->
+    <section class="section section-become-mentor" id="become-mentor" aria-labelledby="become-mentor-heading">
+      <div class="wrap">
+        <div class="become-mentor-inner">
+          <header class="section-head reveal">
+            <h2 id="become-mentor-heading" class="section-heading">Been there, done it?</h2>
+            <p class="section-intro">
+              Give a few hours to help a local creative business grow.
+              Mentoring is volunteer-based and low commitment: you choose
+              how much time you give.
+            </p>
+          </header>
+          <a class="btn btn-primary reveal" data-reveal-delay="1" href="#form" data-cta="become-mentor">
+            Register your interest as a mentor
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <!--
+      ======================================================================
+      03 · ELIGIBILITY — grounded in the Lot 3 spec (SME/trading-status
+      criteria), lightly summarised: exact numeric SME thresholds (staff/
+      turnover/balance-sheet caps) and the blunt pre-start exclusion are
+      deliberately left off the public checklist — see README.
+      ======================================================================
+    -->
+    <section class="section section-eligibility" id="eligibility" aria-labelledby="eligibility-heading">
+      <div class="wrap">
+        <div class="eligibility-inner">
+          <header class="section-head reveal">
+            <h2 id="eligibility-heading" class="section-heading">Is this for you?</h2>
+          </header>
+
+          <ul class="checklist">
+            <li class="check-item reveal" data-reveal-delay="0">
+              <span class="check-dot" aria-hidden="true"></span>
+              Actively trading creative business based in East Sussex
+            </li>
+            <li class="check-item reveal" data-reveal-delay="1">
+              <span class="check-dot" aria-hidden="true"></span>
+              Working in design, digital, craft, fashion, film, gaming, music,
+              publishing or a related creative field, including tech-enabled
+              work like web or app design (general IT support doesn&rsquo;t
+              count)
+            </li>
+            <li class="check-item reveal" data-reveal-delay="2">
+              <span class="check-dot" aria-hidden="true"></span>
+              Sole trader, freelancer, small business, social enterprise,
+              co-operative or charity (trading arm)
+            </li>
+          </ul>
+
+          <p class="eligibility-close reveal">
+            Not sure if you fit? Come along to a Connect or get in touch,
+            and we&rsquo;ll help you work it out.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!--
+      ======================================================================
+      04 · WHO'S BEHIND THIS
+      ======================================================================
+    -->
+    <section class="section section-who" id="who" aria-labelledby="who-heading">
+      <div class="wrap">
+        <div class="who-inner">
+          <header class="section-head reveal">
+            <h2 id="who-heading" class="section-heading">Delivered by people who&rsquo;ve done this before</h2>
+          </header>
+
+          <div class="who-copy">
+            <p class="who-lead reveal">
+              Create East Sussex is delivered by Studio Zao, an innovation
+              and growth consultancy that&rsquo;s supported hundreds of small
+              businesses across the UK, working in partnership with East
+              Sussex County Council.
+            </p>
+            <p class="who-lead reveal" data-reveal-delay="1">
+              Led locally by Sara Carter, who&rsquo;s spent years mentoring
+              creative founders and building programmes like this one,
+              alongside a team who&rsquo;ve delivered similar work in Torbay,
+              Croydon and Tamworth.
+            </p>
+            <p class="who-note reveal" data-reveal-delay="2">
+              Real people, not a call centre. You&rsquo;ll meet the same faces
+              throughout.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!--
+      ======================================================================
+      05 · CALL TO ACTION / FORM
+      ----------------------------------------------------------------------
+      This is an EXPRESSION OF INTEREST, not a live booking — Hack dates are
+      not yet confirmed. Once dates are live, update the copy below and, if
+      you wish, swap the outbound button for a booking link.
+
+      <<< SWAP >>> Replace FORM_URL below with the real Google Form link.
+         We intentionally do NOT iframe-embed the form (it can't be restyled
+         to match the brand). A clean outbound button is the right call.
+      ======================================================================
+    -->
+    <section class="section section-form" id="form" aria-labelledby="form-heading">
+      <div class="wrap">
+        <div class="form-inner">
+          <header class="section-head reveal">
+            <h2 id="form-heading" class="section-heading">Ready when you are</h2>
+          </header>
+          <p class="form-body reveal" data-reveal-delay="1">
+            Interested in getting involved? Register below and we&rsquo;ll be
+            in touch with details on the first Connects as soon as
+            they&rsquo;re confirmed.
+          </p>
+          <!-- <<< SWAP >>> Replace the href with your Google Form URL. -->
+          <a
+            class="btn btn-primary btn-lg reveal"
+            data-reveal-delay="2"
+            href="https://forms.gle/REPLACE_WITH_REAL_FORM_URL"
+            target="_blank"
+            rel="noopener"
+            data-cta="form"
+          >
+            Register your interest
+          </a>
+          <p class="form-microcopy reveal" data-reveal-delay="3">
+            This is an expression of interest, with no dates to pick just yet.
+            We&rsquo;ll email you first when the first Connects are confirmed.
+          </p>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!--
+    ========================================================================
+    FOOTER — a single mast-headed band: logos anchor it, tagline sits
+    beside, copyright closes it in quiet small type below a hairline.
+    ========================================================================
+  -->
+  <footer class="site-footer">
+    <div class="wrap footer-inner">
+      <div class="logo-lockup footer-lockup" aria-label="Studio Zao, UK Government, South Coast Business Support Alliance and East Sussex County Council">
+        <a class="logo-link" href="https://www.studiozao.com/" target="_blank" rel="noopener" aria-label="Studio Zao (opens in a new tab)">
+          <img src="assets/studiozao-logo.png" alt="Studio Zao" class="logo-img logo-img-zao" width="2355" height="734" />
+        </a>
+      </div>
+      <p class="footer-line">
+        Delivered by Studio Zao, funded by East Sussex County Council.
+      </p>
+    </div>
+    <div class="wrap footer-funders">
+      <img src="assets/Logos/Funded by UK Gov - Black.png" alt="Funded by UK Government" class="logo-img logo-img-ukgov" width="1488" height="325" />
+      <img src="assets/Logos/SBSAlogo1.png" alt="South Coast Business Support Alliance" class="logo-img logo-img-sbsa" width="1977" height="460" />
+      <a class="logo-link" href="https://www.eastsussex.gov.uk/" target="_blank" rel="noopener" aria-label="East Sussex County Council (opens in a new tab)">
+        <img src="assets/Logos/ESCC Logo - Blue.png" alt="East Sussex County Council" class="logo-img logo-img-escc" width="1200" height="867" />
+      </a>
+    </div>
+    <div class="wrap footer-bottom">
+      <p class="footer-copyright">Copyright &copy; 2026 Studio Zao Innovations Ltd. All rights reserved.</p>
+    </div>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>

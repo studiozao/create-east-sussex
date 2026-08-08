@@ -1,0 +1,808 @@
+/* Hallmark · pre-emit critique: P4 H4 E4 S4 R4 V4
+ * Hallmark · genre: editorial · macrostructure: Specimen-inspired, DE-NUMBERED
+ * at client request (the 01–05 section index and per-list-item hairline
+ * rules read as over-applied and were removed after review — see README's
+ * "Design rationale" section for the two-pass history). Deviations: filled
+ * CTA retained for conversion; hero photography retained over "none/SVG").
+ * theme: client-locked hex palette (not OKLCH catalog) · nav: N9-inspired
+ * (edge-aligned, quiet links, text+arrow secondary CTA) · footer: Ft1-inspired
+ * (mast-headed) · enrichment: hero collage — 4 real, credited photographs
+ * (makers/craft, illustration & fine art, fashion/textiles, drone/property
+ * photography); see README for current credits and swap notes
+ * ============================================================================
+ * Create East Sussex — styles.css
+ * ----------------------------------------------------------------------------
+ * Redesigned from a generic 3-card-grid/AI-nav template into an editorial
+ * layout for a creative-industry audience, then simplified further after
+ * client review (numbered section labels and most hairline dividers cut —
+ * only two rules remain on the whole page, each marking a real hierarchy
+ * break). See README for the full rationale. Colour system uses the
+ * client's EXACT locked hex values. Laptop-first; adapts down to mobile at
+ * the bottom of the file. All motion respects prefers-reduced-motion.
+ * ============================================================================ */
+
+@import url("tokens.css");
+
+/* ---------------------------------------------------------------------------
+   1 · Reset & base
+   --------------------------------------------------------------------------- */
+*,
+*::before,
+*::after { box-sizing: border-box; }
+
+html {
+  scroll-behavior: smooth;
+  scroll-padding-top: 6rem;
+  -webkit-text-size-adjust: 100%;
+  overflow-x: clip;
+}
+
+body {
+  margin: 0;
+  font-family: var(--font-body);
+  font-size: var(--text-body);
+  line-height: 1.6;
+  color: var(--color-black);
+  background: var(--color-white);
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+  overflow-x: clip;
+}
+
+h1, h2, h3 {
+  font-family: var(--font-display);
+  color: var(--color-navy);
+  line-height: 1.08;
+  letter-spacing: -0.01em;
+  margin: 0;
+  overflow-wrap: anywhere;
+  min-width: 0;
+  font-weight: 600;
+}
+
+em {
+  font-style: italic;
+  font-weight: 500;
+}
+
+p { margin: 0; }
+
+a { color: inherit; }
+
+img,
+svg { max-width: 100%; display: block; }
+
+.wrap {
+  width: 100%;
+  max-width: var(--wrap-max);
+  margin-inline: auto;
+  padding-inline: var(--wrap-pad);
+}
+
+.skip-link {
+  position: absolute;
+  left: -9999px;
+  top: 0;
+  z-index: var(--z-sticky);
+  background: var(--color-navy);
+  color: var(--color-white);
+  padding: 0.75rem 1.25rem;
+  border-radius: 0 0 6px 0;
+  text-decoration: none;
+  font-weight: 600;
+}
+.skip-link:focus { left: 0; }
+
+a:focus-visible,
+button:focus-visible {
+  outline: 3px solid var(--color-red);
+  outline-offset: 3px;
+  border-radius: 2px;
+}
+
+/* ---------------------------------------------------------------------------
+   2 · Buttons — solid, for the two real conversion moments only (hero + form)
+   --------------------------------------------------------------------------- */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-family: var(--font-body);
+  font-weight: 600;
+  font-size: 1rem;
+  line-height: 1;
+  text-decoration: none;
+  padding: 1rem 1.75rem;
+  border-radius: var(--radius-pill);
+  border: 0;
+  cursor: pointer;
+  white-space: nowrap;
+  transition: background-color var(--dur-fast) var(--ease-out),
+              transform var(--dur-fast) var(--ease-out);
+}
+
+.btn-primary {
+  background: var(--color-red);
+  color: var(--color-white);
+}
+.btn-primary:hover {
+  background: var(--color-red-hover);
+  transform: translateY(-2px);
+}
+.btn-primary:active { transform: translateY(0); }
+
+.btn-lg {
+  font-size: 1.0625rem;
+  padding: 1.15rem 2.25rem;
+}
+
+/* ---------------------------------------------------------------------------
+   3 · Header — edge-aligned and quiet (N9-inspired). No blur, no glass;
+   a hairline rule is the only separation from the page.
+   --------------------------------------------------------------------------- */
+.site-header {
+  position: sticky;
+  top: 0;
+  z-index: var(--z-sticky);
+  background: var(--color-white);
+  border-bottom: 1px solid var(--color-light-grey);
+}
+
+.header-inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-lg);
+  min-height: 4.75rem;
+}
+
+.logo-lockup {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  flex-wrap: wrap;
+}
+
+.logo-link {
+  display: inline-flex;
+  align-items: center;
+  transition: opacity var(--dur-fast) var(--ease-out);
+}
+.logo-link:hover { opacity: 0.7; }
+
+.logo-img {
+  height: 34px;
+  width: auto;
+  object-fit: contain;
+}
+
+/* ESCC crest sized up per client feedback ("bigger council logo") — it now
+   appears larger than the Studio Zao mark in both header and footer. */
+.logo-img-escc { height: 42px; }
+
+.logo-rule {
+  width: 1px;
+  height: 30px;
+  background: var(--color-light-grey);
+}
+
+.site-nav { display: flex; align-items: center; }
+
+.nav-links {
+  display: flex;
+  align-items: center;
+  gap: 2rem;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+.nav-links a {
+  font-family: var(--font-body);
+  font-size: 0.8125rem;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--color-darker-grey);
+  text-decoration: none;
+  padding: 0.35rem 0;
+  transition: color var(--dur-fast) var(--ease-out);
+}
+.nav-links a:hover { color: var(--color-navy); }
+
+/* Nav CTA — quiet text+arrow, not a filled pill (the bold button is reserved
+   for the hero and final register moments so it isn't diluted here). */
+.nav-links .nav-cta {
+  color: var(--color-navy);
+  display: inline-flex;
+  align-items: center;
+  gap: 0.3em;
+}
+.nav-links .nav-cta span {
+  transition: transform var(--dur-fast) var(--ease-out);
+  display: inline-block;
+}
+.nav-links .nav-cta:hover span { transform: translateX(3px); }
+
+.nav-toggle {
+  display: none;
+  flex-direction: column;
+  justify-content: center;
+  gap: 5px;
+  width: 44px;
+  height: 44px;
+  background: none;
+  border: 0;
+  cursor: pointer;
+}
+.nav-toggle-bar {
+  display: block;
+  width: 24px;
+  height: 2px;
+  background: var(--color-navy);
+  transition: transform var(--dur-fast) var(--ease-out),
+              opacity var(--dur-fast) var(--ease-out);
+}
+
+/* ---------------------------------------------------------------------------
+   4 · Section rhythm — deliberately varied padding. Sections are separated
+   by whitespace alone; the two rules that remain on the page (below Hacks
+   in the programme section, above the footer copyright) each mark a real
+   hierarchy break rather than decorating every gap.
+   --------------------------------------------------------------------------- */
+.section {
+  position: relative;
+}
+.section-is-you        { padding-block: var(--space-2xl) var(--space-xl); background: #FAFAFA; }
+.section-programme     { padding-block: var(--space-2xl) var(--space-xl); }
+.section-how           { padding-block: var(--space-xl) var(--space-2xl); }
+.section-connects-list { padding-block: var(--space-xl); }
+.section-become-mentor { padding-block: var(--space-xl); background: #FAFAFA; }
+.section-eligibility   { padding-block: var(--space-xl); }
+.section-who           { padding-block: var(--space-2xl); background: #FAFAFA; }
+.section-form          { padding-block: var(--space-2xl) var(--space-3xl); }
+
+.section-head { margin-bottom: var(--space-xl); max-width: 40rem; }
+
+.section-heading {
+  font-size: var(--text-h2);
+}
+
+.section-intro {
+  margin-top: var(--space-md);
+  font-size: var(--text-lead);
+  color: var(--color-darker-grey);
+  max-width: 38rem;
+}
+
+/* ---------------------------------------------------------------------------
+   5 · Hero — asymmetric two-column, serif display with an italic flourish
+   --------------------------------------------------------------------------- */
+.hero {
+  position: relative;
+  display: grid;
+  grid-template-rows: 1fr auto;
+  min-height: calc(100vh - 4.75rem);
+  padding-top: var(--space-lg);
+  padding-bottom: var(--space-xl); /* heavier than top — pulls the hero into the page */
+  overflow: hidden;
+}
+.hero-inner {
+  display: grid;
+  grid-template-columns: 1.05fr 0.95fr;
+  gap: clamp(2rem, 5vw, 5rem);
+  align-items: center;
+  align-self: center;
+  width: 100%;
+}
+.hero-copy { max-width: 34rem; }
+
+.hero-tagline {
+  font-family: var(--font-display);
+  font-style: italic;
+  font-weight: 500;
+  font-size: var(--text-lead);
+  color: var(--color-red);
+  margin-bottom: var(--space-sm);
+}
+
+.hero-heading {
+  font-size: var(--text-hero);
+  font-weight: 600;
+  color: var(--color-navy);
+}
+.hero-heading em { color: var(--color-red); }
+
+.hero-subhead {
+  margin-top: var(--space-md);
+  font-family: var(--font-body);
+  font-size: var(--text-lead);
+  color: var(--color-darker-grey);
+  max-width: 30rem;
+}
+
+.hero-copy .btn { margin-top: var(--space-lg); }
+
+.hero-collage {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: clamp(0.75rem, 1.5vw, 1.25rem);
+  align-content: center;
+}
+.collage-tile {
+  margin: 0;
+  border-radius: 6px;
+  overflow: hidden;
+  will-change: transform;
+  box-shadow: 0 1px 2px rgba(18, 45, 84, 0.06);
+}
+.tile-a { transform: translateY(-1.5rem); }
+.tile-b { transform: translateY(1.25rem); }
+.tile-c { transform: translateY(-0.5rem); }
+.tile-d { transform: translateY(2rem); }
+
+.collage-img {
+  aspect-ratio: 4 / 5;
+  background-size: cover;
+  background-position: center;
+  transition: transform var(--dur-slow) var(--ease-out);
+  position: relative;
+}
+.collage-tile:hover .collage-img { transform: scale(1.05); }
+
+/* <<< SWAP >>> real programme photography, one per creative discipline —
+   see README for current credits. Each maps to a discipline on the page:
+   hands = makers/craft · art = illustration & fine art · textile = fashion
+   and textiles · photography = drone/property. */
+.img-hands       { background-image: url("assets/hero/hands.jpg"); }
+.img-art         { background-image: url("assets/hero/art.jpg"); }
+.img-textile     { background-image: url("assets/hero/textile.jpg"); }
+.img-photography { background-image: url("assets/hero/photography.jpg"); background-position: center 60%; }
+
+.scroll-cue {
+  justify-self: center;
+  margin-top: var(--space-md);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.5rem;
+  text-decoration: none;
+  color: var(--color-darker-grey); /* --color-grey fails 4.5:1 at this size */
+}
+.scroll-cue-text {
+  font-family: var(--font-mono);
+  font-size: 0.6875rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+}
+.scroll-cue-line {
+  width: 1px;
+  height: 44px;
+  background: var(--color-grey);
+  transform-origin: top;
+  animation: scrollCue 2.2s var(--ease-in-out) infinite;
+}
+@keyframes scrollCue {
+  0%   { transform: scaleY(0); opacity: 0; }
+  40%  { transform: scaleY(1); opacity: 1; }
+  100% { transform: scaleY(0); opacity: 0; transform-origin: bottom; }
+}
+
+/* ---------------------------------------------------------------------------
+   6 · Programme — asymmetric editorial index, not a 3-card grid.
+   Hacks leads at full width; Mentoring Sprints + The Collective pair beneath,
+   divided by a single hairline rule. Each offering carries a spec-line
+   (access + time) so a reader can self-select at a glance.
+   --------------------------------------------------------------------------- */
+.programme-index { display: flex; flex-direction: column; gap: var(--space-xl); }
+
+.programme-head {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  margin-bottom: var(--space-2xs);
+}
+.programme-icon {
+  display: inline-flex;
+  color: var(--color-red);
+  flex-shrink: 0;
+}
+.programme-icon svg { width: 28px; height: 28px; }
+
+/* Functional spec-line: who it's for + time commitment. Small, muted,
+   sits between the title and the body. */
+.programme-meta {
+  font-size: var(--text-small);
+  color: var(--color-darker-grey);
+  margin-bottom: var(--space-sm);
+  letter-spacing: 0.01em;
+}
+
+.programme-lead {
+  padding-bottom: var(--space-xl);
+  border-bottom: 1px solid var(--color-light-grey);
+}
+.programme-lead .programme-title {
+  font-size: var(--text-h2);
+}
+.programme-lead .programme-meta {
+  font-size: var(--text-body);
+}
+.programme-lead .programme-body {
+  font-size: var(--text-lead);
+  color: var(--color-darker-grey);
+  max-width: var(--measure);
+}
+
+.programme-pair {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--space-2xl);
+}
+.programme-item .programme-title {
+  font-size: var(--text-h3);
+}
+.programme-item .programme-body {
+  color: var(--color-darker-grey);
+  max-width: 32rem;
+}
+
+/* ---------------------------------------------------------------------------
+   7 · How it works — numbered process, large serif numerals, hairline
+   dividers between steps instead of a circle+connector-line device.
+   --------------------------------------------------------------------------- */
+.how-opening {
+  max-width: 44rem;
+  margin-bottom: var(--space-xl);
+}
+.how-opening p {
+  font-family: var(--font-display);
+  font-size: var(--text-lead);
+  font-weight: 500;
+  color: var(--color-navy);
+  line-height: 1.4;
+}
+
+.process {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-xl);
+}
+/* A real 2-column grid — numeral | content — instead of a hand-guessed
+   padding-left. The number's own rendered width (which varies with the
+   font/weight and isn't the same as its character count) used to leave
+   the title and body indented by different, wrong amounts; the grid
+   column tracks the number's actual box, so title and body always land
+   in exactly the same column regardless of numeral width. */
+.process-step {
+  max-width: var(--measure);
+  display: grid;
+  grid-template-columns: auto 1fr;
+  column-gap: var(--space-md);
+  row-gap: var(--space-xs);
+  align-items: baseline;
+}
+.process-num {
+  grid-column: 1;
+  grid-row: 1;
+  font-family: var(--font-display);
+  font-size: var(--text-h2);
+  font-weight: 600;
+  color: var(--color-red);
+  line-height: 1;
+}
+.process-title {
+  grid-column: 2;
+  grid-row: 1;
+  font-size: var(--text-h3);
+  font-weight: 600;
+}
+.process-body {
+  grid-column: 2;
+  grid-row: 2;
+  align-self: start;
+  color: var(--color-darker-grey);
+}
+
+.how-band {
+  background: var(--color-navy);
+  margin-top: var(--space-lg);
+  padding-block: var(--space-lg);
+}
+.how-band-text {
+  font-family: var(--font-display);
+  font-size: var(--text-lead);
+  font-weight: 500;
+  color: var(--color-white);
+  max-width: 48rem;
+  line-height: 1.45;
+}
+
+.how-caveat {
+  margin-top: var(--space-xl);
+  font-size: var(--text-small);
+  color: var(--color-darker-grey); /* --color-grey fails 4.5:1 at this size */
+  max-width: 46rem;
+}
+
+/* ---------------------------------------------------------------------------
+   7b · Is this you? — reuses the checklist look from Eligibility; a lighter,
+   self-qualifying pass before the formal criteria further down the page.
+   --------------------------------------------------------------------------- */
+.is-you-inner { max-width: 46rem; }
+
+/* ---------------------------------------------------------------------------
+   7c · Upcoming Connects — placeholder list, same expression-of-interest
+   framing as the form section (no confirmed dates yet).
+   --------------------------------------------------------------------------- */
+.connects-inner { max-width: 44rem; }
+.connects-list {
+  list-style: none;
+  margin: var(--space-lg) 0 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-sm);
+}
+.connect-item {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: var(--space-md);
+  padding-block: var(--space-sm);
+  border-bottom: 1px solid var(--color-light-grey);
+  font-size: var(--text-lead);
+}
+.connect-place {
+  font-family: var(--font-display);
+  font-weight: 600;
+  color: var(--color-navy);
+}
+.connect-date {
+  font-size: var(--text-small);
+  color: var(--color-darker-grey);
+}
+
+/* ---------------------------------------------------------------------------
+   7d · Become a mentor — placeholder CTA, routes to the same form as the
+   rest of the page until a dedicated mentor sign-up flow exists.
+   --------------------------------------------------------------------------- */
+.become-mentor-inner { max-width: 42rem; }
+.become-mentor-inner .btn { margin-top: var(--space-lg); }
+
+/* ---------------------------------------------------------------------------
+   8 · Eligibility
+   --------------------------------------------------------------------------- */
+.eligibility-inner { max-width: 52rem; }
+.checklist {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-md);
+}
+.check-item {
+  display: flex;
+  align-items: baseline;
+  gap: 0.85rem;
+  font-size: var(--text-lead);
+  color: var(--color-darker-grey);
+}
+/* A real round bullet, drawn in CSS so it stays crisp at any size */
+.check-dot {
+  flex-shrink: 0;
+  width: 0.5rem;
+  height: 0.5rem;
+  border-radius: 50%;
+  background: var(--color-red);
+  /* nudge the dot to sit on the text's optical centre, not its baseline */
+  transform: translateY(-0.25em);
+}
+.eligibility-close {
+  margin-top: var(--space-lg);
+  font-size: var(--text-lead);
+  color: var(--color-darker-grey);
+  max-width: 40rem;
+}
+
+/* ---------------------------------------------------------------------------
+   9 · Who's behind this
+   --------------------------------------------------------------------------- */
+.who-inner { max-width: 46rem; }
+.who-copy { margin-top: var(--space-lg); }
+.who-lead {
+  font-size: var(--text-lead);
+  color: var(--color-darker-grey);
+  margin-bottom: var(--space-md);
+  max-width: var(--measure);
+}
+.who-note {
+  font-size: var(--text-small);
+  color: var(--color-darker-grey); /* --color-grey fails 4.5:1 at this size */
+  font-style: italic;
+}
+
+/* ---------------------------------------------------------------------------
+   10 · Form / CTA
+   --------------------------------------------------------------------------- */
+.form-inner { max-width: 42rem; }
+.form-body {
+  margin-top: var(--space-sm);
+  font-size: var(--text-lead);
+  color: var(--color-darker-grey);
+}
+.form-inner .btn { margin-top: var(--space-lg); }
+.form-microcopy {
+  margin-top: var(--space-md);
+  font-size: var(--text-small);
+  color: var(--color-darker-grey); /* --color-grey fails 4.5:1 at this size */
+}
+
+/* ---------------------------------------------------------------------------
+   11 · Footer — mast-headed: logos anchor the band, tagline beside,
+   copyright closes it in small type below, on spacing alone (one hairline
+   — above the whole footer — is enough; a second one right beneath it
+   just to separate the copyright line was one rule too many).
+   --------------------------------------------------------------------------- */
+.site-footer {
+  background: var(--color-white);
+  border-top: 1px solid var(--color-light-grey);
+  padding-top: var(--space-xl);
+  padding-bottom: var(--space-xl); /* room beneath the copyright — it was hugging the page edge */
+}
+.footer-inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-md);
+  flex-wrap: wrap;
+}
+.footer-line {
+  font-size: var(--text-small);
+  color: var(--color-darker-grey); /* --color-grey fails 4.5:1 at this size */
+}
+
+/* Funder trio — UK Government, SBSA, ESCC, in that order (per council
+   request). These are wide banner-style logos, not square crests like
+   Studio Zao's mark, so they're capped by height rather than matched 1:1
+   to it. Own row so they have room to breathe without crowding the
+   Studio Zao/tagline row above. */
+.footer-funders {
+  display: flex;
+  align-items: center;
+  gap: 1.75rem;
+  flex-wrap: wrap;
+  margin-top: var(--space-lg);
+  padding-top: var(--space-lg);
+  border-top: 1px solid var(--color-light-grey);
+}
+.logo-img-ukgov { height: 26px; }
+.logo-img-sbsa { height: 30px; }
+
+.footer-bottom {
+  margin-top: var(--space-xl); /* separate copyright from the tagline row */
+}
+.footer-copyright {
+  /* body face, not mono — the mono outlier stays capped at its 2 slots
+     (see .scroll-cue-text) per the 2+1 type rule */
+  font-size: 0.75rem;
+  color: var(--color-darker-grey);
+  text-align: left;
+}
+
+/* ---------------------------------------------------------------------------
+   12 · Scroll-reveal
+   --------------------------------------------------------------------------- */
+.reveal {
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity var(--dur-mid) var(--ease-out),
+              transform var(--dur-mid) var(--ease-out);
+}
+.reveal.is-visible {
+  opacity: 1;
+  transform: none;
+}
+.reveal[data-reveal-delay="1"] { transition-delay: 0.08s; }
+.reveal[data-reveal-delay="2"] { transition-delay: 0.16s; }
+.reveal[data-reveal-delay="3"] { transition-delay: 0.24s; }
+
+/* ---------------------------------------------------------------------------
+   13 · Responsive
+   --------------------------------------------------------------------------- */
+
+/* Large screens — confirmed live at 1920px: the container stops growing at
+   1200px, leaving ~360px of empty white margin on each side ("looks great
+   on mobile, not optimized for browser" feedback). Widen the shared
+   container progressively on big monitors so the photography-heavy
+   sections (hero collage, tile grids) fill the extra space. Text blocks
+   don't stretch to match — .hero-copy, .measure, .programme-body etc. all
+   carry their own max-width/ch caps regardless of how wide the outer
+   container gets, so reading width stays comfortable either way. */
+@media (min-width: 1500px) {
+  :root { --wrap-max: 1440px; }
+}
+@media (min-width: 1900px) {
+  :root { --wrap-max: 1600px; }
+}
+
+/* Nav switches to the hamburger menu on its OWN breakpoint, wider than the
+   layout breakpoint below. Five links + the logo lockup start wrapping to
+   two lines somewhere around 900-970px (confirmed by measurement) — well
+   before the hero/programme layout actually needs to change — so the nav
+   needs to drop to the mobile menu earlier than everything else does. */
+@media (max-width: 1000px) {
+  .nav-toggle { display: flex; }
+  .nav-links {
+    position: absolute;
+    top: 100%;
+    right: 0;
+    left: 0;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0;
+    background: var(--color-white);
+    border-bottom: 1px solid var(--color-light-grey);
+    padding: var(--space-sm) var(--wrap-pad);
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height var(--dur-mid) var(--ease-out);
+  }
+  .nav-links.is-open { max-height: 22rem; }
+  .nav-links li { width: 100%; }
+  .nav-links a { display: block; width: 100%; padding: 0.85rem 0; }
+  .nav-links .nav-cta { display: inline-flex; width: auto; margin-top: 0.5rem; }
+
+  .site-nav { position: static; }
+  .header-inner { position: relative; }
+}
+
+@media (max-width: 900px) {
+  :root {
+    --space-2xl: 4rem;
+    --space-xl: 3rem;
+    --space-lg: 2rem;
+  }
+
+  .hero { min-height: auto; }
+  .scroll-cue { display: none; }
+  .hero-inner {
+    grid-template-columns: 1fr;
+    gap: var(--space-lg);
+  }
+  .hero-collage { order: 2; }
+
+  .programme-pair { grid-template-columns: 1fr; gap: var(--space-xl); }
+  .programme-lead .programme-title { font-size: var(--text-h3); }
+
+  .process-num { font-size: var(--text-h3); }
+}
+
+@media (max-width: 560px) {
+  .hero-collage { gap: 0.6rem; }
+  .tile-a, .tile-b, .tile-c, .tile-d { transform: none; }
+  .footer-inner { flex-direction: column; align-items: flex-start; }
+}
+
+/* ---------------------------------------------------------------------------
+   14 · Reduced motion
+   --------------------------------------------------------------------------- */
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+    scroll-behavior: auto !important;
+  }
+
+  .reveal { opacity: 1; transform: none; }
+  .collage-tile { transform: none !important; }
+  .scroll-cue-line { animation: none; }
+}
