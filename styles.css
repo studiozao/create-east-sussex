@@ -447,10 +447,9 @@ summary:focus-visible,
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
   gap: clamp(0.6rem, 1.2vw, 1rem);
-  /* standalone `rotate`, not `transform` — GSAP animates `transform` on the
-     tiles and the two must compose rather than overwrite each other */
-  rotate: -5deg;
-  /* the rotation pushes the corners out, so pull the box in to compensate */
+  /* The group itself is level — only the individual tiles carry a starting
+     tilt (via data-tilt + GSAP), settling to dead straight. No wrapper
+     rotation, so the final state has no rotation left anywhere. */
   margin: clamp(1rem, 3vw, 2.25rem);
 }
 .cluster-tile {
@@ -1025,7 +1024,7 @@ summary:focus-visible,
   .hero { min-height: auto; padding-block: var(--space-xl) var(--space-2xl); }
   .register-main .btn, .register-aside .btn { width: 100%; }
   .connect-item { flex-direction: column; align-items: flex-start; gap: 0.35rem; }
-  .cluster { rotate: -3deg; margin: 0.75rem; }
+  .cluster { margin: 0.75rem; }
 }
 
 /* ---------------------------------------------------------------------------
