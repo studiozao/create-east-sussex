@@ -25,31 +25,97 @@
   var prefersReduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 
   /* =========================================================================
-     1 · Hero video — the source clip is only ~2.3s, so it loops often. Slowing
-     it down stretches each pass and makes the loop point far less obvious.
+     1 · Hero video — seamless-ish loop.
+
+     The source clip is only ~2.3s, so `loop` on a single <video> gives a hard
+     cut on every pass. Instead there are two stacked layers sharing one src:
+     the active one plays, and as it approaches the end the other is started
+     from zero and the two crossfade. The seam lands mid-fade, where it is
+     very hard to see. Playback is also slowed, which stretches each pass and
+     softens the camera drift.
      ========================================================================= */
   (function initHeroVideo() {
-    var video = document.querySelector(".hero-video");
-    if (!video) return;
+    var layers = Array.prototype.slice.call(
+      document.querySelectorAll("[data-loop-layer]")
+    );
+    if (!layers.length) return;
 
     if (prefersReduced) {
-      video.pause();
+      layers.forEach(function (v) { v.pause(); });
       return;
     }
 
-    video.playbackRate = 0.6;
+    var RATE = 0.5;   // stretches the ~2.3s clip to ~4.6s per pass
+    var FADE = 1.0;   // seconds of overlap, matched to the CSS transition
+    var active = 0;
 
-    // Some browsers reject autoplay until the metadata is in; retry once.
-    var play = function () {
-      var attempt = video.play();
+    layers.forEach(function (v) {
+      v.playbackRate = RATE;
+      // Autoplay can be refused until the user interacts; the poster frame
+      // stands in, so there is nothing to recover from.
+      v.addEventListener("loadedmetadata", function () { v.playbackRate = RATE; });
+    });
+
+    function play(v) {
+      var attempt = v.play();
       if (attempt && typeof attempt.catch === "function") {
-        attempt.catch(function () {
-          /* Autoplay blocked — the poster frame stands in. Nothing to do. */
-        });
+        attempt.catch(function () {});
       }
-    };
-    if (video.readyState >= 2) play();
-    else video.addEventListener("loadeddata", play, { once: true });
+    }
+
+    play(layers[0]);
+
+    var swapping = false;
+
+    /* Fallback. The crossfade is driven by requestAnimationFrame, which the
+       browser throttles or stops on a hidden tab. `loop` is deliberately NOT
+       set (it would hard-cut and fight the fade), so without this a layer
+       that reaches its end while rAF is stalled would freeze on the last
+       frame. If that happens, just restart it. */
+    layers.forEach(function (v) {
+      v.addEventListener("ended", function () {
+        if (swapping) return;
+        v.currentTime = 0;
+        play(v);
+      });
+    });
+
+    function tick() {
+      var current = layers[active];
+      var dur = current.duration;
+
+      if (dur && !swapping && current.currentTime > 0) {
+        // currentTime and duration are in MEDIA time, so the fade window does
+        // not need scaling by playbackRate.
+        var remaining = dur - current.currentTime;
+
+        if (remaining <= FADE * RATE) {
+          swapping = true;
+          var nextIndex = (active + 1) % layers.length;
+          var next = layers[nextIndex];
+
+          next.currentTime = 0;
+          next.playbackRate = RATE;
+          play(next);
+
+          next.classList.add("is-active");
+          current.classList.remove("is-active");
+          active = nextIndex;
+
+          // Park the outgoing layer once it is fully faded, so it is not
+          // decoding two streams forever.
+          window.setTimeout(function () {
+            current.pause();
+            current.currentTime = 0;
+            swapping = false;
+          }, FADE * 1000);
+        }
+      }
+
+      window.requestAnimationFrame(tick);
+    }
+
+    window.requestAnimationFrame(tick);
   })();
 
   /* =========================================================================

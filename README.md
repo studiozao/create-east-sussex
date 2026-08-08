@@ -45,11 +45,19 @@ fast (Cmd/Ctrl+F).
    first frame, used as the poster and as the still fallback under
    `prefers-reduced-motion`. Two caveats worth knowing before you swap it:
    the source is a **vertical** phone video, so on desktop most of the frame
-   is cropped away to a wide band; and it is only ~2.3s, so `script.js`
-   slows playback to 0.6x to make the loop less obvious. The full-res
-   original (`IMG_4627.mov`, 8.1MB) is gitignored. The hero scrim is neutral
-   black and is what holds the white headline at AA contrast, so do not
-   lighten it without re-checking the type.
+   is cropped away to a wide band; and it is only ~2.3s, so it is
+   played back at 0.5x across TWO stacked <video> layers that `script.js`
+   crossfades into each other near the end of each pass, hiding the loop
+   seam (the `loop` attribute is deliberately not set, since it would hard
+   cut and fight the fade). The full-res
+   original (`IMG_4627.mov`, 8.1MB) is gitignored. The hero scrim is neutral black
+   and is weighted to the footage rather than to habit: the clip is bright
+   in the upper half (sky) and dark in the lower half (ground), so the
+   gradient peaks over the headline band and drops away at the bottom. The
+   small tagline sits on a solid red chip because it was over the brightest
+   sky and would otherwise have forced the whole scrim darker. If you change
+   the clip or the stops, re-measure the luminance under each text block
+   before shipping.
 
 2. **Discipline images — TEMPORARY, replace before launch.** All four
    photos are generic (but real, credited) stock, not actual programme

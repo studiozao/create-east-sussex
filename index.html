@@ -109,14 +109,25 @@
       ======================================================================
     -->
     <section class="hero" aria-labelledby="hero-heading">
+      <!-- Two copies of the same clip. The source is only ~2.3s, so looping it
+           natively produces a hard cut every pass. script.js instead crossfades
+           between these two layers as one nears its end, which hides the seam.
+           Same `src`, so the browser fetches and caches it once. -->
       <div class="hero-bg" aria-hidden="true">
         <video
-          class="hero-video"
+          class="hero-video is-active"
+          data-loop-layer
           src="assets/hero/hero-cliffs.mp4"
           poster="assets/hero/hero-poster.jpg"
-          autoplay
           muted
-          loop
+          playsinline
+          preload="auto"
+        ></video>
+        <video
+          class="hero-video"
+          data-loop-layer
+          src="assets/hero/hero-cliffs.mp4"
+          muted
           playsinline
           preload="auto"
         ></video>

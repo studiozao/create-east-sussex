@@ -248,42 +248,67 @@ summary:focus-visible,
 }
 
 .hero-bg { position: absolute; inset: 0; z-index: -2; overflow: hidden; }
+/* The two layers stack exactly; script.js crossfades their opacity to hide
+   the loop seam. The first carries .is-active so a JS-free page still shows
+   a frame rather than nothing. */
 .hero-video {
+  position: absolute;
+  inset: 0;
   width: 100%;
   height: 100%;
   object-fit: cover;         /* source is a vertical phone video — the crop
                                 to a wide band is deliberate */
   object-position: center 42%;
-  will-change: transform;
+  opacity: 0;
+  transition: opacity 1s linear;
+  will-change: transform, opacity;
 }
+.hero-video.is-active { opacity: 1; }
 
 .hero-shade {
   position: absolute;
   inset: 0;
   z-index: -1;
+  /* Weighted to the FOOTAGE, not to habit. Measuring the clip's luminance
+     under each text block showed the sky in the upper half is bright
+     (p95 ~0.59) while the ground in the lower half is dark (p95 ~0.28) —
+     so the old scrim, which was heaviest at the bottom, was darkening the
+     part that least needed it. This peaks over the headline band and drops
+     away sharply at the bottom, which is where the cliffs and beach are.
+     Net result: much more of the shot reads, and contrast improves.
+     Re-measure before changing these stops. */
   background:
     linear-gradient(
       180deg,
       rgba(0, 0, 0, 0.42) 0%,
-      rgba(0, 0, 0, 0.50) 45%,
-      rgba(0, 0, 0, 0.78) 100%
+      rgba(0, 0, 0, 0.56) 45%,
+      rgba(0, 0, 0, 0.34) 100%
     );
 }
 
 .hero-inner { display: flex; flex-direction: column; }
 
+/* The tagline is the smallest text in the hero and sat over the brightest
+   part of the sky. On its own chip it carries its own contrast (white on
+   brand red measures 4.53:1) instead of forcing the whole scrim darker. */
 .hero-tagline {
+  align-self: flex-start;
   font-family: var(--font-body);
   font-weight: 700;
   font-size: var(--text-label);
   letter-spacing: 0.14em;
   text-transform: uppercase;
-  color: var(--color-on-dark-dim);
+  color: var(--color-white);
+  background: var(--color-red);
+  padding: 0.55rem 0.9rem;
   margin-bottom: var(--space-md);
-  max-width: 34ch;
+  max-width: 42ch;
 }
 
 .hero-heading {
+  /* covers isolated blown-out pixels (sun glare on water) that a flat scrim
+     can't reach without over-darkening the whole frame */
+  text-shadow: 0 2px 24px rgba(0, 0, 0, 0.42);
   font-size: var(--text-hero);
   font-variation-settings: "wdth" 118;
   font-weight: 900;
@@ -329,6 +354,7 @@ summary:focus-visible,
 .hero-sub {
   font-size: var(--text-lead);
   color: var(--color-white);
+  text-shadow: 0 1px 12px rgba(0, 0, 0, 0.55);
   max-width: 42ch;
 }
 .hero-actions { display: flex; flex-wrap: wrap; gap: var(--space-sm); }
@@ -917,7 +943,7 @@ summary:focus-visible,
   .card-inner { transform: none !important; opacity: 1 !important; }
   .type { border-right-color: transparent !important; }
   /* the looping hero video is spatial motion too — hold the poster frame */
-  .hero-video { display: none; }
+  .hero-video { display: none !important; }
   .hero-bg {
     background-image: url("assets/hero/hero-poster.jpg");
     background-size: cover;
