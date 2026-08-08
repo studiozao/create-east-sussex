@@ -163,6 +163,14 @@ summary:focus-visible,
   z-index: var(--z-sticky);
   background: var(--color-white);
   border-bottom: 1px solid var(--color-line);
+  transition: transform var(--dur-mid) var(--ease-out);
+}
+/* Auto-hide on scroll — mobile only. script.js toggles .is-hidden while
+   scrolling down and clears it on scroll-up, but only attaches the
+   listener below this same 900px breakpoint everything else uses for
+   "mobile", so desktop/tablet keep a permanently visible header. */
+@media (max-width: 900px) {
+  .site-header.is-hidden { transform: translateY(-100%); }
 }
 
 .header-inner {
@@ -557,7 +565,12 @@ summary:focus-visible,
   font-weight: 700;
   letter-spacing: 0.02em;
   color: var(--color-red);
-  white-space: nowrap;
+}
+/* Nowrap only once there's reliably enough width for the longest of the
+   three ("Rolling sign-up · up to 6 hours, one-to-one") — below this it
+   wraps normally instead of overflowing past the card edge. */
+@media (min-width: 400px) {
+  .card-meta { white-space: nowrap; }
 }
 .card-body {
   margin-top: var(--space-md);
@@ -1042,6 +1055,15 @@ summary:focus-visible,
   .register-main .btn, .register-aside .btn { width: 100%; }
   .connect-item { flex-direction: column; align-items: flex-start; gap: 0.35rem; }
   .cluster { margin: 0.75rem; }
+
+  /* Footer — the three stacked columns and the funder row otherwise carry
+     the same generous gaps as desktop, which reads as a lot of dead space
+     once everything is a single narrow column. */
+  .site-footer { padding-block: var(--space-xl) var(--space-lg); }
+  .footer-top { gap: var(--space-lg); }
+  .footer-heading { margin-bottom: var(--space-sm); }
+  .footer-funders { margin-top: var(--space-lg); gap: 1.25rem; }
+  .footer-bottom { margin-top: var(--space-md); }
 }
 
 /* ---------------------------------------------------------------------------
