@@ -932,7 +932,7 @@ summary:focus-visible,
   gap: clamp(2rem, 4vw, 3.5rem);
   align-items: start;
 }
-.footer-brand .logo-img-zao { height: 34px; }
+.footer-brand .logo-img-zao { height: 42px; }
 .footer-line {
   margin-top: var(--space-md);
   font-size: var(--text-small);
@@ -986,8 +986,11 @@ summary:focus-visible,
   padding-top: var(--space-lg);
   border-top: 1px solid var(--color-line);
 }
-.logo-img-ukgov { height: 26px; }
-.logo-img-sbsa  { height: 30px; }
+.logo-img-ukgov { height: 32px; }
+.logo-img-sbsa  { height: 37px; }
+/* ESCC in the footer only — the shared .logo-img-escc rule (44px) stays as
+   the header's size; this scoped override bumps just the footer copy. */
+.footer-funders .logo-img-escc { height: 54px; }
 
 .footer-bottom { margin-top: var(--space-lg); }
 .footer-copyright { font-size: 0.75rem; color: var(--color-ink-3); }
