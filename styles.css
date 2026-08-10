@@ -654,28 +654,52 @@ summary:focus-visible,
 .map-pin.is-active .map-pin-dot   { r: 9; }
 .map-pin.is-active .map-pin-label { opacity: 1; }
 
-/* --- Connects list ------------------------------------------------------- */
+/* --- Event calendar ------------------------------------------------------ */
+.calendar-months { display: flex; flex-direction: column; gap: var(--space-lg); }
+.calendar-month-name {
+  font-size: var(--text-h3);
+  margin-bottom: var(--space-sm);
+}
 /* No rules between rows — spacing alone separates them, and the gap is
-   deliberately tight so the five towns read as one list, not five blocks. */
-.connects-list { display: flex; flex-direction: column; gap: 0.35rem; }
-.connect-item {
-  display: flex;
+   deliberately tight so each month's rows read as one list, not blocks. */
+.calendar-list { display: flex; flex-direction: column; gap: 0.35rem; }
+/* A grid, not flex-wrap: the date column can wrap onto a second line (some
+   of these are long, e.g. "same day as Hastings") without dragging the
+   link down with it — place and link both stay pinned to their own
+   columns regardless of how many lines the date takes. */
+.calendar-item {
+  display: grid;
+  grid-template-columns: minmax(6.5rem, auto) minmax(0, 1fr) auto;
+  column-gap: var(--space-md);
+  row-gap: 0.2rem;
   align-items: baseline;
-  justify-content: space-between;
-  flex-wrap: wrap;
-  gap: var(--space-sm);
-  padding-block: 0.45rem;
+  padding-block: 0.6rem;
+  border-top: 1px solid var(--color-line);
   transition: color var(--dur-fast) var(--ease-out);
 }
-.connect-place {
+.calendar-month-name + .calendar-list .calendar-item:first-child { border-top: none; }
+.calendar-place {
   /* body face at a heavier weight, not the display face */
   font-weight: 700;
-  font-size: 1.25rem;
+  font-size: 1.0625rem;
   color: var(--color-ink);
   transition: color var(--dur-fast) var(--ease-out);
 }
-.connect-date { font-size: var(--text-small); color: var(--color-ink-3); white-space: nowrap; }
-.connect-item.is-active .connect-place { color: var(--color-red); }
+.calendar-date {
+  font-size: var(--text-small);
+  color: var(--color-ink-3);
+}
+.calendar-link {
+  font-size: var(--text-small);
+  font-weight: 700;
+  color: var(--color-red);
+  text-decoration: underline;
+  text-underline-offset: 3px;
+  white-space: nowrap;
+  justify-self: end;
+}
+.calendar-link:hover { color: var(--color-ink); }
+.calendar-item.is-active .calendar-place { color: var(--color-red); }
 
 .connects-note {
   margin-top: var(--space-lg);
@@ -788,60 +812,165 @@ summary:focus-visible,
 }
 
 /* ---------------------------------------------------------------------------
-   11 · Process — numeral | content grid. A real grid column tracks the
-   numeral's rendered width, so title and body always share one left edge.
+   11 · Meet your mentors — horizontal scroll carousel. CSS scroll-snap,
+   no JS: adding another <li class="mentor-card"> extends it, no rebuild.
    --------------------------------------------------------------------------- */
-.process {
-  display: grid;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: clamp(2rem, 4vw, 3.5rem);
+.mentor-scroll-outer {
+  margin-top: var(--space-xl);
+  padding-inline: var(--wrap-pad);
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  -webkit-overflow-scrolling: touch;
+  /* a little breathing room so the scrollbar (where the OS draws one)
+     doesn't sit flush against the cards */
+  padding-bottom: var(--space-sm);
 }
-.process-step {
-  display: grid;
-  grid-template-columns: auto minmax(0, 1fr);
-  column-gap: var(--space-md);
-  row-gap: var(--space-2xs);
-  align-items: baseline;
-  max-width: var(--measure);
+.mentor-scroll {
+  display: flex;
+  gap: clamp(1rem, 2vw, 1.5rem);
+  width: max-content;
 }
-.process-num {
-  grid-column: 1;
-  grid-row: 1;
+.mentor-card {
+  scroll-snap-align: start;
+  width: min(20rem, 82vw);
+  flex: 0 0 auto;
+  padding: clamp(1.5rem, 2.2vw, 2rem);
+  background: var(--color-paper-2);
+  border: 1px solid var(--color-line);
+}
+.mentor-photo {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 4rem;
+  height: 4rem;
+  border-radius: 50%;
+  background: var(--color-line-strong);
+  color: var(--color-ink-3);
   font-family: var(--font-display);
-  font-variation-settings: "wdth" 110;
-  font-size: clamp(2rem, 3.5vw, 2.75rem);
-  font-weight: 750;
-  color: var(--color-red);
-  line-height: 1;
+  font-size: 1.25rem;
+  font-weight: 650;
+  margin-bottom: var(--space-md);
 }
-.process-title { grid-column: 2; grid-row: 1; font-size: var(--text-h3); }
-.process-body {
-  grid-column: 2;
-  grid-row: 2;
-  align-self: start;
+/* Any "Placeholder" flag on the page uses this same look — small, honest,
+   never styled to blend in as if it were real copy. */
+.mentor-placeholder-flag,
+.testimonial-placeholder-flag,
+.stats-flag {
+  display: inline-block;
+  font-size: var(--text-label);
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--color-red);
+  background: rgba(228, 37, 68, 0.09);
+  padding: 0.2rem 0.55rem;
+  margin-bottom: var(--space-sm);
+}
+.mentor-name { font-size: var(--text-h3); }
+.mentor-role {
+  font-size: var(--text-small);
+  font-weight: 700;
+  color: var(--color-red);
+  margin-top: var(--space-3xs);
+}
+.mentor-bio {
+  margin-top: var(--space-sm);
   color: var(--color-ink-2);
 }
-
-.how-caveat {
-  margin-top: var(--space-xl);
+.mentor-example {
+  margin-top: var(--space-sm);
+  padding-top: var(--space-sm);
+  border-top: 1px solid var(--color-line);
   font-size: var(--text-small);
   color: var(--color-ink-3);
-  max-width: 46rem;
+  font-style: italic;
 }
 
-.how-band {
-  background: var(--color-ink);
-  margin-top: var(--space-2xl);
-  padding-block: var(--space-xl);
+/* ---------------------------------------------------------------------------
+   12 · Your business, your journey — outcome-led prose, not a numbered
+   process. The four-step detail moved to the FAQ.
+   --------------------------------------------------------------------------- */
+.journey-inner { max-width: 52rem; }
+.journey-copy {
+  font-size: var(--text-lead);
+  color: var(--color-ink-2);
+  max-width: var(--measure);
 }
-.how-band-text {
-  /* body face — this is a paragraph, not a heading */
-  font-size: clamp(1.1875rem, 2vw, 1.625rem);
-  font-weight: 500;
-  line-height: 1.45;
-  color: var(--color-white);
-  max-width: 38ch;
+.journey-copy + .journey-copy { margin-top: var(--space-md); }
+.journey-inner .btn { margin-top: var(--space-xl); }
+
+/* ---------------------------------------------------------------------------
+   13 · Businesses like yours — testimonials
+   --------------------------------------------------------------------------- */
+.testimonial-grid {
+  margin-top: var(--space-xl);
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: clamp(1.5rem, 3vw, 2.5rem);
 }
+.testimonial-card { margin: 0; }
+.testimonial-quote {
+  margin: 0;
+  font-family: var(--font-display);
+  font-variation-settings: "wdth" 105;
+  font-weight: 650;
+  font-size: clamp(1.125rem, 1.7vw, 1.4375rem);
+  line-height: 1.35;
+  letter-spacing: -0.01em;
+  color: var(--color-ink);
+}
+.testimonial-attribution {
+  margin-top: var(--space-md);
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+.testimonial-avatar {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  width: 2.75rem;
+  height: 2.75rem;
+  border-radius: 50%;
+  background: var(--color-line-strong);
+  color: var(--color-ink-3);
+  font-weight: 700;
+}
+.testimonial-name { display: block; font-weight: 700; color: var(--color-ink); }
+.testimonial-business { display: block; font-size: var(--text-small); color: var(--color-ink-3); }
+
+/* ---------------------------------------------------------------------------
+   14 · About stats strip — count up from 0 on scroll into view (script.js),
+   visible at full value by default so JS-off still shows the real numbers.
+   --------------------------------------------------------------------------- */
+.stats-row {
+  margin-top: var(--space-lg);
+  margin-bottom: var(--space-xl);
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: clamp(1rem, 3vw, 2rem);
+}
+.stat { border-top: 1px solid var(--color-line-strong); padding-top: var(--space-md); }
+.stat-figure {
+  font-family: var(--font-display);
+  font-variation-settings: "wdth" 108;
+  font-weight: 700;
+  font-size: clamp(2.25rem, 4.5vw, 3.5rem);
+  line-height: 1;
+  color: var(--color-red);
+}
+.stat-label {
+  margin-top: var(--space-2xs);
+  font-size: var(--text-small);
+  color: var(--color-ink-3);
+}
+
+/* ---------------------------------------------------------------------------
+   15 · FAQ — reuses the .panels disclosure pattern from About.
+   --------------------------------------------------------------------------- */
+.faq-inner { max-width: 52rem; }
 /* On laptop and up there's a full line of width going unused inside the
    dark band — let the text run the wrap's width instead of stopping short. */
 @media (min-width: 900px) {
@@ -1048,7 +1177,9 @@ summary:focus-visible,
 
   .cards { grid-template-columns: minmax(0, 1fr); }
 
-  .process { grid-template-columns: minmax(0, 1fr); }
+  .testimonial-grid { grid-template-columns: minmax(0, 1fr); }
+  .stats-row { grid-template-columns: repeat(3, minmax(0, 1fr)); gap: var(--space-sm); }
+  .stat-figure { font-size: clamp(1.75rem, 7vw, 2.5rem); }
 
   .register-grid { grid-template-columns: minmax(0, 1fr); }
 
@@ -1062,8 +1193,11 @@ summary:focus-visible,
 @media (max-width: 560px) {
   .hero { min-height: auto; padding-block: var(--space-xl) var(--space-2xl); }
   .register-main .btn, .register-aside .btn { width: 100%; }
-  .connect-item { flex-direction: column; align-items: flex-start; gap: 0.35rem; }
+  .calendar-item { grid-template-columns: minmax(0, 1fr); row-gap: 0.3rem; }
+  .calendar-link { justify-self: start; }
   .cluster { margin: 0.75rem; }
+  .stats-row { grid-template-columns: minmax(0, 1fr); gap: var(--space-md); }
+  .journey-inner .btn { width: 100%; }
 
   /* Footer — the three stacked columns and the funder row otherwise carry
      the same generous gaps as desktop, which reads as a lot of dead space

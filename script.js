@@ -371,6 +371,35 @@
         }
 
         /* ---------------------------------------------------------------
+           About stats — count up from 0 to data-count as the strip
+           scrolls into view. Markup already shows the real final number
+           as static text, so JS-off or a blocked vendor file still shows
+           the true figure; this only adds the count-up on top of it.
+           --------------------------------------------------------------- */
+        var statCounts = gsap.utils.toArray(".stat-count");
+        if (statCounts.length) {
+          ScrollTrigger.create({
+            trigger: ".stats-row",
+            start: "top 85%",
+            once: true,
+            onEnter: function () {
+              statCounts.forEach(function (el) {
+                var target = parseFloat(el.getAttribute("data-count")) || 0;
+                var obj = { val: 0 };
+                gsap.to(obj, {
+                  val: target,
+                  duration: 1.6,
+                  ease: "power2.out",
+                  onUpdate: function () {
+                    el.textContent = Math.round(obj.val);
+                  },
+                });
+              });
+            },
+          });
+        }
+
+        /* ---------------------------------------------------------------
            Eligibility ticks — each draws itself in, then the red circle
            behind it pops slightly, as its row scrolls into view. Length is
            read per-path via getTotalLength(), so it isn't hard-coded and
@@ -472,7 +501,7 @@
   (function initMap() {
     var pins = Array.prototype.slice.call(document.querySelectorAll(".map-pin"));
     var rows = Array.prototype.slice.call(
-      document.querySelectorAll(".connect-item")
+      document.querySelectorAll(".calendar-item")
     );
     if (!pins.length) return;
 

@@ -114,7 +114,39 @@ fast (Cmd/Ctrl+F).
    than this checklist), the source figures are in the Lot 3 specification
    document, not repeated here.
 
-6. **Connect dates** — the register section is currently framed as an
+6a. **Meet your mentors — PLACEHOLDER, replace before launch.** Chris and Sara
+   are real names but everything else in `#mentors` is mockup content: the
+   `CH`/`SA` initials tiles stand in for real photos, the bios just say "bio
+   to follow", and the "[Placeholder Business]" line in each card needs a
+   real named business each mentor has helped. Never ship a real name next
+   to the wrong photo — if a real photo isn't ready for someone, an initials
+   tile (what's there now) is the right fallback, not a stock photo. The
+   carousel (`.mentor-scroll`) takes any number of cards without layout
+   changes — add more `<li class="mentor-card">` blocks as mentors join.
+
+6b. **Businesses like yours — NO REAL COPY YET, do not treat as final.**
+   `#testimonials` ships with two clearly-flagged placeholder quotes (each
+   marked with a small red "Placeholder" tag) because no signed-off
+   testimonial copy existed at build time. Do not delete the "Placeholder"
+   flags without replacing the quote, name and business text next to them
+   with real, signed-off testimonials first.
+
+6c. **About stats — PLACEHOLDER FIGURES, not confirmed.** The count-up strip
+   in `#about` (30+ businesses supported, 120+ mentoring hours, 95% would
+   recommend) is flagged inline as placeholder and is not real data. Update
+   the three `data-count` values on `.stat-count` (and the visible number
+   inside each span, which mirrors `data-count` so the figure is still
+   correct if `script.js` fails to load) before launch, and remove the
+   `.stats-flag` line once they're real.
+
+6d. **Event calendar dates** — none of the `<<< SWAP >>>` dates in
+   `#connects` are locked. The five September rows have real
+   working (tentative) dates; October–December are placeholders with no
+   location chosen yet. Every "Register for a Connect" link currently
+   points at the same placeholder Google Form — replace with real
+   per-location booking links (Eventbrite or similar) once they exist.
+
+7. **Connect dates** — the register section is currently framed as an
    *expression of interest*, not a live booking, because Connect dates
    aren't confirmed. Once
    dates are live, update the copy in the form section (and the small microcopy

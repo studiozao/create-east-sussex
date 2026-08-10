@@ -6,6 +6,13 @@
   Files:   index.html  ·  styles.css  ·  script.js  ·  tokens.css
   Swap-before-launch items are flagged inline with  <<< SWAP >>>  and listed
   in README.md.
+
+  Aug 2026 content restructure: full section reorder (eligibility moved up,
+  About moved down and renamed, mentoring detail rewritten as outcome-led
+  prose, four new sections: Meet your mentors, Businesses like yours,
+  event calendar rebuilt from the old Connects list, FAQ). Several new
+  sections ship with clearly-labelled PLACEHOLDER content (mentor bios,
+  testimonials, stats, calendar dates) — see README for the full swap list.
   ============================================================================
 -->
 <!DOCTYPE html>
@@ -82,9 +89,9 @@
         </button>
         <ul id="nav-links" class="nav-links">
           <li><a href="#what-you-get">What you get</a></li>
-          <li><a href="#connects">Where we meet</a></li>
-          <li><a href="#who-is-it-for">Who it&rsquo;s for</a></li>
-          <li><a href="#about">About</a></li>
+          <li><a href="#who-is-it-for">Eligibility</a></li>
+          <li><a href="#mentors">Mentors</a></li>
+          <li><a href="#faq">FAQ</a></li>
           <li><a class="nav-cta" href="#register">Join <span aria-hidden="true">&rarr;</span></a></li>
         </ul>
       </nav>
@@ -95,12 +102,13 @@
 
     <!--
       ======================================================================
-      HERO — "Create" types out character by character behind a caret, then
-      "East Sussex" lands beneath it. Behind: client-supplied golden-hour
-      cliff footage, cropped to a wide band (the source is a vertical phone
-      video, so most of the frame is deliberately cropped away on desktop).
-      The scrim is neutral black, not a colour cast — the footage is already
-      moody enough that it only needs darkening for type contrast.
+      1 · HERO — "Create" types out character by character behind a caret,
+      then "East Sussex" lands beneath it. Behind: client-supplied
+      golden-hour cliff footage, cropped to a wide band (the source is a
+      vertical phone video, so most of the frame is deliberately cropped
+      away on desktop). The scrim is neutral black, not a colour cast — the
+      footage is already moody enough that it only needs darkening for type
+      contrast.
       <<< SWAP >>> assets/hero/hero-cliffs.mp4 + hero-poster.jpg
       ======================================================================
     -->
@@ -131,7 +139,7 @@
       <div class="hero-shade" aria-hidden="true"></div>
 
       <div class="wrap hero-inner">
-        <p class="hero-tagline">Grow your creative business together:</p>
+        <p class="hero-tagline">Grow your creative business, together.</p>
 
         <h1 id="hero-heading" class="hero-heading" aria-label="Create East Sussex">
           <span class="hero-line hero-line-create" aria-hidden="true">
@@ -142,11 +150,12 @@
 
         <div class="hero-foot">
           <p class="hero-sub">
-            Free mentoring, practical workshops, and a peer community for
-            creative businesses across East Sussex.
+            Free mentoring, practical workshops and a supportive community to
+            help creative founders build stronger, more sustainable
+            businesses.
           </p>
           <div class="hero-actions">
-            <a class="btn btn-primary" href="#register" data-cta="hero">Register your interest</a>
+            <a class="btn btn-primary" href="#register" data-cta="hero">Join us now</a>
             <a class="btn btn-ghost" href="#what-you-get">See what you get</a>
           </div>
         </div>
@@ -155,9 +164,9 @@
 
     <!--
       ======================================================================
-      HOOK — deliberately short and full width, on its own tinted band so it
-      reads as a beat between the hero and the offer rather than a section.
-      The discipline photographs moved down to "Who it's for".
+      2 · INTRO, WITH URGENCY LINE — deliberately short and full width, on
+      its own tinted band so it reads as a beat between the hero and the
+      offer rather than a section.
       ======================================================================
     -->
     <section class="section section-hook" id="is-this-you" aria-labelledby="hook-heading">
@@ -173,15 +182,15 @@
           you&rsquo;re working on, and get free 1:1 mentoring tailored to
           where your business is right now.
         </p>
-        <p class="hook-close reveal">Join whenever you&rsquo;re ready.</p>
+        <p class="hook-close reveal">Limited spaces. Join now.</p>
       </div>
     </section>
 
     <!--
       ======================================================================
-      WHAT YOU GET — an editorial index of rows, each with a line icon.
-      Connects leads (the low-commitment entry point); the network and
-      mentoring follow, with full mentoring detail further down.
+      3 · THREE WAYS IN — an editorial index of cards. Order unchanged:
+      Connects, Mentoring, network. Mentoring card body expanded to list
+      what mentoring actually covers.
       ======================================================================
     -->
     <section class="section section-programme" id="what-you-get" aria-labelledby="programme-heading">
@@ -192,7 +201,8 @@
           <p class="section-intro">
             Free 1:1 mentoring is the heart of it, and you can go straight
             there. Practical sessions and a network of people who get it sit
-            alongside, for whenever you want them.
+            alongside, for whenever you want them. Connects are free, 2-hour
+            workshops. Open to anyone, no booking history needed.
           </p>
         </header>
 
@@ -232,8 +242,9 @@
               <p class="card-body">
                 The heart of the programme. Get matched with a mentor who has
                 built a creative business themselves, and work on whatever
-                your business actually needs. Register and we&rsquo;ll take it
-                from there.
+                your business actually needs, including pricing, finding
+                customers, marketing, AI, productivity, confidence and
+                business growth. Register and we&rsquo;ll take it from there.
               </p>
             </div>
           </article>
@@ -263,51 +274,322 @@
 
     <!--
       ======================================================================
-      WHERE WE MEET — the county map sits on the RIGHT, the list on the left.
-      Boundary is real: ONS "Counties and Unitary Authorities (Dec 2023)"
-      generalised boundary for East Sussex, projected to this viewBox, so
-      the outline and all five town positions are geographically placed.
-      <<< SWAP >>> add real dates and booking links once Connects go live.
+      4 · ELIGIBILITY — moved up from its old position near the bottom, so a
+      reader finds out if they qualify right after seeing the offer, before
+      investing attention in mentors/journey/testimonials/calendar. Content
+      unchanged, position only. Formal criteria, grounded in the Lot 3 spec.
+      Exact numeric SME thresholds (staff/turnover/balance-sheet caps) and
+      the blunt pre-start exclusion are deliberately left off — see README.
       ======================================================================
     -->
-    <section class="section section-connects section-tint" id="connects" aria-labelledby="connects-heading">
-      <!-- Section head sits OUTSIDE the split and full width, so the
-           heading gets a single line instead of wrapping in a column. -->
+    <section class="section section-eligibility" id="who-is-it-for" aria-labelledby="eligibility-heading">
+      <div class="wrap split split-text-first">
+        <div class="split-copy">
+          <header class="section-head reveal">
+            <h2 id="eligibility-heading" class="section-heading">Check you&rsquo;re eligible</h2>
+          </header>
+
+          <ul class="checklist">
+            <li class="check-item reveal">
+              <span class="check-icon" aria-hidden="true">
+                <svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+                  <path class="check-tick" d="M4 10.5 8 14.5 16 5.5" />
+                </svg>
+              </span>
+              Actively trading creative business based in East Sussex
+            </li>
+            <li class="check-item reveal">
+              <span class="check-icon" aria-hidden="true">
+                <svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+                  <path class="check-tick" d="M4 10.5 8 14.5 16 5.5" />
+                </svg>
+              </span>
+              Working in design, digital, craft, fashion, film, gaming, music,
+              publishing or a related creative field, including tech-enabled
+              work like web or app design (general IT support doesn&rsquo;t
+              count)
+            </li>
+            <li class="check-item reveal">
+              <span class="check-icon" aria-hidden="true">
+                <svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+                  <path class="check-tick" d="M4 10.5 8 14.5 16 5.5" />
+                </svg>
+              </span>
+              Sole trader, freelancer, small business, social enterprise,
+              co-operative or charity (trading arm)
+            </li>
+          </ul>
+
+          <p class="eligibility-close reveal">
+            Not sure if you fit? Get in touch and we&rsquo;ll help you work
+            it out.
+          </p>
+        </div>
+
+        <!-- The four discipline photographs, angled as one cluster. They
+             stagger in as this section scrolls past. Decorative. -->
+        <div class="split-media">
+          <!-- Each tile carries its own scattered starting tilt in
+               data-tilt; script.js animates rotation back to level (0deg)
+               as the section scrolls into view, so the photos visibly
+               "settle straight" rather than just fading up. -->
+          <div class="cluster" aria-hidden="true">
+            <div class="cluster-tile img-hands" data-tilt="-7"></div>
+            <div class="cluster-tile img-art" data-tilt="5"></div>
+            <div class="cluster-tile img-textile" data-tilt="6"></div>
+            <div class="cluster-tile img-photography" data-tilt="-4"></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!--
+      ======================================================================
+      5 · MEET YOUR MENTORS — new. Horizontal scroll carousel rather than a
+      static grid, because it scales cleanly as more mentors join (add
+      another <li>, no layout rework needed). CSS scroll-snap, no JS.
+
+      <<< PLACEHOLDER >>> Chris and Sara are real names but everything else
+      here — initials tiles standing in for photos, the bios, and the named
+      "one of their businesses" examples — is placeholder mockup content.
+      Swap before launch: real photos (never ship a real name against the
+      wrong face), real bios, and a real named business example each.
+      ======================================================================
+    -->
+    <section class="section section-mentors" id="mentors" aria-labelledby="mentors-heading">
       <div class="wrap">
-        <header class="section-head section-head-wide reveal">
-          <h2 id="connects-heading" class="section-heading section-heading-fit">Connects run across East Sussex</h2>
+        <header class="section-head reveal">
+          <p class="section-kicker">Meet your mentors</p>
+          <h2 id="mentors-heading" class="section-heading">People who&rsquo;ve built businesses too</h2>
           <p class="section-intro">
-            Free, 2-hour sessions. Places are limited and you&rsquo;ll need
-            to sign up. Register your interest and we&rsquo;ll email you as
-            soon as dates open for booking.
+            Every mentor has built a creative business themselves. Here are a
+            few of the people you could be matched with.
           </p>
         </header>
       </div>
 
+      <div class="mentor-scroll-outer reveal">
+        <ul class="mentor-scroll" role="list">
+          <li class="mentor-card">
+            <div class="mentor-photo" aria-hidden="true">CH</div>
+            <p class="mentor-placeholder-flag">Placeholder</p>
+            <h3 class="mentor-name">Chris</h3>
+            <p class="mentor-role">Mentor</p>
+            <p class="mentor-bio">
+              Bio to follow. Placeholder text standing in until Chris&rsquo;s
+              real background and focus areas are confirmed.
+            </p>
+            <p class="mentor-example">
+              &ldquo;[Placeholder Business]&rdquo; is one of the businesses
+              they&rsquo;ve helped.
+            </p>
+          </li>
+          <li class="mentor-card">
+            <div class="mentor-photo" aria-hidden="true">SA</div>
+            <p class="mentor-placeholder-flag">Placeholder</p>
+            <h3 class="mentor-name">Sara</h3>
+            <p class="mentor-role">Mentor</p>
+            <p class="mentor-bio">
+              Bio to follow. Placeholder text standing in until
+              Sara&rsquo;s real background and focus areas are confirmed.
+            </p>
+            <p class="mentor-example">
+              &ldquo;[Placeholder Business]&rdquo; is one of the businesses
+              they&rsquo;ve helped.
+            </p>
+          </li>
+          <!-- More mentors go here as they join — one more <li class="mentor-card"> each,
+               same shape as above. The carousel takes any number without a rebuild. -->
+        </ul>
+      </div>
+    </section>
+
+    <!--
+      ======================================================================
+      6 · YOUR BUSINESS, YOUR JOURNEY — rewritten as an outcome-led
+      narrative rather than a numbered process. The old four-step detail
+      (register, diagnostic, Sprint, alum) now lives in the FAQ, under
+      "What happens after I register?".
+      ======================================================================
+    -->
+    <section class="section section-journey" id="journey" aria-labelledby="journey-heading">
+      <div class="wrap journey-inner">
+        <header class="section-head reveal">
+          <h2 id="journey-heading" class="section-heading">Your business, your journey</h2>
+        </header>
+
+        <p class="journey-copy reveal">
+          You join because there&rsquo;s something specific you&rsquo;re
+          trying to work out: pricing, finding customers, getting your
+          marketing straight, building the confidence to grow. You get
+          matched with a mentor and work through it over a 6-hour Sprint, at
+          whatever pace suits your practice.
+        </p>
+        <p class="journey-copy reveal">
+          Along the way, you&rsquo;re part of something bigger too: a
+          community of creative people across East Sussex, in the mentoring,
+          at the Connects, and beyond. The community is what makes the
+          support last. Once your Sprint ends, you keep your invite to
+          future Connects, and you&rsquo;re welcome to come back later as a
+          mentor yourself.
+        </p>
+        <p class="journey-copy reveal">
+          Mentoring places are limited and matched to fit, so we can&rsquo;t
+          promise one to everyone who applies. The Connects and the wider
+          network stay open to you either way.
+        </p>
+
+        <a class="btn btn-primary reveal" href="#register" data-cta="journey">Join us now</a>
+      </div>
+    </section>
+
+    <!--
+      ======================================================================
+      7 · BUSINESSES LIKE YOURS — new. Follows the journey narrative rather
+      than sitting with the mentor profiles: mentors answer "who", this
+      answers "does it work for someone like me".
+
+      <<< PLACEHOLDER >>> no real testimonial copy exists yet. Every quote,
+      name and business below is clearly marked placeholder mockup content
+      — do not treat as final, and do not remove the "Placeholder" flags
+      without replacing the text they sit next to with real, signed-off
+      testimonials first.
+      ======================================================================
+    -->
+    <section class="section section-testimonials section-tint" id="testimonials" aria-labelledby="testimonials-heading">
+      <div class="wrap">
+        <header class="section-head reveal">
+          <p class="section-kicker">Businesses like yours</p>
+          <h2 id="testimonials-heading" class="section-heading">See what it&rsquo;s done for other creative businesses</h2>
+        </header>
+
+        <div class="testimonial-grid">
+          <figure class="testimonial-card reveal">
+            <p class="testimonial-placeholder-flag">Placeholder</p>
+            <blockquote class="testimonial-quote">
+              &ldquo;[Placeholder testimonial: an outcome-led quote
+              about what changed for this business goes here once it&rsquo;s
+              signed off.]&rdquo;
+            </blockquote>
+            <figcaption class="testimonial-attribution">
+              <span class="testimonial-avatar" aria-hidden="true">?</span>
+              <span>
+                <span class="testimonial-name">[Placeholder name]</span>
+                <span class="testimonial-business">[Placeholder business], East Sussex</span>
+              </span>
+            </figcaption>
+          </figure>
+
+          <figure class="testimonial-card reveal">
+            <p class="testimonial-placeholder-flag">Placeholder</p>
+            <blockquote class="testimonial-quote">
+              &ldquo;[Placeholder testimonial: a second outcome-led
+              quote goes here once it&rsquo;s signed off.]&rdquo;
+            </blockquote>
+            <figcaption class="testimonial-attribution">
+              <span class="testimonial-avatar" aria-hidden="true">?</span>
+              <span>
+                <span class="testimonial-name">[Placeholder name]</span>
+                <span class="testimonial-business">[Placeholder business], East Sussex</span>
+              </span>
+            </figcaption>
+          </figure>
+        </div>
+      </div>
+    </section>
+
+    <!--
+      ======================================================================
+      8 · EVENT CALENDAR — rebuilt from the old Connects list, which only
+      ever showed "Dates to be confirmed" for every location. Laid out as
+      months, each with location / date (marked tentative where it is) /
+      a per-location sign-up link.
+      <<< SWAP >>> none of these dates are locked yet. Replace with
+      confirmed dates and real per-location Eventbrite/booking links before
+      launch — every "Register for a Connect" link below points at the
+      same placeholder form for now.
+      ======================================================================
+    -->
+    <section class="section section-calendar" id="connects" aria-labelledby="calendar-heading">
+      <div class="wrap">
+        <header class="section-head section-head-wide reveal">
+          <p class="section-kicker">Event calendar</p>
+          <h2 id="calendar-heading" class="section-heading">Connects run across East Sussex</h2>
+          <p class="section-intro">
+            Free, 2-hour sessions. Places are limited and you&rsquo;ll need
+            to sign up. Dates below are tentative, so register and
+            we&rsquo;ll email you as soon as they&rsquo;re confirmed.
+          </p>
+        </header>
+
+      </div>
+
       <div class="wrap split split-text-first">
-        <div class="split-copy">
-          <ul class="connects-list">
-            <li class="connect-item reveal" data-place="lewes" tabindex="0">
-              <span class="connect-place">Lewes</span>
-              <span class="connect-date">Dates to be confirmed</span>
-            </li>
-            <li class="connect-item reveal" data-place="uckfield" tabindex="0">
-              <span class="connect-place">Uckfield</span>
-              <span class="connect-date">Dates to be confirmed</span>
-            </li>
-            <li class="connect-item reveal" data-place="eastbourne" tabindex="0">
-              <span class="connect-place">Eastbourne</span>
-              <span class="connect-date">Dates to be confirmed</span>
-            </li>
-            <li class="connect-item reveal" data-place="bexhill" tabindex="0">
-              <span class="connect-place">Bexhill</span>
-              <span class="connect-date">Dates to be confirmed</span>
-            </li>
-            <li class="connect-item reveal" data-place="hastings" tabindex="0">
-              <span class="connect-place">Hastings</span>
-              <span class="connect-date">Dates to be confirmed</span>
-            </li>
-          </ul>
+        <div class="split-copy calendar-months reveal">
+          <div class="calendar-month">
+            <h3 class="calendar-month-name">September</h3>
+            <ul class="calendar-list">
+              <li class="calendar-item" data-place="hastings" tabindex="0">
+                <span class="calendar-place">Hastings</span>
+                <span class="calendar-date">Tentative &middot; 23 September</span>
+                <a class="calendar-link" href="https://forms.gle/REPLACE_WITH_REAL_FORM_URL" target="_blank" rel="noopener" data-cta="connect-hastings">Register for a Connect</a>
+              </li>
+              <li class="calendar-item" data-place="bexhill" tabindex="0">
+                <span class="calendar-place">Bexhill</span>
+                <span class="calendar-date">Tentative &middot; 23 September (same day as Hastings)</span>
+                <a class="calendar-link" href="https://forms.gle/REPLACE_WITH_REAL_FORM_URL" target="_blank" rel="noopener" data-cta="connect-bexhill">Register for a Connect</a>
+              </li>
+              <li class="calendar-item" data-place="eastbourne" tabindex="0">
+                <span class="calendar-place">Eastbourne</span>
+                <span class="calendar-date">Tentative &middot; full day, week of 23 September</span>
+                <a class="calendar-link" href="https://forms.gle/REPLACE_WITH_REAL_FORM_URL" target="_blank" rel="noopener" data-cta="connect-eastbourne">Register for a Connect</a>
+              </li>
+              <li class="calendar-item" data-place="uckfield" tabindex="0">
+                <span class="calendar-place">Uckfield</span>
+                <span class="calendar-date">Tentative &middot; week of 23 September</span>
+                <a class="calendar-link" href="https://forms.gle/REPLACE_WITH_REAL_FORM_URL" target="_blank" rel="noopener" data-cta="connect-uckfield">Register for a Connect</a>
+              </li>
+              <li class="calendar-item" data-place="lewes" tabindex="0">
+                <span class="calendar-place">Lewes</span>
+                <span class="calendar-date">4 September</span>
+                <a class="calendar-link" href="https://forms.gle/REPLACE_WITH_REAL_FORM_URL" target="_blank" rel="noopener" data-cta="connect-lewes">Register for a Connect</a>
+              </li>
+            </ul>
+          </div>
+
+          <!-- <<< SWAP >>> October–December: one Connect a month, location
+               not yet chosen. Replace each with a confirmed location/date
+               once set. -->
+          <div class="calendar-month">
+            <h3 class="calendar-month-name">October</h3>
+            <ul class="calendar-list">
+              <li class="calendar-item">
+                <span class="calendar-place">Location to be confirmed</span>
+                <span class="calendar-date">Tentative &middot; date to be confirmed</span>
+                <a class="calendar-link" href="https://forms.gle/REPLACE_WITH_REAL_FORM_URL" target="_blank" rel="noopener" data-cta="connect-october">Register for a Connect</a>
+              </li>
+            </ul>
+          </div>
+          <div class="calendar-month">
+            <h3 class="calendar-month-name">November</h3>
+            <ul class="calendar-list">
+              <li class="calendar-item">
+                <span class="calendar-place">Location to be confirmed</span>
+                <span class="calendar-date">Tentative &middot; date to be confirmed</span>
+                <a class="calendar-link" href="https://forms.gle/REPLACE_WITH_REAL_FORM_URL" target="_blank" rel="noopener" data-cta="connect-november">Register for a Connect</a>
+              </li>
+            </ul>
+          </div>
+          <div class="calendar-month">
+            <h3 class="calendar-month-name">December</h3>
+            <ul class="calendar-list">
+              <li class="calendar-item">
+                <span class="calendar-place">Location to be confirmed</span>
+                <span class="calendar-date">Tentative &middot; date to be confirmed</span>
+                <a class="calendar-link" href="https://forms.gle/REPLACE_WITH_REAL_FORM_URL" target="_blank" rel="noopener" data-cta="connect-december">Register for a Connect</a>
+              </li>
+            </ul>
+          </div>
 
           <p class="connects-note reveal">
             These are the first locations, not the full list. More towns
@@ -379,77 +661,14 @@
 
     <!--
       ======================================================================
-      WHO IT'S FOR — the formal criteria, grounded in the Lot 3 spec. Exact
-      numeric SME thresholds (staff/turnover/balance-sheet caps) and the
-      blunt pre-start exclusion are deliberately left off — see README.
-      ======================================================================
-    -->
-    <section class="section section-eligibility" id="who-is-it-for" aria-labelledby="eligibility-heading">
-      <div class="wrap split split-text-first">
-        <div class="split-copy">
-          <header class="section-head reveal">
-            <h2 id="eligibility-heading" class="section-heading">Check you&rsquo;re eligible</h2>
-          </header>
+      9 · DELIVERED BY PEOPLE WHO'VE BUILT BUSINESSES TOO — About Studio
+      Zao, moved down from straight-after-eligibility to just before the
+      FAQ, and renamed from a company-led heading to a benefit-led one that
+      earns its place right before commitment. Adds a stats strip — the
+      only place these figures appear on the page.
 
-          <ul class="checklist">
-            <li class="check-item reveal">
-              <span class="check-icon" aria-hidden="true">
-                <svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
-                  <path class="check-tick" d="M4 10.5 8 14.5 16 5.5" />
-                </svg>
-              </span>
-              Actively trading creative business based in East Sussex
-            </li>
-            <li class="check-item reveal">
-              <span class="check-icon" aria-hidden="true">
-                <svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
-                  <path class="check-tick" d="M4 10.5 8 14.5 16 5.5" />
-                </svg>
-              </span>
-              Working in design, digital, craft, fashion, film, gaming, music,
-              publishing or a related creative field, including tech-enabled
-              work like web or app design (general IT support doesn&rsquo;t
-              count)
-            </li>
-            <li class="check-item reveal">
-              <span class="check-icon" aria-hidden="true">
-                <svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
-                  <path class="check-tick" d="M4 10.5 8 14.5 16 5.5" />
-                </svg>
-              </span>
-              Sole trader, freelancer, small business, social enterprise,
-              co-operative or charity (trading arm)
-            </li>
-          </ul>
-
-          <p class="eligibility-close reveal">
-            Not sure if you fit? Get in touch and we&rsquo;ll help you work
-            it out.
-          </p>
-        </div>
-
-        <!-- The four discipline photographs, angled as one cluster. They
-             stagger in as this section scrolls past. Decorative. -->
-        <div class="split-media">
-          <!-- Each tile carries its own scattered starting tilt in
-               data-tilt; script.js animates rotation back to level (0deg)
-               as the section scrolls into view, so the photos visibly
-               "settle straight" rather than just fading up. -->
-          <div class="cluster" aria-hidden="true">
-            <div class="cluster-tile img-hands" data-tilt="-7"></div>
-            <div class="cluster-tile img-art" data-tilt="5"></div>
-            <div class="cluster-tile img-textile" data-tilt="6"></div>
-            <div class="cluster-tile img-photography" data-tilt="-4"></div>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!--
-      ======================================================================
-      ABOUT OUR TEAM — short intro, then the detail in disclosure panels so
-      the section stays scannable. Panels are native <details>/<summary>,
-      so they open and close without JavaScript.
+      <<< PLACEHOLDER >>> the three stats below (30+, 120+, 95%) are NOT
+      confirmed figures. Swap for real numbers before launch.
       ======================================================================
     -->
     <section class="section section-about" id="about" aria-labelledby="about-heading">
@@ -460,13 +679,32 @@
               Delivered by
               <a class="kicker-link" href="https://www.studiozao.com/" target="_blank" rel="noopener">Studio Zao</a>
             </p>
-            <h2 id="about-heading" class="section-heading">About our team</h2>
+            <h2 id="about-heading" class="section-heading">Delivered by people who&rsquo;ve built businesses too</h2>
             <p class="section-intro">
               Create East Sussex is delivered by Studio Zao, an innovation
               and growth consultancy, in partnership with East Sussex County
               Council.
             </p>
           </header>
+
+          <!-- Count-up stats. script.js animates 0 -> data-count on scroll
+               into view; visible at full value by default so JS-off or a
+               blocked vendor file still shows the real numbers. -->
+          <p class="stats-flag reveal">Placeholder figures, not confirmed. Swap before launch.</p>
+          <div class="stats-row reveal">
+            <div class="stat">
+              <p class="stat-figure"><span class="stat-count" data-count="30" data-suffix="+">30</span><span aria-hidden="true">+</span></p>
+              <p class="stat-label">businesses supported</p>
+            </div>
+            <div class="stat">
+              <p class="stat-figure"><span class="stat-count" data-count="120" data-suffix="+">120</span><span aria-hidden="true">+</span></p>
+              <p class="stat-label">mentoring hours delivered</p>
+            </div>
+            <div class="stat">
+              <p class="stat-figure"><span class="stat-count" data-count="95" data-suffix="%">95</span><span aria-hidden="true">%</span></p>
+              <p class="stat-label">would recommend</p>
+            </div>
+          </div>
 
           <div class="panels reveal">
             <details class="panel" open>
@@ -555,85 +793,120 @@
 
     <!--
       ======================================================================
-      HOW IT WORKS / MENTORING — the full mentoring detail, kept late so it
-      lands as the last substantive pitch before the closing asks.
+      10 · FAQ — new, moved to sit directly before the final CTA rather
+      than earlier or behind a separate tab (tabbed content hurts both
+      scroll-based conversion and SEO indexing). Takes over the four-step
+      process detail that used to live in "Your business, your journey".
+      Reuses the disclosure-panel pattern from "About" for consistency —
+      native <details>/<summary>, no JavaScript required to open or close.
       ======================================================================
     -->
-    <section class="section section-how" id="how" aria-labelledby="how-heading">
-      <div class="wrap">
-        <header class="section-head section-head-wide reveal">
-          <h2 id="how-heading" class="section-heading">Your route to one-to-one mentoring</h2>
-          <p class="section-intro">
-            Getting started is simple, and it is the same short route
-            whether you have been to a Connect or you are coming to us cold.
-            Tell us you are interested and we will pick it up from there.
-          </p>
+    <section class="section section-faq" id="faq" aria-labelledby="faq-heading">
+      <div class="wrap faq-inner">
+        <header class="section-head reveal">
+          <h2 id="faq-heading" class="section-heading">Frequently asked questions</h2>
         </header>
 
-        <!-- Plain divs with ARIA list semantics, not <ol>/<li> — a native
-             list marker was rendering alongside the custom numeral in some
-             browsers, showing as a doubled "1. 2" style number. -->
-        <div class="process" role="list" aria-label="What happens after a Connect">
-          <div class="process-step reveal" role="listitem">
-            <span class="process-num" aria-hidden="true">1</span>
-            <h3 class="process-title">Tell us you&rsquo;re interested</h3>
-            <p class="process-body">
-              Register in a couple of minutes. Meeting us at a Connect first
-              is welcome, but it is not a step you have to take.
-            </p>
-          </div>
-          <div class="process-step reveal" role="listitem">
-            <span class="process-num" aria-hidden="true">2</span>
-            <h3 class="process-title">Go through the diagnostic</h3>
-            <p class="process-body">
-              A short survey, then a 30-minute call to talk through your
-              situation and agree the focus for your mentoring Sprint.
-            </p>
-          </div>
-          <div class="process-step reveal" role="listitem">
-            <span class="process-num" aria-hidden="true">3</span>
-            <h3 class="process-title">Start your Sprint</h3>
-            <p class="process-body">
-              You&rsquo;re matched with a mentor and begin your 6-hour
-              Sprint, at whatever pace suits your practice: a few short
-              weekly sessions, or a couple of longer deep-dives.
-            </p>
-          </div>
-          <div class="process-step reveal" role="listitem">
-            <span class="process-num" aria-hidden="true">4</span>
-            <h3 class="process-title">Stay part of the network</h3>
-            <p class="process-body">
-              Once your Sprint ends, you&rsquo;re an alum: you&rsquo;ll get a
-              short summary of next steps, keep your invite to future
-              Connects, and, if it&rsquo;s a fit, come back later as a
-              mentor yourself.
-            </p>
-          </div>
-        </div>
+        <div class="panels reveal">
+          <details class="panel" open>
+            <summary class="panel-summary">
+              <span class="panel-icon" aria-hidden="true">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M9 9a3 3 0 1 1 4.2 2.7c-.7.4-1.2 1-1.2 2.1v.7"/><circle cx="12" cy="17.5" r="0.6" fill="currentColor" stroke="none"/></svg>
+              </span>
+              <span class="panel-title">What do I actually get out of it?</span>
+              <span class="panel-mark" aria-hidden="true"></span>
+            </summary>
+            <div class="panel-body">
+              <p>
+                Free 1:1 mentoring tailored to where your business is right
+                now, practical Connects sessions on things like pricing,
+                audience building, hiring, AI tools and grants, and an
+                ongoing network of other creative businesses across East
+                Sussex.
+              </p>
+            </div>
+          </details>
 
-        <p class="how-caveat reveal">
-          Mentoring places are limited and matched to fit, so we
-          can&rsquo;t promise one to everyone who applies. The Connects and
-          the wider network stay open to you either way.
-        </p>
-      </div>
+          <details class="panel">
+            <summary class="panel-summary">
+              <span class="panel-icon" aria-hidden="true">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="8.5"/><path d="M12 7.5v5l3.5 2"/></svg>
+              </span>
+              <span class="panel-title">How much time does it take?</span>
+              <span class="panel-mark" aria-hidden="true"></span>
+            </summary>
+            <div class="panel-body">
+              <p>
+                Connects are 2 hours each. Mentoring is up to 6 hours total,
+                split however suits you, a few short weekly sessions or a
+                couple of longer deep-dives.
+              </p>
+            </div>
+          </details>
 
-      <div class="how-band">
-        <div class="wrap">
-          <p class="how-band-text reveal">
-            And through all of it, you&rsquo;re part of something bigger: a
-            community of creative people across East Sussex, in the
-            mentoring, at the Connects, and beyond. You&rsquo;re not doing
-            this on your own.
-          </p>
+          <details class="panel">
+            <summary class="panel-summary">
+              <span class="panel-icon" aria-hidden="true">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M4 7h16M4 12h16M4 17h10"/></svg>
+              </span>
+              <span class="panel-title">Is there any cost?</span>
+              <span class="panel-mark" aria-hidden="true"></span>
+            </summary>
+            <div class="panel-body">
+              <p>
+                No. Everything on this programme, mentoring, Connects and the
+                network, is free.
+              </p>
+            </div>
+          </details>
+
+          <details class="panel">
+            <summary class="panel-summary">
+              <span class="panel-icon" aria-hidden="true">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h11M12 5.5 18.5 12 12 18.5"/></svg>
+              </span>
+              <span class="panel-title">What happens after I register?</span>
+              <span class="panel-mark" aria-hidden="true"></span>
+            </summary>
+            <div class="panel-body">
+              <p>
+                You register in a couple of minutes. Then a short survey and
+                a 30-minute call to talk through your situation and agree
+                the focus for your mentoring Sprint. You&rsquo;re matched
+                with a mentor and begin your Sprint. Once it ends,
+                you&rsquo;re an alum: you&rsquo;ll get a short summary of
+                next steps, keep your invite to future Connects, and, if
+                it&rsquo;s a fit, come back later as a mentor yourself.
+              </p>
+            </div>
+          </details>
+
+          <details class="panel">
+            <summary class="panel-summary">
+              <span class="panel-icon" aria-hidden="true">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19c0-3.3 3.1-6 7-6s7 2.7 7 6"/><circle cx="11" cy="7.5" r="3.2"/></svg>
+              </span>
+              <span class="panel-title">Do I have to come to a Connects before I get mentoring?</span>
+              <span class="panel-mark" aria-hidden="true"></span>
+            </summary>
+            <div class="panel-body">
+              <p>
+                No. Meeting us at a Connect first is welcome, but it&rsquo;s
+                not a step you have to take.
+              </p>
+            </div>
+          </details>
         </div>
       </div>
     </section>
 
     <!--
       ======================================================================
-      REGISTER — both closing asks in one block: join as a creative
-      business, or come back as a mentor.
+      11 · REGISTER — both closing asks in one block: join as a creative
+      business, or come back as a mentor. Button copy differentiated by
+      what it actually does: "Join us now" for people wanting help,
+      "Become a mentor" (visually lighter, different audience) for people
+      wanting to give it.
       This is an EXPRESSION OF INTEREST, not a live booking.
       <<< SWAP >>> Replace FORM_URL with the real Google Form link. We
       intentionally do NOT iframe-embed the form (it can't be restyled to
@@ -659,7 +932,7 @@
               rel="noopener"
               data-cta="register"
             >
-              Register your interest
+              Join us now
             </a>
             <p class="register-microcopy">
               This is an expression of interest, with no dates to pick just
@@ -690,7 +963,7 @@
               rel="noopener"
               data-cta="become-mentor"
             >
-              Register as a mentor
+              Become a mentor
             </a>
           </aside>
         </div>
@@ -701,8 +974,8 @@
 
   <!--
     ========================================================================
-    FOOTER — three columns: mast + contact + navigation, then the funder
-    row, then the legal line.
+    12 · FOOTER — three columns: mast + contact + navigation, then the
+    funder row, then the legal line.
     ========================================================================
   -->
   <footer class="site-footer">
@@ -734,9 +1007,13 @@
         <h2 class="footer-heading">Explore</h2>
         <ul class="footer-list">
           <li><a href="#what-you-get">What you get</a></li>
-          <li><a href="#connects">Where we meet</a></li>
-          <li><a href="#who-is-it-for">Who it&rsquo;s for</a></li>
-          <li><a href="#about">About our team</a></li>
+          <li><a href="#who-is-it-for">Eligibility</a></li>
+          <li><a href="#mentors">Meet your mentors</a></li>
+          <li><a href="#journey">Your journey</a></li>
+          <li><a href="#testimonials">Businesses like yours</a></li>
+          <li><a href="#connects">Event calendar</a></li>
+          <li><a href="#about">About us</a></li>
+          <li><a href="#faq">FAQ</a></li>
           <li><a href="#register">Register your interest</a></li>
         </ul>
       </nav>
