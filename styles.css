@@ -848,18 +848,19 @@ summary:focus-visible,
   background: var(--color-paper-2);
   border: 1px solid var(--color-line);
 }
+/* Background-removed cutouts, shown at their real proportions rather than
+   cropped into a circle — a tiny circular crop distorted these portraits
+   and defeated the point of removing the background in the first place. */
 .mentor-photo {
-  overflow: hidden;
-  width: 4.5rem;
-  height: 4.5rem;
-  border-radius: 50%;
-  background: var(--color-line-strong);
+  height: 7.5rem;
+  width: auto;
   margin-bottom: var(--space-md);
 }
 .mentor-photo img {
-  width: 100%;
+  display: block;
   height: 100%;
-  object-fit: cover;
+  width: auto;
+  object-fit: contain;
 }
 .mentor-name { font-size: var(--text-h3); }
 .mentor-role {
