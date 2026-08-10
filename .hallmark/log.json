@@ -1,5 +1,13 @@
 [
   {
+    "date": "2026-08-10",
+    "macrostructure": "Marquee Hero",
+    "theme": "near-black + greys on white, red as the only colour (navy dropped)",
+    "theme_axes": "dark hero band / wide-heavy-grotesque display / warm accent",
+    "enrichment": "E4 full-bleed video + E5 SVG map, unchanged; testimonials moved into a new E6b quote carousel inside About",
+    "brief": "Create East Sussex · revision pass: normalised heading weights (hero + stat figures now match the base display weight), removed all visitor-facing \"placeholder\"/\"tentative\" language, collapsed the Oct-Dec calendar placeholders into a single forward-looking line, moved testimonials out of their own section into a horizontal-scroll quote carousel at the bottom of About, slowed the stats count-up, renamed About's kicker/heading to \"Meet the team\"/\"About Studio Zao\", and made the About and FAQ disclosure panels mutually exclusive within their own group via native <details name>."
+  },
+  {
     "date": "2026-08-08",
     "macrostructure": "Marquee Hero",
     "theme": "near-black + greys on white, red as the only colour (navy dropped)",

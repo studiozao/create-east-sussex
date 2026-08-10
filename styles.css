@@ -324,8 +324,11 @@ summary:focus-visible,
      can't reach without over-darkening the whole frame */
   text-shadow: 0 2px 24px rgba(0, 0, 0, 0.42);
   font-size: var(--text-hero);
-  font-variation-settings: "wdth" 110;
-  font-weight: 750;
+  /* Same weight/width as every other heading on the page (650 / wdth 105)
+     — it reads bold at this size purely from scale, not from being a
+     heavier cut than the rest of the type system. */
+  font-variation-settings: "wdth" 105;
+  font-weight: 650;
   line-height: 0.9;
   letter-spacing: -0.035em;
   text-transform: uppercase;
@@ -701,6 +704,13 @@ summary:focus-visible,
 .calendar-link:hover { color: var(--color-ink); }
 .calendar-item.is-active .calendar-place { color: var(--color-red); }
 
+.calendar-more {
+  margin-top: var(--space-lg);
+  font-size: var(--text-lead);
+  color: var(--color-ink);
+  max-width: 46ch;
+}
+
 .connects-note {
   margin-top: var(--space-lg);
   font-size: var(--text-small);
@@ -852,21 +862,6 @@ summary:focus-visible,
   font-weight: 650;
   margin-bottom: var(--space-md);
 }
-/* Any "Placeholder" flag on the page uses this same look — small, honest,
-   never styled to blend in as if it were real copy. */
-.mentor-placeholder-flag,
-.testimonial-placeholder-flag,
-.stats-flag {
-  display: inline-block;
-  font-size: var(--text-label);
-  font-weight: 700;
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
-  color: var(--color-red);
-  background: rgba(228, 37, 68, 0.09);
-  padding: 0.2rem 0.55rem;
-  margin-bottom: var(--space-sm);
-}
 .mentor-name { font-size: var(--text-h3); }
 .mentor-role {
   font-size: var(--text-small);
@@ -877,14 +872,6 @@ summary:focus-visible,
 .mentor-bio {
   margin-top: var(--space-sm);
   color: var(--color-ink-2);
-}
-.mentor-example {
-  margin-top: var(--space-sm);
-  padding-top: var(--space-sm);
-  border-top: 1px solid var(--color-line);
-  font-size: var(--text-small);
-  color: var(--color-ink-3);
-  font-style: italic;
 }
 
 /* ---------------------------------------------------------------------------
@@ -901,45 +888,44 @@ summary:focus-visible,
 .journey-inner .btn { margin-top: var(--space-xl); }
 
 /* ---------------------------------------------------------------------------
-   13 · Businesses like yours — testimonials
+   13 · About quotes — horizontal scroll carousel, same pattern as the mentor
+   carousel: CSS scroll-snap, no JS, extend by adding another <li>.
    --------------------------------------------------------------------------- */
-.testimonial-grid {
+.quote-scroll-outer {
   margin-top: var(--space-xl);
-  display: grid;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: clamp(1.5rem, 3vw, 2.5rem);
+  padding-bottom: var(--space-sm);
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  -webkit-overflow-scrolling: touch;
 }
-.testimonial-card { margin: 0; }
-.testimonial-quote {
+.quote-scroll {
+  display: flex;
+  gap: clamp(1rem, 2vw, 1.5rem);
+  width: max-content;
+}
+.quote-card {
+  scroll-snap-align: start;
+  width: min(22rem, 82vw);
+  flex: 0 0 auto;
+  padding: clamp(1.5rem, 2.2vw, 2rem);
+  background: var(--color-paper-2);
+  border: 1px solid var(--color-line);
+}
+.quote-text {
   margin: 0;
   font-family: var(--font-display);
   font-variation-settings: "wdth" 105;
   font-weight: 650;
-  font-size: clamp(1.125rem, 1.7vw, 1.4375rem);
+  font-size: clamp(1.0625rem, 1.5vw, 1.25rem);
   line-height: 1.35;
   letter-spacing: -0.01em;
   color: var(--color-ink);
 }
-.testimonial-attribution {
+.quote-attribution {
   margin-top: var(--space-md);
-  display: flex;
-  align-items: center;
-  gap: 0.75rem;
 }
-.testimonial-avatar {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  flex-shrink: 0;
-  width: 2.75rem;
-  height: 2.75rem;
-  border-radius: 50%;
-  background: var(--color-line-strong);
-  color: var(--color-ink-3);
-  font-weight: 700;
-}
-.testimonial-name { display: block; font-weight: 700; color: var(--color-ink); }
-.testimonial-business { display: block; font-size: var(--text-small); color: var(--color-ink-3); }
+.quote-name { display: block; font-weight: 700; color: var(--color-ink); }
+.quote-business { display: block; font-size: var(--text-small); color: var(--color-ink-3); }
 
 /* ---------------------------------------------------------------------------
    14 · About stats strip — count up from 0 on scroll into view (script.js),
@@ -955,8 +941,8 @@ summary:focus-visible,
 .stat { border-top: 1px solid var(--color-line-strong); padding-top: var(--space-md); }
 .stat-figure {
   font-family: var(--font-display);
-  font-variation-settings: "wdth" 108;
-  font-weight: 700;
+  font-variation-settings: "wdth" 105;
+  font-weight: 650;
   font-size: clamp(2.25rem, 4.5vw, 3.5rem);
   line-height: 1;
   color: var(--color-red);
@@ -1177,7 +1163,6 @@ summary:focus-visible,
 
   .cards { grid-template-columns: minmax(0, 1fr); }
 
-  .testimonial-grid { grid-template-columns: minmax(0, 1fr); }
   .stats-row { grid-template-columns: repeat(3, minmax(0, 1fr)); gap: var(--space-sm); }
   .stat-figure { font-size: clamp(1.75rem, 7vw, 2.5rem); }
 

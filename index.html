@@ -9,10 +9,10 @@
 
   Aug 2026 content restructure: full section reorder (eligibility moved up,
   About moved down and renamed, mentoring detail rewritten as outcome-led
-  prose, four new sections: Meet your mentors, Businesses like yours,
-  event calendar rebuilt from the old Connects list, FAQ). Several new
-  sections ship with clearly-labelled PLACEHOLDER content (mentor bios,
-  testimonials, stats, calendar dates) — see README for the full swap list.
+  prose, new sections: Meet your mentors, event calendar rebuilt from the
+  old Connects list, FAQ). Mentor bios, testimonial quotes, About stats and
+  calendar dates are mockup content pending real sign-off — see README for
+  the full swap list.
   ============================================================================
 -->
 <!DOCTYPE html>
@@ -349,9 +349,9 @@
       static grid, because it scales cleanly as more mentors join (add
       another <li>, no layout rework needed). CSS scroll-snap, no JS.
 
-      <<< PLACEHOLDER >>> Chris and Sara are real names but everything else
-      here — initials tiles standing in for photos, the bios, and the named
-      "one of their businesses" examples — is placeholder mockup content.
+      <<< SWAP >>> Chris and Sara are real names but everything else here —
+      initials tiles standing in for photos, the bios, and the named "one of
+      their businesses" examples — is mockup content pending sign-off.
       Swap before launch: real photos (never ship a real name against the
       wrong face), real bios, and a real named business example each.
       ======================================================================
@@ -372,30 +372,18 @@
         <ul class="mentor-scroll" role="list">
           <li class="mentor-card">
             <div class="mentor-photo" aria-hidden="true">CH</div>
-            <p class="mentor-placeholder-flag">Placeholder</p>
             <h3 class="mentor-name">Chris</h3>
             <p class="mentor-role">Mentor</p>
             <p class="mentor-bio">
-              Bio to follow. Placeholder text standing in until Chris&rsquo;s
-              real background and focus areas are confirmed.
-            </p>
-            <p class="mentor-example">
-              &ldquo;[Placeholder Business]&rdquo; is one of the businesses
-              they&rsquo;ve helped.
+              Full bio coming soon.
             </p>
           </li>
           <li class="mentor-card">
             <div class="mentor-photo" aria-hidden="true">SA</div>
-            <p class="mentor-placeholder-flag">Placeholder</p>
             <h3 class="mentor-name">Sara</h3>
             <p class="mentor-role">Mentor</p>
             <p class="mentor-bio">
-              Bio to follow. Placeholder text standing in until
-              Sara&rsquo;s real background and focus areas are confirmed.
-            </p>
-            <p class="mentor-example">
-              &ldquo;[Placeholder Business]&rdquo; is one of the businesses
-              they&rsquo;ve helped.
+              Full bio coming soon.
             </p>
           </li>
           <!-- More mentors go here as they join — one more <li class="mentor-card"> each,
@@ -445,61 +433,6 @@
 
     <!--
       ======================================================================
-      7 · BUSINESSES LIKE YOURS — new. Follows the journey narrative rather
-      than sitting with the mentor profiles: mentors answer "who", this
-      answers "does it work for someone like me".
-
-      <<< PLACEHOLDER >>> no real testimonial copy exists yet. Every quote,
-      name and business below is clearly marked placeholder mockup content
-      — do not treat as final, and do not remove the "Placeholder" flags
-      without replacing the text they sit next to with real, signed-off
-      testimonials first.
-      ======================================================================
-    -->
-    <section class="section section-testimonials section-tint" id="testimonials" aria-labelledby="testimonials-heading">
-      <div class="wrap">
-        <header class="section-head reveal">
-          <p class="section-kicker">Businesses like yours</p>
-          <h2 id="testimonials-heading" class="section-heading">See what it&rsquo;s done for other creative businesses</h2>
-        </header>
-
-        <div class="testimonial-grid">
-          <figure class="testimonial-card reveal">
-            <p class="testimonial-placeholder-flag">Placeholder</p>
-            <blockquote class="testimonial-quote">
-              &ldquo;[Placeholder testimonial: an outcome-led quote
-              about what changed for this business goes here once it&rsquo;s
-              signed off.]&rdquo;
-            </blockquote>
-            <figcaption class="testimonial-attribution">
-              <span class="testimonial-avatar" aria-hidden="true">?</span>
-              <span>
-                <span class="testimonial-name">[Placeholder name]</span>
-                <span class="testimonial-business">[Placeholder business], East Sussex</span>
-              </span>
-            </figcaption>
-          </figure>
-
-          <figure class="testimonial-card reveal">
-            <p class="testimonial-placeholder-flag">Placeholder</p>
-            <blockquote class="testimonial-quote">
-              &ldquo;[Placeholder testimonial: a second outcome-led
-              quote goes here once it&rsquo;s signed off.]&rdquo;
-            </blockquote>
-            <figcaption class="testimonial-attribution">
-              <span class="testimonial-avatar" aria-hidden="true">?</span>
-              <span>
-                <span class="testimonial-name">[Placeholder name]</span>
-                <span class="testimonial-business">[Placeholder business], East Sussex</span>
-              </span>
-            </figcaption>
-          </figure>
-        </div>
-      </div>
-    </section>
-
-    <!--
-      ======================================================================
       8 · EVENT CALENDAR — rebuilt from the old Connects list, which only
       ever showed "Dates to be confirmed" for every location. Laid out as
       months, each with location / date (marked tentative where it is) /
@@ -517,8 +450,8 @@
           <h2 id="calendar-heading" class="section-heading">Connects run across East Sussex</h2>
           <p class="section-intro">
             Free, 2-hour sessions. Places are limited and you&rsquo;ll need
-            to sign up. Dates below are tentative, so register and
-            we&rsquo;ll email you as soon as they&rsquo;re confirmed.
+            to sign up. Register and we&rsquo;ll email you as soon as your
+            date is confirmed.
           </p>
         </header>
 
@@ -531,22 +464,22 @@
             <ul class="calendar-list">
               <li class="calendar-item" data-place="hastings" tabindex="0">
                 <span class="calendar-place">Hastings</span>
-                <span class="calendar-date">Tentative &middot; 23 September</span>
+                <span class="calendar-date">23 September</span>
                 <a class="calendar-link" href="https://forms.gle/REPLACE_WITH_REAL_FORM_URL" target="_blank" rel="noopener" data-cta="connect-hastings">Register for a Connect</a>
               </li>
               <li class="calendar-item" data-place="bexhill" tabindex="0">
                 <span class="calendar-place">Bexhill</span>
-                <span class="calendar-date">Tentative &middot; 23 September (same day as Hastings)</span>
+                <span class="calendar-date">23 September (same day as Hastings)</span>
                 <a class="calendar-link" href="https://forms.gle/REPLACE_WITH_REAL_FORM_URL" target="_blank" rel="noopener" data-cta="connect-bexhill">Register for a Connect</a>
               </li>
               <li class="calendar-item" data-place="eastbourne" tabindex="0">
                 <span class="calendar-place">Eastbourne</span>
-                <span class="calendar-date">Tentative &middot; full day, week of 23 September</span>
+                <span class="calendar-date">Full day, week of 23 September</span>
                 <a class="calendar-link" href="https://forms.gle/REPLACE_WITH_REAL_FORM_URL" target="_blank" rel="noopener" data-cta="connect-eastbourne">Register for a Connect</a>
               </li>
               <li class="calendar-item" data-place="uckfield" tabindex="0">
                 <span class="calendar-place">Uckfield</span>
-                <span class="calendar-date">Tentative &middot; week of 23 September</span>
+                <span class="calendar-date">Week of 23 September</span>
                 <a class="calendar-link" href="https://forms.gle/REPLACE_WITH_REAL_FORM_URL" target="_blank" rel="noopener" data-cta="connect-uckfield">Register for a Connect</a>
               </li>
               <li class="calendar-item" data-place="lewes" tabindex="0">
@@ -557,39 +490,11 @@
             </ul>
           </div>
 
-          <!-- <<< SWAP >>> October–December: one Connect a month, location
-               not yet chosen. Replace each with a confirmed location/date
-               once set. -->
-          <div class="calendar-month">
-            <h3 class="calendar-month-name">October</h3>
-            <ul class="calendar-list">
-              <li class="calendar-item">
-                <span class="calendar-place">Location to be confirmed</span>
-                <span class="calendar-date">Tentative &middot; date to be confirmed</span>
-                <a class="calendar-link" href="https://forms.gle/REPLACE_WITH_REAL_FORM_URL" target="_blank" rel="noopener" data-cta="connect-october">Register for a Connect</a>
-              </li>
-            </ul>
-          </div>
-          <div class="calendar-month">
-            <h3 class="calendar-month-name">November</h3>
-            <ul class="calendar-list">
-              <li class="calendar-item">
-                <span class="calendar-place">Location to be confirmed</span>
-                <span class="calendar-date">Tentative &middot; date to be confirmed</span>
-                <a class="calendar-link" href="https://forms.gle/REPLACE_WITH_REAL_FORM_URL" target="_blank" rel="noopener" data-cta="connect-november">Register for a Connect</a>
-              </li>
-            </ul>
-          </div>
-          <div class="calendar-month">
-            <h3 class="calendar-month-name">December</h3>
-            <ul class="calendar-list">
-              <li class="calendar-item">
-                <span class="calendar-place">Location to be confirmed</span>
-                <span class="calendar-date">Tentative &middot; date to be confirmed</span>
-                <a class="calendar-link" href="https://forms.gle/REPLACE_WITH_REAL_FORM_URL" target="_blank" rel="noopener" data-cta="connect-december">Register for a Connect</a>
-              </li>
-            </ul>
-          </div>
+          <p class="calendar-more reveal">
+            More Connects run once a month from October to December, in
+            person and online. Stay updated, register now and we&rsquo;ll
+            let you know as soon as they&rsquo;re on the calendar.
+          </p>
 
           <p class="connects-note reveal">
             These are the first locations, not the full list. More towns
@@ -667,30 +572,27 @@
       earns its place right before commitment. Adds a stats strip — the
       only place these figures appear on the page.
 
-      <<< PLACEHOLDER >>> the three stats below (30+, 120+, 95%) are NOT
-      confirmed figures. Swap for real numbers before launch.
+      <<< SWAP >>> the three stats below (30+, 120+, 95%) are mockup
+      figures pending sign-off. Swap for real numbers before launch.
       ======================================================================
     -->
     <section class="section section-about" id="about" aria-labelledby="about-heading">
       <div class="wrap">
         <div class="about-inner">
           <header class="section-head reveal">
-            <p class="section-kicker">
-              Delivered by
-              <a class="kicker-link" href="https://www.studiozao.com/" target="_blank" rel="noopener">Studio Zao</a>
-            </p>
-            <h2 id="about-heading" class="section-heading">Delivered by people who&rsquo;ve built businesses too</h2>
+            <p class="section-kicker">Meet the team</p>
+            <h2 id="about-heading" class="section-heading">About Studio Zao</h2>
             <p class="section-intro">
-              Create East Sussex is delivered by Studio Zao, an innovation
-              and growth consultancy, in partnership with East Sussex County
-              Council.
+              Create East Sussex is delivered by
+              <a class="kicker-link" href="https://www.studiozao.com/" target="_blank" rel="noopener">Studio Zao</a>,
+              an innovation and growth consultancy, in partnership with East
+              Sussex County Council.
             </p>
           </header>
 
           <!-- Count-up stats. script.js animates 0 -> data-count on scroll
                into view; visible at full value by default so JS-off or a
                blocked vendor file still shows the real numbers. -->
-          <p class="stats-flag reveal">Placeholder figures, not confirmed. Swap before launch.</p>
           <div class="stats-row reveal">
             <div class="stat">
               <p class="stat-figure"><span class="stat-count" data-count="30" data-suffix="+">30</span><span aria-hidden="true">+</span></p>
@@ -707,7 +609,7 @@
           </div>
 
           <div class="panels reveal">
-            <details class="panel" open>
+            <details class="panel" name="about-panels" open>
               <summary class="panel-summary">
                 <span class="panel-icon" aria-hidden="true">
                   <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="7.5" r="3.2"/><circle cx="18.5" cy="9" r="2.6"/><path d="M4 19c0-3.3 3.1-6 7-6s7 2.7 7 6"/><path d="M18 19c0-2.4 1.7-4.4 4-4.4"/></svg>
@@ -733,7 +635,7 @@
               </div>
             </details>
 
-            <details class="panel">
+            <details class="panel" name="about-panels">
               <summary class="panel-summary">
                 <span class="panel-icon" aria-hidden="true">
                   <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M4 18.5 9.5 8l3.2 5.6L15.2 9l4.8 9.5z"/><path d="M3 20.5h18"/></svg>
@@ -760,7 +662,7 @@
               </div>
             </details>
 
-            <details class="panel">
+            <details class="panel" name="about-panels">
               <summary class="panel-summary">
                 <span class="panel-icon" aria-hidden="true">
                   <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M12 20s-7-4.2-7-9a4 4 0 0 1 7-2.6A4 4 0 0 1 19 11c0 4.8-7 9-7 9z"/></svg>
@@ -787,6 +689,36 @@
               </div>
             </details>
           </div>
+
+          <!-- Quotes, relocated from the old standalone "Businesses like
+               yours" section. Horizontal-scroll row, same pattern as the
+               mentor carousel above, so more can be added later without a
+               rebuild.
+               <<< SWAP >>> mockup quotes pending real, signed-off testimonials. -->
+          <div class="quote-scroll-outer reveal">
+            <ul class="quote-scroll" role="list">
+              <li class="quote-card">
+                <blockquote class="quote-text">
+                  &ldquo;Quote to follow once it&rsquo;s signed off.&rdquo;
+                </blockquote>
+                <p class="quote-attribution">
+                  <span class="quote-name">Name to follow</span>
+                  <span class="quote-business">Business, East Sussex</span>
+                </p>
+              </li>
+              <li class="quote-card">
+                <blockquote class="quote-text">
+                  &ldquo;Quote to follow once it&rsquo;s signed off.&rdquo;
+                </blockquote>
+                <p class="quote-attribution">
+                  <span class="quote-name">Name to follow</span>
+                  <span class="quote-business">Business, East Sussex</span>
+                </p>
+              </li>
+              <!-- More quotes go here as they're signed off — one more
+                   <li class="quote-card"> each, same shape as above. -->
+            </ul>
+          </div>
         </div>
       </div>
     </section>
@@ -808,7 +740,7 @@
         </header>
 
         <div class="panels reveal">
-          <details class="panel" open>
+          <details class="panel" name="faq-panels" open>
             <summary class="panel-summary">
               <span class="panel-icon" aria-hidden="true">
                 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M9 9a3 3 0 1 1 4.2 2.7c-.7.4-1.2 1-1.2 2.1v.7"/><circle cx="12" cy="17.5" r="0.6" fill="currentColor" stroke="none"/></svg>
@@ -827,7 +759,7 @@
             </div>
           </details>
 
-          <details class="panel">
+          <details class="panel" name="faq-panels">
             <summary class="panel-summary">
               <span class="panel-icon" aria-hidden="true">
                 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="8.5"/><path d="M12 7.5v5l3.5 2"/></svg>
@@ -844,7 +776,7 @@
             </div>
           </details>
 
-          <details class="panel">
+          <details class="panel" name="faq-panels">
             <summary class="panel-summary">
               <span class="panel-icon" aria-hidden="true">
                 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M4 7h16M4 12h16M4 17h10"/></svg>
@@ -860,7 +792,7 @@
             </div>
           </details>
 
-          <details class="panel">
+          <details class="panel" name="faq-panels">
             <summary class="panel-summary">
               <span class="panel-icon" aria-hidden="true">
                 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h11M12 5.5 18.5 12 12 18.5"/></svg>
@@ -881,7 +813,7 @@
             </div>
           </details>
 
-          <details class="panel">
+          <details class="panel" name="faq-panels">
             <summary class="panel-summary">
               <span class="panel-icon" aria-hidden="true">
                 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19c0-3.3 3.1-6 7-6s7 2.7 7 6"/><circle cx="11" cy="7.5" r="3.2"/></svg>
@@ -1010,7 +942,6 @@
           <li><a href="#who-is-it-for">Eligibility</a></li>
           <li><a href="#mentors">Meet your mentors</a></li>
           <li><a href="#journey">Your journey</a></li>
-          <li><a href="#testimonials">Businesses like yours</a></li>
           <li><a href="#connects">Event calendar</a></li>
           <li><a href="#about">About us</a></li>
           <li><a href="#faq">FAQ</a></li>

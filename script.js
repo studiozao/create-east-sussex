@@ -388,7 +388,7 @@
                 var obj = { val: 0 };
                 gsap.to(obj, {
                   val: target,
-                  duration: 1.6,
+                  duration: 3,
                   ease: "power2.out",
                   onUpdate: function () {
                     el.textContent = Math.round(obj.val);
