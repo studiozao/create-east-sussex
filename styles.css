@@ -401,7 +401,7 @@ summary:focus-visible,
 .section-register { padding-block: var(--space-2xl) var(--space-3xl); }
 
 .section-head { margin-bottom: var(--space-xl); }
-.section-head-wide { max-width: 46rem; }
+.section-head-wide { max-width: 58rem; }
 
 .section-kicker {
   display: block;
@@ -767,7 +767,7 @@ summary:focus-visible,
 /* ---------------------------------------------------------------------------
    10 · About — disclosure panels. Native <details>, so they work with JS off.
    --------------------------------------------------------------------------- */
-.about-inner { max-width: 58rem; }
+.about-inner { max-width: 66rem; }
 .panels { border-top: 1px solid var(--color-line-strong); }
 
 .panel { border-bottom: 1px solid var(--color-line-strong); }
@@ -829,6 +829,46 @@ summary:focus-visible,
   padding-left: calc(1.5rem + 0.9rem);   /* aligns with the title above */
   max-width: var(--measure);
   color: var(--color-ink-2);
+}
+
+/* Floating testimonial strip — deliberately no heading/kicker, sits quiet
+   under the panels. Half-transparent, rounded, long rectangular cards;
+   horizontal scroll, CSS scroll-snap only. */
+.quote-float-outer {
+  margin-top: var(--space-xl);
+  padding-bottom: var(--space-sm);
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  -webkit-overflow-scrolling: touch;
+}
+.quote-float {
+  display: flex;
+  gap: clamp(1rem, 2vw, 1.5rem);
+  width: max-content;
+}
+.quote-float-card {
+  scroll-snap-align: start;
+  flex: 0 0 auto;
+  width: min(26rem, 84vw);
+  padding: clamp(1.5rem, 2vw, 2rem) clamp(1.75rem, 2.4vw, 2.25rem);
+  background: rgba(255, 255, 255, 0.55);
+  backdrop-filter: blur(10px);
+  border-radius: 1.5rem;
+  box-shadow: 0 24px 48px -28px rgba(17, 17, 17, 0.28);
+}
+.quote-float-card blockquote {
+  margin: 0;
+  font-size: var(--text-small);
+  line-height: 1.5;
+  color: var(--color-ink);
+}
+.quote-float-attribution {
+  margin-top: var(--space-sm);
+  font-size: var(--text-label);
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: var(--color-ink-3);
 }
 
 /* ---------------------------------------------------------------------------
@@ -934,7 +974,7 @@ summary:focus-visible,
 /* ---------------------------------------------------------------------------
    15 · FAQ — reuses the .panels disclosure pattern from About.
    --------------------------------------------------------------------------- */
-.faq-inner { max-width: 52rem; }
+.faq-inner { max-width: 66rem; }
 /* On laptop and up there's a full line of width going unused inside the
    dark band — let the text run the wrap's width instead of stopping short. */
 @media (min-width: 900px) {
@@ -946,7 +986,7 @@ summary:focus-visible,
    --------------------------------------------------------------------------- */
 .register-grid {
   display: grid;
-  grid-template-columns: minmax(0, 1.15fr) minmax(0, 0.85fr);
+  grid-template-columns: minmax(0, 1.5fr) minmax(0, 0.5fr);
   gap: clamp(2.5rem, 5vw, 4.5rem);
   align-items: start;
 }
@@ -1035,8 +1075,11 @@ summary:focus-visible,
 /* Dropped below the main title's baseline rather than sitting level with
    it, so the secondary ask doesn't read as equal-weight with the primary
    register CTA at a glance. */
+/* Lines up with the top of .register-body (kicker + heading height),
+   so this box sits level with "Sign up to our Connects..." rather than
+   the heading above it. */
 @media (min-width: 900px) {
-  .register-aside-lower { margin-top: clamp(5rem, 12vw, 9rem); }
+  .register-aside-lower { margin-top: clamp(4rem, 9vw, 7.75rem); }
 }
 
 /* ---------------------------------------------------------------------------
