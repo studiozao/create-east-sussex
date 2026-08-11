@@ -114,38 +114,27 @@ fast (Cmd/Ctrl+F).
    than this checklist), the source figures are in the Lot 3 specification
    document, not repeated here.
 
-6a. **Meet your mentors — mockup content, replace before launch.** Chris and
-   Sara are real names but everything else in `#mentors` is mockup content:
-   the `CH`/`SA` initials tiles stand in for real photos, and the bios just
-   say "full bio coming soon". Never ship a real name next to the wrong
-   photo — if a real photo isn't ready for someone, an initials tile (what's
-   there now) is the right fallback, not a stock photo. The carousel
-   (`.mentor-scroll`) takes any number of cards without layout changes — add
-   more `<li class="mentor-card">` blocks as mentors join.
+6a. **Meet your mentors — real people, placeholder LinkedIn/bio wording
+   already replaced.** Sara Carter and Chris Baker have real photos, bios
+   and LinkedIn links in `#mentors`. Add more mentors by appending another
+   `<li class="mentor-card">` (photo on the left, name/role beside it,
+   bio and LinkedIn link below) — the carousel takes any number without
+   layout changes.
 
-6b. **About quotes — no real copy yet, do not treat as final.** The
-   `.quote-scroll` block at the bottom of `#about` ships with two mockup
-   quote cards ("Quote to follow once it's signed off") because no
-   signed-off testimonial copy existed at build time. Replace the quote,
-   name and business text in each `.quote-card` with real, signed-off
-   testimonials before launch. The carousel takes any number of cards
-   without layout changes — add more `<li class="quote-card">` blocks as
-   quotes are signed off.
-
-6c. **About stats — mockup figures, not confirmed.** The count-up strip in
+6b. **About stats — mockup figures, not confirmed.** The count-up strip in
    `#about` (30+ businesses supported, 120+ mentoring hours, 95% would
    recommend) is not real data. Update the three `data-count` values on
    `.stat-count` (and the visible number inside each span, which mirrors
    `data-count` so the figure is still correct if `script.js` fails to load)
    before launch.
 
-6d. **Event calendar dates** — none of the `<<< SWAP >>>` dates in
-   `#connects` are locked. The five September rows have real working dates;
-   October–December have no location or date chosen yet, so they're
-   summarised in a single line instead of dated rows. Every "Register for a
-   Connect" link currently points at the same placeholder Google Form —
-   replace with real per-location booking links (Eventbrite or similar)
-   once they exist.
+6c. **Event calendar dates and register link** — none of the
+   `<<< SWAP >>>` dates in `#connects` are locked yet. The five September
+   rows have real working dates, ordered earliest to latest; October–
+   December have no location or date chosen yet, so they're summarised in
+   a single line instead of dated rows. There is now one shared "Register
+   for a Connect" link for the whole list (`.calendar-register`) rather
+   than a link per row — point it at the real signup form once it exists.
 
 7. **Connect dates** — the register section is currently framed as an
    *expression of interest*, not a live booking, because Connect dates

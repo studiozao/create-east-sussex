@@ -587,6 +587,25 @@ summary:focus-visible,
   border-top: 1px solid var(--color-line);
   color: var(--color-ink-2);
 }
+/* A card can carry several .card-body paragraphs (Connects, mentoring) —
+   only the first should draw the divider under the meta line. */
+.card-body + .card-body {
+  margin-top: var(--space-sm);
+  padding-top: 0;
+  border-top: none;
+}
+.card-note {
+  margin-top: var(--space-sm);
+  font-size: var(--text-small);
+}
+.card-note a {
+  color: var(--color-red);
+  font-weight: 700;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+.card-note a:hover { color: var(--color-ink); }
+.card-cta { margin-top: var(--space-lg); }
 
 /* ---------------------------------------------------------------------------
    8 · Map — real ONS boundary. Textured land, offset shadow copy for depth,
@@ -668,11 +687,10 @@ summary:focus-visible,
 .calendar-list { display: flex; flex-direction: column; gap: 0.35rem; }
 /* A grid, not flex-wrap: the date column can wrap onto a second line (some
    of these are long, e.g. "same day as Hastings") without dragging the
-   link down with it — place and link both stay pinned to their own
-   columns regardless of how many lines the date takes. */
+   next column down with it. */
 .calendar-item {
   display: grid;
-  grid-template-columns: minmax(6.5rem, auto) minmax(0, 1fr) auto;
+  grid-template-columns: minmax(6.5rem, auto) minmax(0, 1fr);
   column-gap: var(--space-md);
   row-gap: 0.2rem;
   align-items: baseline;
@@ -692,30 +710,16 @@ summary:focus-visible,
   font-size: var(--text-small);
   color: var(--color-ink-3);
 }
-.calendar-link {
-  font-size: var(--text-small);
-  font-weight: 700;
-  color: var(--color-red);
-  text-decoration: underline;
-  text-underline-offset: 3px;
-  white-space: nowrap;
-  justify-self: end;
-}
-.calendar-link:hover { color: var(--color-ink); }
 .calendar-item.is-active .calendar-place { color: var(--color-red); }
 
+/* One shared register link for the whole list, rather than one per row. */
+.calendar-register { margin-top: var(--space-lg); }
+
 .calendar-more {
-  margin-top: var(--space-lg);
+  margin-top: var(--space-2xl);
   font-size: var(--text-lead);
   color: var(--color-ink);
-  max-width: 46ch;
-}
-
-.connects-note {
-  margin-top: var(--space-lg);
-  font-size: var(--text-small);
-  color: var(--color-ink-3);
-  max-width: 54ch;
+  max-width: none;
 }
 
 /* ---------------------------------------------------------------------------
@@ -842,19 +846,27 @@ summary:focus-visible,
 }
 .mentor-card {
   scroll-snap-align: start;
-  width: min(20rem, 82vw);
+  width: min(28rem, 88vw);
   flex: 0 0 auto;
   padding: clamp(1.5rem, 2.2vw, 2rem);
   background: var(--color-paper-2);
   border: 1px solid var(--color-line);
 }
+/* Photo on the left, name and role to its right — a wide masthead row
+   rather than a stacked headshot, so the card reads more like a byline. */
+.mentor-card-head {
+  display: flex;
+  align-items: center;
+  gap: 1.25rem;
+  margin-bottom: var(--space-md);
+}
 /* Background-removed cutouts, shown at their real proportions rather than
    cropped into a circle — a tiny circular crop distorted these portraits
    and defeated the point of removing the background in the first place. */
 .mentor-photo {
-  height: 7.5rem;
+  flex-shrink: 0;
+  height: 5.5rem;
   width: auto;
-  margin-bottom: var(--space-md);
 }
 .mentor-photo img {
   display: block;
@@ -862,6 +874,7 @@ summary:focus-visible,
   width: auto;
   object-fit: contain;
 }
+.mentor-card-heading { min-width: 0; }
 .mentor-name { font-size: var(--text-h3); }
 .mentor-role {
   font-size: var(--text-small);
@@ -870,7 +883,6 @@ summary:focus-visible,
   margin-top: var(--space-3xs);
 }
 .mentor-bio {
-  margin-top: var(--space-sm);
   color: var(--color-ink-2);
 }
 .mentor-linkedin {
@@ -888,59 +900,6 @@ summary:focus-visible,
 .mentor-linkedin:hover { color: var(--color-red); border-color: var(--color-red); }
 
 /* ---------------------------------------------------------------------------
-   12 · Your business, your journey — outcome-led prose, not a numbered
-   process. The four-step detail moved to the FAQ.
-   --------------------------------------------------------------------------- */
-.journey-inner { max-width: 52rem; }
-.journey-copy {
-  font-size: var(--text-lead);
-  color: var(--color-ink-2);
-  max-width: var(--measure);
-}
-.journey-copy + .journey-copy { margin-top: var(--space-md); }
-.journey-inner .btn { margin-top: var(--space-xl); }
-
-/* ---------------------------------------------------------------------------
-   13 · About quotes — horizontal scroll carousel, same pattern as the mentor
-   carousel: CSS scroll-snap, no JS, extend by adding another <li>.
-   --------------------------------------------------------------------------- */
-.quote-scroll-outer {
-  margin-top: var(--space-xl);
-  padding-bottom: var(--space-sm);
-  overflow-x: auto;
-  scroll-snap-type: x mandatory;
-  -webkit-overflow-scrolling: touch;
-}
-.quote-scroll {
-  display: flex;
-  gap: clamp(1rem, 2vw, 1.5rem);
-  width: max-content;
-}
-.quote-card {
-  scroll-snap-align: start;
-  width: min(22rem, 82vw);
-  flex: 0 0 auto;
-  padding: clamp(1.5rem, 2.2vw, 2rem);
-  background: var(--color-paper-2);
-  border: 1px solid var(--color-line);
-}
-.quote-text {
-  margin: 0;
-  font-family: var(--font-display);
-  font-variation-settings: "wdth" 105;
-  font-weight: 650;
-  font-size: clamp(1.0625rem, 1.5vw, 1.25rem);
-  line-height: 1.35;
-  letter-spacing: -0.01em;
-  color: var(--color-ink);
-}
-.quote-attribution {
-  margin-top: var(--space-md);
-}
-.quote-name { display: block; font-weight: 700; color: var(--color-ink); }
-.quote-business { display: block; font-size: var(--text-small); color: var(--color-ink-3); }
-
-/* ---------------------------------------------------------------------------
    14 · About stats strip — count up from 0 on scroll into view (script.js),
    visible at full value by default so JS-off still shows the real numbers.
    --------------------------------------------------------------------------- */
@@ -951,7 +910,7 @@ summary:focus-visible,
   grid-template-columns: repeat(3, minmax(0, 1fr));
   gap: clamp(1rem, 3vw, 2rem);
 }
-.stat { border-top: 1px solid var(--color-line-strong); padding-top: var(--space-md); }
+.stat { padding-top: var(--space-sm); }
 .stat-figure {
   font-family: var(--font-display);
   font-variation-settings: "wdth" 105;
@@ -1045,6 +1004,28 @@ summary:focus-visible,
   color: var(--color-ink-2);
 }
 .register-aside .btn { margin-top: var(--space-lg); }
+
+/* Compact variant — this ask is secondary to "Register your interest" and
+   was reading as heavy enough to compete with it, so it drops the icon,
+   shrinks the title, and loses the meta/divider line entirely. */
+.register-aside-compact {
+  padding: clamp(1.25rem, 1.8vw, 1.75rem);
+  align-self: start;
+}
+.register-aside-compact .mentor-title {
+  font-size: var(--text-lead);
+}
+.register-aside-compact .mentor-body {
+  margin-top: var(--space-2xs);
+  padding-top: 0;
+  border-top: none;
+  font-size: var(--text-small);
+}
+.register-aside-compact .btn {
+  margin-top: var(--space-md);
+  padding: 0.75rem 1.5rem;
+  font-size: 0.9rem;
+}
 
 /* ---------------------------------------------------------------------------
    13 · Footer
@@ -1192,10 +1173,8 @@ summary:focus-visible,
   .hero { min-height: auto; padding-block: var(--space-xl) var(--space-2xl); }
   .register-main .btn, .register-aside .btn { width: 100%; }
   .calendar-item { grid-template-columns: minmax(0, 1fr); row-gap: 0.3rem; }
-  .calendar-link { justify-self: start; }
   .cluster { margin: 0.75rem; }
   .stats-row { grid-template-columns: minmax(0, 1fr); gap: var(--space-md); }
-  .journey-inner .btn { width: 100%; }
 
   /* Footer — the three stacked columns and the funder row otherwise carry
      the same generous gaps as desktop, which reads as a lot of dead space
