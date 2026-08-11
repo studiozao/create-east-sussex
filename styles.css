@@ -459,6 +459,17 @@ summary:focus-visible,
 .split-text-first  { grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); }
 .split-media-first { grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); }
 
+/* Calendar's map/list pairing: top-aligned rather than centred, and the
+   map column is narrower than the default 1:1 split so the map's height
+   (fixed by its aspect ratio) lands close to the list's own height —
+   roughly top of "September" to the bottom of the Uckfield row. */
+@media (min-width: 760px) {
+  .calendar-split {
+    grid-template-columns: minmax(0, 1.52fr) minmax(0, 1fr);
+    align-items: start;
+  }
+}
+
 /* --- Hook: four photographs as one angled cluster ------------------------ */
 .cluster {
   display: grid;
@@ -718,15 +729,20 @@ summary:focus-visible,
 }
 .calendar-item.is-active .calendar-place { color: var(--color-red); }
 
-/* One shared register link for the whole list, rather than one per row. */
-.calendar-register { margin-top: var(--space-lg); }
-
 .calendar-more {
-  margin-top: var(--space-2xl);
   font-size: var(--text-lead);
   color: var(--color-ink);
   max-width: none;
 }
+/* Sits between the month list and the register button now, rather than
+   full width below everything — tighter gaps on both sides than the
+   generous section-level spacing it used to have room for. */
+.calendar-more-tight {
+  margin-top: var(--space-md);
+  margin-bottom: 0;
+}
+/* One shared register link for the whole list, rather than one per row. */
+.calendar-register { margin-top: var(--space-md); }
 
 /* ---------------------------------------------------------------------------
    9 · Eligibility checklist
