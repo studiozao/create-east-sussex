@@ -836,11 +836,12 @@ summary:focus-visible,
    horizontal scroll, CSS scroll-snap only. */
 .quote-float-outer {
   margin-top: var(--space-xl);
-  padding-bottom: var(--space-sm);
   overflow-x: auto;
   scroll-snap-type: x mandatory;
   -webkit-overflow-scrolling: touch;
+  scrollbar-width: none;
 }
+.quote-float-outer::-webkit-scrollbar { display: none; }
 .quote-float {
   display: flex;
   gap: clamp(1rem, 2vw, 1.5rem);
@@ -872,7 +873,54 @@ summary:focus-visible,
 }
 
 /* ---------------------------------------------------------------------------
-   11 · Meet your mentors — horizontal scroll carousel. CSS scroll-snap,
+   11 · Carousel shell — shared by the mentor and testimonial strips. Native
+   scroll-snap does the work; script.js only wires the two arrow buttons to
+   scrollBy(), and the OS scrollbar is hidden so the arrows are the only
+   visible affordance (touch swipe and trackpad scroll still work either
+   way — nothing here is required to move the strip).
+   --------------------------------------------------------------------------- */
+.carousel { position: relative; }
+
+.carousel-arrow {
+  position: absolute;
+  top: 50%;
+  z-index: 2;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 2.75rem;
+  height: 2.75rem;
+  padding: 0;
+  border: 1px solid var(--color-line-strong);
+  border-radius: 50%;
+  background: var(--color-white);
+  color: var(--color-ink);
+  cursor: pointer;
+  transform: translateY(-50%);
+  box-shadow: 0 8px 20px -10px rgba(17, 17, 17, 0.35);
+  transition: background-color var(--dur-fast) var(--ease-out),
+              color var(--dur-fast) var(--ease-out),
+              opacity var(--dur-fast) var(--ease-out);
+}
+.carousel-arrow svg { width: 18px; height: 18px; }
+.carousel-arrow:hover { background: var(--color-ink); color: var(--color-white); }
+.carousel-arrow[disabled] { opacity: 0.35; cursor: default; }
+.carousel-arrow:hover[disabled] { background: var(--color-white); color: var(--color-ink); }
+.carousel-arrow-prev { left: 0; }
+.carousel-arrow-next { right: 0; }
+
+/* The mentor strip's arrows sit just outside the cards, over the wrap
+   padding; the quieter testimonial strip keeps its arrows tucked further
+   in since it has no side padding of its own to sit in. */
+.carousel-quiet .carousel-arrow-prev { left: -0.25rem; }
+.carousel-quiet .carousel-arrow-next { right: -0.25rem; }
+
+@media (max-width: 640px) {
+  .carousel-arrow { display: none; }
+}
+
+/* ---------------------------------------------------------------------------
+   12 · Meet your mentors — horizontal scroll carousel. CSS scroll-snap,
    no JS: adding another <li class="mentor-card"> extends it, no rebuild.
    --------------------------------------------------------------------------- */
 .mentor-scroll-outer {
@@ -881,10 +929,9 @@ summary:focus-visible,
   overflow-x: auto;
   scroll-snap-type: x mandatory;
   -webkit-overflow-scrolling: touch;
-  /* a little breathing room so the scrollbar (where the OS draws one)
-     doesn't sit flush against the cards */
-  padding-bottom: var(--space-sm);
+  scrollbar-width: none;
 }
+.mentor-scroll-outer::-webkit-scrollbar { display: none; }
 .mentor-scroll {
   display: flex;
   gap: clamp(1rem, 2vw, 1.5rem);
@@ -1079,7 +1126,10 @@ summary:focus-visible,
    so this box sits level with "Sign up to our Connects..." rather than
    the heading above it. */
 @media (min-width: 900px) {
-  .register-aside-lower { margin-top: clamp(4rem, 9vw, 7.75rem); }
+  .register-aside-lower {
+    margin-top: clamp(4rem, 9vw, 7.75rem);
+    margin-left: clamp(-2rem, -3vw, -1rem);
+  }
 }
 
 /* ---------------------------------------------------------------------------

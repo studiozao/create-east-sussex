@@ -8,8 +8,9 @@
      4. Header auto-hide on scroll (mobile only, driven by ScrollTrigger's
         own direction tracking — no manual scroll listener)
      5. Map pins paired with the Connects list
-     6. Mobile nav toggle
-     7. CTA click analytics event (separate from page view)
+     6. Carousel arrows for the mentor and testimonial strips
+     7. Mobile nav toggle
+     8. CTA click analytics event (separate from page view)
 
    Motion is gated behind prefers-reduced-motion via gsap.matchMedia(). The
    CSS renders everything visible by default; the pre-animation state is set
@@ -546,7 +547,39 @@
   })();
 
   /* =========================================================================
-     4 · Mobile nav toggle
+     4 · Carousel arrows — mentor and testimonial strips. The scroll-snap
+     viewport already works with touch/trackpad on its own; this only wires
+     up the two visible buttons and dims whichever one has nothing left to
+     scroll to, so the OS scrollbar (hidden in CSS) isn't the only way to
+     tell the strip has more content.
+     ========================================================================= */
+  document.querySelectorAll(".carousel").forEach(function (carousel) {
+    var viewport = carousel.querySelector("[data-carousel-viewport]");
+    var prev = carousel.querySelector("[data-carousel-prev]");
+    var next = carousel.querySelector("[data-carousel-next]");
+    if (!viewport || !prev || !next) return;
+
+    function step(dir) {
+      var card = viewport.querySelector(":scope > ul > li");
+      var distance = card ? card.getBoundingClientRect().width + 24 : viewport.clientWidth * 0.9;
+      viewport.scrollBy({ left: dir * distance, behavior: "smooth" });
+    }
+
+    function refresh() {
+      var max = viewport.scrollWidth - viewport.clientWidth;
+      prev.disabled = viewport.scrollLeft <= 4;
+      next.disabled = viewport.scrollLeft >= max - 4;
+    }
+
+    prev.addEventListener("click", function () { step(-1); });
+    next.addEventListener("click", function () { step(1); });
+    viewport.addEventListener("scroll", refresh, { passive: true });
+    window.addEventListener("resize", refresh);
+    refresh();
+  });
+
+  /* =========================================================================
+     5 · Mobile nav toggle
      ========================================================================= */
   var navToggle = document.querySelector(".nav-toggle");
   var navLinks = document.getElementById("nav-links");
@@ -566,7 +599,7 @@
   }
 
   /* =========================================================================
-     5 · CTA click analytics event
+     6 · CTA click analytics event
      Fires a custom event on every CTA click, SEPARATE from the page view.
      Works with Plausible OR Google Analytics 4 — whichever you enabled in
      the <head> of index.html. Safe no-op if neither is present.

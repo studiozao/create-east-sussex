@@ -381,7 +381,11 @@
         </header>
       </div>
 
-      <div class="mentor-scroll-outer reveal">
+      <div class="carousel reveal">
+        <button class="carousel-arrow carousel-arrow-prev" type="button" data-carousel-prev aria-label="Previous mentor">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 5 8 12l7 7"/></svg>
+        </button>
+        <div class="mentor-scroll-outer" data-carousel-viewport>
         <ul class="mentor-scroll" role="list">
           <li class="mentor-card">
             <div class="mentor-card-head">
@@ -424,6 +428,10 @@
           <!-- More mentors go here as they join — one more <li class="mentor-card"> each,
                same shape as above. The carousel takes any number without a rebuild. -->
         </ul>
+        </div>
+        <button class="carousel-arrow carousel-arrow-next" type="button" data-carousel-next aria-label="Next mentor">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 5l7 7-7 7"/></svg>
+        </button>
       </div>
     </section>
 
@@ -566,8 +574,8 @@
       <div class="wrap">
         <div class="about-inner">
           <header class="section-head reveal">
-            <p class="section-kicker">Delivered by Studio Zao, with East Sussex County Council</p>
-            <h2 id="about-heading" class="section-heading">About Studio Zao</h2>
+            <p class="section-kicker">Get to know Studio Zao</p>
+            <h2 id="about-heading" class="section-heading">About our Team</h2>
             <p class="section-intro">
               Create East Sussex is a free programme for local creative
               businesses, combining practical sessions, tailored support and
@@ -684,7 +692,11 @@
                <<< SWAP >>> mockup quotes, anonymised on purpose since no
                signed-off testimonials exist yet. Replace with real,
                named, signed-off quotes before launch. -->
-          <div class="quote-float-outer">
+          <div class="carousel carousel-quiet">
+            <button class="carousel-arrow carousel-arrow-prev" type="button" data-carousel-prev aria-label="Previous quote">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 5 8 12l7 7"/></svg>
+            </button>
+            <div class="quote-float-outer" data-carousel-viewport>
             <ul class="quote-float" role="list">
               <li class="quote-float-card">
                 <blockquote>&ldquo;Having a mentor to bounce ideas off made the difference between staying stuck and actually moving.&rdquo;</blockquote>
@@ -703,6 +715,10 @@
                 <p class="quote-float-attribution">Illustrator, Uckfield</p>
               </li>
             </ul>
+            </div>
+            <button class="carousel-arrow carousel-arrow-next" type="button" data-carousel-next aria-label="Next quote">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 5l7 7-7 7"/></svg>
+            </button>
           </div>
         </div>
       </div>
