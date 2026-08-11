@@ -515,8 +515,6 @@ summary:focus-visible,
 }
 .card { min-width: 0; }
 
-/* Semi-opaque paper tint, matching the mentor cards, rather than a flat
-   white box — softer and less like a form field. */
 .card-inner {
   position: relative;
   height: 100%;
@@ -524,16 +522,14 @@ summary:focus-visible,
   flex-direction: column;
   align-items: flex-start;
   padding: clamp(1.75rem, 2.4vw, 2.75rem);
-  background: rgba(244, 241, 238, 0.7);
-  backdrop-filter: blur(6px);
+  background: var(--color-white);
   border: 1px solid var(--color-line);
   overflow: hidden;
   transform-origin: center center;
   will-change: transform;
   transition: border-color var(--dur-fast) var(--ease-out),
               box-shadow var(--dur-mid) var(--ease-out),
-              transform var(--dur-mid) var(--ease-out),
-              background-color var(--dur-fast) var(--ease-out);
+              transform var(--dur-mid) var(--ease-out);
 }
 /* Red rule across the top edge, drawn in rather than bordered on, so it can
    grow on hover without shifting anything. */
@@ -551,7 +547,6 @@ summary:focus-visible,
 }
 .card:hover .card-inner {
   border-color: var(--color-line-strong);
-  background: rgba(244, 241, 238, 0.95);
   box-shadow: 0 18px 40px -24px rgba(17, 17, 17, 0.4);
   transform: translateY(-4px);
 }
@@ -1036,6 +1031,12 @@ summary:focus-visible,
   margin-top: var(--space-md);
   padding: 0.75rem 1.5rem;
   font-size: 0.9rem;
+}
+/* Dropped below the main title's baseline rather than sitting level with
+   it, so the secondary ask doesn't read as equal-weight with the primary
+   register CTA at a glance. */
+@media (min-width: 900px) {
+  .register-aside-lower { margin-top: clamp(5rem, 12vw, 9rem); }
 }
 
 /* ---------------------------------------------------------------------------
