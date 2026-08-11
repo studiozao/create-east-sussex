@@ -509,12 +509,14 @@ summary:focus-visible,
    --------------------------------------------------------------------------- */
 .cards {
   display: grid;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
+  grid-template-columns: repeat(2, minmax(0, 1fr));
   gap: clamp(1rem, 1.6vw, 1.5rem);
   perspective: 1600px;
 }
 .card { min-width: 0; }
 
+/* Semi-opaque paper tint, matching the mentor cards, rather than a flat
+   white box — softer and less like a form field. */
 .card-inner {
   position: relative;
   height: 100%;
@@ -522,14 +524,16 @@ summary:focus-visible,
   flex-direction: column;
   align-items: flex-start;
   padding: clamp(1.75rem, 2.4vw, 2.75rem);
-  background: var(--color-white);
+  background: rgba(244, 241, 238, 0.7);
+  backdrop-filter: blur(6px);
   border: 1px solid var(--color-line);
   overflow: hidden;
   transform-origin: center center;
   will-change: transform;
   transition: border-color var(--dur-fast) var(--ease-out),
               box-shadow var(--dur-mid) var(--ease-out),
-              transform var(--dur-mid) var(--ease-out);
+              transform var(--dur-mid) var(--ease-out),
+              background-color var(--dur-fast) var(--ease-out);
 }
 /* Red rule across the top edge, drawn in rather than bordered on, so it can
    grow on hover without shifting anything. */
@@ -547,6 +551,7 @@ summary:focus-visible,
 }
 .card:hover .card-inner {
   border-color: var(--color-line-strong);
+  background: rgba(244, 241, 238, 0.95);
   box-shadow: 0 18px 40px -24px rgba(17, 17, 17, 0.4);
   transform: translateY(-4px);
 }
@@ -562,8 +567,14 @@ summary:focus-visible,
   border-radius: 50%;
   background: rgba(228, 37, 68, 0.09);
   color: var(--color-red);
+  transition: transform var(--dur-mid) var(--ease-out),
+              background-color var(--dur-mid) var(--ease-out);
 }
 .card-icon svg { width: 26px; height: 26px; }
+.card:hover .card-icon {
+  transform: scale(1.1) rotate(-6deg);
+  background: rgba(228, 37, 68, 0.16);
+}
 
 .card-title {
   font-size: clamp(1.375rem, 1.9vw, 1.75rem);
