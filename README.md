@@ -82,11 +82,11 @@ fast (Cmd/Ctrl+F).
    - Fashion / textiles: *A Tailor Sewing Clothes in Her Shop.jpg* by Meritkosy, CC BY-SA 4.0
    - Photography: *Quadcopter camera drone in flight.jpg* by Josh Sorenson, CC0 (stands in for drone / property photography)
 
-3. **Google Form URL** — in `index.html`, find the CTA button in the form
-   section (`href="https://forms.gle/REPLACE_WITH_REAL_FORM_URL"`) and paste the
-   real link. We deliberately do **not** iframe-embed the form — a native embed
-   can't be restyled to match the brand, so a clean outbound button is correct.
-   The hero and nav buttons scroll to this section.
+3. **Google Form URL — done.** Every register/mentor CTA (`href=`) points at
+   the real form: `https://forms.gle/YGaUqdTt6nfKurEG6`. We deliberately do
+   **not** iframe-embed the form — a native embed can't be restyled to match
+   the brand, so a clean outbound button is correct. The hero and nav buttons
+   scroll to the register section.
 
 4. **Analytics tracking ID** — in the `<head>` of `index.html` there are two
    pre-wired, commented-out snippets: **Plausible** (simplest) and
@@ -121,20 +121,26 @@ fast (Cmd/Ctrl+F).
    bio and LinkedIn link below) — the carousel takes any number without
    layout changes.
 
-6b. **About stats — mockup figures, not confirmed.** The count-up strip in
-   `#about` (30+ businesses supported, 120+ mentoring hours, 95% would
-   recommend) is not real data. Update the three `data-count` values on
-   `.stat-count` (and the visible number inside each span, which mirrors
-   `data-count` so the figure is still correct if `script.js` fails to load)
-   before launch.
+6b. **About stats — two of three confirmed.** The count-up strip in
+   `#about` now shows real figures for businesses supported (300+) and
+   mentoring hours delivered (1200+). The third, "would recommend" (95%),
+   is still a mockup pending sign-off — update its `data-count` (and the
+   visible number inside the span, which mirrors `data-count` so the
+   figure is still correct if `script.js` fails to load) before launch.
 
-6c. **Event calendar dates and register link** — none of the
-   `<<< SWAP >>>` dates in `#connects` are locked yet. The five September
-   rows have real working dates, ordered earliest to latest; October–
-   December have no location or date chosen yet, so they're summarised in
-   a single line instead of dated rows. There is now one shared "Register
-   for a Connect" link for the whole list (`.calendar-register`) rather
-   than a link per row — point it at the real signup form once it exists.
+6c. **Event calendar dates** — none of the `<<< SWAP >>>` dates in
+   `#connects` are locked yet. The five September rows have real working
+   dates, ordered earliest to latest; October–December have no location
+   or date chosen yet, so they're summarised in a single line instead of
+   dated rows. The one shared "Register for a Connect" link for the whole
+   list (`.calendar-register`) already points at the real signup form.
+
+6d. **Testimonials — real, signed-off quotes, project names withheld for
+   now.** The floating strip under "Who we've helped" in `#about` carries
+   five real quotes (Big SLP and IMPACT Torbay participants), each
+   attributed as "Name, Business" without the programme name. Add the
+   programme name back to each attribution once confirmed it should be
+   public.
 
 7. **Connect dates** — the register section is currently framed as an
    *expression of interest*, not a live booking, because Connect dates
