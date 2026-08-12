@@ -556,7 +556,16 @@
      which is imperceptible because the clone is pixel-identical to the
      real set it's swapped for. Arrow buttons always target the middle
      copy directly, so they can't drift into a clone.
+
+     Below MIN_LOOP_COUNT this stays off: with e.g. only 2 mentor cards, a
+     one-set clone repeats so quickly that it reads as an obvious visible
+     duplicate rather than a seamless loop. Those carousels fall back to
+     plain bounded arrows (still wrapping first<->last on click, just
+     without ever cloning anything into the DOM) until there are enough
+     real cards to make the clone trick invisible.
      ========================================================================= */
+  var MIN_LOOP_COUNT = 3;
+
   document.querySelectorAll(".carousel").forEach(function (carousel) {
     var viewport = carousel.querySelector("[data-carousel-viewport]");
     var prev = carousel.querySelector("[data-carousel-prev]");
@@ -567,6 +576,19 @@
     var realItems = Array.prototype.slice.call(list.children);
     var count = realItems.length;
     if (count < 2) return; // nothing to loop with one card
+
+    if (count < MIN_LOOP_COUNT) {
+      var plainIndex = 0;
+      prev.addEventListener("click", function () {
+        plainIndex = (plainIndex - 1 + count) % count;
+        viewport.scrollTo({ left: realItems[plainIndex].offsetLeft, behavior: "smooth" });
+      });
+      next.addEventListener("click", function () {
+        plainIndex = (plainIndex + 1) % count;
+        viewport.scrollTo({ left: realItems[plainIndex].offsetLeft, behavior: "smooth" });
+      });
+      return;
+    }
 
     function cloneSet() {
       return realItems.map(function (item) {
