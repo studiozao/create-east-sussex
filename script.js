@@ -549,33 +549,55 @@
   /* =========================================================================
      4 · Carousel arrows — mentor and testimonial strips. The scroll-snap
      viewport already works with touch/trackpad on its own; this only wires
-     up the two visible buttons and dims whichever one has nothing left to
-     scroll to, so the OS scrollbar (hidden in CSS) isn't the only way to
-     tell the strip has more content.
+     up the two visible buttons. Loops rather than stopping dead at either
+     end: clicking "next" on the last card wraps smoothly back to the
+     first, and "previous" on the first wraps to the last, so there's
+     nothing to hit a wall on.
      ========================================================================= */
   document.querySelectorAll(".carousel").forEach(function (carousel) {
     var viewport = carousel.querySelector("[data-carousel-viewport]");
     var prev = carousel.querySelector("[data-carousel-prev]");
     var next = carousel.querySelector("[data-carousel-next]");
-    if (!viewport || !prev || !next) return;
+    var list = viewport && viewport.querySelector(":scope > ul");
+    if (!viewport || !prev || !next || !list) return;
 
-    function step(dir) {
-      var card = viewport.querySelector(":scope > ul > li");
-      var distance = card ? card.getBoundingClientRect().width + 24 : viewport.clientWidth * 0.9;
-      viewport.scrollBy({ left: dir * distance, behavior: "smooth" });
+    // The current index is tracked here rather than re-derived from
+    // scrollLeft on every click, since scrollLeft is still mid-animation
+    // between clicks (smooth scroll takes longer than a click gap) and
+    // reading it mid-flight caused clicks to land on the wrong card.
+    var index = 0;
+
+    function cards() {
+      return Array.prototype.slice.call(list.children);
     }
 
-    function refresh() {
-      var max = viewport.scrollWidth - viewport.clientWidth;
-      prev.disabled = viewport.scrollLeft <= 4;
-      next.disabled = viewport.scrollLeft >= max - 4;
+    function goTo(nextIndex) {
+      var items = cards();
+      index = (nextIndex + items.length) % items.length;
+      viewport.scrollTo({ left: items[index].offsetLeft, behavior: "smooth" });
     }
 
-    prev.addEventListener("click", function () { step(-1); });
-    next.addEventListener("click", function () { step(1); });
-    viewport.addEventListener("scroll", refresh, { passive: true });
-    window.addEventListener("resize", refresh);
-    refresh();
+    // If the visitor drags/swipes the strip by hand, resync `index` once
+    // the scroll settles so the next button click continues from wherever
+    // they left it rather than snapping back to the last known index.
+    var resyncTimer;
+    viewport.addEventListener("scroll", function () {
+      window.clearTimeout(resyncTimer);
+      resyncTimer = window.setTimeout(function () {
+        var items = cards();
+        var target = viewport.scrollLeft + 1;
+        var closest = 0;
+        var closestDelta = Infinity;
+        items.forEach(function (item, i) {
+          var delta = Math.abs(item.offsetLeft - target);
+          if (delta < closestDelta) { closestDelta = delta; closest = i; }
+        });
+        index = closest;
+      }, 150);
+    }, { passive: true });
+
+    prev.addEventListener("click", function () { goTo(index - 1); });
+    next.addEventListener("click", function () { goTo(index + 1); });
   });
 
   /* =========================================================================

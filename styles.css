@@ -963,8 +963,6 @@ summary:focus-visible,
 }
 .carousel-arrow svg { width: 18px; height: 18px; }
 .carousel-arrow:hover { background: var(--color-ink); color: var(--color-white); }
-.carousel-arrow[disabled] { opacity: 0.35; cursor: default; }
-.carousel-arrow:hover[disabled] { background: var(--color-white); color: var(--color-ink); }
 .carousel-arrow-prev { left: 0; }
 .carousel-arrow-next { right: 0; }
 
