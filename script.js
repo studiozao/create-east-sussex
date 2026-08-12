@@ -547,12 +547,15 @@
   })();
 
   /* =========================================================================
-     4 · Carousel arrows — mentor and testimonial strips. The scroll-snap
-     viewport already works with touch/trackpad on its own; this only wires
-     up the two visible buttons. Loops rather than stopping dead at either
-     end: clicking "next" on the last card wraps smoothly back to the
-     first, and "previous" on the first wraps to the last, so there's
-     nothing to hit a wall on.
+     4 · Carousel loop — mentor and testimonial strips. Scrolling by hand
+     (trackpad, wheel, touch) should feel circular, not stop dead at either
+     end, so the real cards are flanked by one cloned copy of the full set
+     on each side: [clone][real][clone]. The visible viewport always starts
+     inside the middle "real" copy; a scroll listener silently rewinds by
+     exactly one set-width whenever the visitor scrolls into either clone,
+     which is imperceptible because the clone is pixel-identical to the
+     real set it's swapped for. Arrow buttons always target the middle
+     copy directly, so they can't drift into a clone.
      ========================================================================= */
   document.querySelectorAll(".carousel").forEach(function (carousel) {
     var viewport = carousel.querySelector("[data-carousel-viewport]");
@@ -561,43 +564,86 @@
     var list = viewport && viewport.querySelector(":scope > ul");
     if (!viewport || !prev || !next || !list) return;
 
-    // The current index is tracked here rather than re-derived from
-    // scrollLeft on every click, since scrollLeft is still mid-animation
-    // between clicks (smooth scroll takes longer than a click gap) and
-    // reading it mid-flight caused clicks to land on the wrong card.
-    var index = 0;
+    var realItems = Array.prototype.slice.call(list.children);
+    var count = realItems.length;
+    if (count < 2) return; // nothing to loop with one card
 
-    function cards() {
+    function cloneSet() {
+      return realItems.map(function (item) {
+        var clone = item.cloneNode(true);
+        clone.setAttribute("aria-hidden", "true");
+        clone.querySelectorAll("a, button, [tabindex]").forEach(function (el) {
+          el.setAttribute("tabindex", "-1");
+        });
+        return clone;
+      });
+    }
+
+    var leading = cloneSet();
+    var trailing = cloneSet();
+    list.textContent = "";
+    leading.concat(realItems, trailing).forEach(function (el) { list.appendChild(el); });
+
+    // The middle copy now sits at DOM indices [count, 2*count).
+    var index = 0; // logical index within the real set, 0..count-1
+    var setWidth = 0;
+
+    function allItems() {
       return Array.prototype.slice.call(list.children);
     }
 
-    function goTo(nextIndex) {
-      var items = cards();
-      index = (nextIndex + items.length) % items.length;
-      viewport.scrollTo({ left: items[index].offsetLeft, behavior: "smooth" });
+    function middleItem(i) {
+      return allItems()[count + ((i % count) + count) % count];
     }
 
-    // If the visitor drags/swipes the strip by hand, resync `index` once
-    // the scroll settles so the next button click continues from wherever
-    // they left it rather than snapping back to the last known index.
+    function measure() {
+      var items = allItems();
+      setWidth = items[count].offsetLeft - items[0].offsetLeft;
+    }
+
+    function jumpTo(i, smooth) {
+      viewport.scrollTo({ left: middleItem(i).offsetLeft, behavior: smooth ? "smooth" : "auto" });
+    }
+
+    measure();
+    jumpTo(0, false); // land on the middle copy's first card with no animation
+
+    window.addEventListener("resize", function () {
+      measure();
+      jumpTo(index, false);
+    });
+
+    // Rewind by one set-width the moment the visitor scrolls into either
+    // clone zone, so they never actually reach a real edge.
+    viewport.addEventListener("scroll", function () {
+      if (!setWidth) return;
+      if (viewport.scrollLeft < setWidth * 0.5) {
+        viewport.scrollLeft += setWidth;
+      } else if (viewport.scrollLeft > setWidth * 1.5) {
+        viewport.scrollLeft -= setWidth;
+      }
+    }, { passive: true });
+
+    // Resync the tracked index from scroll position once it settles, so
+    // arrow clicks continue from wherever a manual scroll left off.
     var resyncTimer;
     viewport.addEventListener("scroll", function () {
       window.clearTimeout(resyncTimer);
       resyncTimer = window.setTimeout(function () {
-        var items = cards();
+        var items = allItems();
         var target = viewport.scrollLeft + 1;
-        var closest = 0;
+        var closest = count;
         var closestDelta = Infinity;
         items.forEach(function (item, i) {
           var delta = Math.abs(item.offsetLeft - target);
           if (delta < closestDelta) { closestDelta = delta; closest = i; }
         });
-        index = closest;
+        index = (closest - count + count) % count;
       }, 150);
     }, { passive: true });
 
-    prev.addEventListener("click", function () { goTo(index - 1); });
-    next.addEventListener("click", function () { goTo(index + 1); });
+    prev.addEventListener("click", function () { index = (index - 1 + count) % count; jumpTo(index, true); });
+    next.addEventListener("click", function () { index = (index + 1) % count; jumpTo(index, true); });
   });
 
   /* =========================================================================
