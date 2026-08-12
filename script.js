@@ -617,9 +617,9 @@
     // clone zone, so they never actually reach a real edge.
     viewport.addEventListener("scroll", function () {
       if (!setWidth) return;
-      if (viewport.scrollLeft < setWidth * 0.5) {
+      if (viewport.scrollLeft < setWidth) {
         viewport.scrollLeft += setWidth;
-      } else if (viewport.scrollLeft > setWidth * 1.5) {
+      } else if (viewport.scrollLeft >= setWidth * 2) {
         viewport.scrollLeft -= setWidth;
       }
     }, { passive: true });
