@@ -976,10 +976,11 @@ summary:focus-visible,
   color: var(--color-ink-3);
   text-decoration: none;
 }
-.quote-float-business::before {
-  content: "\00b7";
-  margin-right: 0.5em;
-  color: var(--color-line-strong);
+/* A dedicated element rather than a ::before on .quote-float-business, so
+   the link's underline only ever sits under its own words, not the dot. */
+.quote-float-sep {
+  font-weight: 700;
+  color: var(--color-ink-2);
 }
 a.quote-float-business {
   display: inline-flex;
