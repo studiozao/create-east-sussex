@@ -635,23 +635,25 @@
       jumpTo(index, false);
     });
 
-    // Rewind by one set-width the moment the visitor scrolls into either
-    // clone zone, so they never actually reach a real edge.
+    // Rewinding scrollLeft mid-gesture fought the browser's own momentum
+    // and scroll-snap physics — the strip visibly shook and skipped cards
+    // under a trackpad or touch flick. Instead, wait for scrolling to go
+    // idle (debounced), THEN rewind by one set-width if it landed in a
+    // clone zone. Correcting while stationary is invisible (the clone is
+    // pixel-identical to the real set it swaps for) and never competes
+    // with an in-flight gesture. The same debounce also resyncs the
+    // tracked index, so arrow clicks continue from wherever a manual
+    // scroll left off.
+    var settleTimer;
     viewport.addEventListener("scroll", function () {
-      if (!setWidth) return;
-      if (viewport.scrollLeft < setWidth) {
-        viewport.scrollLeft += setWidth;
-      } else if (viewport.scrollLeft >= setWidth * 2) {
-        viewport.scrollLeft -= setWidth;
-      }
-    }, { passive: true });
-
-    // Resync the tracked index from scroll position once it settles, so
-    // arrow clicks continue from wherever a manual scroll left off.
-    var resyncTimer;
-    viewport.addEventListener("scroll", function () {
-      window.clearTimeout(resyncTimer);
-      resyncTimer = window.setTimeout(function () {
+      window.clearTimeout(settleTimer);
+      settleTimer = window.setTimeout(function () {
+        if (setWidth) {
+          // A loop, not a single if/else: guards against an extreme-fast
+          // flick overscrolling by more than one zone width in one go.
+          while (viewport.scrollLeft < setWidth) { viewport.scrollLeft += setWidth; }
+          while (viewport.scrollLeft >= setWidth * 2) { viewport.scrollLeft -= setWidth; }
+        }
         var items = allItems();
         var target = viewport.scrollLeft + 1;
         var closest = count;
@@ -661,7 +663,7 @@
           if (delta < closestDelta) { closestDelta = delta; closest = i; }
         });
         index = (closest - count + count) % count;
-      }, 150);
+      }, 120);
     }, { passive: true });
 
     prev.addEventListener("click", function () { index = (index - 1 + count) % count; jumpTo(index, true); });
