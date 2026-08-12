@@ -197,6 +197,22 @@ summary:focus-visible,
 
 .logo-rule { width: 1px; height: 30px; background: var(--color-line-strong); }
 
+/* Funder trio in the header, beside Studio Zao — same three logos as the
+   footer, same order, sized down to fit the slim sticky header. */
+.logo-img-ukgov-header { height: 22px; }
+.logo-img-sbsa-header  { height: 26px; }
+.logo-img-escc-header  { height: 30px; }
+@media (max-width: 640px) {
+  /* Not enough width for five logos + nav on a phone header; the funder
+     trio already repeats, larger, right below the hero. */
+  .logo-img-ukgov-header,
+  .logo-img-sbsa-header,
+  .logo-img-escc-header,
+  .logo-lockup .logo-rule {
+    display: none;
+  }
+}
+
 .site-nav { display: flex; align-items: center; }
 
 .nav-links { display: flex; align-items: center; gap: 2rem; }
@@ -375,12 +391,6 @@ summary:focus-visible,
   max-width: 42ch;
 }
 .hero-actions { display: flex; flex-wrap: wrap; gap: var(--space-sm); }
-.hero-urgency {
-  margin-top: var(--space-md);
-  font-size: var(--text-small);
-  font-weight: 700;
-  color: var(--color-white);
-}
 
 /* ---------------------------------------------------------------------------
    5 · Section rhythm & heads — one consistent vertical rhythm so the page
@@ -792,6 +802,9 @@ summary:focus-visible,
    --------------------------------------------------------------------------- */
 .about-inner { max-width: 66rem; }
 .panels { border-top: 1px solid var(--color-line-strong); }
+/* This group follows the mentor carousel directly, with no header
+   in between to supply the usual gap via .section-head's margin. */
+.section-mentors .panels { margin-top: var(--space-xl); }
 
 .panel { border-bottom: 1px solid var(--color-line-strong); }
 .panel-summary {
