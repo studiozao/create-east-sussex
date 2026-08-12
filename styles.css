@@ -853,6 +853,28 @@ summary:focus-visible,
   max-width: var(--measure);
   color: var(--color-ink-2);
 }
+.panel-lead {
+  font-family: var(--font-body);
+  font-weight: 700;
+  font-size: var(--text-lead);
+  color: var(--color-ink);
+}
+.panel-subheading {
+  margin-top: var(--space-2xs);
+  font-family: var(--font-body);
+  font-weight: 700;
+  font-size: 1rem;
+  color: var(--color-ink);
+}
+.panel-list {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2xs);
+  padding-left: 1.25rem;
+  list-style: disc;
+}
+.panel-list li::marker { color: var(--color-red); }
+.panel-body .btn { align-self: flex-start; margin-top: var(--space-2xs); }
 
 /* Floating testimonial strip — deliberately no heading/kicker, sits quiet
    under the panels. Half-transparent, rounded, long rectangular cards;
