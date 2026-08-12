@@ -375,6 +375,12 @@ summary:focus-visible,
   max-width: 42ch;
 }
 .hero-actions { display: flex; flex-wrap: wrap; gap: var(--space-sm); }
+.hero-urgency {
+  margin-top: var(--space-md);
+  font-size: var(--text-small);
+  font-weight: 700;
+  color: var(--color-white);
+}
 
 /* ---------------------------------------------------------------------------
    5 · Section rhythm & heads — one consistent vertical rhythm so the page
@@ -401,6 +407,7 @@ summary:focus-visible,
 .section-register { padding-block: var(--space-2xl) var(--space-3xl); }
 
 .section-head { margin-bottom: var(--space-xl); }
+.section-head > .btn { margin-top: var(--space-md); }
 .section-head-wide { max-width: 58rem; }
 
 .section-kicker {
@@ -929,7 +936,16 @@ summary:focus-visible,
   font-size: var(--text-label);
   letter-spacing: 0.02em;
   color: var(--color-ink-3);
+  text-decoration: none;
 }
+a.quote-float-business {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.25em;
+  border-bottom: 1px solid var(--color-line-strong);
+  transition: color var(--dur-fast) var(--ease-out), border-color var(--dur-fast) var(--ease-out);
+}
+a.quote-float-business:hover { color: var(--color-red); border-color: var(--color-red); }
 
 /* ---------------------------------------------------------------------------
    11 · Carousel shell — shared by the mentor and testimonial strips. Native
@@ -1247,6 +1263,18 @@ summary:focus-visible,
   color: var(--color-ink-3);
   max-width: 32ch;
 }
+
+.funders-top {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: clamp(2rem, 4vw, 3.5rem);
+  flex-wrap: wrap;
+  padding-block: var(--space-lg);
+}
+.logo-img-ukgov-top { height: 48px; }
+.logo-img-sbsa-top  { height: 56px; }
+.logo-img-escc-top  { height: 78px; }
 
 .footer-funders {
   display: flex;
