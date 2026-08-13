@@ -512,6 +512,10 @@
       all.forEach(function (el) {
         if (el.getAttribute("data-place") === place) {
           el.classList.toggle("is-active", on);
+          // Once a pin has been shown (hover, focus, or the intro
+          // sequence below), its name stays on the map for good rather
+          // than disappearing again when "is-active" is cleared.
+          if (on) el.classList.add("is-named");
         }
       });
     }
@@ -530,6 +534,11 @@
     // map reads as interactive rather than decorative.
     if (!hasGsap || prefersReduced) return;
 
+    var areas = document.querySelector(".map-areas");
+    if (areas) gsap.set(areas, { opacity: 0 }); // area lines are visible by
+    // default in CSS; only hide them here so the fade-in below has
+    // somewhere to animate from when motion is available.
+
     ScrollTrigger.create({
       trigger: ".map-figure",
       start: "top 62%",
@@ -542,6 +551,13 @@
             window.setTimeout(function () { setActive(place, false); }, 1100);
           }, 1600 + i * 340);
         });
+        // Slightly more map detail fades in once every name has had its
+        // turn, rather than all at once with the pins.
+        if (areas) {
+          window.setTimeout(function () {
+            gsap.to(areas, { opacity: 1, duration: 1.1, ease: "power1.out" });
+          }, 1600 + pins.length * 340);
+        }
       },
     });
   })();

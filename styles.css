@@ -659,16 +659,19 @@ summary:focus-visible,
   fill: #FBF7F5;   /* the faintest warm tint, not flat grey */
   stroke: none;
 }
-/* Contour rings — the outline redrawn at decreasing scale about the county's
-   centroid, clipped so nothing spills past the coast. Reads as topography
-   rather than the screen-print dots this replaced. */
-.map-contours use {
+/* Faint stylised area dividers — not exact administrative boundaries,
+   just enough internal detail that the county doesn't read as one flat
+   shape. Visible by default (so blocked/no JS still shows them); script.js
+   only adds the fade-in-after-the-pin-sequence flourish when motion is
+   available. */
+.map-areas path {
   fill: none;
-  stroke: rgba(228, 37, 68, 0.16);
-  stroke-width: 1.3;
-  stroke-linejoin: round;
+  stroke: var(--color-ink);
+  stroke-width: 1;
+  stroke-linecap: round;
+  opacity: 0.08;
 }
-/* The coastline sits on top so the contours never cross it */
+/* The coastline sits on top so the area lines never cross it */
 .map-edge {
   fill: none;
   /* softer than pure ink, and warmed very slightly with the brand red so it
@@ -684,7 +687,7 @@ summary:focus-visible,
   fill: var(--color-red);
   stroke: var(--color-white);
   stroke-width: 2;
-  transition: r var(--dur-fast) var(--ease-out);
+  transition: r var(--dur-fast) var(--ease-out), fill var(--dur-fast) var(--ease-out);
 }
 .map-pin-halo {
   fill: var(--color-red);
@@ -693,7 +696,8 @@ summary:focus-visible,
   transform-origin: center;
   transform: scale(0.4);
   transition: opacity var(--dur-mid) var(--ease-out),
-              transform var(--dur-mid) var(--ease-out);
+              transform var(--dur-mid) var(--ease-out),
+              fill var(--dur-fast) var(--ease-out);
 }
 .map-pin-label {
   font-family: var(--font-body);
@@ -709,9 +713,18 @@ summary:focus-visible,
   stroke-width: 5px;
   stroke-linejoin: round;
 }
-.map-pin.is-active .map-pin-halo  { opacity: 0.2; transform: scale(1); }
-.map-pin.is-active .map-pin-dot   { r: 9; }
-.map-pin.is-active .map-pin-label { opacity: 1; }
+/* Once named (script.js, after the intro sequence or first interaction)
+   the label stays up for good — "is-active" alone no longer controls it,
+   so hovering away doesn't make the name disappear again. */
+.map-pin.is-named .map-pin-label { opacity: 1; }
+/* Hover/pairing highlight uses ink rather than the resting red, so the
+   two states read as visually distinct rather than "redder red". */
+.map-pin.is-active .map-pin-halo {
+  opacity: 0.22;
+  transform: scale(1);
+  fill: var(--color-ink);
+}
+.map-pin.is-active .map-pin-dot { r: 9; fill: var(--color-ink); }
 
 /* --- Event calendar ------------------------------------------------------ */
 .calendar-months { display: flex; flex-direction: column; gap: var(--space-lg); }
@@ -805,10 +818,6 @@ summary:focus-visible,
    --------------------------------------------------------------------------- */
 .about-inner { max-width: 66rem; }
 .panels { border-top: 1px solid var(--color-line-strong); }
-/* This group follows the mentor carousel directly, with no header
-   in between to supply the usual gap via .section-head's margin. */
-.section-mentors .panels { margin-top: var(--space-xl); }
-
 .panel { border-bottom: 1px solid var(--color-line-strong); }
 .panel-summary {
   display: flex;
@@ -840,6 +849,25 @@ summary:focus-visible,
   font-size: clamp(1.125rem, 1.7vw, 1.4375rem);
   color: var(--color-ink);
 }
+
+/* Footnote treatment — quiet, muted, no icon, sits between the page's
+   last section and the footer rather than inside a full section. */
+.footnote-wrap { padding-block: var(--space-lg); }
+.footnote-panel { border-top: none; max-width: var(--measure); }
+.footnote-panel .panel { border-bottom: none; }
+.footnote-panel .panel-summary { padding-block: var(--space-sm); gap: 0.6rem; }
+.footnote-panel .panel-title {
+  font-family: var(--font-body);
+  font-size: var(--text-small);
+  font-weight: 700;
+  color: var(--color-ink-3);
+}
+.footnote-panel .panel-mark { width: 1rem; height: 1rem; }
+.footnote-panel .panel-mark::before,
+.footnote-panel .panel-mark::after { background: var(--color-ink-3); }
+.footnote-panel .panel-body { padding-left: 0; color: var(--color-ink-3); }
+.footnote-panel .panel-lead { color: var(--color-ink-2); }
+.footnote-panel .panel-subheading { color: var(--color-ink-2); }
 
 /* Plus/minus mark, drawn in CSS so it stays crisp and flips on open */
 .panel-mark {
