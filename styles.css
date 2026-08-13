@@ -736,8 +736,9 @@ summary:focus-visible,
    next column down with it. */
 .calendar-item {
   display: grid;
-  grid-template-columns: minmax(6.5rem, auto) minmax(0, 1fr) minmax(0, auto);
-  column-gap: var(--space-md);
+  grid-template-columns: minmax(6.5rem, auto) minmax(0, auto) minmax(0, auto);
+  column-gap: var(--space-lg);
+  justify-content: start;
   row-gap: 0.2rem;
   align-items: baseline;
   padding-block: 0.6rem;
@@ -759,7 +760,6 @@ summary:focus-visible,
 .calendar-time {
   font-size: var(--text-small);
   color: var(--color-ink-3);
-  text-align: right;
 }
 .calendar-item.is-active .calendar-place { color: var(--color-red); }
 
