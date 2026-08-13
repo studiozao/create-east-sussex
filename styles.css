@@ -737,7 +737,7 @@ summary:focus-visible,
 .calendar-item {
   display: grid;
   grid-template-columns: minmax(6.5rem, auto) minmax(0, auto) minmax(0, auto);
-  column-gap: var(--space-lg);
+  column-gap: var(--space-xl);
   justify-content: start;
   row-gap: 0.2rem;
   align-items: baseline;
