@@ -1281,6 +1281,14 @@ a.quote-float-business:hover { color: var(--color-red); border-color: var(--colo
 .logo-img-ukgov-top { height: 48px; }
 .logo-img-sbsa-top  { height: 56px; }
 .logo-img-escc-top  { height: 78px; }
+@media (max-width: 640px) {
+  /* Shrink and tighten so the trio stays on one line rather than wrapping
+     onto a second row on narrow phones. */
+  .funders-top { gap: clamp(0.75rem, 4vw, 1.5rem); flex-wrap: nowrap; padding-block: var(--space-md); }
+  .logo-img-ukgov-top { height: 26px; }
+  .logo-img-sbsa-top  { height: 30px; }
+  .logo-img-escc-top  { height: 40px; }
+}
 
 .footer-funders {
   display: flex;
