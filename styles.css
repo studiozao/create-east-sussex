@@ -1170,7 +1170,9 @@ a.quote-float-business:hover { color: var(--color-red); border-color: var(--colo
    12 · Register — single closing ask; the mentor ask now lives in the
    page-footnote band instead of sitting beside this one.
    --------------------------------------------------------------------------- */
-.register-grid { max-width: 34rem; }
+/* No max-width here — the heading (.section-heading-fit) needs room to
+   stay on one line; .register-body/.register-microcopy already cap
+   their own reading width in ch units below. */
 .register-body {
   margin-top: var(--space-md);
   font-size: var(--text-lead);
