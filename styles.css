@@ -846,10 +846,18 @@ summary:focus-visible,
   color: var(--color-ink);
 }
 
-/* Footnote treatment — quiet, muted, no icon, sits between the page's
-   last section and the footer rather than inside a full section. */
-.footnote-wrap { padding-block: var(--space-lg); }
-.footnote-panel { border-top: none; max-width: var(--measure); }
+/* Closing band — footnote + back-to-top grouped as one deliberate close
+   to the page, bordered top and bottom so it reads as its own quiet beat
+   rather than two elements loosely stacked above the footer. */
+.page-footnote {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-lg);
+  padding-block: var(--space-2xl);
+  border-block: 1px solid var(--color-line);
+}
+.footnote-panel { border-top: none; width: 100%; max-width: var(--measure); }
 .footnote-panel .panel { border-bottom: none; }
 .footnote-panel .panel-summary { padding-block: var(--space-sm); gap: 0.6rem; }
 .footnote-panel .panel-title {
@@ -1274,14 +1282,9 @@ a.quote-float-business:hover { color: var(--color-red); border-color: var(--colo
 }
 
 /* ---------------------------------------------------------------------------
-   13 · Back to top — sits between the last section and the footer,
-   scrolls to "What is it" rather than the literal top of the page.
+   13 · Back to top — grouped into .page-footnote above, scrolls to
+   "What is it" rather than the literal top of the page.
    --------------------------------------------------------------------------- */
-.back-to-top-wrap {
-  display: flex;
-  justify-content: center;
-  padding-block: var(--space-lg);
-}
 .back-to-top {
   display: inline-flex;
   align-items: center;
