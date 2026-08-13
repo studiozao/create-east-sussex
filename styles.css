@@ -737,7 +737,7 @@ summary:focus-visible,
 .calendar-item {
   display: grid;
   grid-template-columns: minmax(6.5rem, auto) minmax(0, auto) minmax(0, auto);
-  column-gap: var(--space-xl);
+  column-gap: var(--space-lg);
   justify-content: start;
   row-gap: 0.2rem;
   align-items: baseline;
@@ -760,6 +760,7 @@ summary:focus-visible,
 .calendar-time {
   font-size: var(--text-small);
   color: var(--color-ink-3);
+  margin-left: var(--space-lg);
 }
 .calendar-item.is-active .calendar-place { color: var(--color-red); }
 
@@ -1377,7 +1378,7 @@ a.quote-float-business:hover { color: var(--color-red); border-color: var(--colo
   .hero { min-height: auto; padding-block: var(--space-xl) var(--space-2xl); }
   .register-main .btn { width: 100%; }
   .calendar-item { grid-template-columns: minmax(0, 1fr); row-gap: 0.3rem; }
-  .calendar-time { text-align: left; }
+  .calendar-time { text-align: left; margin-left: 0; }
   .cluster { margin: 0.75rem; }
   .stats-row { grid-template-columns: minmax(0, 1fr); gap: var(--space-md); }
 
