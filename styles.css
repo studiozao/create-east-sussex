@@ -730,15 +730,21 @@ summary:focus-visible,
 }
 /* No rules between rows — spacing alone separates them, and the gap is
    deliberately tight so each month's rows read as one list, not blocks. */
-.calendar-list { display: flex; flex-direction: column; gap: 0.35rem; }
-/* A grid, not flex-wrap: the date column can wrap onto a second line (some
-   of these are long, e.g. "same day as Hastings") without dragging the
-   next column down with it. */
-.calendar-item {
+/* .calendar-list defines the shared column tracks; each .calendar-item is a
+   subgrid on those columns so date/time line up across every row instead of
+   each <li> sizing its own columns independently. */
+.calendar-list {
   display: grid;
   grid-template-columns: minmax(6.5rem, auto) minmax(0, auto) minmax(0, auto);
   column-gap: var(--space-lg);
+  row-gap: 0.35rem;
   justify-content: start;
+}
+.calendar-item {
+  display: grid;
+  grid-column: 1 / -1;
+  grid-template-columns: subgrid;
+  column-gap: var(--space-lg);
   row-gap: 0.2rem;
   align-items: baseline;
   padding-block: 0.6rem;
@@ -1377,7 +1383,8 @@ a.quote-float-business:hover { color: var(--color-red); border-color: var(--colo
 @media (max-width: 560px) {
   .hero { min-height: auto; padding-block: var(--space-xl) var(--space-2xl); }
   .register-main .btn { width: 100%; }
-  .calendar-item { grid-template-columns: minmax(0, 1fr); row-gap: 0.3rem; }
+  .calendar-list { grid-template-columns: minmax(0, 1fr); }
+  .calendar-item { row-gap: 0.3rem; }
   .calendar-time { text-align: left; margin-left: 0; }
   .cluster { margin: 0.75rem; }
   .stats-row { grid-template-columns: minmax(0, 1fr); gap: var(--space-md); }
