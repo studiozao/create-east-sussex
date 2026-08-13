@@ -736,7 +736,7 @@ summary:focus-visible,
    next column down with it. */
 .calendar-item {
   display: grid;
-  grid-template-columns: minmax(6.5rem, auto) minmax(0, 1fr);
+  grid-template-columns: minmax(6.5rem, auto) minmax(0, 1fr) minmax(0, auto);
   column-gap: var(--space-md);
   row-gap: 0.2rem;
   align-items: baseline;
@@ -755,6 +755,11 @@ summary:focus-visible,
 .calendar-date {
   font-size: var(--text-small);
   color: var(--color-ink-3);
+}
+.calendar-time {
+  font-size: var(--text-small);
+  color: var(--color-ink-3);
+  text-align: right;
 }
 .calendar-item.is-active .calendar-place { color: var(--color-red); }
 
@@ -1364,6 +1369,7 @@ a.quote-float-business:hover { color: var(--color-red); border-color: var(--colo
   .hero { min-height: auto; padding-block: var(--space-xl) var(--space-2xl); }
   .register-main .btn { width: 100%; }
   .calendar-item { grid-template-columns: minmax(0, 1fr); row-gap: 0.3rem; }
+  .calendar-time { text-align: left; }
   .cluster { margin: 0.75rem; }
   .stats-row { grid-template-columns: minmax(0, 1fr); gap: var(--space-md); }
 
