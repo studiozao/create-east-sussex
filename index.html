@@ -542,13 +542,15 @@
               <use class="map-shadow" href="#esShape" />
               <use class="map-land" href="#esShape" />
 
-              <!-- Faint stylised area dividers, clipped to the county —
-                   decorative texture, not exact administrative boundaries.
-                   Faded in via script.js after the pin-label sequence. -->
+              <!-- Stylised areas, told apart by a subtle shade difference
+                   alone, no drawn boundary lines — rough zones, not exact
+                   administrative ones. Faded in via script.js after the
+                   pin-label sequence. -->
               <g class="map-areas" clip-path="url(#esClip)" aria-hidden="true">
-                <path d="M15,225 Q300,205 615,245" />
-                <path d="M145,145 Q205,270 255,405" />
-                <path d="M330,255 Q345,330 365,415" />
+                <rect class="map-area map-area-1" x="0" y="0" width="640" height="235" />
+                <rect class="map-area map-area-2" x="0" y="235" width="235" height="186" />
+                <rect class="map-area map-area-3" x="235" y="235" width="110" height="186" />
+                <rect class="map-area map-area-4" x="345" y="235" width="295" height="186" />
               </g>
 
               <use class="map-edge" href="#esShape" />
