@@ -659,6 +659,15 @@ summary:focus-visible,
   fill: #FBF7F5;   /* the faintest warm tint, not flat grey */
   stroke: none;
 }
+/* District outlines — stroke only, land colour underneath is untouched. */
+.map-districts path {
+  fill: none;
+  stroke: var(--color-ink);
+  stroke-width: 1;
+  stroke-linejoin: round;
+  stroke-linecap: round;
+  opacity: 0.14;
+}
 .map-edge {
   fill: none;
   /* softer than pure ink, and warmed very slightly with the brand red so it

@@ -541,6 +541,18 @@
               <use class="map-shadow" href="#esShape" />
               <use class="map-land" href="#esShape" />
 
+              <!-- Faint district outlines (Wealden, Lewes, Eastbourne,
+                   Rother, Hastings) — stroke only, no fill, so the land
+                   colour underneath is untouched. Hand-approximated from
+                   the real district shapes, not an exact dataset. -->
+              <g class="map-districts" clip-path="url(#esClip)" aria-hidden="true">
+                <path d="M20,200 Q160,178 320,192 Q460,206 552,236" />
+                <path d="M552,236 Q565,275 548,320 Q520,300 500,282" />
+                <path d="M272,196 Q252,290 246,406" />
+                <path d="M232,352 Q262,336 300,347 Q322,367 300,397 Q268,408 240,392 Z" />
+                <path d="M412,272 Q442,260 466,276 Q474,300 454,316 Q430,320 414,300 Z" />
+              </g>
+
               <use class="map-edge" href="#esShape" />
 
               <g class="map-pin" data-place="uckfield" tabindex="0" role="button" aria-label="Uckfield, Connect location">
