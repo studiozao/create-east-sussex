@@ -546,11 +546,11 @@
                    colour underneath is untouched. Hand-approximated from
                    the real district shapes, not an exact dataset. -->
               <g class="map-districts" clip-path="url(#esClip)" aria-hidden="true">
-                <path d="M20,200 Q160,178 320,192 Q460,206 552,236" />
-                <path d="M552,236 Q565,275 548,320 Q520,300 500,282" />
-                <path d="M272,196 Q252,290 246,406" />
-                <path d="M232,352 Q262,336 300,347 Q322,367 300,397 Q268,408 240,392 Z" />
-                <path d="M412,272 Q442,260 466,276 Q474,300 454,316 Q430,320 414,300 Z" />
+                <path d="M20,199 L70,192 L120,198 L170,185 L215,190 L260,180 L300,188 L340,178 L385,190 L430,182 L470,195 L510,205 L552,236" />
+                <path d="M552,236 L560,255 L555,275 L545,290 L552,305 L540,320 L522,308 L508,292 L500,282" />
+                <path d="M272,196 L266,230 L275,260 L260,290 L268,320 L252,350 L258,380 L246,406" />
+                <path d="M232,352 L250,340 L272,344 L290,352 L305,365 L300,382 L288,395 L268,403 L248,398 L236,378 L232,362 Z" />
+                <path d="M412,272 L428,262 L446,266 L462,275 L470,290 L466,305 L452,315 L434,318 L418,308 L410,290 Z" />
               </g>
 
               <use class="map-edge" href="#esShape" />
@@ -962,23 +962,6 @@
               place is confirmed!
             </p>
           </div>
-
-          <aside class="register-aside register-aside-compact register-aside-lower reveal" aria-labelledby="mentor-heading">
-            <h3 id="mentor-heading" class="mentor-title">Want to mentor?</h3>
-            <p class="mentor-body">
-              Share your experience with a local business. A few hours, on
-              your schedule.
-            </p>
-            <a
-              class="btn btn-outline"
-              href="https://forms.gle/fS5DMddoWx8WG5jk7"
-              target="_blank"
-              rel="noopener"
-              data-cta="become-mentor"
-            >
-              Become a mentor
-            </a>
-          </aside>
         </div>
       </div>
     </section>
@@ -987,16 +970,24 @@
 
   <!--
     ========================================================================
-    CLOSING BAND — volunteer-mentor footnote + back-to-top, grouped into
-    one bordered band so they read as a single deliberate close to the
-    page rather than two small elements loosely stacked above the footer.
+    CLOSING BAND — back-to-top, then the volunteer-mentor ask (moved down
+    from the register section so both mentor asks live in one place).
+    Panel styled the same as the About Studio Zao ones, not the smaller
+    muted treatment this used to have.
     ========================================================================
   -->
   <div class="wrap page-footnote">
+    <a class="back-to-top" href="#what-you-get" aria-label="Back to top, What is it section">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 15l7-7 7 7"/></svg>
+    </a>
+
     <div class="panels footnote-panel">
       <details class="panel" name="footnote-panels">
         <summary class="panel-summary">
-          <span class="panel-title">Learn more about becoming a volunteer mentor</span>
+          <span class="panel-icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M16 27s-10-6-10-14a5.5 5.5 0 0 1 10-3.2A5.5 5.5 0 0 1 26 13c0 8-10 14-10 14z" transform="translate(-4 -6) scale(0.85)"/></svg>
+          </span>
+          <span class="panel-title">Want to mentor? Learn more about becoming a volunteer mentor</span>
           <span class="panel-mark" aria-hidden="true"></span>
         </summary>
         <div class="panel-body">
@@ -1031,14 +1022,10 @@
             Interested? Sign up to become a Create East Sussex Volunteer
             Mentor.
           </p>
-          <a class="btn btn-outline" href="https://forms.gle/fS5DMddoWx8WG5jk7" target="_blank" rel="noopener" data-cta="become-mentor-footnote">Become a mentor</a>
+          <a class="btn btn-primary" href="https://forms.gle/fS5DMddoWx8WG5jk7" target="_blank" rel="noopener" data-cta="become-mentor-footnote">Become a mentor</a>
         </div>
       </details>
     </div>
-
-    <a class="back-to-top" href="#what-you-get" aria-label="Back to top, What is it section">
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 15l7-7 7 7"/></svg>
-    </a>
   </div>
 
   <!--

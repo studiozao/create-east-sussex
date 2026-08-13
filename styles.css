@@ -857,21 +857,10 @@ summary:focus-visible,
   padding-block: var(--space-2xl);
   border-block: 1px solid var(--color-line);
 }
+/* Same panel type as About Studio Zao's — icon, full-size title, no
+   muted treatment — just a width constraint since it stands alone here. */
 .footnote-panel { border-top: none; width: 100%; max-width: var(--measure); }
 .footnote-panel .panel { border-bottom: none; }
-.footnote-panel .panel-summary { padding-block: var(--space-sm); gap: 0.6rem; }
-.footnote-panel .panel-title {
-  font-family: var(--font-body);
-  font-size: var(--text-small);
-  font-weight: 700;
-  color: var(--color-ink-3);
-}
-.footnote-panel .panel-mark { width: 1rem; height: 1rem; }
-.footnote-panel .panel-mark::before,
-.footnote-panel .panel-mark::after { background: var(--color-ink-3); }
-.footnote-panel .panel-body { padding-left: 0; color: var(--color-ink-3); }
-.footnote-panel .panel-lead { color: var(--color-ink-2); }
-.footnote-panel .panel-subheading { color: var(--color-ink-2); }
 
 /* Plus/minus mark, drawn in CSS so it stays crisp and flips on open */
 .panel-mark {
@@ -1178,14 +1167,10 @@ a.quote-float-business:hover { color: var(--color-red); border-color: var(--colo
 }
 
 /* ---------------------------------------------------------------------------
-   12 · Register — both closing asks side by side
+   12 · Register — single closing ask; the mentor ask now lives in the
+   page-footnote band instead of sitting beside this one.
    --------------------------------------------------------------------------- */
-.register-grid {
-  display: grid;
-  grid-template-columns: minmax(0, 1.5fr) minmax(0, 0.5fr);
-  gap: clamp(2.5rem, 5vw, 4.5rem);
-  align-items: start;
-}
+.register-grid { max-width: 34rem; }
 .register-body {
   margin-top: var(--space-md);
   font-size: var(--text-lead);
@@ -1198,87 +1183,6 @@ a.quote-float-business:hover { color: var(--color-red); border-color: var(--colo
   font-size: var(--text-small);
   color: var(--color-ink-3);
   max-width: 56ch;
-}
-
-/* Matches the .card-inner language from "What you get": red top rule, icon
-   in a tinted circle, meta in brand red over a divider, so the closing
-   mentor ask reads as a sibling of those cards rather than a plain box. */
-.register-aside {
-  position: relative;
-  padding: clamp(1.75rem, 2.4vw, 2.75rem);
-  background: var(--color-white);
-  border: 1px solid var(--color-line);
-  overflow: hidden;
-}
-.register-aside::before {
-  content: "";
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  height: 4px;
-  background: var(--color-red);
-}
-.mentor-icon {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  width: 3.25rem;
-  height: 3.25rem;
-  margin-bottom: var(--space-md);
-  border-radius: 50%;
-  background: rgba(228, 37, 68, 0.09);
-  color: var(--color-red);
-}
-.mentor-icon svg { width: 26px; height: 26px; }
-.mentor-title { font-size: clamp(1.375rem, 1.9vw, 1.75rem); }
-.mentor-meta {
-  margin-top: var(--space-2xs);
-  font-size: var(--text-small);
-  font-weight: 700;
-  letter-spacing: 0.02em;
-  color: var(--color-red);
-}
-.mentor-body {
-  margin-top: var(--space-md);
-  padding-top: var(--space-md);
-  border-top: 1px solid var(--color-line);
-  color: var(--color-ink-2);
-}
-.register-aside .btn { margin-top: var(--space-lg); }
-
-/* Compact variant — this ask is secondary to "Register your interest" and
-   was reading as heavy enough to compete with it, so it drops the icon,
-   shrinks the title, and loses the meta/divider line entirely. */
-.register-aside-compact {
-  padding: clamp(1.25rem, 1.8vw, 1.75rem);
-  align-self: start;
-}
-.register-aside-compact .mentor-title {
-  font-size: var(--text-lead);
-}
-.register-aside-compact .mentor-body {
-  margin-top: var(--space-2xs);
-  padding-top: 0;
-  border-top: none;
-  font-size: var(--text-small);
-}
-.register-aside-compact .btn {
-  margin-top: var(--space-md);
-  padding: 0.75rem 1.5rem;
-  font-size: 0.9rem;
-}
-/* Dropped below the main title's baseline rather than sitting level with
-   it, so the secondary ask doesn't read as equal-weight with the primary
-   register CTA at a glance. */
-/* Lines up with the top of .register-body (kicker + heading height),
-   so this box sits level with "Sign up to our Connects..." rather than
-   the heading above it. */
-@media (min-width: 900px) {
-  .register-aside-lower {
-    margin-top: clamp(4rem, 9vw, 7.75rem);
-    margin-left: clamp(-2rem, -3vw, -1rem);
-  }
 }
 
 /* ---------------------------------------------------------------------------
@@ -1456,7 +1360,7 @@ a.quote-float-business:hover { color: var(--color-red); border-color: var(--colo
 
 @media (max-width: 560px) {
   .hero { min-height: auto; padding-block: var(--space-xl) var(--space-2xl); }
-  .register-main .btn, .register-aside .btn { width: 100%; }
+  .register-main .btn { width: 100%; }
   .calendar-item { grid-template-columns: minmax(0, 1fr); row-gap: 0.3rem; }
   .cluster { margin: 0.75rem; }
   .stats-row { grid-template-columns: minmax(0, 1fr); gap: var(--space-md); }
