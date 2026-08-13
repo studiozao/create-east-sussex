@@ -659,17 +659,6 @@ summary:focus-visible,
   fill: #FBF7F5;   /* the faintest warm tint, not flat grey */
   stroke: none;
 }
-/* Rough areas, told apart by shade alone — no stroke, no drawn boundary
-   lines, just enough tonal variation that the county doesn't read as one
-   flat shape. Visible by default (so blocked/no JS still shows them);
-   script.js only adds the fade-in-after-the-pin-sequence flourish when
-   motion is available. */
-.map-area { stroke: none; }
-.map-area-1 { fill: var(--color-ink); opacity: 0.035; }
-.map-area-2 { fill: var(--color-ink); opacity: 0.065; }
-.map-area-3 { fill: var(--color-red);  opacity: 0.05; }
-.map-area-4 { fill: var(--color-ink); opacity: 0.09; }
-/* The coastline sits on top so the area tints never cross it */
 .map-edge {
   fill: none;
   /* softer than pure ink, and warmed very slightly with the brand red so it

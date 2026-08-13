@@ -530,36 +530,36 @@
       el.addEventListener("blur", function () { setActive(place, false); });
     });
 
-    // On first scroll into view, light each pin briefly in sequence so the
-    // map reads as interactive rather than decorative.
-    if (!hasGsap || prefersReduced) return;
+    // On first scroll into view, name every pin for good. Deliberately
+    // plain IntersectionObserver rather than ScrollTrigger — this is the
+    // one thing on the map that has to work even if the GSAP vendor file
+    // fails to load, since without it a visitor would only ever see a
+    // name by hovering, and never again once the pointer moves away.
+    if (prefersReduced || typeof IntersectionObserver === "undefined") {
+      pins.forEach(function (pin) {
+        setActive(pin.getAttribute("data-place"), true);
+      });
+      return;
+    }
 
-    var areas = document.querySelector(".map-areas");
-    if (areas) gsap.set(areas, { opacity: 0 }); // area lines are visible by
-    // default in CSS; only hide them here so the fade-in below has
-    // somewhere to animate from when motion is available.
+    var mapFigure = document.querySelector(".map-figure");
+    if (!mapFigure) return;
 
-    ScrollTrigger.create({
-      trigger: ".map-figure",
-      start: "top 62%",
-      once: true,
-      onEnter: function () {
+    var observer = new IntersectionObserver(
+      function (entries) {
+        if (!entries[0].isIntersecting) return;
+        observer.disconnect();
         pins.forEach(function (pin, i) {
           var place = pin.getAttribute("data-place");
           window.setTimeout(function () {
             setActive(place, true);
             window.setTimeout(function () { setActive(place, false); }, 1100);
-          }, 1600 + i * 340);
+          }, 400 + i * 340);
         });
-        // Slightly more map detail fades in once every name has had its
-        // turn, rather than all at once with the pins.
-        if (areas) {
-          window.setTimeout(function () {
-            gsap.to(areas, { opacity: 1, duration: 1.1, ease: "power1.out" });
-          }, 1600 + pins.length * 340);
-        }
       },
-    });
+      { threshold: 0.38 }
+    );
+    observer.observe(mapFigure);
   })();
 
   /* =========================================================================
