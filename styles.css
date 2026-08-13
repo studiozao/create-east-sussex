@@ -760,7 +760,7 @@ summary:focus-visible,
 .calendar-time {
   font-size: var(--text-small);
   color: var(--color-ink-3);
-  margin-left: var(--space-lg);
+  margin-left: var(--space-2xl);
 }
 .calendar-item.is-active .calendar-place { color: var(--color-red); }
 
