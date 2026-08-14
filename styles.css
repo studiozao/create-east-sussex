@@ -923,7 +923,8 @@ summary:focus-visible,
   list-style: disc;
 }
 .panel-list li::marker { color: var(--color-red); }
-.panel-body .btn { align-self: flex-start; margin-top: var(--space-2xs); }
+.panel-body .btn { align-self: flex-start; }
+.panel-body .btn:last-child { margin-top: var(--space-2xs); }
 
 /* Floating testimonial strip — deliberately no heading/kicker, sits quiet
    under the panels. Half-transparent, rounded, long rectangular cards;
