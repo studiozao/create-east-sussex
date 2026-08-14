@@ -545,12 +545,15 @@
     var mapFigure = document.querySelector(".map-figure");
     if (!mapFigure) return;
 
+    // Reveal in calendar order (top to bottom of the Connect list), not the
+    // pins' order in the SVG markup.
+    var revealOrder = ["lewes", "hastings", "bexhill", "eastbourne", "uckfield"];
+
     var observer = new IntersectionObserver(
       function (entries) {
         if (!entries[0].isIntersecting) return;
         observer.disconnect();
-        pins.forEach(function (pin, i) {
-          var place = pin.getAttribute("data-place");
+        revealOrder.forEach(function (place, i) {
           window.setTimeout(function () {
             setActive(place, true);
             window.setTimeout(function () { setActive(place, false); }, 1100);
