@@ -910,6 +910,9 @@ summary:focus-visible,
 }
 .panel-subheading {
   margin-top: var(--space-2xs);
+  margin-bottom: 0; /* h4's default UA margin-bottom (~1.33em) was stacking
+                        on top of the flex gap below, on top of the negative
+                        margin-top on the next element */
   font-family: var(--font-body);
   font-weight: 700;
   font-size: 1rem;
