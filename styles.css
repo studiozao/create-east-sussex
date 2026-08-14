@@ -1278,12 +1278,16 @@ a.quote-float-business:hover { color: var(--color-red); border-color: var(--colo
   max-width: 32ch;
 }
 
+/* Three equal-width columns, each logo centred in its own slot — this
+   keeps the row visually balanced regardless of how wide any one logo is,
+   rather than relying on one shared centred flex group (where uneven logo
+   widths can look off-centre even though the maths checks out). */
 .funders-top {
-  display: flex;
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
   align-items: center;
-  justify-content: center;
-  gap: clamp(2rem, 4vw, 3.5rem);
-  flex-wrap: wrap;
+  justify-items: center;
+  column-gap: clamp(1rem, 4vw, 3.5rem);
   padding-block: var(--space-lg);
 }
 .logo-img-ukgov-top { height: 48px; }
@@ -1292,7 +1296,7 @@ a.quote-float-business:hover { color: var(--color-red); border-color: var(--colo
 @media (max-width: 640px) {
   /* Shrink and tighten so the trio stays on one line rather than wrapping
      onto a second row on narrow phones. */
-  .funders-top { gap: clamp(0.75rem, 4vw, 1.5rem); flex-wrap: nowrap; padding-block: var(--space-md); }
+  .funders-top { column-gap: clamp(0.75rem, 4vw, 1.5rem); padding-block: var(--space-md); }
   .logo-img-ukgov-top { height: 26px; }
   .logo-img-sbsa-top  { height: 30px; }
   .logo-img-escc-top  { height: 40px; }
