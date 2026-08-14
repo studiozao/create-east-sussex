@@ -915,6 +915,13 @@ summary:focus-visible,
   font-size: 1rem;
   color: var(--color-ink);
 }
+/* .panel-body is a flex column with a uniform gap between all children;
+   pull the element right after a subheading closer so the heading reads
+   attached to its own content instead of evenly spaced like a paragraph. */
+.panel-subheading + p,
+.panel-subheading + ul {
+  margin-top: calc(var(--space-2xs) - var(--space-sm));
+}
 .panel-list {
   display: flex;
   flex-direction: column;
