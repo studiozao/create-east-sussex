@@ -1304,14 +1304,17 @@ a.quote-float-business:hover { color: var(--color-red); border-color: var(--colo
 }
 .logo-img-ukgov-top { height: 48px; }
 .logo-img-sbsa-top  { height: 56px; }
-.logo-img-escc-top  { height: 78px; }
+/* The ESCC crest is a compact, near-square mark rather than a wide
+   wordmark, so matching it to the others' height (not their old, much
+   taller value) is what makes the three read as the same visual size. */
+.logo-img-escc-top  { height: 52px; }
 @media (max-width: 640px) {
   /* Shrink and tighten so the trio stays on one line rather than wrapping
      onto a second row on narrow phones. */
   .funders-top { column-gap: clamp(0.75rem, 4vw, 1.5rem); padding-block: var(--space-md); }
   .logo-img-ukgov-top { height: 26px; }
   .logo-img-sbsa-top  { height: 30px; }
-  .logo-img-escc-top  { height: 40px; }
+  .logo-img-escc-top  { height: 28px; }
 }
 
 .footer-funders {
