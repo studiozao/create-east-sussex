@@ -583,7 +583,7 @@
      without ever cloning anything into the DOM) until there are enough
      real cards to make the clone trick invisible.
      ========================================================================= */
-  var MIN_LOOP_COUNT = 3;
+  var MIN_LOOP_COUNT = 4;
 
   document.querySelectorAll(".carousel").forEach(function (carousel) {
     var viewport = carousel.querySelector("[data-carousel-viewport]");
