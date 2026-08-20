@@ -1128,6 +1128,15 @@ a.quote-float-business:hover { color: var(--color-red); border-color: var(--colo
   width: auto;
   object-fit: contain;
 }
+/* Candi's photo is a plain square selfie, not a background-removed cutout
+   like the others — left at its natural aspect it renders noticeably wider
+   than the narrower portrait cutouts, making her card read as a different
+   size. Cropped to the same width instead, face kept in frame. */
+.mentor-photo img[src*="candi"] {
+  width: 4.4rem;
+  object-fit: cover;
+  object-position: 50% 18%;
+}
 .mentor-card-heading { min-width: 0; }
 .mentor-name { font-size: var(--text-h3); }
 .mentor-role {
