@@ -736,7 +736,7 @@ summary:focus-visible,
 .calendar-list {
   display: grid;
   grid-template-columns: minmax(6.5rem, auto) minmax(0, auto) minmax(0, auto) minmax(0, auto);
-  column-gap: var(--space-lg);
+  column-gap: var(--space-md);
   row-gap: 0.35rem;
   justify-content: start;
 }
@@ -744,7 +744,7 @@ summary:focus-visible,
   display: grid;
   grid-column: 1 / -1;
   grid-template-columns: subgrid;
-  column-gap: var(--space-lg);
+  column-gap: var(--space-md);
   row-gap: 0.2rem;
   align-items: baseline;
   padding-block: 0.6rem;
@@ -766,13 +766,13 @@ summary:focus-visible,
 .calendar-time {
   font-size: var(--text-small);
   color: var(--color-ink-3);
-  margin-left: var(--space-2xl);
+  margin-left: var(--space-xs);
 }
 .calendar-signup {
   display: inline-flex;
   align-items: center;
   gap: 0.3em;
-  margin-left: var(--space-lg);
+  margin-left: var(--space-xs);
   font-size: var(--text-small);
   font-weight: 700;
   color: var(--color-ink);
