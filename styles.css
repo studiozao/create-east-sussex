@@ -880,9 +880,17 @@ summary:focus-visible,
   border-block: 1px solid var(--color-line);
 }
 /* Same panel type as About Studio Zao's — icon, full-size title, no
-   muted treatment — just a width constraint since it stands alone here. */
-.footnote-panel { border-top: none; width: 100%; max-width: var(--measure); }
+   muted treatment — just a width constraint since it stands alone here.
+   Wider than --measure: the title itself needs the extra room to stay on
+   one line (see .panel-title-fit); the body copy inside still reads fine
+   at this width. */
+.footnote-panel { border-top: none; width: 100%; max-width: 46rem; }
 .footnote-panel .panel { border-bottom: none; }
+/* Keeps "Want to mentor? Learn more about becoming a volunteer mentor" on
+   one line rather than wrapping, once there's enough width for it. */
+@media (min-width: 640px) {
+  .panel-title-fit { white-space: nowrap; }
+}
 
 /* Plus/minus mark, drawn in CSS so it stays crisp and flips on open */
 .panel-mark {
