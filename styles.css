@@ -477,15 +477,12 @@ summary:focus-visible,
 .split-media-first { grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); }
 
 /* Calendar's map/list pairing: top-aligned rather than centred. The list
-   column is narrower than it looks like it "should" be so each row's
-   place/date sit close together instead of stretching across a wide
-   column with a big gap between them; the map gets the space that frees
-   up, and — since its height is fixed by its own aspect ratio — ends up
-   a bit taller than the list, which reads fine against a top-aligned
-   pairing. */
+   now carries four columns (place/date/time/sign-up), so it gets more of
+   the row's width than the map — otherwise its own columns cramp up
+   against each other while the map side sits mostly empty. */
 @media (min-width: 760px) {
   .calendar-split {
-    grid-template-columns: minmax(0, 1.05fr) minmax(0, 1fr);
+    grid-template-columns: minmax(0, 1.4fr) minmax(0, 1fr);
     align-items: start;
   }
 }
