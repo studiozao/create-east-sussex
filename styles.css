@@ -735,7 +735,7 @@ summary:focus-visible,
    each <li> sizing its own columns independently. */
 .calendar-list {
   display: grid;
-  grid-template-columns: minmax(6.5rem, auto) minmax(0, auto) minmax(0, auto);
+  grid-template-columns: minmax(6.5rem, auto) minmax(0, auto) minmax(0, auto) minmax(0, auto);
   column-gap: var(--space-lg);
   row-gap: 0.35rem;
   justify-content: start;
@@ -768,6 +768,19 @@ summary:focus-visible,
   color: var(--color-ink-3);
   margin-left: var(--space-2xl);
 }
+.calendar-signup {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.3em;
+  margin-left: var(--space-lg);
+  font-size: var(--text-small);
+  font-weight: 700;
+  color: var(--color-ink);
+  text-decoration: none;
+  border-bottom: 1px solid var(--color-line-strong);
+  transition: color var(--dur-fast) var(--ease-out), border-color var(--dur-fast) var(--ease-out);
+}
+.calendar-signup:hover { color: var(--color-red); border-color: var(--color-red); }
 .calendar-item.is-active .calendar-place { color: var(--color-red); }
 
 .calendar-more {
@@ -1415,6 +1428,7 @@ a.quote-float-business:hover { color: var(--color-red); border-color: var(--colo
   .calendar-list { grid-template-columns: minmax(0, 1fr); }
   .calendar-item { row-gap: 0.3rem; }
   .calendar-time { text-align: left; margin-left: 0; }
+  .calendar-signup { margin-left: 0; margin-top: 0.2rem; }
   .cluster { margin: 0.75rem; }
   .stats-row { grid-template-columns: minmax(0, 1fr); gap: var(--space-md); }
 
