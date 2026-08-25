@@ -194,6 +194,9 @@ summary:focus-visible,
 .logo-img { height: 32px; width: auto; object-fit: contain; }
 /* ESCC crest sized up per client feedback ("bigger council logo") */
 .logo-img-escc { height: 44px; }
+/* The programme's own mark, leading the lockup ahead of Studio Zao — sized
+   a touch taller than the wordmark since it carries two stacked lines. */
+.logo-img-ces { height: 38px; }
 
 .logo-rule { width: 1px; height: 30px; background: var(--color-line-strong); }
 
