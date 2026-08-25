@@ -351,11 +351,25 @@ summary:focus-visible,
   color: var(--color-white);
 }
 .hero-line { display: block; }
+/* Matches the logo's own two-face lockup: "Create" in the rounded display
+   face, mixed case (not the heading's usual uppercase/tight tracking);
+   "East Sussex" in the marker/handwritten face, which needs a touch more
+   size and looser tracking than Archivo to read at the same weight. */
+.hero-line-create {
+  font-family: "Baloo 2", var(--font-display);
+  font-weight: 800;
+  font-variation-settings: normal;
+  text-transform: none;
+  letter-spacing: -0.01em;
+}
 /* "East Sussex" is 11 characters against "Create"'s 6, so at a shared size
    it runs far wider than the column. ~0.55em lands both lines on nearly the
    same measure, which is the lockup we want anyway. */
 .hero-line-place {
-  font-size: 0.55em;
+  font-family: "Caveat", var(--font-display);
+  font-weight: 700;
+  font-size: 0.75em;
+  letter-spacing: 0.01em;
   color: rgba(255, 255, 255, 0.88);
 }
 
