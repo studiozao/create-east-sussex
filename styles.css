@@ -354,12 +354,12 @@ summary:focus-visible,
   color: var(--color-white);
 }
 .hero-line { display: block; }
-/* Matches the logo's own two-face lockup: "Create" in the rounded display
-   face, mixed case (not the heading's usual uppercase/tight tracking);
-   "East Sussex" in the marker/handwritten face, which needs a touch more
-   size and looser tracking than Archivo to read at the same weight. */
+/* Matches the logo's own two-face lockup: "Create" in League Spartan,
+   mixed case (not the heading's usual uppercase/tight tracking); "East
+   Sussex" in the marker/handwritten face, which needs a touch more size
+   and looser tracking than Archivo to read at the same weight. */
 .hero-line-create {
-  font-family: "Baloo 2", var(--font-display);
+  font-family: "League Spartan", var(--font-display);
   font-weight: 800;
   font-variation-settings: normal;
   text-transform: none;
