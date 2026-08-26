@@ -244,14 +244,15 @@ summary:focus-visible,
 }
 .nav-links a:hover { color: var(--color-ink); }
 
+/* Plain inline, like the other nav links — inline-flex made this item's
+   box taller and shifted up relative to its siblings (the arrow span's own
+   line metrics, not the shared text line-height, drove its height). */
 .nav-links .nav-cta {
   color: var(--color-red);
-  display: inline-flex;
-  align-items: center;
-  gap: 0.3em;
 }
 .nav-links .nav-cta span {
   display: inline-block;
+  margin-left: 0.3em;
   transition: transform var(--dur-fast) var(--ease-out);
 }
 .nav-links .nav-cta:hover span { transform: translateX(3px); }
