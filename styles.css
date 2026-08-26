@@ -485,9 +485,10 @@ summary:focus-visible,
   margin-top: var(--space-md);
   font-size: var(--text-lead);
   color: var(--color-ink-2);
-  /* wide enough to use the line on a laptop, still inside a comfortable
-     reading measure */
-  max-width: 64ch;
+  /* Grows with the viewport instead of sitting at a fixed measure, so it
+     uses more of the line on wide windows; still capped so it doesn't run
+     past a comfortable reading width. */
+  max-width: clamp(64ch, 55vw, 84ch);
 }
 /* ...but inside a split column there is only half the width to play with */
 .split-copy .section-intro { max-width: 42ch; }
