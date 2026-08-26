@@ -244,14 +244,18 @@ summary:focus-visible,
 }
 .nav-links a:hover { color: var(--color-ink); }
 
-/* Plain inline, like the other nav links — inline-flex made this item's
-   box taller and shifted up relative to its siblings (the arrow span's own
-   line metrics, not the shared text line-height, drove its height). */
 .nav-links .nav-cta {
   color: var(--color-red);
 }
+/* The arrow's own inline-block box was inheriting the page's 1.65
+   line-height, making it taller than the surrounding nav text and
+   stretching this whole link's line box (and so its height/vertical
+   position) beyond its siblings'. Pinning line-height to 1 keeps its box
+   no taller than the glyph itself needs. */
 .nav-links .nav-cta span {
   display: inline-block;
+  line-height: 1;
+  vertical-align: middle;
   margin-left: 0.3em;
   transition: transform var(--dur-fast) var(--ease-out);
 }
