@@ -200,6 +200,17 @@ summary:focus-visible,
 
 .logo-rule { width: 1px; height: 30px; background: var(--color-line-strong); }
 
+/* Small "by" tag between the Create East Sussex mark and Studio Zao's own
+   logo, replacing the divider rule that used to sit there — reads as one
+   relationship instead of two separate, unrelated marks. */
+.logo-by {
+  margin-inline: -0.25rem;
+  font-family: var(--font-body);
+  font-size: var(--text-small);
+  font-style: italic;
+  color: var(--color-ink-3);
+}
+
 /* Funder trio in the header, beside Studio Zao — same three logos as the
    footer, same order, sized down to fit the slim sticky header. */
 .logo-img-ukgov-header { height: 22px; }
