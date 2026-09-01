@@ -1191,6 +1191,11 @@ a.quote-float-business:hover { color: var(--color-red); border-color: var(--colo
 }
 .mentor-card-heading { min-width: 0; }
 .mentor-name { font-size: var(--text-h3); }
+.mentor-pronouns {
+  font-size: var(--text-small);
+  font-weight: 400;
+  color: var(--color-ink-3);
+}
 .mentor-role {
   font-size: var(--text-small);
   font-weight: 700;
