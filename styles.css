@@ -389,8 +389,9 @@ summary:focus-visible,
   /* Scaled down from 0.75em — Caveat's thin, flourish-heavy strokes read
      noticeably larger than League Spartan's dense bold face at the same
      bounding-box height, so it needs to sit smaller to match the logo's
-     actual proportions. */
-  font-size: 0.6em;
+     actual proportions. Target: "Create"'s last e sits above the second
+     s in "Sussex", matching the logo's proportions. */
+  font-size: 0.5em;
   /* Matches the logo source file's own tracking value (Canva letter
      spacing 133, ~133/1000 em). */
   letter-spacing: 0.133em;
