@@ -388,7 +388,9 @@ summary:focus-visible,
   font-family: "Caveat", var(--font-display);
   font-weight: 700;
   font-size: 0.75em;
-  letter-spacing: 0.01em;
+  /* Tighter than a plain default — the logo's "EAST SUSSEX" reads as
+     compact, near-touching letters, not loosely tracked-out caps. */
+  letter-spacing: -0.02em;
   color: rgba(255, 255, 255, 0.88);
 }
 
