@@ -379,15 +379,18 @@ summary:focus-visible,
   font-weight: 800;
   font-variation-settings: normal;
   text-transform: none;
-  letter-spacing: -0.01em;
+  /* Matches the logo source file's own tracking value (Canva letter
+     spacing 21, ~21/1000 em). */
+  letter-spacing: 0.021em;
 }
-/* "East Sussex" is 11 characters against "Create"'s 6, so at a shared size
-   it runs far wider than the column. ~0.55em lands both lines on nearly the
-   same measure, which is the lockup we want anyway. */
 .hero-line-place {
   font-family: "Caveat", var(--font-display);
   font-weight: 700;
-  font-size: 0.75em;
+  /* Scaled down from 0.75em — Caveat's thin, flourish-heavy strokes read
+     noticeably larger than League Spartan's dense bold face at the same
+     bounding-box height, so it needs to sit smaller to match the logo's
+     actual proportions. */
+  font-size: 0.6em;
   /* Matches the logo source file's own tracking value (Canva letter
      spacing 133, ~133/1000 em). */
   letter-spacing: 0.133em;
