@@ -1186,11 +1186,11 @@ a.quote-float-business:hover { color: var(--color-red); border-color: var(--colo
   width: auto;
   object-fit: contain;
 }
-/* Candi's photo is a plain square selfie, not a background-removed cutout
-   like the others — left at its natural aspect it renders noticeably wider
-   than the narrower portrait cutouts, making her card read as a different
-   size. Cropped to the same width instead, face kept in frame. */
-.mentor-photo img[src*="candi"] {
+/* Plain square photos (not background-removed cutouts like Sara/Chris/
+   Karen) render noticeably wider than the narrower portrait cutouts at
+   the same height, making that card read as a different size. Cropped to
+   the same width instead, face kept in frame. */
+.mentor-photo img.mentor-photo-square {
   width: 4.4rem;
   object-fit: cover;
   object-position: 50% 18%;
@@ -1211,11 +1211,19 @@ a.quote-float-business:hover { color: var(--color-red); border-color: var(--colo
 .mentor-bio {
   color: var(--color-ink-2);
 }
-.mentor-linkedin {
+/* Wraps one or two links (LinkedIn, Website) per mentor — the wrapper
+   carries the spacing above the bio so links can share a row instead of
+   each one re-adding its own margin-top. */
+.mentor-links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem 1.25rem;
+  margin-top: var(--space-sm);
+}
+.mentor-link {
   display: inline-flex;
   align-items: center;
   gap: 0.3em;
-  margin-top: var(--space-sm);
   font-size: var(--text-small);
   font-weight: 700;
   color: var(--color-ink);
@@ -1223,7 +1231,7 @@ a.quote-float-business:hover { color: var(--color-red); border-color: var(--colo
   border-bottom: 1px solid var(--color-line-strong);
   transition: color var(--dur-fast) var(--ease-out), border-color var(--dur-fast) var(--ease-out);
 }
-.mentor-linkedin:hover { color: var(--color-red); border-color: var(--color-red); }
+.mentor-link:hover { color: var(--color-red); border-color: var(--color-red); }
 
 /* ---------------------------------------------------------------------------
    14 · About stats strip — count up from 0 on scroll into view (script.js),
