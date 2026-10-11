@@ -7,10 +7,11 @@
      3. Scroll reveals across the page (ScrollTrigger.batch)
      4. Header auto-hide on scroll (mobile only, driven by ScrollTrigger's
         own direction tracking — no manual scroll listener)
-     5. Map pins paired with the Connects list
-     6. Carousel arrows for the mentor and testimonial strips
-     7. Mobile nav toggle
-     8. CTA click analytics event (separate from page view)
+     5. Past Connects auto-move into the "Previous events" panel
+     6. Map pins paired with the Connects list
+     7. Carousel arrows for the mentor and testimonial strips
+     8. Mobile nav toggle
+     9. CTA click analytics event (separate from page view)
 
    Motion is gated behind prefers-reduced-motion via gsap.matchMedia(). The
    CSS renders everything visible by default; the pre-animation state is set
@@ -494,7 +495,37 @@
   }
 
   /* =========================================================================
-     3 · Map pins paired with the Connects list
+     3 · Past Connects move themselves into "Previous events"
+     Each upcoming .calendar-item carries data-event-date="YYYY-MM-DD".
+     Plain vanilla JS, no GSAP/ScrollTrigger dependency — this has to run
+     even if the vendor file fails to load, since without it a past event
+     would just sit there looking current. Once a date is in the past, the
+     row moves into the "Previous events" panel's list (its sign-up link is
+     hidden there via CSS, not stripped — same row, just no longer bookable).
+     A month group left with no rows is hidden entirely.
+     ========================================================================= */
+  (function moveExpiredConnects() {
+    var previousList = document.querySelector(".calendar-previous .calendar-list");
+    if (!previousList) return;
+
+    var today = new Date();
+    today.setHours(0, 0, 0, 0);
+
+    document
+      .querySelectorAll(".calendar-months > .calendar-month .calendar-item[data-event-date]")
+      .forEach(function (item) {
+        var eventDate = new Date(item.getAttribute("data-event-date") + "T00:00:00");
+        if (eventDate < today) previousList.appendChild(item);
+      });
+
+    document.querySelectorAll(".calendar-months > .calendar-month").forEach(function (month) {
+      var list = month.querySelector(".calendar-list");
+      if (list && !list.children.length) month.style.display = "none";
+    });
+  })();
+
+  /* =========================================================================
+     4 · Map pins paired with the Connects list
      Hovering or focusing either half highlights both. Pins are keyboard
      reachable (tabindex + role=button in the markup), so focus counts as a
      first-class interaction here, not a hover afterthought.
@@ -566,7 +597,7 @@
   })();
 
   /* =========================================================================
-     4 · Carousel loop — mentor and testimonial strips. Scrolling by hand
+     5 · Carousel loop — mentor and testimonial strips. Scrolling by hand
      (trackpad, wheel, touch) should feel circular, not stop dead at either
      end, so the real cards are flanked by one cloned copy of the full set
      on each side: [clone][real][clone]. The visible viewport always starts
@@ -690,7 +721,7 @@
   });
 
   /* =========================================================================
-     5 · Mobile nav toggle
+     6 · Mobile nav toggle
      ========================================================================= */
   var navToggle = document.querySelector(".nav-toggle");
   var navLinks = document.getElementById("nav-links");
@@ -710,7 +741,7 @@
   }
 
   /* =========================================================================
-     6 · CTA click analytics event
+     7 · CTA click analytics event
      Fires a custom event on every CTA click, SEPARATE from the page view.
      Works with Plausible OR Google Analytics 4 — whichever you enabled in
      the <head> of index.html. Safe no-op if neither is present.
