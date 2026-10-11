@@ -796,15 +796,6 @@ summary:focus-visible,
   color: var(--color-ink);
   transition: color var(--dur-fast) var(--ease-out);
 }
-/* Venue detail nested inside .calendar-place (not a sibling span) so it
-   stays in the same subgrid column as the place name rather than
-   shifting every later child into the wrong column. */
-.calendar-venue {
-  display: block;
-  font-size: var(--text-small);
-  font-weight: 400;
-  color: var(--color-ink-3);
-}
 .calendar-date {
   font-size: var(--text-small);
   color: var(--color-ink-3);
