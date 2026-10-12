@@ -1417,8 +1417,21 @@ a.quote-float-business:hover { color: var(--color-red); border-color: var(--colo
    the header's size; this scoped override bumps just the footer copy. */
 .footer-funders .logo-img-escc { height: 54px; }
 
-.footer-bottom { margin-top: var(--space-lg); }
+.footer-bottom {
+  margin-top: var(--space-lg);
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 0.5rem 1.5rem;
+}
 .footer-copyright { font-size: 0.75rem; color: var(--color-ink-3); }
+.footer-legal-link {
+  font-size: 0.75rem;
+  color: var(--color-ink-3);
+  text-decoration: underline;
+  text-underline-offset: 0.15em;
+}
+.footer-legal-link:hover { color: var(--color-ink); }
 
 /* ---------------------------------------------------------------------------
    14 · Reveal — visible by DEFAULT. script.js sets the pre-animation state
