@@ -578,7 +578,9 @@
 
     // Reveal in calendar order (top to bottom of the Connect list), not the
     // pins' order in the SVG markup.
-    var revealOrder = ["lewes", "hastings", "bexhill", "eastbourne", "uckfield"];
+    // "lewes" left out — its pin is hidden (.map-pin-hidden) until there's
+    // a Lewes event again; add it back here when the pin is restored.
+    var revealOrder = ["hastings", "bexhill", "eastbourne", "uckfield"];
 
     var observer = new IntersectionObserver(
       function (entries) {

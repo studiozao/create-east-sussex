@@ -672,11 +672,6 @@
                 <span class="calendar-time">12-1pm</span>
                 <a class="calendar-signup" href="https://www.eventbrite.co.uk/e/2002196184686?aff=oddtdtcreator" target="_blank" rel="noopener" data-cta="signup-online-oct13">Sign up <span aria-hidden="true">&#8599;</span></a>
               </li>
-              <li class="calendar-item" data-place="lewes" data-event-date="2026-10-21" tabindex="0">
-                <span class="calendar-place">Lewes Launch</span>
-                <span class="calendar-date">21 Oct 2026</span>
-                <span class="calendar-time">11am-1pm</span>
-              </li>
             </ul>
           </div>
 
@@ -736,7 +731,7 @@
           <figure class="map-figure reveal">
             <svg class="map" viewBox="0 0 640 421" role="img" aria-labelledby="map-title map-desc">
               <title id="map-title">Map of East Sussex</title>
-              <desc id="map-desc">East Sussex with the Connect locations marked: Uckfield, Lewes, Eastbourne, Bexhill and Hastings.</desc>
+              <desc id="map-desc">East Sussex with the Connect locations marked: Uckfield, Eastbourne, Bexhill and Hastings.</desc>
 
               <defs>
                 <!-- The boundary is defined once and re-used, so the long
@@ -755,7 +750,10 @@
                 <circle class="map-pin-dot" cx="155.3" cy="185.9" r="7" />
                 <text class="map-pin-label" x="155.3" y="167">Uckfield</text>
               </g>
-              <g class="map-pin" data-place="lewes" tabindex="0" role="button" aria-label="Lewes, Connect location">
+              <!-- Lewes pin hidden (no current Lewes Connect) rather than
+                   removed — drop the "map-pin-hidden" class below to bring
+                   it back once a Lewes event is scheduled again. -->
+              <g class="map-pin map-pin-hidden" data-place="lewes" tabindex="-1" role="button" aria-label="Lewes, Connect location" aria-hidden="true">
                 <circle class="map-pin-halo" cx="99.1" cy="278.2" r="24" />
                 <circle class="map-pin-dot" cx="99.1" cy="278.2" r="7" />
                 <text class="map-pin-label" x="99.1" y="259">Lewes</text>

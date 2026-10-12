@@ -716,6 +716,7 @@ summary:focus-visible,
 }
 
 .map-pin { cursor: pointer; }
+.map-pin-hidden { display: none; }
 .map-pin-dot {
   fill: var(--color-red);
   stroke: var(--color-white);
