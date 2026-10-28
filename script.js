@@ -499,7 +499,7 @@
      Each upcoming .calendar-item carries data-event-date="YYYY-MM-DD".
      Plain vanilla JS, no GSAP/ScrollTrigger dependency — this has to run
      even if the vendor file fails to load, since without it a past event
-     would just sit there looking current. Once a date is in the past, the
+     would just sit there looking current. Once an event has ended, the
      row moves into the "Previous events" panel's list (its sign-up link is
      hidden there via CSS, not stripped — same row, just no longer bookable).
      A month group left with no rows is hidden entirely.
@@ -514,8 +514,13 @@
     document
       .querySelectorAll(".calendar-months > .calendar-month .calendar-item[data-event-date]")
       .forEach(function (item) {
-        var eventDate = new Date(item.getAttribute("data-event-date") + "T00:00:00");
-        if (eventDate < today) previousList.appendChild(item);
+        // data-event-end ("YYYY-MM-DDTHH:MM", local time) moves the row the
+        // moment the event finishes; without it, the row stays until the day is over.
+        var end = item.getAttribute("data-event-end");
+        var over = end
+          ? new Date(end) <= new Date()
+          : new Date(item.getAttribute("data-event-date") + "T00:00:00") < today;
+        if (over) previousList.insertBefore(item, previousList.firstChild);
       });
 
     document.querySelectorAll(".calendar-months > .calendar-month").forEach(function (month) {

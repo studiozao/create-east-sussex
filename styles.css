@@ -773,7 +773,7 @@ summary:focus-visible,
    each <li> sizing its own columns independently. */
 .calendar-list {
   display: grid;
-  grid-template-columns: minmax(6.5rem, auto) minmax(0, auto) minmax(0, auto) minmax(0, auto);
+  grid-template-columns: minmax(7.5rem, auto) minmax(8rem, auto) minmax(5.5rem, auto) minmax(0, auto);
   column-gap: var(--space-md);
   row-gap: 0.35rem;
   justify-content: start;
