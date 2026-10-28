@@ -789,6 +789,7 @@ summary:focus-visible,
 /* Month label only makes sense in the upcoming list; rows moved into
    "Previous events" drop it and fall back to date, place, time. */
 .calendar-previous .calendar-month-label { display: none; }
+.calendar-previous .calendar-place { order: -1; }
 .calendar-item {
   display: grid;
   grid-column: 1 / -1;

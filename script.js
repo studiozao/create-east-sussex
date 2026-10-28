@@ -520,7 +520,12 @@
         var over = end
           ? new Date(end) <= new Date()
           : new Date(item.getAttribute("data-event-date") + "T00:00:00") < today;
-        if (over) previousList.insertBefore(item, previousList.firstChild);
+        if (over) {
+          // Previous events read "Launch: Eastbourne"; a moved Connect gets the same shape.
+          var place = item.querySelector(".calendar-place");
+          if (place) place.textContent = "Connect: " + place.textContent;
+          previousList.insertBefore(item, previousList.firstChild);
+        }
       });
 
     document.querySelectorAll(".calendar-months > .calendar-month").forEach(function (month) {
