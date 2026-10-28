@@ -779,7 +779,8 @@ summary:focus-visible,
   justify-content: start;
 }
 .calendar-list-upcoming {
-  grid-template-columns: minmax(6rem, auto) minmax(7.5rem, auto) minmax(8rem, auto) minmax(5.5rem, auto) minmax(0, auto);
+  grid-template-columns: 6.5rem 7.5rem 7.5rem 5.5rem auto;
+  column-gap: var(--space-lg);
 }
 .calendar-month-label {
   font-weight: 700;
@@ -790,6 +791,15 @@ summary:focus-visible,
    "Previous events" drop it and fall back to date, place, time. */
 .calendar-previous .calendar-month-label { display: none; }
 .calendar-previous .calendar-place { order: -1; }
+/* Upcoming rows lead with the month (bold); the location is regular weight. */
+.calendar-list-upcoming .calendar-item { column-gap: var(--space-lg); }
+.calendar-list-upcoming .calendar-place {
+  font-weight: 400;
+  font-size: var(--text-body);
+}
+.calendar-list-upcoming .calendar-time,
+.calendar-list-upcoming .calendar-signup { margin-left: 0; }
+.calendar-item.is-active .calendar-month-label { color: var(--color-red); }
 .calendar-item {
   display: grid;
   grid-column: 1 / -1;
