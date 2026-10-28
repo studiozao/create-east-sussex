@@ -790,13 +790,6 @@ summary:focus-visible,
 /* Month label only makes sense in the upcoming list; rows moved into
    "Previous events" drop it and fall back to date, place, time. */
 .calendar-previous .calendar-month-label { display: none; }
-/* Hairline to the right of the month, one per row, stretched to the row's height. */
-.calendar-list-upcoming .calendar-month-label {
-  align-self: stretch;
-  padding-right: 1rem;
-  border-right: 1px solid var(--color-line-strong);
-}
-.calendar-list-upcoming .calendar-place { margin-left: -1rem; }
 .calendar-previous .calendar-place { order: -1; }
 /* Upcoming rows lead with the month (bold); the location is regular weight. */
 .calendar-list-upcoming .calendar-item { column-gap: var(--space-lg); }
@@ -1533,8 +1526,6 @@ a.quote-float-business:hover { color: var(--color-red); border-color: var(--colo
   .calendar-list { grid-template-columns: minmax(0, 1fr); }
   .calendar-item { row-gap: 0.3rem; }
   .calendar-time { text-align: left; margin-left: 0; }
-  .calendar-list-upcoming .calendar-month-label { border-right: none; padding-right: 0; }
-  .calendar-list-upcoming .calendar-place { margin-left: 0; }
   .calendar-signup { margin-left: 0; margin-top: 0.2rem; }
   .cluster { margin: 0.75rem; }
   .stats-row { grid-template-columns: minmax(0, 1fr); gap: var(--space-md); }
