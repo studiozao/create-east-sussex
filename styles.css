@@ -779,8 +779,10 @@ summary:focus-visible,
   justify-content: start;
 }
 .calendar-list-upcoming {
-  grid-template-columns: 6.5rem 7.5rem 7.5rem 5.5rem auto;
-  column-gap: var(--space-lg);
+  /* Content-sized tracks, shared by every row via subgrid, so the row can
+     never outgrow its column (fixed widths pushed Sign up under the map). */
+  grid-template-columns: repeat(5, auto);
+  column-gap: clamp(1rem, 2.4vw, 2.5rem);
 }
 .calendar-month-label {
   font-weight: 700;
@@ -792,7 +794,7 @@ summary:focus-visible,
 .calendar-previous .calendar-month-label { display: none; }
 .calendar-previous .calendar-place { order: -1; }
 /* Upcoming rows lead with the month (bold); the location is regular weight. */
-.calendar-list-upcoming .calendar-item { column-gap: var(--space-lg); }
+.calendar-list-upcoming .calendar-item { column-gap: clamp(1rem, 2.4vw, 2.5rem); }
 .calendar-list-upcoming .calendar-place {
   font-weight: 400;
   font-size: var(--text-body);
