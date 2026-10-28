@@ -778,6 +778,17 @@ summary:focus-visible,
   row-gap: 0.35rem;
   justify-content: start;
 }
+.calendar-list-upcoming {
+  grid-template-columns: minmax(6rem, auto) minmax(7.5rem, auto) minmax(8rem, auto) minmax(5.5rem, auto) minmax(0, auto);
+}
+.calendar-month-label {
+  font-weight: 700;
+  font-size: 1.0625rem;
+  color: var(--color-ink);
+}
+/* Month label only makes sense in the upcoming list; rows moved into
+   "Previous events" drop it and fall back to date, place, time. */
+.calendar-previous .calendar-month-label { display: none; }
 .calendar-item {
   display: grid;
   grid-column: 1 / -1;
