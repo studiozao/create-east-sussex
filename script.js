@@ -521,9 +521,13 @@
           ? new Date(end) <= new Date()
           : new Date(item.getAttribute("data-event-date") + "T00:00:00") < today;
         if (over) {
-          // Previous events read "Launch: Eastbourne"; a moved Connect gets the same shape.
+          // Previous events are named by month ("Launch: September"); a moved
+          // Connect gets the same shape, e.g. "Connect: October".
           var place = item.querySelector(".calendar-place");
-          if (place) place.textContent = "Connect: " + place.textContent;
+          var months = ["January", "February", "March", "April", "May", "June", "July",
+            "August", "September", "October", "November", "December"];
+          var monthIndex = parseInt(item.getAttribute("data-event-date").split("-")[1], 10) - 1;
+          if (place) place.textContent = "Connect: " + months[monthIndex];
           previousList.insertBefore(item, previousList.firstChild);
         }
       });
