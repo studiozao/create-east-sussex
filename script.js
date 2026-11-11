@@ -522,12 +522,12 @@
           : new Date(item.getAttribute("data-event-date") + "T00:00:00") < today;
         if (over) {
           // Previous events are named by month ("Launch: September"); a moved
-          // Connect gets the same shape, e.g. "Connect: October".
+          // Connect gets the same shape, e.g. "Connect: October (Hastings)".
           var place = item.querySelector(".calendar-place");
           var months = ["January", "February", "March", "April", "May", "June", "July",
             "August", "September", "October", "November", "December"];
           var monthIndex = parseInt(item.getAttribute("data-event-date").split("-")[1], 10) - 1;
-          if (place) place.textContent = "Connect: " + months[monthIndex];
+          if (place) place.textContent = "Connect: " + months[monthIndex] + " (" + place.textContent + ")";
           previousList.insertBefore(item, previousList.firstChild);
         }
       });
